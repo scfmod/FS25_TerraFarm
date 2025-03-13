@@ -4,7 +4,7 @@
 
 95% completed.
 
-Due to engine bug(s), the process of getting TerraFarm working properly in FS25 is stalled. The main issue is that the terrain collisions are not properly updated when deforming the terrain, resulting.
+Due to engine bug(s), the process of getting TerraFarm working properly in FS25 is stalled. The main issue is that the terrain collisions are not properly updated when deforming the terrain.
 
 This has been reported to Giants (not only by me), but there has not been any feedback whether they are working on a fix or if it will ever be fixed.
 
