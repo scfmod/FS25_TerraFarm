@@ -1,0 +1,3533 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<configurations>
+	<!-- Trailers/trucks -->
+    <configuration
+		vehicle="FS22_Lizard_Superior_End_Dump/Superior20.xml"
+		file="xml/machines/modhub/Lizard_Superior_Dump.xml" />
+    <configuration
+		vehicle="FS22_Lizard_Superior_End_Dump/Superior28.xml"
+		file="xml/machines/modhub/Lizard_Superior_Dump.xml" />
+    <configuration
+		vehicle="FS22_Lizard_Superior_End_Dump/Superior34.xml"
+		file="xml/machines/modhub/Lizard_Superior_Dump.xml" />
+    <configuration
+		vehicle="FS22_Lizard_Superior_End_Dump/Superior40.xml"
+		file="xml/machines/modhub/Lizard_Superior_Dump.xml" />
+    <configuration
+		vehicle="FS22_Lizard_Superior_End_Dump/Superior48.xml"
+		file="xml/machines/modhub/Lizard_Superior_Dump.xml" />
+    <configuration
+		vehicle="FS22_KrAZ/kraz_65032.xml"
+		file="xml/machines/kingmods/kraz_65032.xml" />
+    <configuration
+		vehicle="WMF_HX620Dump_FS22/hx620dumptruck2.xml"
+		file="xml/machines/kingmods/hx620dumptruck2.xml" />
+    <configuration
+		vehicle="FS22_DACR19215DFK/MUIEBARBASUBREDA.xml"
+		file="xml/machines/kingmods/DACR19215DFK.xml" />
+
+
+	<!-- Gjerstad pack -->
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/cableBucket850L_S70/cableBucket850L_S70.xml"
+		file="xml/machines/gjerstadPack/cableBucket850L_S70.xml" />
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/gradingBucket1300S70/gradingBucket1300S70.xml"
+		file="xml/machines/gjerstadPack/gradingBucket1300S70.xml" />
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/largeLevelingBucket/largeLevelingBucket.xml"
+		file="xml/machines/gjerstadPack/largeLevelingBucket.xml" />
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/lightMaterialBucket/lightMaterialBucket.xml"
+		file="xml/machines/gjerstadPack/lightMaterialBucket.xml" />
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/smallLevelingBucket/smallLevelingBucket.xml"
+		file="xml/machines/gjerstadPack/smallLevelingBucket.xml" />
+    <configuration
+		vehicle="FS22_gjerstadPack/vehicles/ripperS70/ripperS70.xml"
+		file="xml/machines/gjerstadPack/ripperS70.xml" />
+
+	<!-- ENGCON pack -->
+	<!-- NOT TESTED -->
+    <configuration
+		vehicle="FS22M_Tool_ENGCON_Pack/xmlFilename/cable.xml"
+		file="xml/machines/engconPack/cableBucket.xml" />
+    <configuration
+		vehicle="FS22M_Tool_ENGCON_Pack/xmlFilename/deepDiggingBroad.xml"
+		file="xml/machines/engconPack/deepDiggingBucket.xml" />
+    <configuration
+		vehicle="FS22M_Tool_ENGCON_Pack/xmlFilename/deepDigging.xml"
+		file="xml/machines/engconPack/deepDiggingBroadBucket.xml" />
+    <configuration
+		vehicle="FS22M_Tool_ENGCON_Pack/xmlFilename/grading.xml"
+		file="xml/machines/engconPack/graderBucket.xml" />
+    <configuration
+		vehicle="FS22M_Tool_ENGCON_Pack/xmlFilename/waterDrainage.xml"
+		file="xml/machines/engconPack/waterDrainageBucket.xml" />
+
+	<!-- ModHub -->
+    <configuration
+		vehicle="FS22_lizard320Excavator/vehicles/bucket1250lS70/bucket1250lS70.xml"
+		file="xml/machines/modHub/Lizard_320_1250LS70.xml" />
+
+	<!-- FSM: Compactors -->
+    <configuration
+		vehicle="FS22_Bomag_BW120_FSM/FrontWheelRoller.xml"
+		file="xml/machines/fsm/Bomag_BW120.xml" />
+    <configuration
+		vehicle="FS22_BomagRoller_FSM/FrontWheelRoller.xml"
+		file="xml/machines/fsm/BomagRoller.xml" />
+
+	<!-- FSM: Levelers -->
+  
+    <configuration
+		vehicle="FS22_CAT_D4NG_FSM/Catd4.xml"
+		file="xml/machines/fsm/CAT_D4NG.xml" />
+   
+    <configuration
+		vehicle="FS22_CAT_D6R_FSM/Catd6.xml"
+		file="xml/machines/fsm/CAT_D6R.xml" />
+   
+   
+    
+    <configuration
+		vehicle="FS22_Komatsu_575D_FSM/575D.xml"
+		file="xml/machines/fsm/Komatsu_575D.xml" />
+
+	<!-- FSM: Ground rippers -->
+   
+    <configuration
+		vehicle="FS22_CAT_D6R_FSM/d6Ripper.xml"
+		file="xml/machines/fsm/CAT_D6R_ripper.xml" />
+
+
+	<!-- FSM: Wheel loader shovels -->
+    <configuration
+		vehicle="FS22_980K/980Bucket.xml"
+		file="xml/machines/fsm/CAT_980K_bucket.xml"
+	/>
+    <configuration
+		vehicle="FS22_CAT_980K_Coal_Bucket_FSM/cbucket.xml"
+		file="xml/machines/fsm/CAT_980K_coalBucket.xml"
+	/>
+    <configuration
+		vehicle="FS22_CAT_980K_Mining_Bucket_FSM/mbucket.xml"
+		file="xml/machines/fsm/CAT_980K_miningBucket.xml"
+	/>
+
+	<!-- FSM: Wheel loaders -->
+    <configuration
+		vehicle="FS22_Komatsu_WA1200_C_FSM/1200.xml"
+		file="xml/machines/fsm/Komatsu_WA1200C.xml"
+	/>
+
+	<!-- FSM: Trenchers -->
+    <configuration
+		vehicle="FS22_Vermeer_T75_Trencher_FSM/t755.xml"
+		file="xml/machines/fsm/Vermeer_T75.xml"
+	/>
+
+
+	<!-- FS22_JCB_Pack_CX -->
+    <configuration
+		vehicle="FS22_JCB_Pack_CX/xml/godet1.xml"
+		file="xml/machines/jcbPack/godet1.xml" />
+    <configuration
+		vehicle="FS22_JCB_Pack_CX/xml/godet2.xml"
+		file="xml/machines/jcbPack/godet2.xml" />
+    <configuration
+		vehicle="FS22_JCB_Pack_CX/xml/godet3.xml"
+		file="xml/machines/jcbPack/godet3.xml" />
+    <configuration
+		vehicle="FS22_JCB_Pack_CX/xml/godet4.xml"
+		file="xml/machines/jcbPack/godet4.xml" />
+    <configuration
+		vehicle="FS22_JCB_Pack_CX/xml/godet5.xml"
+		file="xml/machines/jcbPack/godet5.xml" />
+
+
+	<!-- Third party -->
+
+	<configuration
+		vehicle="FS22_Cat_349_352_Pack/attachments/60inFBRC.xml"
+		file="xml/machines/generic/excavatorShovel.xml"
+	/>
+	<configuration
+		vehicle="FS22_Cat_349_352_Pack/attachments/wt36in.xml"
+		file="xml/machines/generic/excavatorShovel.xml"
+	/>
+	<configuration
+		vehicle="FS22_Cat_349_352_Pack/attachments/wt54in.xml"
+		file="xml/machines/generic/excavatorShovel.xml"
+	/>
+	<configuration
+		vehicle="FS22_Cat_349_352_Pack/attachments/wt77in.xml"
+		file="xml/machines/generic/excavatorShovel.xml"
+	/>
+	
+	<configuration
+		vehicle="FS22_K9_Dozer_Blade/K9Blade.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+	<configuration
+		vehicle="FS22_caseDL550/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_caseDL550/ripper.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		  
+		  <configuration
+		vehicle="FS22_DeereCT332/highDumpBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		<configuration
+		vehicle="FS22_UtilityTractor/frontloaderBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_UtilityTractor/bucketBackhoe.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_UtilityTractor/boxBlade.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		  <configuration
+		vehicle="AJsDeereLoader/JohnDeereBucket.xml"
+		file="xml/machines/forestryDlc/l120H_highTipShovel.xml" />
+		  <configuration
+		vehicle="FS22_Deere764SP/xmlFilename/Deere_764.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		   
+		  <configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom-1/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom-1/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom-1/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom-1/xmlFilename/balde_04.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Liebherr_9400/xmls/Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Case_1150M_FSM/1150M.xml"
+		file="xml/machines/thirdParty/Case_1150M.xml" />
+		  
+		  <configuration
+		vehicle="FS22_BobcatT76_FSM/bobcatShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		   <configuration
+		vehicle="FS22_BobcatT76_FSM/T67ripper.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Case_LongReach_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Case_LongReach_FSM/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Case_CX245_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Case_CX245_FSM/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_CAT_385C_LongReach_FSM/385.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_CAT_385C_FSM/385.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_CAT_385C_MH_FSM/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Deere_850/850L.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		  <configuration
+		vehicle="Takeuchi_TB290/xml/HeavyBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="Takeuchi_TB290/xml/LongBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="Takeuchi_TB290/xml/SmallBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="Takeuchi_TB290/TB295-2.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+		  <configuration
+		vehicle="FS22_PSI_M413XT/M413XT.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+		  <configuration
+		vehicle="FS22_sany55c/bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_sany55c/bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		   <configuration
+		vehicle="FS22_sany55c/sany55.xml"
+		file="xml/machines/thirdParty/smalllevler.xml" />
+		 
+		 <configuration
+		vehicle="FS22_WieskaPackage/WieskaJH250.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_WieskaPackage/WieskaJH300.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_WieskaPackage/WieskaW3SR.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_WieskaPackage/WieskaW350SR.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_WieskaPackage/WieskaW380SR.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+		  <configuration
+		vehicle="FS22_bmVolvoSnowGear/snowBucket/snowBucket.xml"
+		file="xml/machines/forestryDlc/l120H_highTipShovel.xml" />
+		  <configuration
+		vehicle="FS22_bmVolvoSnowGear/snowPlowV/snowPlowV.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  <configuration
+		vehicle="FS22_bmVolvoSnowGear/dozerBlade/dozerBlade.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+		 <configuration
+		vehicle="FS22_takeuchiTL8/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_ASHLAND_I200_TS4_SCRAPER/AshlandRS.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Komatsu_D355C_Sideboom/355cDozer.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_International_TD8E/D39EX.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 <configuration
+		vehicle="FS22_Volvo_G740B/G740.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_G740B/G740B.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+
+		   <configuration
+		vehicle="FS22_4MR_Cat_18M/Grader.xml"
+		file="xml/machines/thirdParty/smalllevler.xml" />
+		 
+		  <configuration
+		vehicle="FS22_Wirgten_W130_c/Wirtgen.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		 <configuration
+		vehicle="FS22_4MR_CAT150NG/Grader.xml"
+		file="xml/machines/thirdParty/smalllevler.xml" />
+		 
+		 <configuration
+		vehicle="FS22_JD_4055_Track/Degelman.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		 
+		 <configuration
+		vehicle="FS22_ROLLERPACK/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		 <configuration
+		vehicle="FS22_ROLLERPACK/AJbomag.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		 <configuration
+		vehicle="FS22_ROLLERPACK/bomagdualdrum.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		 <configuration
+		vehicle="FS22_ROLLERPACK/casedv213.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		 <configuration
+		vehicle="FS22_ROLLERPACK/MMCat.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		
+		 
+		  <configuration
+		vehicle="FS22_4MR_JohnDeere_870G/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		   <configuration
+		vehicle="FS22_4MR_JohnDeere_870G/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		 <configuration
+		vehicle="FS22_4MR_JohnDeere_870G/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_4MR_Hitachi_2600EX/2600EXBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		   <configuration
+		vehicle="FS22_JohnDeere50G/bucketJD.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="Fs22_KubotaU48/Xml/Equipments/HeavyBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="Fs22_KubotaU48/Xml/Equipments/LongBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="Fs22_KubotaU48/Xml/Equipments/SmallBalde.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		 <configuration
+		vehicle="FS22_PSM_EXP_Cat7495HD/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+
+		  
+		   <configuration
+		vehicle="FS22_Wheel_Loader_Road_Pack/LoaderLame.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Wheel_Loader_Road_Pack/rollerv1.xml"
+		file="xml/machines/thirdParty/roller3.xml" />
+		  <configuration
+		vehicle="FS22_Wheel_Loader_Road_Pack/rollerv2.xml"
+		file="xml/machines/thirdParty/roller4.xml" />
+		  
+		  <configuration
+		vehicle="FS22_JohnDeere_700L_FSM/700L.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  <configuration
+		vehicle="FS22_JohnDeere_700L_FSM/700Lripper.xml"
+		file="xml/machines/thirdParty/ripper2.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Cat_315NGG/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Cat_315NGG/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Caterpillar_836K/Cat_836k.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		    <configuration
+		vehicle="Cat_988/980Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_CAT_D8T_TriRipper/lameD8T.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  <configuration
+		vehicle="FS22_CAT_D8T_TriRipper/3ripper.xml"
+		file="xml/machines/thirdParty/ripper3.xml" />
+		  <configuration
+		vehicle="FS22_CAT_D8T_TriRipper/ripper.xml"
+		file="xml/machines/thirdParty/ripper3.xml" />
+		  
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/bucketFront.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/kovafour.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/normalbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/kovalang.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JCBBackhoeLoadert/kova.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_largeShovel/shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_jd135c/diggingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_jd135c/finishingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_jd135c/gradingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Cat_D9H/d9h.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Cat_637K/cat637.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_Cat_637K_Scraper/Scraper.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		   
+		  <configuration
+		vehicle="FS22_Cat_657G/cat657.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_JohnDeere_350P/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JohnDeere_350P/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_SkidSteer_Shovel_Pack/hdShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  <configuration
+		vehicle="FS22_SkidSteer_Shovel_Pack/screenShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_JohnDeere_85G/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_JohnDeere_85G/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Deere345G_LC/WedgeLock_3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Deere345G_LC/WedgeLock_5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Deere345G_LC/WedgeLock_CleanUp.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Cat_938M/catShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_145_Volvo/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_145_Volvo/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_145_Volvo/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Caterpillar994K/994KBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		  
+		  <configuration
+		vehicle="FS22_SkidSteer_Leveler/LV180sk.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		  <configuration
+		vehicle="FS22_SM_Bagger288/bagger288.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 
+		  <configuration
+		vehicle="FS22_SkidsteerAttachments/trencher.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		
+		 
+		 <configuration
+		vehicle="WMF_VolvoG940BGrader_FS22/volvog940b.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		   <configuration
+		vehicle="WMF_VolvoG940BGrader_FS22/ripper.xml"
+		file="xml/machines/thirdParty/ripper4.xml" />
+		  
+		   <configuration
+		vehicle="EXP22_Cat7495HD/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Wheel_Loader_Road_Pack/loaderPlow.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		  
+		  <configuration
+		vehicle="FS22_WheelLoader_LevelerAttachment_FSM/levelerAttachment.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		   <configuration
+		vehicle="FS22_CAT_990H_FSM/Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 
+		 <configuration
+		vehicle="FS22_CAT_D7NG_FSM/Catd7.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  <configuration
+		vehicle="FS22_CAT_D7NG_FSM/d7Ripper.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		 
+		 <configuration
+		vehicle="FS22_CAT_D10T_FSM/Catd10.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		   <configuration
+		vehicle="FS22_CAT_D10T_FSM/d10Ripper.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Komatsu_GD655_FSM/komatsu_gd655.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		  
+		  <configuration
+		vehicle="FS22_Komatsu_D375A_FSM/375ADozer.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+		   <configuration
+		vehicle="FS22_Komatsu_D375A_FSM/375ripper.xml"
+		file="xml/machines/thirdParty/ripper.xml" />
+		   <configuration
+		vehicle="FS22_Volvo_EC950_FSM/ec950.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_EC530_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 <configuration
+		vehicle="FS22_Volvo_L350H_Gearbox/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  
+		  <configuration
+		vehicle="FS22_4MR_JD544G/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+		 <configuration
+		vehicle="FS22_LIEBHERR_902_Pack_Crossplay/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 
+		  <configuration
+		vehicle="FS22_LIEBHERR_902_Pack_Crossplay/bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		 
+		  <configuration
+		vehicle="FS22_LIEBHERR_902_Pack_Crossplay/Blade.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+
+	<!-- Excavatorshovel -->
+		<configuration
+		vehicle="FS22_60_80TonBucketPack/3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_60_80TonBucketPack/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_60_80TonBucketPack/Cat_5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_60_80TonBucketPack/Cat_7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_60_80TonBucketPack/CleanUp_Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Esco3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Esco5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Esco7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/EscoDitchCleaning.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Rockland3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Rockland5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Rockland7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/RocklandDitchCleaning.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/RocklandKryptoKlaw.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Cat3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Cat5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/Cat7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_40_60TonBucketPack/CatCleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/WerkBrau_4ToothBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/WerkBrau_6ToothBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/WerkBrau_DitchingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/WerkBrau_HydraclampBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Cat_5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Cat_Cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_CB15.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_DB13.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_DB13_Teeth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_EC219.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_GB13.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_GHH1200.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_PP3200.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_SG19.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_10_20TonBucketPack/Engcon_SR1600.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Tooth24Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Tooth30Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Tooth42Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Tooth48Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Tooth54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Cleanup54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Ditching60Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/EX54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/Volvo5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/WerkBrau5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/WedgeLock_3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/WedgeLock_5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/WedgeLock_CleanUp.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/WedgeLock_TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Cat4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Cat5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Deere4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Rockland3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Rockland4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Rockland4ToothPlate.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/Rockland4ToothWide.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_1_10TonBucketPack/RocklandCleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_304E2/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_304E2/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_304E2/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_304E2/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_304E2/Bucket5.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_316E/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_316E/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_316E/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_320/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_320/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_320/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_323E_highRail/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_323E_highRail/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_323E_highRail/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_323E_highRail/xmlFilename/balde_05.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_325F/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_325F/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_325F/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_325F/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_335F/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_335F/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_335F/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_335F/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_352F/xmlFilename/Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_352F/xmlFilename/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_352F/xmlFilename/bucket55.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_420F/rearBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_420F/compactor.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JohnDeere_245G/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere_245G/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JohnDeere_245P/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere_245P/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JohnDeere_250P/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere_250P/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JohnDeere_345P/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere_345P/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC138USLC/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PC138USLC/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC238/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PC238/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC360/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PC360/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PC360/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Excavator_Tools/CrusherBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/bucket1huddig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/bucket2huddig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/bucket3huddig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/bucket4huddig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/bucket5huddig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Mecalac_MTX12_FSM/xml/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Mecalac_MTX12_FSM/xml/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Mecalac_MTX12_FSM/xml/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JCBBackhoeLoader/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JCBBackhoeLoader/bucketBundle.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JCB_110W_CYSG/tools/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_YanmarVio27/Buckets/DigBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_YanmarVio27/Buckets/DitchBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_04.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_05.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/balde_06.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+	
+		<configuration
+		vehicle="FS19_Backhoe_For_Skid/Backhoe_load.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS19_Backhoe_For_Tractors/Backhoe_load.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Volvo_EC750EL_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC750EL_FSM/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_4MR_HitachiEX8000/8000.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_9800/9800.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JohnDeere180G/Buckets/DigBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere180G/Buckets/DitchBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		 <configuration
+		vehicle="FS22_Liebherr980SME_Grey/CYSG_980sme.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_liebherr_LB28/liebherr_LB28.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/25tonTiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/3tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/3toothwide.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/4tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/5tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/6tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/7tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR235EL/buckets/rockland/cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_35_Ton_Bucket_Pack/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30_Ton_Bucket_Pack/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25_Ton_Bucket_Pack/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20_Ton_Bucket_Pack/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_15_Ton_Bucket_Pack/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Deere800C/3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Deere800C/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Deere800C/7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat390FL_5Tooth/Tooth54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat390FL_7Tooth/Tooth54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_7Tooth_bucket/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_4MR_Cat6015B/CAT6015B.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30TonCWSBuckets/3tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30TonCWSBuckets/5tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30TonCWSBuckets/CleanUp_Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_30TonCWSBuckets/Wrist_Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_309CR/4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_CAT_309CR/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_390_Bucket_Pack/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_390_Bucket_Pack/7Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/ami/ami35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/ami/ami65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat32_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat32inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/cat/cat65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/ami/ami40inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/ami/ami80inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/ami/ami65inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/ami/ami80inch_cleanup.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat50_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat84_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat50inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />		
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat84inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />			
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat84_inch_clean_up.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/cat/cat84inch_clean_up.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	    
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco25_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco35_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco45_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco55_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco65_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco75_inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco25inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco35inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco45inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco55inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco65inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco75inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco65_inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EB_Modding_Buckets_70_Ton/esco/esco65inch_ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_4MR_Hitachi_Zaxis870LC/BucketNarrow870.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_4MR_Hitachi_Zaxis870LC/BucketStandard870.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_4MR_Hitachi_Zaxis870LC/BucketWide870.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket1_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket2_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_20TonBucketPack/Bucket3_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Case_CX35B_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_308E2/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_308E2/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_308E2/Bucket4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_309CR_oldgen/4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_309CR_oldgen/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_CAT_321C_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_321C_FSM/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_321C_FSM/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_CAT_349NG_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_349NG_FSM/wideBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Rockland_Tilt_Bucket_Pack/20tonTiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Rockland_Tilt_Bucket_Pack/25tonTiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Rockland_Tilt_Bucket_Pack/30tonTiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Rockland_Tilt_Bucket_Pack/35tonTiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Rockland_Tilt_Bucket_Pack/TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		
+		<configuration
+		vehicle="FS22_Cat_309CR/3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+			
+		<configuration
+		vehicle="FS22_Cat_309CR/ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Ditching60inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Tooth24Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Tooth30Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Tooth42Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Tooth40Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_309_Bucket_Pack/Tooth54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+    <configuration
+		vehicle="FS22_Cat_310NG/buckets/3Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Cat_310NG/buckets/4Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Cat_310NG/buckets/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Cat_310NG/buckets/ditching.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Cat_310NG/buckets/TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		
+		<configuration
+		vehicle="WMF_CAT420FIT_FS22/420fitbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="WMF_CAT420FIT_FS22V2/420fitbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_VolvoEC300D/StandardBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL_2022/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL_2022/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_EC300EL_2022/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR355EL/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR355EL/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR355EL/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Caterpillar_395_Series/buckets/5tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Caterpillar_395_Series/buckets/5toothgp.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Caterpillar_395_Series/buckets/7toothgp.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Caterpillar_395_Series/buckets/395bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Cat323E_L/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat323E_L/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat323E_L/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat323E_L/xmlFilename/balde_05.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat315NG/xmlFilename/Tooth24Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat315NG/xmlFilename/Tooth48Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat323EF/4ToothBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat323EF/4ToothBucketThumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25tonBucketPack/Cleanup54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25tonBucketPack/TiltBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_25tonBucketPack/Tooth24Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />> <configuration
+		vehicle="FS22_25tonBucketPack/Tooth30Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />> <configuration
+		vehicle="FS22_25tonBucketPack/Tooth42Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />> <configuration
+		vehicle="FS22_25tonBucketPack/Tooth48Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />> <configuration
+		vehicle="FS22_25tonBucketPack/Tooth54Inch.xml"
+		file="xml/machines/thirdParty/godet1.xml" />> <configuration
+		vehicle="FS22_CAT313_NextGen/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT313_NextGen/xmlFilename/balde_01_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT313_NextGen/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat200SeriesPack/235Buckets/StandardBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat200SeriesPack/235Buckets/TrenchingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat200SeriesPack/245Buckets/5Tooth.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_335NG/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_ZX135US_C/Buckets/WB5T.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		
+		<configuration
+		vehicle="FS22_Raveling48InchRoundBottomSandCan/15 Ton.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Raveling48InchRoundBottomSandCan/25 Ton.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Raveling48InchRoundBottomSandCan/30 Ton.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_Raveling48InchRoundBottomSandCan/40-50 Ton.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		
+		<configuration
+		vehicle="FS22_EC380_BucketPack_FSM/HDbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		<configuration
+		vehicle="FS22_EC380_BucketPack_FSM/wideBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />	
+		
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket1_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket2_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/Bucket3_Thumb.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_CAT_385C_LR_Amphibious_FSM/385.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_CAT_395NG_FSM/395NG.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_430E/430rear_bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat_6015b/R6015B.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_CAT_6015B_FSM/6015.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat304E2Excavator_Construction/godet1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat304E2Excavator_Construction/godet2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat304E2Excavator_Construction/godet3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat304E2Excavator_Construction/godet4.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Cat304E2Excavator_Construction/godet5.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Dossan_80t_FSm/Doosan.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+
+
+	<!-- Levelers -->
+		 <configuration
+		vehicle="FS22_CatD7H/D7H.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />		
+		<configuration
+		vehicle="FS22_CatD7R/D7R.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_CatTrackLoaderPack/CatBrushRake.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Deere650K/650k.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Caterpillar836K/Cat_836k.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_D123_NG/Dozers.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_YanmarVio27/Buckets/GradingGrid.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_JCB_Telehandler_Attachments/grainPusher/grainPusher.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_4MR_CatD6T/D6T2UBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_4MR_CatD6T/D6T2.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_Cat_D6K2_FSM/CatD6Blade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Cat_140M/cat140m.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_Volvo_BL61B/bl61b.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD7G/NormalBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD7G/RakeBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD7G/AngleBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_Cat_D11_NextGen/Blade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_D7_Sideboom/AngleBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_D7_Sideboom/NormalBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_D7_Sideboom/RakeBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_nmcD11Bulldozer/nmcBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_nmcD11Bulldozer/nmcDozerSnowplow.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_Liebherr_634/634.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_Liebherr_776/PR_776.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_lizard_Titan_19_5/Lizard_T_19_5.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_KomatsuD65PXi/KomatsuD65PXi.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_KomatsuD39EX/D39EX.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_Deere_850L/850L.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />		 
+		 <configuration
+		vehicle="FS22_Cat_D8T/d8t.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />			
+		 <configuration
+		vehicle="FS22_CAT_D4NG/Catd4.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />				 
+		 <configuration
+		vehicle="FS22_Cat_D3G/D39EX.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD10Pack/D10N_D10R.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD6TPack/D6T_VPAT.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD6TPack/D6T_UBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Cat_D6K2LGP/Catd4.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_4MR_Cat_18M3/Grader.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_BBM_RoadGrader/graderBlade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_CATD5_NextGen/CaterpillarD5.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_Cat_D5NG/CaterpillarD5.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CAT_D4NG/d4.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CAT_D5NG_FSM/Catd5.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_Komatsu_D375A_8/357ADozer.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_CatD3NG/D39EX.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_JohnDeere650K/650k.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="ATC22_Deere700Dozer/700L.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />		
+		 	 
+		  <configuration
+		vehicle="FS22_CatD6T_LGP/D6T.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_D6TLGP_WinStorm_Edit/D6T.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_caseDL550/blade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_CatD3_FOX/D39EX.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 <configuration
+		vehicle="FS22_4MR_Cat_150NG/Grader.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Volvo_ECR235EL/ECR235EL.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_CAT_527_FSM/Cat527.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		  <configuration
+		vehicle="FS22_Cat_D11T/CATD11.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		  <configuration
+		vehicle="FS22_Cat_D12/CATD11.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Caterpillar12K/Caterpillar12K.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_D6N/blade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		 <configuration
+		vehicle="FS22_D6N_FSM/blade.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		 
+		<configuration
+		vehicle="FS22_Deere764/xmlFilename/Deere_764.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+
+
+	<!-- rippers -->
+		 <configuration
+		vehicle="FS22_CatD7H/d7Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_CatD7R/d7Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		 <configuration
+		vehicle="FS22_CatTrackLoaderPack/D_K_Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_SkidSteerMulcherPack/Cat_Mulcher.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_SkidSteerMulcherPack/FAE_Mulcher.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_SkidSteerMulcherPack/Fecon_Mulcher.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_SkidSteerMulcherPack/Loftness_Mulcher.xml"
+		file="xml/machines/thirdParty/miscripper.xml" />
+		<configuration
+		vehicle="FS22_LandscapeRake22/LandscapeRake22.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+	   <configuration
+		vehicle="FS22_SkidSteer_Mulcher/skidsteerMulcher.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+	   
+	   <configuration
+		vehicle="FS22_Prinoth_Raptor_Pack/m650.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+	   
+	     <configuration
+		vehicle="FS22_4MR_CatD6T/Ripper.xml"
+		file="xml/machines/thirdParty/ripper5.xml" />
+		 
+		  <configuration
+		vehicle="FS22_Cat_D6K2_FSM/d6kripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		 <configuration
+		vehicle="FS22_Cat_D11_NextGen/Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		 <configuration
+		vehicle="FS22_nmcD11Bulldozer/nmcRipper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		 <configuration
+		vehicle="FS22_nmcD11Bulldozer/nmcBladePlow.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_nmcD11Bulldozer/nmcMulcher.xml"
+		file="xml/machines/thirdParty/ripper6.xml" />
+		
+		<configuration
+		vehicle="FS22_Liebherr_634/ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		
+		
+		<configuration
+		vehicle="FS22_CATD5_NextGen/Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_Cat_D5NG/Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_CAT_D5NG_FSM/d5Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_D375A_8/375ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="ATC22_Deere700Dozer/700Lripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		 <configuration
+		vehicle="FS22_Harley_rake_angle/skidsteerMulcher.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		<configuration
+		vehicle="FS22_CAT_963Kripper_FSM/963Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		<configuration
+		vehicle="FS22_D6N/ripper.xml"
+		file="xml/machines/thirdParty/ripper7.xml" />
+		
+		<configuration
+		vehicle="FS22_D6N_FSM/ripper.xml"
+		file="xml/machines/thirdParty/ripper7.xml" />
+
+	<!-- excavatorrippers -->
+		 <configuration
+		vehicle="FS22_20_40TonBucketPack/Fecon_Mulcher.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		<configuration
+		vehicle="FS22_20_40TonBucketPack/FAE_Mulcher.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		
+		<configuration
+		vehicle="FS22_jcbSkidSteer/stumpcutter.xml"
+		file="xml/machines/thirdParty/exripperspec.xml" />
+		<configuration
+		vehicle="FS22_Excavator_Tools/EXstumpGrinder.xml"
+		file="xml/machines/thirdParty/exripperspec.xml" />
+		<configuration
+		vehicle="FS22_Excavator_Tools/380rake.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/asfaltSkjearer.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/stumpGrinder.xml"
+		file="xml/machines/thirdParty/ripperS702.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/planerbalk.xml"
+		file="xml/machines/thirdParty/ripperS702.xml" />
+		<configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/dent_de_deroctage.xml"
+		file="xml/machines/thirdParty/ripperS703.xml" />
+		<configuration
+		vehicle="FS22_Cat_336F/broyeur.xml"
+		file="xml/machines/thirdParty/ripperS704.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_336F/compactor.xml"
+		file="xml/machines/thirdParty/ripperS705.xml" />
+		
+		<configuration
+		vehicle="FS22_EWR150E_V2_Tools_FSM/grader.xml"
+		file="xml/machines/thirdParty/ripperS706.xml" />
+
+
+	<!-- compactors -->
+		 <configuration
+		vehicle="FS22_Trailed_Roller_FSM/roller.xml"
+		file="xml/machines/thirdParty/roller5.xml" />
+		 <configuration
+		vehicle="FS22_Volvo_DD105_FSM/VolvoRoller.xml"
+		file="xml/machines/thirdParty/roller6.xml" />
+		 <configuration
+		vehicle="FS22_TrenchCompactor_FSM/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/roller7.xml" />
+		  <configuration
+		vehicle="FS22_Plate_Compactor_FSM/PlateCompacor.xml"
+		file="xml/machines/thirdParty/roller8.xml" />
+		  <configuration
+		vehicle="FS22_CAT_CP56_FSM/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/rollerv2.xml" />
+		  <configuration
+		vehicle="FS22_CAT_CW16_FSM/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/roller9.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Cat_AP655F/catAP655F.xml"
+		file="xml/machines/thirdParty/roller10.xml" />
+		 <configuration
+		vehicle="FS22_Cat_AP555F/catAP555F.xml"
+		file="xml/machines/thirdParty/roller10.xml" />
+		 
+		  <configuration
+		vehicle="ARTANKPACK/cocopoly.xml"
+		file="xml/machines/thirdParty/roller11.xml" />
+		 
+		  <configuration
+		vehicle="ARTANKPACK/etnyre.xml"
+		file="xml/machines/thirdParty/roller11.xml" />
+		 
+		  <configuration
+		vehicle="FS22_DetachableTruckBodies/asphaltbed.xml"
+		file="xml/machines/thirdParty/roller12.xml" />
+		 
+		  <configuration
+		vehicle="ARSweeperPack/bear.xml"
+		file="xml/machines/thirdParty/roller13.xml" />
+		 
+		  <configuration
+		vehicle="ARSweeperPack/eagle.xml"
+		file="xml/machines/thirdParty/roller13.xml" />
+		 
+		<configuration
+		vehicle="FS22_BomagBT65/BomagBT65.xml"
+		file="xml/machines/thirdParty/roller8.xml" />
+		 <configuration
+		vehicle="FS22_BomagPlateCompactor/PlateCompacor.xml"
+		file="xml/machines/thirdParty/roller14.xml" />
+		 
+		 
+		 <configuration
+		vehicle="FS22_TMP_Caterpillar_M315F/xmlFilename/ammann.xml"
+		file="xml/machines/thirdParty/roller15.xml" />
+		 
+		  <configuration
+		vehicle="FS22_CAT_AP1055F_Paver_Fix/vogele1600_3i.xml"
+		file="xml/machines/thirdParty/roller16.xml" />
+		 
+		  <configuration
+		vehicle="FS22_CAT_CB_44NG_FSM/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/roller17.xml" />
+		 
+		  <configuration
+		vehicle="FS22_Cat_CB44B/DynapacCC2200.xml"
+		file="xml/machines/thirdParty/roller18.xml" />
+
+
+	<!-- shovels -->
+		 <configuration
+		vehicle="FS22_CatTrackLoaderPack/CatBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		 <configuration
+		vehicle="FS22_CatTrackLoaderPack/D_K_PinOn.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_420F/stollToolShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_926M/catShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_950M/950Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_jcbSkidSteer/shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Bobcat863Pack/bobcatShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_hauer2600/hauerSGS2600.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_hauer2600/hauerbucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_JohnDeereGrapple/JDgrappleBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_HuddigBuckets/xml/shovelhuddig.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_JCBBackhoeLoader/bucketFront.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Locura_CAT_Mining_Set/CoalLoader.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Bobcat_Attachments/BobcatDirtBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Bobcat_Attachments/BobcatGrapple.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Bobcat_Attachments/snowbucket1.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_DitchWitchSK752_CHS/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_JCB_Telehandler_Attachments/grainBucket3m3/telehandlerShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		 <configuration
+		vehicle="FS22_JCB_Telehandler_Attachments/grainBucket5m3/telehandlerShovelLarge.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Cat_LoaderPackAJ/962.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Cat_LoaderPackAJ/980Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Cat_LoaderPackAJ/982.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_SkidSteer4in1_Bucket/skidSteerBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="BobcatT770_bucket/skidSteerBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_WirtgenWR250/WirtgenWR250.xml"
+		file="xml/machines/thirdParty/WirtgenWR250.xml" />
+		
+		<configuration
+		vehicle="FS22_Case_855D_TrackLoader/4in1bucket/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_966E/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_966E/catShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_VolvoLoaderPack/l120HRockShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_VolvoLoaderPack/l120HShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_VolvoLoaderPack/l180HHighTipShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_VolvoLoaderPack/l180HRockShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_VolvoLoaderPack/l180HShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="Paladin_Bucket/skidSteerBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_WA380_new/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Kawasaki_115ZV/Buckets/FlatEdgeBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />		
+		<configuration
+		vehicle="FS22_Kawasaki_115ZV/Buckets/WheelLoaderBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />		
+		<configuration
+		vehicle="FS22_Hyundai_HL770_9J_FSM/hl770.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_HyundaiHL940TM/GP_Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="CG22_Deere644G_edit/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />				
+		<configuration
+		vehicle="FS22_Paladin_Bucket/skidSteerBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_Case_Skidsteer_Pack_2018/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="PIBLIC_DeereLoaderPack/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="PIBLIC_DeereLoaderPack/craig.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS19_Case1845C_converted/Case1845C.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_BobcatMT100_CHS/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_CaseLoaderPack/wheelLoaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CaseLoaderPack/GodetCase821G.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="RSRFAB22_JohnDeere_Kseries_PayLoader/JohnDeereBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Kawasaki90Z7/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+
+		<configuration
+		vehicle="FS22_Bucket_Plow/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="ATC22_CAT_963K_IC/963k.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="AZ22_JD90/Shovel2.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Volvo_L350H/bucketsilage.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_Volvo_L350H/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_NHL555_JD675/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_WA900_3/WheelLoaderBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="WMF_Komatsu_WA250PZ_FS22/KomatsuBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_Komatsu_WA1200/1200.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_Hitachi_310W_FSM/310W.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_Liebherr_622A/CrawlerLoaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="WMF_CAT420FIT_FS22/420fitshovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="WMF_CAT420FIT_FS22V2/420fitshovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Cat_LoaderPackAJ/980K.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_982xe_FSM/982.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Cat980Pack/982.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Cat980Pack/980Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_962NG_FSM/962.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_908NG_FSM/908shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Case821G/wheelLoaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Case821G/GodetCase821G.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_CAT_430E/430bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />		
+		<configuration
+		vehicle="FS22_CAT_953D_FSM/953D.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />		
+		<configuration
+		vehicle="FS22_CAT_963K_FSM/963K.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />	
+		<configuration
+		vehicle="FS22_cat_994f/cat994F.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_994kXL_FSM/994k.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CAT_R3000H_FSM/CoalLoader.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+
+	<!-- New -->
+
+
+	<!-- Excavatorshovel -->
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_ec950.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_HDbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_b1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_b2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_b3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_JCB_220X_Excavator/attachments/220X_TrBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JCB_220X_Excavator/attachments/220X_GPBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_JCB_220X_Excavator/attachments/220X_GrBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_KomatsuPC300/PC300.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LandClearingPack/clawbucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrLH26multi/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrR960/bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrR960/bucketBig.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrR960/clamShell.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrR960/clamShellFixed.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_R1055F/bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Hitachi350_Demolition_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Hitachi350LC_Telescope/Pinza.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_HitachiEG70R_Pack/ClamshellGrab.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Kobelco_SK140_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Kobelco_SK140_FSM/wideBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Kobelco_SK140_FSM/trenchBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Kobelco_SK210_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Kobelco_SK480_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC_8000_FSM/Pc8000.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC800_AttacherVersion_FSM/PC800Shovel.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PC800_FSM/Pc800.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PW98_FSM/b1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PW98_FSM/b2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PW98_FSM/b3.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_SK714_FSM/714Shovel.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_KomatsuExcavatorPack/PC800LC_8_Shovel.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_KomatsuExcavatorPack/PC1250LC_7_Shovel.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_980grey_SME_FSM/CYSG_980sme.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_LiebherrR926_FSM/Bucket1.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_LiebherrR926_FSM/Bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Poclain_1000_FSM/poclain1000.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Poclain_P10_FSM/Bucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_TakeuchiTB295W_PNEU_ET_CHENILLE/xml/Engcon_GB13.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TakeuchiTB295W_PNEU_ET_CHENILLE/xml/engcon.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TakeuchiTB295W_PNEU_ET_CHENILLE/xml/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_TakeuchiTB295W_PNEU_ET_CHENILLE/xml/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/balde_03.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/balde_02.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/balde_01.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/balde_04.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/bucket2.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/bucket5.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+		<configuration
+		vehicle="FS22_Volvo_ECR145EL_TripleBoom/xmlFilename/KMtrenchingBucket.xml"
+		file="xml/machines/thirdParty/godet1.xml" />
+
+
+	<!-- Levelers -->
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_Catd6.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_D9T.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_D11T.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_komatsu_gd655.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/CYSG_KomatsuPW98.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_3PointLevelerBlade/spych.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P502200.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P502200V.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P502500.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P502500V.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P503000.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/Agrilame_G3P503000V.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		
+		<configuration
+		vehicle="FS22_BLM4_Lizard/BLM4.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		
+		<configuration
+		vehicle="FS22_FiatAllisAD9/BladeFiatAllis.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		<configuration
+		vehicle="FS22_Grampo_Silagem/Grampo Silagem.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />	
+		
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/Snowplow2000.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/Snowplow2500.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Leveler/livella.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Lizard_LT_Pack/lamina_LT_leveler.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_lizardS101/S101.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Los_Antonios_BAT90/xml/BAT90.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Los_Antonios_RT80/xml/RT80_Delantero.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Los_Antonios_RT80/xml/RT80_Trasero.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Magsi_Pack/Lame_Ensilage.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Rateau_Desilage.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_SopemaTelehandlerLeveler/Leveler.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Lizard_BAT90/xml/BAT90.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Kobelco_SK140_FSM/140.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_PW98_FSM/CYSG_KomatsuPW98.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_KomatsuExcavatorPack/PC138USLC_11.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Leon_Blade/LEON.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_Leon_Blade/LEONSNOW.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Lizard_HFP23/HFP.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		
+		<configuration
+		vehicle="FS22_Los_Antonios_TH51/xml/TH51.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_LosAntonios_CC5000/xml/CC5000.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+		<configuration
+		vehicle="FS22_MDS_Pusher/MDSpusher.xml"
+		file="xml/machines/thirdParty/CAT_D10T.xml" />
+
+
+	<!-- rippers -->
+		 <configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_d6Ripper.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+		
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/MTforest_StumpCut.xml"
+		file="xml/machines/thirdParty/ripper8.xml" />
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/Cultivator.xml"
+		file="xml/machines/thirdParty/ripper9.xml" />
+		
+		 <configuration
+		vehicle="FS22_Lizard_LT_Pack/xml/lamina_LT.xml"
+		file="xml/machines/thirdParty/JohnDeere_700L_ripper.xml" />
+
+
+	<!-- excavatorrippers -->
+		 <configuration
+		vehicle="FS22_RGC_MINING_MODS/Fecon_Mulcher.xml"
+		file="xml/machines/thirdParty/ripperS70.xml" />
+		
+		 <configuration
+		vehicle="FS22_Kobelco_SK480_FSM/480rake.xml"
+		file="xml/machines/thirdParty/ripperS707.xml" />
+		 <configuration
+		vehicle="FS22_Kobelco_SK480_FSM/480ripper.xml"
+		file="xml/machines/thirdParty/ripperS707.xml" />
+		<configuration
+		vehicle="FS22_Komatsu_PC800_AttacherVersion_FSM/pc800ripper.xml"
+		file="xml/machines/thirdParty/ripperS707.xml" />
+		
+		<configuration
+		vehicle="FS22_KomatsuExcavatorPack/PC800LC_8_Ripper.xml"
+		file="xml/machines/thirdParty/ripperS707.xml" />
+		<configuration
+		vehicle="FS22_lizardClearingRake/clearingRake.xml"
+		file="xml/machines/thirdParty/ripperS707.xml" />
+
+
+	<!-- compactors -->
+		 <configuration
+		vehicle="FS22_RGC_MINING_MODS/roller.xml"
+		file="xml/machines/thirdParty/roller5.xml" />
+		 
+		  <configuration
+		vehicle="FS22_Hamm_H25i_FSM/FrontWheelRoller.xml"
+		file="xml/machines/thirdParty/roller.xml" />
+		 
+		  <configuration
+		vehicle="FS22_plaque_Bomag__5055/XML/plaque_Bomag__5055.xml"
+		file="xml/machines/thirdParty/roller19.xml" />
+		 
+		 <configuration
+		vehicle="FS22_Volvo_SD115_FSM/VolvoRoller.xml"
+		file="xml/machines/thirdParty/roller20.xml" />
+
+
+	<!-- shovels -->
+		 <configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_Bucket2.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/WheelLoaderBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_385A.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_385LR.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_RGC_MINING_MODS/RGC_953D.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/GAC01DP.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/GT01_15000.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/GV03_2450_CV.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Agrimanutention_Pack/GV04.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Albutt_Stonebucket/frontloaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/H135/H135.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/H160/H160.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/H185/H185.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/H210/H210.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/H240/H240.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/Multigrab160HD/Multigrab160HD.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/Multigrab180HD/Multigrab180HD.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Aloe_Frontloadertools/Multigrab200HD/Multigrab200HD.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_BackBucket/Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_bresselUndLadeHighTipShovelPack/L67/bresselUndLadeL67.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_bresselUndLadeHighTipShovelPack/L71/bresselUndLadeL71.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_bresselUndLadeShovelPack/vehicles/bresselUndLade/l16/l16.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_bresselUndLadeShovelPack/vehicles/bresselUndLade/l17/l17.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_BuL_Greifschafel_SL50/BuL_GSL50.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Case_W20E/W20EShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_flieglShovelPack/flieglGRS_BigBucket_160.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_flieglShovelPack/flieglGRS_BigBucket_180.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_flieglShovelPack/flieglGRS_BigBucket_260.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_flieglShovelPack/flieglGRS_BigBucket_280.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_guenterSchmihingHTB6000/HTB6000.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Heusdens_multiPurposeBucket/multiPurposeBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/MTbasic_Hightip_S.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/MTbasic_Hightip_XL18.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/SnowBlower1500arc.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ITS_AVANT/vehicles/vehicles/SnowBlower1500.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_John_Deere_3400_TL/telehandlerShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_John_Deere_3400_TL/Sweeper.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_JohnDeere_EYM148_And_158/BucketAndSpear.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Klepp_Mek_Bucket/xml/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_Xpower/earthShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_Xpower/highTipShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_Xpower/loadingShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Liebherr_Xpower/miningShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Lizard_Scorpion/xml/frontLoader.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Lizard_WheelLoaderShovel/lizardWheelLoaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_lizardGrabshovel/greifschaufel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_lizardHighTipShovel/highTipShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_lizardHTB6000/HTB6000.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_MAGSI_Easyshark/easyshark.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Magsi_Pack/Godet_Materiaux.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Godet_Vrac.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Godet_Reprise.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Grappin_Agrishark.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Grappin_Oxycoupes.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Fourche_Fumier.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Godet_Claire_Voie.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Fourche_Multigrap.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Pack/Grappin_Multigrap.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Tool_Pack/xml/Bucket_Rotor.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Tool_Pack/xml/Godet_Grappin_oxycoupe.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Magsi_Tool_Pack/xml/Godet_Grappin_doigts.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ManitouAgriShovel/ManitouAgriShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ManitouCBG2450/CBDG2450MS.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_MX_BC_250H/MX_BC_250H.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Pack_Shovel_Lamy/BRT.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_Shovel_Lamy/BRC.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_Shovel_Lamy/BMFR2_2m.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_Shovel_Lamy/BMFR2_2m45.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Pack_WheelLoader_Magsi/xml/WheelLoader_Shovel_Earthworks_Magsi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_WheelLoader_Magsi/xml/WheelLoader_Shovel_Spill_Magsi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_WheelLoader_Magsi/xml/WheelLoader_Shovel_Spill_Claw_Magsi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Pack_WheelLoader_Magsi/xml/WheelLoader_Shovel_Claw_Magsi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_quickeHDV240/quickeHDV240.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_reschkeHighTipShovel/highTipShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Roetterink_ShovelPack/2400_Shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Roetterink_ShovelPack/2600_Shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Roetterink_ShovelPack/2800_Shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_Roetterink_ShovelPack/3000_Shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_SEequipment/xml/SE_Refill_Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_SEequipment/xml/SE_leveling_bucket_Tele.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_SEequipment/xml/SE_leveling_bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_SEequipment/xml/Lightweight_material_Bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_SEequipment/xml/Lightweight_material_Bucket_Tele.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_siljumMultiSnowBucket/bucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_strautmannGS1750/strautmannGS1750.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_ThievinBucketPack/210/210.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ThievinBucketPack/230/230.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ThievinBucketPack/245/245.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_ThievinBucketPack/270/270.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_UFO_10m3_lightMaterialBucket/UFO_10m3.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_VDMJev2v/ev2v.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_JCB_110B_FSM/110b.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_JD90/Shovel2.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_WA900A_FSM/WheelLoaderBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_WA1200_FSM/1200.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Komatsu_WA1800_FSM/wa1800.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Lizard_GrappleBucket/grappleBucket.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_Muller_RadLader/Shovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		
+		<configuration
+		vehicle="FS22_WackerNeuson_WL20/frontloaderShovel.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_WoodChips_Bucket_FSM/woodchipsBuckey.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+
+	<!-- CSZPack -->
+
+	<!-- wheelloader -->
+				
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/spintorePesante.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/spintorePesante_leveler.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/lamaDozer_implements.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/raschiatoreDentiForgiati_frontLoaders.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/raschiatoreMonoblocco_frontLoaders.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  
+		 <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaMultiuso_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaMultiusoTrattenitoreMonoblocco_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaRaptor_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaScaricoCentrale_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		    <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaTramoggia_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaDesilatrice_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaOrrizontale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaOrrizontaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaOrrizontaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaVerticale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaVerticaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaGrigliaVerticaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaMultiusoPlus_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/wheelLoader/bennaMultiusoTrattenitoreDentiForgiati_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+	<!-- telehandler -->
+				
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/spintoreAlleggerito.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/spintoreAlleggerito_leveler.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/raschiatoreDentiForgiati_frontLoaders.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/raschiatoreMonoblocco_frontLoaders.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/lamaDozer_implements.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaOrrizontale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaOrrizontaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaOrrizontaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaVerticale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaVerticaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaGrigliaVerticaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaMultiuso_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaMultiusoTrattenitoreDentiForgiati_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaMultiusoTrattenitoreMonoblocco_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaRaptor_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaScaricoCentrale_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaTramoggia_frontLoaders.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/telehandler/bennaDesilatrice_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+	<!-- skidsteer -->
+				
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaMultiuso.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaMultiusoNoTrattenitore.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaMultiusoTrattenitoreDentiForgiati.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaMultiusoTrattenitoreMonoblocco.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaVerticaleSassi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaVerticaleTrattenitore.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaDesilatrice.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaOrrizontale.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaOrrizontaleNoTrattenitore.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaOrrizontaleSassi.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaOrrizontaleTrattenitore.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaVerticale.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/skidSteer/bennaGrigliaVerticaleNoTrattenitore.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+
+	<!-- frontloader -->
+		
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaRaptor.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaScaricoCentrale.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/raschiatore.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/raschiatoreDentiForgiati.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/raschiatoreMonoblocco.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaTramoggia.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />  
+		  
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaMultiuso_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaMultiusoTrattenitoreMonoblocco_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaDesilatrice_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 		
+		<configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaOrrizontale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaOrrizontaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaOrrizontaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaVerticale_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaVerticaleSassi_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaGrigliaVerticaleTrattenitore_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" /> 	
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/frontloader/bennaMultiusoTrattenitoreDentiForgiati_skidSteers.xml"
+		file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+
+	<!-- misc -->
+		  <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/lamaDozer.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/lamaDozer_leveler.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" /> 
+		   <configuration
+		vehicle="FS22_CSZ_pack_crossplay/xmlFilename/lamaDozer_winterEquipment.xml"
+		file="xml/machines/thirdParty/K9DozerBlade.xml" />
+
