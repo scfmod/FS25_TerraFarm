@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+
+    <Bitmap profile="screen_container">
+        <ThreePartBitmap profile="screen_bgMiddleSmall" />
+        <ThreePartBitmap profile="screen_bgTopSmall" />
+        <ThreePartBitmap profile="screen_bgBottom" />
+    </Bitmap>
+
+    <Paging id="pagingElement" onPageChange="onPageChange" onPageUpdate="onPageUpdate" profile="tfMachineScreen_paging">
+        <frameReference ref="machineSettings" name="machineSettings" id="settingsFrame" />
+        <frameReference ref="machineSettingsLandscaping" name="machineSettingsLandscaping" id="landscapingSettingsFrame" />
+        <frameReference ref="machineSettingsAdvanced" name="machineSettingsAdvanced" id="advancedSettingsFrame" />
+        <frameReference ref="machineSettingsCalibration" name="machineSettingsCalibration" id="calibrationSettingsFrame" />
+    </Paging>
+
+    <Bitmap id="header" profile="tfMachineScreen_tabList">
+        <MultiTextOption id="pageSelector" onClick="onClickPageSelection" profile="uiInGameMenuHeaderSelector" soundDisabled="true" />
+        <SmoothList id="pagingTabList" onScroll="onTabMenuScroll" onSelectionChanged="onTabMenuSelectionChanged" profile="fs25_tabList">
+            <ListItem profile="fs25_tabListItem">
+                <Button name="tabButton" profile="tfScreen_tabListItemButton" soundDisabled="true" />
+            </ListItem>
+        </SmoothList>
+    </Bitmap>
+
+    <BoxLayout id="buttonsPanel" profile="tfMenuScreen_buttonBox">
+        <Button id="menuButton[1]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+        <Button id="menuButton[2]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+        <Button id="menuButton[3]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+        <Button id="menuButton[4]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+        <Button id="menuButton[5]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+        <Button id="menuButton[6]" onClick="onClickBack" profile="buttonBack">
+            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
+        </Button>
+    </BoxLayout>
+
+    <GuiProfiles>
+        <Profile name="tfMenuScreen_buttonBox" extends="baseReference" with="anchorBottomCenter">
+            <size value="1326px 56px" />
+            <position value="0 113px" />
+
+            <imageColor value="0 0 0 0" />
+            <alignmentX value="right" />
+            <alignmentY value="middle" />
+            <fillDirectionX value="rightToLeft" />
+            <autoValidateLayout value="true" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_paging" extends="uiInGameMenuPaging">
+        </Profile>
+
+        <Profile name="tfMachineScreen_tabList" extends="baseReference" with="anchorMiddleCenter">
+            <size value="125px 756px" />
+            <position value="-631px 0" />
+
+            <imageColor value="0 0 0 0" />
+        </Profile>
+
+        <Profile name="screen_container" with="anchorMiddleCenter">
+            <size value="1400px 900px" />
+            <imageColor value="0 0 0 0" />
+        </Profile>
+
+        <Profile name="screen_bgTopSmall" extends="fs25_dialogBgTopSmall">
+            <imageColor value="1 1 1 1" />
+            <startImageColor value="1 1 1 1" />
+            <endImageColor value="1 1 1 1" />
+        </Profile>
+        <Profile name="screen_bgMiddleSmall" extends="fs25_dialogBgMiddleSmall">
+            <imageColor value="1 1 1 1" />
+            <startImageColor value="1 1 1 1" />
+            <endImageColor value="1 1 1 1" />
+        </Profile>
+        <Profile name="screen_bgBottom" extends="fs25_dialogBgBottom">
+            <imageColor value="1 1 1 1" />
+            <startImageColor value="1 1 1 1" />
+            <endImageColor value="1 1 1 1" />
+        </Profile>
+
+        <Profile name="tfScreen_tabListItemButton" extends="fs25_tabListItemButton">
+        </Profile>
+
+        <Profile name="tfScreen_tabList" extends="fs25_tabList"></Profile>
+    </GuiProfiles>
+</GUI>

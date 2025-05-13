@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI name="machineSettingsLandscaping">
+    <GuiElement profile="tfMenuFrame_contentContainer">
+        <Bitmap profile="tfMenuFrame_content" id="settingsContainer">
+            <Bitmap profile="tfMenuFrame_contentHeader">
+                <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_landscaping" />
+            </Bitmap>
+
+            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_postDeformation" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateClearDecoArea" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateClearDecoAreaTooltip" />
+
+                    <BinaryOption id="clearDecoAreaOption" name="clearDecoArea" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateClearDensityMapHeightArea" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateClearDensityMapHeightAreaTooltip" />
+
+                    <BinaryOption id="clearDensityMapHeightAreaOption" name="clearDensityMapHeightArea" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEraseTireTracks" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEraseTireTracksTooltip" />
+
+                    <BinaryOption id="eraseTireTracksOption" name="eraseTireTracks" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateRemoveFieldArea" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateRemoveFieldAreaTooltip" />
+
+                    <BinaryOption id="removeFieldAreaOption" name="removeFieldArea" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateRemoveStoneArea" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateRemoveStoneAreaTooltip" />
+
+                    <BinaryOption id="removeStoneAreaOption" name="removeStoneArea" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateRemoveWeedArea" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateRemoveWeedAreaTooltip" />
+
+                    <BinaryOption id="removeWeedAreaOption" name="removeWeedArea" onClick="onClickStateCheckedOption" profile="tfMenuFrame_binaryOption" />
+                </Bitmap>
+            </ScrollingLayout>
+
+            <Bitmap profile="tfMenuFrame_contentShadowTop" />
+            <Bitmap profile="tfMenuFrame_contentShadowBottom" />
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+            </ThreePartBitmap>
+        </Bitmap>
+    </GuiElement>
+
+</GUI>

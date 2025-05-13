@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GUI name="ingameMenuTerraFarm">
+    <GuiElement profile="tfFrame_menuContainer">
+        <GuiElement profile="fs25_menuHeaderPanel">
+            <Bitmap profile="fs25_menuHeaderIconBg">
+                <Bitmap id="categoryHeaderIcon" profile="tfFrame_menuHeaderIcon" />
+            </Bitmap>
+            <Text id="categoryHeaderText" profile="fs25_menuHeaderTitle" text="TerraFarm" />
+        </GuiElement>
+
+        <GuiElement profile="fs25_statisticsHeaderBox">
+            <Text profile="fs25_vehiclesHeaderName" text="Machine" />
+            <GuiElement position="440px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="Operator" />
+            </GuiElement>
+            <GuiElement position="620px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_age" />
+            </GuiElement>
+            <GuiElement position="800px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_workingHours" />
+            </GuiElement>
+            <GuiElement position="980px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_condition" />
+            </GuiElement>
+            <GuiElement position="1160px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="Type" />
+            </GuiElement>
+            <GuiElement position="1340px 0px" profile="fs25_vehiclesHeaderTextContainer">
+                <Text profile="fs25_vehiclesHeaderText" text="Status" />
+            </GuiElement>
+            <ThreePartBitmap position="0px -2dp" profile="fs25_lineSeparatorBottom" />
+        </GuiElement>
+        <SmoothList id="list" profile="tfFrame_list">
+            <ListItem name="rowTemplate" profile="fs25_vehiclesListItem">
+                <ThreePartBitmap name="alternating" profile="fs25_vehiclesListItemBg" />
+                <Text name="name" profile="fs25_vehiclesListItemName" />
+                <Text name="operator" position="440px 0px" profile="fs25_vehiclesListItemInfo" />
+                <Text name="age" position="620px 0px" profile="fs25_vehiclesListItemInfo" />
+                <Text name="operatingHours" position="800px 0px" profile="fs25_vehiclesListItemInfo" />
+                <Text name="damage" position="980px 0px" profile="fs25_vehiclesListItemInfo" />
+                <Text name="type" position="1160px 0px" profile="fs25_vehiclesListItemInfo" />
+                <Text name="status" position="1340px 0px" profile="fs25_vehiclesListItemInfo" />
+            </ListItem>
+        </SmoothList>
+        <GuiElement id="detailBox" visible="true" profile="tfFrame_detailsContainer">
+            <Bitmap name="startClipper" position="-2px 140px" profile="fs25_stopClipper" />
+            <Bitmap profile="tfFrame_detailsImageBg">
+                <Bitmap id="itemDetailsImage" profile="tfFrame_detailsImage" />
+            </Bitmap>
+            <Text id="itemDetailsName" profile="tfFrame_detailsName" />
+        </GuiElement>
+    </GuiElement>
+
+    <ThreePartBitmap id="frameSliderBox" profile="fs25_sliderDockedBg">
+        <ThreePartBitmap profile="fs25_sliderDockedBox">
+            <Slider dataElementId="list" id="frameSlider" profile="fs25_sliderDocked" />
+        </ThreePartBitmap>
+    </ThreePartBitmap>
+
+    <GuiProfiles>
+        <Profile name="tfFrame_menuHeaderIcon" extends="fs25_menuHeaderIcon">
+            <imageSliceId value="terraFarm.icon_excavator" />
+        </Profile>
+        <Profile name="tfFrame_menuContainer" extends="fs25_menuContainer">
+            <position value="-76px 80px" />
+        </Profile>
+
+        <Profile name="tfFrame_detailsContainer" extends="fs25_shopItemsDetailsContainer">
+            <height value="150px" />
+        </Profile>
+
+        <Profile name="tfFrame_detailsImageBg" extends="fs25_vehiclesDetailsImageBg">
+            <size value="170px 170px" />
+            <position value="0px -35px" />
+        </Profile>
+
+        <Profile name="tfFrame_detailsImage" extends="fs25_vehiclesDetailsImage">
+            <size value="125px 125px" />
+        </Profile>
+
+        <Profile name="tfFrame_detailsName" extends="fs25_vehiclesDetailsName">
+            <absoluteSizeOffset value="520px 0px" />
+            <position value="190px -30px" />
+            <textSize value="24px" />
+        </Profile>
+
+        <Profile name="tfFrame_list" extends="fs25_vehiclesList">
+            <position value="0px -34px" />
+            <absoluteSizeOffset value="0px 175px" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

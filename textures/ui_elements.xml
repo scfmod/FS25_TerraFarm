@@ -1,0 +1,35 @@
+<texture>
+    <meta>
+        <filename>ui_elements.png</filename>
+        <size width="2048" height="1024" />
+    </meta>
+
+    <slices>
+        <slice id="mode_material" uvs="0px 0px 128px 128px" />
+        <slice id="mode_raise" uvs="256px 0px 128px 128px" />
+        <slice id="mode_lower" uvs="512px 0px 128px 128px" />
+        <slice id="mode_smooth" uvs="768px 0px 128px 128px" />
+        <slice id="mode_grade" uvs="1024px 0px 128px 128px" />
+        <slice id="mode_paint" uvs="1280px 0px 128px 128px" />
+
+        <slice id="surveyor_angle" uvs="0px 128px 128px 128px" />
+        <slice id="surveyor_offset" uvs="128px 128px 128px 128px" />
+        <slice id="surveyor_terrain" uvs="256px 128px 128px 128px" />
+        <slice id="surveyor_map" uvs="384px 128px 128px 128px" />
+
+        <slice id="icon_excavator" uvs="0px 256px 128px 128px" />
+        <slice id="icon_surveyor" uvs="128px 256px 128px 128px" />
+
+        <slice id="shadow" uvs="0px 936px 1024px 56px" />
+        <slice id="list_shadow" uvs="82px 936px 860px 56px" />
+        <slice id="bar" uvs="0px 992px 1024px 28px" />
+        <slice id="bar_small" uvs="0px 992px 200px 32px" />
+
+        <slice id="mask_overlay" uvs="1536px 769px 256px 256px" />
+        <slice id="mask_overlay_shadow" uvs="1792px 769px 256px 256px" />
+
+        <slice id="list_box" uvs="1026px 513px 252px 34px" />
+        <slice id="list_box_selected" uvs="1026px 577px 252px 34px" />
+        <slice id="list_box_hover" uvs="1026px 641px 252px 34px" />
+    </slices>
+</texture>

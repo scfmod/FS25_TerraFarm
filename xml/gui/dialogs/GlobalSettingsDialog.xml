@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tfGlobalSettings_dialogBg">
+        <ThreePartBitmap profile="fs25_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="fs25_dialogBgTopSmall" />
+        <ThreePartBitmap profile="fs25_dialogBgBottom" />
+
+        <Text position="0 -40px" profile="tf_dialogTitle" text="$l10n_ui_globalSettings" />
+
+        <GuiElement profile="tf_globalSettingsContent">
+            <ScrollingLayout profile="tf_globalSettingsLayout" id="boxLayout">
+                <Bitmap profile="tf_globalSettingsOptionContainer">
+                    <BinaryOption id="enabledOption" onClick="onClickEnabledOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_globalEnabled" />
+                </Bitmap>
+
+                <Bitmap profile="tf_globalSettingsOptionContainerAlternate">
+                    <BinaryOption id="defaultEnabledOption" onClick="onClickDefaultEnabledOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_globalDefaultEnabled" />
+                </Bitmap>
+
+                <Bitmap profile="tf_globalSettingsOptionContainer">
+                    <BinaryOption id="hudEnabledOption" onClick="onClickHudEnabledOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_enableHud" />
+                </Bitmap>
+
+                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="Debug" />
+
+                <Bitmap profile="tf_globalSettingsOptionContainer">
+                    <BinaryOption id="debugNodesOption" onClick="onClickDebugNodesOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_debugNodes" />
+                </Bitmap>
+
+                <Bitmap profile="tf_globalSettingsOptionContainerAlternate">
+                    <BinaryOption id="debugCalibrationOption" onClick="onClickDebugCalibrationOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_debugCalibration" />
+                </Bitmap>
+
+                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="Map resources" />
+
+                <Bitmap profile="tf_globalSettingsExtensionBg">
+                    <Text profile="tf_globalSettingsExtensionText" text="$l10n_ui_mapResourcesDescription" />
+                    <Text profile="tf_globalSettingsExtensionStatus" text="$l10n_ui_mapResourcesNotAvailable" id="extensionStatus" />
+                </Bitmap>
+
+                <Bitmap profile="tf_globalSettingsOptionContainer" id="resourcesEnabledOptionContainer">
+                    <BinaryOption id="resourcesEnabledOption" onClick="onClickResourcesEnabledOption" profile="tf_globalSettingsBinaryOption" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_globalResourcesEnabled" />
+                </Bitmap>
+            </ScrollingLayout>
+        </GuiElement>
+
+        <BoxLayout profile="tf_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_back" />
+            <Bitmap profile="tf_dialogButtonBoxSeparator" />
+            <Button id="settingsButton" profile="buttonActivate" text="$l10n_ui_materialSettings" onClick="onClickMaterialSettings" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfGlobalSettings_dialogBg" extends="tf_dialogBg">
+            <size value="720px 760px" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsContent">
+            <size value="720px 720px" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsOptionContainer" extends="fs25_multiTextOptionContainer">
+            <imageColor value="0.02732 0.02732 0.02732 0.5" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsOptionContainerAlternate" extends="tf_globalSettingsOptionContainer">
+            <imageColor value="$preset_fs25_colorGreyListItem" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsLayout" extends="baseReference" with="anchorMiddleCenter">
+            <size value="620px 620px" />
+
+            <imageColor value="0 0 0 0" />
+            <fitFlowToElements value="true" />
+            <flowDirection value="vertical" />
+            <elementSpacing value="2dp" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsExtensionBg" extends="tf_globalSettingsOptionContainer">
+            <size value="590px 110px" />
+            <imageColor value="0 0 0 0" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsExtensionText" extends="textDefault" with="anchorTopLeft">
+            <position value="18px -10px" />
+            <size value="500px 32px" />
+            <width value="98%" />
+            <margin value="0 8px" />
+
+            <textSize value="16px" />
+            <textBold value="false" />
+            <textAutoWidth value="false" />
+            <textMaxNumLines value="3" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsExtensionStatus" extends="textDefault" with="anchorTopLeft">
+            <size value="560px 16px" />
+            <position value="18px -64px" />
+
+            <textSize value="16px" />
+            <textColor value="1 0.078 0.078 1" />
+            <textBold value="false" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsBinaryOption" extends="tf_binaryOption">
+            <size value="180px 32px" />
+            <position value="-206px 0" />
+        </Profile>
+
+        <Profile name="tf_globalSettingsOptionTitle" extends="fs25_settingsMultiTextOptionTitle">
+            <textBold value="false" />
+            <textSize value="16px" />
+            <textDisabledColor value="0.35 0.35 0.35 1" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

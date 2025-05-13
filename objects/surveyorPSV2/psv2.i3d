@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="psv2.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.4"/>
+  </Asset>
+
+  <Files>
+    <File fileId="30" filename="$data/shaders/glowShader.xml"/>
+    <File fileId="6" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="4" filename="$data/shared/default_normal.dds"/>
+    <File fileId="5" filename="$data/shared/default_specular.dds"/>
+    <File fileId="27" filename="$data/shared/detailLibrary/calibrated/grainSmall_specular.png"/>
+    <File fileId="8" filename="$data/shared/detailLibrary/flat_normal.png"/>
+    <File fileId="28" filename="$data/shared/detailLibrary/metallic/clear_diffuse.png"/>
+    <File fileId="9" filename="$data/shared/detailLibrary/metallic/scratched_diffuse.png"/>
+    <File fileId="7" filename="$data/shared/detailLibrary/metallic/scratched_specular.png"/>
+    <File fileId="39" filename="$data/shared/detailLibrary/nonMetallic/fabric/fabric5Dark_diffuse.png"/>
+    <File fileId="38" filename="$data/shared/detailLibrary/nonMetallic/fabric/fabric5_normal.png"/>
+    <File fileId="37" filename="$data/shared/detailLibrary/nonMetallic/fabric/fabric5_specular.png"/>
+    <File fileId="36" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_diffuse.png"/>
+    <File fileId="35" filename="$data/shared/detailLibrary/nonMetallic/metal/metalPainted_specular.png"/>
+    <File fileId="34" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticGraniteGrainSmall_diffuse.png"/>
+    <File fileId="33" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticGraniteGrainSmall_specular.png"/>
+    <File fileId="15" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_diffuse.png"/>
+    <File fileId="14" filename="$data/shared/detailLibrary/nonMetallic/plastic/plasticPainted_specular.png"/>
+    <File fileId="42" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubberBlack_diffuse.png"/>
+    <File fileId="41" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_normal.png"/>
+    <File fileId="40" filename="$data/shared/detailLibrary/nonMetallic/rubber/rubber_specular.png"/>
+    <File fileId="29" filename="$data/shared/materialHolders/defaultGlow_diffuse.dds"/>
+    <File fileId="25" filename="$data/shared/window_diffuse.dds"/>
+    <File fileId="26" filename="$data/shared/window_vmask.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="collision" materialId="5" diffuseColor="1 0 1 1" specularColor="1 1 0">
+    </Material>
+    <Material name="DefaultMaterial.001" materialId="6" diffuseColor="0.8 0.8 0.8 1" specularColor="1 1 0">
+    </Material>
+    <Material name="Glas 002.002" materialId="7" diffuseColor="1 1 1 1" specularColor="0.27451 1 0">
+    </Material>
+    <Material name="lambert1" materialId="288" diffuseColor="0.501961 0.501961 0.501961 1">
+    </Material>
+    <Material name="markerMaterial" materialId="257" alphaBlending="true" customShaderId="30" customShaderVariation="additive_colorScale">
+      <Emissivemap fileId="29"/>
+      <CustomParameter name="lightControl" value="10"/>
+      <CustomParameter name="colorScale" value="0 1 0"/>
+    </Material>
+    <Material name="markerMaterial" materialId="168" alphaBlending="true" customShaderId="30" customShaderVariation="additive_colorScale">
+      <Emissivemap fileId="29"/>
+      <CustomParameter name="lightControl" value="10"/>
+    </Material>
+    <Material name="Orange Juice.007" materialId="9" diffuseColor="1 0.882353 0 1" specularColor="1 1 0">
+    </Material>
+    <Material name="Orange Juice1.001" materialId="10" diffuseColor="0.054902 0.839216 0 1" specularColor="1 1 0">
+    </Material>
+    <Material name="Pelican_Black_Mat" materialId="11" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="33"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="34"/>
+      <CustomParameter name="colorScale" value="0 0 0"/>
+    </Material>
+    <Material name="Pelican_Foam_Mat" materialId="12" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="37"/>
+      <Custommap name="detailNormal" fileId="38"/>
+      <Custommap name="detailDiffuse" fileId="39"/>
+      <CustomParameter name="colorScale" value="0.02 0.02 0.02"/>
+      <CustomParameter name="porosity" value="1"/>
+    </Material>
+    <Material name="Pelican_Gray_Mat" materialId="13" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="33"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="34"/>
+      <CustomParameter name="colorScale" value="0.1 0.1 0.1"/>
+    </Material>
+    <Material name="Pelican_Metal_Mat" materialId="14" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="7"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="9"/>
+      <CustomParameter name="colorScale" value="0.8 0.8 0.8"/>
+    </Material>
+    <Material name="Pelican_Red_Mat" materialId="15" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="35"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="36"/>
+      <CustomParameter name="colorScale" value="0.85 0 0"/>
+    </Material>
+    <Material name="Pelican_Rubber_Mat" materialId="16" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="40"/>
+      <Custommap name="detailNormal" fileId="41"/>
+      <Custommap name="detailDiffuse" fileId="42"/>
+      <CustomParameter name="colorScale" value="0 0 0"/>
+      <CustomParameter name="porosity" value="0.5"/>
+    </Material>
+    <Material name="Pelican_White_Mat" materialId="17" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="35"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="36"/>
+    </Material>
+    <Material name="Plastic Dot Grid White-sml.002" materialId="18" diffuseColor="1 1 1 1" specularColor="0.239216 1 0">
+    </Material>
+    <Material name="Plastic Dot Grid.004" materialId="19" diffuseColor="0.054902 0.054902 0.054902 1" specularColor="1 1 0">
+    </Material>
+    <Material name="Plastic Dot Grid1.001" materialId="20" diffuseColor="0.14902 0.14902 0.14902 1" specularColor="1 1 0">
+    </Material>
+    <Material name="Rough Blue.002" materialId="21" diffuseColor="0.156863 0.313726 0.8 1" specularColor="0.211765 1 0">
+    </Material>
+    <Material name="Surveyor_Black_Mat" materialId="22" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="15"/>
+      <CustomParameter name="colorScale" value="0 0 0"/>
+      <CustomParameter name="smoothnessScale" value="1.52"/>
+    </Material>
+    <Material name="Surveyor_Grey_Mat" materialId="23" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="15"/>
+      <CustomParameter name="colorScale" value="0.2 0.2 0.2"/>
+      <CustomParameter name="smoothnessScale" value="1.52"/>
+    </Material>
+    <Material name="Surveyor_Orange_Mat" materialId="24" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="14"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="15"/>
+      <CustomParameter name="colorScale" value="0.913 0.117 0.009"/>
+      <CustomParameter name="smoothnessScale" value="1.52"/>
+    </Material>
+    <Material name="Surveyor_Screws_Mat" materialId="25" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="7"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="9"/>
+      <CustomParameter name="colorScale" value="0.9 0.9 0.9"/>
+    </Material>
+    <Material name="Surveyor_Silver_Mat" materialId="26" diffuseColor="0.8 0.8 0.8 1" customShaderId="6">
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
+      <Custommap name="detailSpecular" fileId="7"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="9"/>
+    </Material>
+    <Material name="trigger" materialId="27" diffuseColor="1 1 1 1">
+    </Material>
+    <Material name="trigger" materialId="28" diffuseColor="1 1 1 1" specularColor="0.8 1 0.8">
+    </Material>
+    <Material name="windowInside_Mat" materialId="29" alphaBlending="true" customShaderId="6">
+      <Texture fileId="25"/>
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="26"/>
+      <Custommap name="detailSpecular" fileId="27"/>
+      <Custommap name="detailNormal" fileId="8"/>
+      <Custommap name="detailDiffuse" fileId="28"/>
+      <CustomParameter name="alphaBlendingClipThreshold" value="0"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="psv2.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="surveyor" shapeId="1" dynamic="true" compound="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" clipDistance="10000" nodeId="57" castsShadows="false" receiveShadows="false" nonRenderable="true" distanceBlending="false" materialIds="27">
+      <Shape name="trigger" translation="0 0.5 -5.96046e-08" shapeId="2" visibility="false" kinematic="true" compound="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" nodeId="343" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="288"/>
+      <Shape name="Tripod" translation="-0.055 1.52171 1.38545e-07" rotation="90 -0 0" shapeId="3" nodeId="59" castsShadows="true" receiveShadows="true" materialIds="25,24,26,22">
+        <Shape name="tripod_leg1" translation="0.0509223 -0.0294 0.0212998" rotation="-25 -2.59568e-06 -120" shapeId="4" nodeId="60" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+          <Shape name="tripod_leg1_lower" translation="0 0.01 1.122" rotation="-9.8184e-06 3.41509e-06 -1.70755e-06" shapeId="5" nodeId="61" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+            <Shape name="tripod_leg1_lower_lock" translation="-6.9961e-06 0.0262567 -0.528247" rotation="0 1.70755e-06 -1.70755e-06" shapeId="6" nodeId="62" castsShadows="true" receiveShadows="true" materialIds="25,23,24"/>
+          </Shape>
+        </Shape>
+        <Shape name="tripod_leg2" translation="0 0.0588 0.0213003" rotation="-25 0 0" shapeId="4" nodeId="63" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+          <Shape name="tripod_leg2_lower" translation="0 0.01 1.122" rotation="-9.8184e-06 3.41509e-06 -1.70755e-06" shapeId="5" nodeId="64" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+            <Shape name="tripod_leg2_lower_lock" translation="-6.9961e-06 0.0262567 -0.528247" rotation="0 1.70755e-06 -1.70755e-06" shapeId="6" nodeId="65" castsShadows="true" receiveShadows="true" materialIds="25,23,24"/>
+          </Shape>
+        </Shape>
+        <Shape name="tripod_leg3" translation="-0.0511565 -0.0286903 0.0211473" rotation="-25 1e-08 120" shapeId="4" nodeId="66" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+          <Shape name="tripod_leg3_lower" translation="0 0.01 1.122" rotation="-9.8184e-06 3.41509e-06 -1.70755e-06" shapeId="5" nodeId="67" castsShadows="true" receiveShadows="true" materialIds="25,24,26">
+            <Shape name="tripod_leg3_lower_lock" translation="-6.9961e-06 0.0262567 -0.528247" rotation="0 1.70755e-06 -1.70755e-06" shapeId="6" nodeId="68" castsShadows="true" receiveShadows="true" materialIds="25,23,24"/>
+          </Shape>
+        </Shape>
+        <Shape name="total_station_fbx_v7300" translation="-0.000144482 -0.00010117 0.0392015" rotation="-90 -0 0" shapeId="7" nodeId="69" castsShadows="true" receiveShadows="true" materialIds="25,24,23,26,22">
+          <Shape name="total_station_fbx_v7300_base" rotation="90 -0 0" shapeId="8" nodeId="70" castsShadows="true" receiveShadows="true" materialIds="24"/>
+          <Shape name="total_station_fbx_v7300_body" scale="0.15 0.1 0.1" shapeId="9" nodeId="71" castsShadows="true" receiveShadows="true" materialIds="24,25"/>
+          <Shape name="total_station_fbx_v7300_buttons" translation="0.000144482 0 0" rotation="-1.36604e-05 -0 0" shapeId="10" nodeId="72" castsShadows="true" receiveShadows="true" materialIds="6,18,19,7,9,21,10,20"/>
+          <Shape name="total_station_fbx_v7300_handle" shapeId="11" nodeId="73" castsShadows="true" receiveShadows="true" materialIds="24,25,22"/>
+          <TransformGroup name="total_station_zero" translation="-0.00115043 0.329045 -0.00354111" rotation="-90 -90 0" nodeId="74">
+            <Shape name="total_station_v7300_Leveler" translation="4.93407e-09 -0.000144482 0" shapeId="12" nodeId="75" castsShadows="true" receiveShadows="true" materialIds="24,22">
+              <Shape name="total_station_fbx_v7300_Leveler_Lens" translation="0.00289906 7.79703e-06 0.00108361" rotation="-8.14222e-13 -0 0" shapeId="13" nodeId="76" castsShadows="true" receiveShadows="true" materialIds="29">
+                <Shape name="ActiveVisual" translation="0.00162594 -0.113031 -0.00566451" rotation="-180 -90 0" shapeId="14" nodeId="77" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="168">
+                  <Shape name="ActiveVisual2" translation="-0.00498796 -0.196642 -0.0016259" rotation="3.25689e-12 -5.00896e-06 9.91043e-06" shapeId="15" nodeId="78" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="257"/>
+                  <Shape name="ActiveVisual3" translation="0.0359488 -0.196146 -0.036546" rotation="-6.51378e-12 -5.00895e-06 9.91043e-06" shapeId="16" nodeId="79" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="257"/>
+                  <Shape name="ActiveVisual4" translation="0.0357735 -0.195937 0.0298747" rotation="-6.51378e-12 -5.00895e-06 9.91043e-06" shapeId="17" nodeId="80" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="257"/>
+                </Shape>
+                <Shape name="LensBlock1" translation="0.00226652 -0.106546 -0.00516365" rotation="180 -90 0" shapeId="18" nodeId="81" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="28"/>
+                <Shape name="LensBlock2" translation="-2.22646e-09 0.0818993 -0.0106525" rotation="-180 -90 0" shapeId="15" nodeId="82" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="28"/>
+                <Shape name="LensBlock3" translation="-0.0349201 0.0814036 0.0302842" rotation="-180 -90 0" shapeId="19" nodeId="83" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="28"/>
+                <Shape name="LensBlock4" translation="0.0315006 0.0811948 0.0301089" rotation="-180 -90 0" shapeId="20" nodeId="84" castsShadows="false" receiveShadows="false" distanceBlending="false" materialIds="28"/>
+              </Shape>
+            </Shape>
+          </TransformGroup>
+        </Shape>
+      </Shape>
+      <Shape name="main_col" translation="-0.0479518 0.303837 0.306024" shapeId="21" static="true" compoundChild="true" collisionFilterGroup="0x10004" collisionFilterMask="0xfe3ffb83" nodeId="85" castsShadows="false" receiveShadows="false" nonRenderable="true" distanceBlending="false" materialIds="5"/>
+      <Shape name="pelicanCase" translation="-0.057 0.474357 0.319761" rotation="90 90 0" shapeId="22" nodeId="86" castsShadows="true" receiveShadows="true" materialIds="13,11,14,15,17">
+        <Shape name="foam_bottom" translation="-0.00322991 -0.00292989 0.400601" rotation="-1.36604e-05 -0 0" shapeId="23" nodeId="87" castsShadows="true" receiveShadows="true" materialIds="12"/>
+        <Shape name="pelicanCover" translation="-0.0105773 -0.358435 -2.29776e-05" rotation="0.651 -0 0" shapeId="24" nodeId="88" castsShadows="true" receiveShadows="true" materialIds="13,14,16">
+          <Shape name="foam_upper" translation="0.00969908 0.353311 -0.0679295" rotation="178.779 -0 -4.07111e-13" shapeId="25" nodeId="89" castsShadows="true" receiveShadows="true" materialIds="12"/>
+          <Shape name="pelicanCover_latchF1" translation="-0.653289 0.675709 -0.0336612" rotation="100 -0 -4.07111e-13" shapeId="26" nodeId="90" castsShadows="true" receiveShadows="true" materialIds="11"/>
+          <Shape name="pelicanCover_latchF2" translation="-0.206488 0.675836 -0.033504" rotation="100 -0 -8.14222e-13" shapeId="26" nodeId="91" castsShadows="true" receiveShadows="true" materialIds="11"/>
+          <Shape name="pelicanCover_latchF3" translation="0.233952 0.675836 -0.033504" rotation="100 -0 -8.14222e-13" shapeId="26" nodeId="92" castsShadows="true" receiveShadows="true" materialIds="11"/>
+          <Shape name="pelicanCover_latchF4" translation="0.679852 0.675836 -0.033504" rotation="100 -0 -8.14222e-13" shapeId="26" nodeId="93" castsShadows="true" receiveShadows="true" materialIds="11"/>
+          <Shape name="pelicanCover_latchL" translation="-0.964 0.354224 -0.0317399" rotation="100 -1.35691e-14 90" shapeId="26" nodeId="94" castsShadows="true" receiveShadows="true" materialIds="11"/>
+          <Shape name="pelicanCover_latchR" translation="0.984539 0.357379 -0.0317728" rotation="100 -0 -90" shapeId="26" nodeId="95" castsShadows="true" receiveShadows="true" materialIds="11"/>
+        </Shape>
+      </Shape>
+    </Shape>
+  </Scene>
+
+</i3D>

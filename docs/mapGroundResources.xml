@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--
+    Template for map resource mappings
+    This file (mapGroundResources.xml) must be placed in same folder as the map xml file
+
+    LAYERS:
+    - value: should map to map.i3d InfoLayer Options [REQUIRED]
+    - fillType: name of filltype to be used when terraforming [REQUIRED]
+    - paintLayer: name of paint layer, case-sensitive(?) [REQUIRED]
+    - paintLayerDischarge: name of paint layer for discharging to ground [OPTIONAL, default=paintLayer]
+    - yield: specify yield of terraforming ground [OPTIONAL, default=1.0]
+    
+-->
+<!-- The infoLayer attribute should match the name of InfoLayer in map.i3d -->
+<groundResources infoLayer="mapGroundResources">
+    <layers>
+        <!-- Layer with value 0 is always the default fallback, REQUIRED -->
+        <layer
+            value="0"
+            fillType="STONE"
+            paintLayer="GRAVEL"
+            yield="1.0"
+        />
+        <layer
+            value="1"
+            fillType="DIRT"
+            paintLayer="dirt"
+            paintLayerDischarge="dirtDark"
+        />
+        <layer
+            value="2"
+            fillType="STONE"
+            paintLayer="rock"
+            yield="0.5"
+        />
+        <layer
+            value="3"
+            fillType="STONE"
+            paintLayer="cobblestone"
+        />
+    </layers>
+</groundResources>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<HUD animateDuration="200">
+    <BoxLayout profile="tfHud_layout" id="boxLayout">
+        <Bitmap profile="tfHud_item" id="vehicleItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <Bitmap profile="tfHud_itemImage" id="vehicleImage" />
+            <Text profile="tfHud_itemText" id="vehicleText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="inputItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <Bitmap profile="tfHud_itemModeImage" id="inputImage" />
+            <Text profile="tfHud_itemTitle" id="inputTitle" text="$l10n_ui_terraform" />
+            <Text profile="tfHud_itemText" id="inputText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="outputItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <Bitmap profile="tfHud_itemModeImage" id="outputImage" />
+            <Text profile="tfHud_itemTitle" id="outputTitle" text="$l10n_ui_discharge" />
+            <Text profile="tfHud_itemDescription" id="outputText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="materialItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <Bitmap profile="tfHud_itemImage" id="materialImage" />
+            <Text profile="tfHud_itemText" id="materialText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="textureItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <TerrainLayer profile="tfHud_itemImage" id="textureImage" />
+            <Text profile="tfHud_itemText" id="textureText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="surveyorItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <Bitmap profile="tfHud_itemImage" id="surveyorImage" />
+            <Text profile="tfHud_itemTitle" id="surveyorTitle" />
+            <Text profile="tfHud_itemDescription" id="surveyorText" />
+        </Bitmap>
+    </BoxLayout>
+
+    <GuiProfiles>
+        <Profile name="tfHud_layout" extends="baseReference" with="anchorTopRight">
+            <size value="200px 320px" />
+            <position value="0 -0.2" />
+
+            <imageColor value="0 0 0 0" />
+            <flowDirection value="vertical" />
+            <elementSpacing value="4dp" />
+        </Profile>
+
+        <Profile name="tfHud_item" extends="baseReference" with="anchorTopLeft">
+            <size value="200px 48px" />
+
+            <imageColor value="0 0 0 0.8" />
+            <imageDisabledColor value="0 0 0 0.8" />
+        </Profile>
+
+        <Profile name="tfHud_itemBar" with="anchorMiddleLeft">
+            <size value="6px 32px" />
+            <position value="8px 0" />
+
+            <imageSliceId value="terraFarm.bar_small" />
+            <imageUVRotation value="90" />
+
+            <imageColor value="$preset_fs25_colorGreen" />
+            <imageDisabledColor value="0.7 0.7 0.7 0.4" />
+        </Profile>
+
+        <Profile name="tfHud_itemImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="32px 32px" />
+            <position value="24px 0" />
+
+            <imageSliceId value="noSlice" />
+            <imageUVs value="0 0 1 1" />
+
+            <imageColor value="1 1 1 1" />
+            <imageDisabledColor value="1 1 1 0.7" />
+        </Profile>
+
+        <Profile name="tfHud_itemModeImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="32px 32px" />
+            <position value="24px 0" />
+
+            <imageColor value="0.33716 0.55834 0.0003 1" />
+            <imageDisabledColor value="0.33716 0.55834 0.0003 0.7" />
+        </Profile>
+
+        <Profile name="tfHud_itemText" extends="textDefault" with="anchorMiddleLeft">
+            <size value="1656px 20px" />
+            <position value="64px 0" />
+
+            <textSize value="12px" />
+            <textMaxWidth value="140px" />
+            <textBold value="false" />
+            <textColor value="1 1 1 1" />
+            <textDisabledColor value="0.7 0.7 0.7 0.8" />
+            <text2Color value="0 0 0 1" />
+        </Profile>
+
+        <Profile name="tfHud_itemTitle" extends="tfHud_itemText">
+            <position value="64px 7px" />
+
+            <textSize value="10px" />
+        </Profile>
+
+        <Profile name="tfHud_itemDescription" extends="tfHud_itemText">
+            <position value="64px -7px" />
+        </Profile>
+    </GuiProfiles>
+</HUD>

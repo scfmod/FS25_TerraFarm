@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="dialogFullscreenBg" />
+    <GuiElement id="dialogElement" profile="fs25_textInputDialogBg">
+        <ThreePartBitmap profile="fs25_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="fs25_dialogBgTopSmall" />
+        <ThreePartBitmap profile="fs25_dialogBgBottom" />
+        <GuiElement profile="fs25_dialogContentContainer">
+            <Text id="dialogTextElement" profile="fs25_textInputDialogText" text="" />
+            <TextInput enterWhenClickOutside="false" id="textElement" imeDescription="" imePlaceholder="" imeTitle="" onEnterPressed="onEnterPressed" onEscPressed="onEscPressed" profile="fs25_dialogTextInput">
+                <ThreePartBitmap profile="fs25_textInputBg" />
+                <Bitmap profile="fs25_dialogTextInputIconBox">
+                    <Bitmap profile="fs25_dialogTextInputIcon" />
+                </Bitmap>
+            </TextInput>
+        </GuiElement>
+        <BoxLayout id="buttonsPC" profile="fs25_dialogButtonBox">
+            <Button id="yesButton" onClick="onClickOk" profile="buttonOK" text="$l10n_button_confirm" />
+            <Bitmap profile="fs25_dialogButtonBoxSeparator" />
+            <Button id="noButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+        </BoxLayout>
+    </GuiElement>
+</GUI>

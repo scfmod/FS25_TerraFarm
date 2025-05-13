@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<vehicle type="surveyorObject">
+    <storeData>
+        <name>$l10n_storeItem_surveyor</name>
+        <specs>
+            <weight ignore="true" />
+        </specs>
+        <image>objects/surveyorPSV2/store_psv2.dds</image>
+        <price>4500</price>
+        <allowLeasing>false</allowLeasing>
+        <canBeSold>true</canBeSold>
+        <brand>LIZARD</brand>
+        <category>misc</category>
+        <shopTranslationOffset>0 0.2 0</shopTranslationOffset>
+        <shopHeight>2.0</shopHeight>
+        <financeCategory>OTHER</financeCategory>
+        <shopFoldingState>1</shopFoldingState>
+    </storeData>
+
+    <base>
+        <filename>objects/surveyorPSV2/psv2.i3d</filename>
+        <size width="2" length="2" height="2" />
+        <components>
+            <component centerOfMass="0 0.1 0" solverIterationCount="10" mass="30" />
+        </components>
+        <typeDesc>$l10n_typeDesc_surveyor</typeDesc>
+        <mapHotspot available="true" />
+        <supportsPickUp>true</supportsPickUp>
+    </base>
+
+    <designColorConfigurations title="Surveyor">
+        <!-- Yellow hues -->
+        <designColorConfiguration name="RAL 1003" color="0.947 0.392 0" />
+        <designColorConfiguration name="RAL 1004" color="0.776 0.342 0" />
+        <designColorConfiguration name="RAL 1006" color="0.761 0.279 0" />
+        <designColorConfiguration name="RAL 1011" color="0.429 0.216 0.078" />
+        <designColorConfiguration name="RAL 1012" color="0.723 0.429 0.02" />
+        <designColorConfiguration name="RAL 1015" color="0.791 0.644 0.462" />
+        <designColorConfiguration name="RAL 1024" color="0.491 0.275 0.072" />
+        <designColorConfiguration name="RAL 1026" color="1 1 0" />
+        <designColorConfiguration name="RAL 1027" color="0.386 0.212 0.004" />
+        <designColorConfiguration name="RAL 1034" color="0.831 0.332 0.084" />
+
+        <!-- Orange hues -->
+        <designColorConfiguration name="RAL 2000" color="0.701 0.156 0" />
+        <designColorConfiguration name="RAL 2001" color="0.491 0.065 0.011" />
+        <designColorConfiguration name="RAL 2002" color="0.521 0.041 0.016" />
+        <designColorConfiguration name="RAL 2004" color="0.761 0.087 0.001" />
+        <designColorConfiguration name="RAL 2005" color="1 0.074 0.002" />
+        <designColorConfiguration name="RAL 2008" color="0.93 0.112 0.019" isDefault="true" />
+        <designColorConfiguration name="RAL 2009" color="0.73 0.087 0.002" />
+
+        <!-- Red hues -->
+        <designColorConfiguration name="RAL 3000" color="0.386 0.022 0.014" />
+        <designColorConfiguration name="RAL 3002" color="0.328 0.017 0.015" />
+        <designColorConfiguration name="RAL 3004" color="0.147 0.012 0.017" />
+        <designColorConfiguration name="RAL 3007" color="0.048 0.014 0.016" />
+        <designColorConfiguration name="RAL 3011" color="0.191 0.018 0.017" />
+        <designColorConfiguration name="RAL 3014" color="0.597 0.171 0.178" />
+        <designColorConfiguration name="RAL 3018" color="0.571 0.05 0.068" />
+        <designColorConfiguration name="RAL 3026" color="1 0.023 0.011" />
+        <designColorConfiguration name="RAL 3027" color="0.407 0.02 0.045" />
+
+        <!-- Violet hues -->
+        <designColorConfiguration name="RAL 4001" color="0.22 0.12 0.227" />
+        <designColorConfiguration name="RAL 4003" color="0.552 0.12 0.262" />
+        <designColorConfiguration name="RAL 4005" color="0.181 0.138 0.323" />
+        <designColorConfiguration name="RAL 4006" color="0.279 0.033 0.171" />
+        <designColorConfiguration name="RAL 4007" color="0.063 0.018 0.045" />
+        <designColorConfiguration name="RAL 4010" color="0.503 0.051 0.184" />
+
+        <!-- Blue hues -->
+        <designColorConfiguration name="RAL 5000" color="0.031 0.078 0.159" />
+        <designColorConfiguration name="RAL 5001" color="0.005 0.072 0.127" />
+        <designColorConfiguration name="RAL 5002" color="0 0.04 0.198" />
+        <designColorConfiguration name="RAL 5005" color="0 0.087 0.242" />
+        <designColorConfiguration name="RAL 5007" color="0.038 0.147 0.262" />
+        <designColorConfiguration name="RAL 5011" color="0.01 0.024 0.045" />
+        <designColorConfiguration name="RAL 5012" color="0 0.25 0.468" />
+        <designColorConfiguration name="RAL 5018" color="0.002 0.258 0.262" />
+        <designColorConfiguration name="RAL 5022" color="0.016 0.026 0.102" />
+        <designColorConfiguration name="RAL 5023" color="0.054 0.141 0.262" />
+
+        <!-- Green hues -->
+        <designColorConfiguration name="RAL 6000" color="0.045 0.175 0.117" />
+        <designColorConfiguration name="RAL 6001" color="0.037 0.136 0.036" />
+        <designColorConfiguration name="RAL 6002" color="0.032 0.1 0.021" />
+        <designColorConfiguration name="RAL 6004" color="0.001 0.058 0.054" />
+        <designColorConfiguration name="RAL 6010" color="0.074 0.159 0.041" />
+        <designColorConfiguration name="RAL 6018" color="0.12 0.319 0.044" />
+        <designColorConfiguration name="RAL 6019" color="0.485 0.617 0.413" />
+        <designColorConfiguration name="RAL 6024" color="0 0.227 0.082" />
+        <designColorConfiguration name="RAL 6037" color="0 0.258 0.022" />
+        <designColorConfiguration name="RAL 6038" color="0 0.462 0.01" />
+
+        <!-- Grey hues -->
+        <designColorConfiguration name="RAL 7000" color="0.195 0.246 0.27" />
+        <designColorConfiguration name="RAL 7001" color="0.262 0.305 0.337" />
+        <designColorConfiguration name="RAL 7002" color="0.22 0.188 0.125" />
+        <designColorConfiguration name="RAL 7005" color="0.15 0.156 0.147" />
+        <designColorConfiguration name="RAL 7013" color="0.095 0.08 0.058" />
+        <designColorConfiguration name="RAL 7016" color="0.04 0.048 0.054" />
+        <designColorConfiguration name="RAL 7021" color="0.028 0.032 0.034" />
+        <designColorConfiguration name="RAL 7035" color="0.558 0.571 0.552" />
+
+        <!-- Brown hues -->
+        <designColorConfiguration name="RAL 8000" color="0.25 0.141 0.048" />
+        <designColorConfiguration name="RAL 8001" color="0.337 0.122 0.024" />
+        <designColorConfiguration name="RAL 8004" color="0.266 0.067 0.031" />
+        <designColorConfiguration name="RAL 8011" color="0.102 0.04 0.019" />
+        <designColorConfiguration name="RAL 8015" color="0.112 0.028 0.019" />
+
+        <!-- White & black hues -->
+        <designColorConfiguration name="RAL 9001" color="0.815 0.745 0.644" />
+        <designColorConfiguration name="RAL 9002" color="0.68 0.665 0.597" />
+        <designColorConfiguration name="RAL 9003" color="0.839 0.839 0.799" />
+        <designColorConfiguration name="RAL 9004" color="0.024 0.024 0.025" />
+        <designColorConfiguration name="RAL 9005" color="0.004 0.004 0.005" />
+        <designColorConfiguration name="RAL 9022" color="0.235 0.235 0.227" />
+
+        <material materialSlotName="Surveyor_Orange_Mat" />
+    </designColorConfigurations>
+
+    <designColor2Configurations title="Legs">
+        <designColor2Configuration name="$l10n_ui_steelStainless" color="1 1 1" material="8" />
+        <designColor2Configuration name="$l10n_ui_steelGalvanized" color="1 1 1" material="4" price="150" />
+
+        <!-- Yellow hues -->
+        <designColor2Configuration name="RAL 1003" color="0.947 0.392 0" material="0" price="250" />
+        <designColor2Configuration name="RAL 1004" color="0.776 0.342 0" material="0" price="250" />
+        <designColor2Configuration name="RAL 1006" color="0.761 0.279 0" material="0" price="250" />
+        <designColor2Configuration name="RAL 1011" color="0.429 0.216 0.078" material="0" price="250" />
+        <designColor2Configuration name="RAL 1012" color="0.723 0.429 0.02" material="0" price="250" />
+        <designColor2Configuration name="RAL 1015" color="0.791 0.644 0.462" material="0" price="250" />
+        <designColor2Configuration name="RAL 1024" color="0.491 0.275 0.072" material="0" price="250" />
+        <designColor2Configuration name="RAL 1026" color="1 1 0" material="0" price="250" />
+        <designColor2Configuration name="RAL 1027" color="0.386 0.212 0.004" material="0" price="250" />
+        <designColor2Configuration name="RAL 1034" color="0.831 0.332 0.084" material="0" price="250" />
+
+        <!-- Orange hues -->
+        <designColor2Configuration name="RAL 2000" color="0.701 0.156 0" material="0" price="250" />
+        <designColor2Configuration name="RAL 2001" color="0.491 0.065 0.011" material="0" price="250" />
+        <designColor2Configuration name="RAL 2002" color="0.521 0.041 0.016" material="0" price="250" />
+        <designColor2Configuration name="RAL 2004" color="0.761 0.087 0.001" material="0" price="250" />
+        <designColor2Configuration name="RAL 2005" color="1 0.074 0.002" material="0" price="250" />
+        <designColor2Configuration name="RAL 2008" color="0.93 0.112 0.019" material="0" price="250" />
+        <designColor2Configuration name="RAL 2009" color="0.73 0.087 0.002" material="0" price="250" />
+
+        <!-- Red hues -->
+        <designColor2Configuration name="RAL 3000" color="0.386 0.022 0.014" material="0" price="250" />
+        <designColor2Configuration name="RAL 3002" color="0.328 0.017 0.015" material="0" price="250" />
+        <designColor2Configuration name="RAL 3004" color="0.147 0.012 0.017" material="0" price="250" />
+        <designColor2Configuration name="RAL 3007" color="0.048 0.014 0.016" material="0" price="250" />
+        <designColor2Configuration name="RAL 3011" color="0.191 0.018 0.017" material="0" price="250" />
+        <designColor2Configuration name="RAL 3014" color="0.597 0.171 0.178" material="0" price="250" />
+        <designColor2Configuration name="RAL 3018" color="0.571 0.05 0.068" material="0" price="250" />
+        <designColor2Configuration name="RAL 3026" color="1 0.023 0.011" material="0" price="250" />
+        <designColor2Configuration name="RAL 3027" color="0.407 0.02 0.045" material="0" price="250" />
+
+        <!-- Violet hues -->
+        <designColor2Configuration name="RAL 4001" color="0.22 0.12 0.227" material="0" price="250" />
+        <designColor2Configuration name="RAL 4003" color="0.552 0.12 0.262" material="0" price="250" />
+        <designColor2Configuration name="RAL 4005" color="0.181 0.138 0.323" material="0" price="250" />
+        <designColor2Configuration name="RAL 4006" color="0.279 0.033 0.171" material="0" price="250" />
+        <designColor2Configuration name="RAL 4007" color="0.063 0.018 0.045" material="0" price="250" />
+        <designColor2Configuration name="RAL 4010" color="0.503 0.051 0.184" material="0" price="250" />
+
+        <!-- Blue hues -->
+        <designColor2Configuration name="RAL 5000" color="0.031 0.078 0.159" material="0" price="250" />
+        <designColor2Configuration name="RAL 5001" color="0.005 0.072 0.127" material="0" price="250" />
+        <designColor2Configuration name="RAL 5002" color="0 0.04 0.198" material="0" price="250" />
+        <designColor2Configuration name="RAL 5005" color="0 0.087 0.242" material="0" price="250" />
+        <designColor2Configuration name="RAL 5007" color="0.038 0.147 0.262" material="0" price="250" />
+        <designColor2Configuration name="RAL 5011" color="0.01 0.024 0.045" material="0" price="250" />
+        <designColor2Configuration name="RAL 5012" color="0 0.25 0.468" material="0" price="250" />
+        <designColor2Configuration name="RAL 5018" color="0.002 0.258 0.262" material="0" price="250" />
+        <designColor2Configuration name="RAL 5022" color="0.016 0.026 0.102" material="0" price="250" />
+        <designColor2Configuration name="RAL 5023" color="0.054 0.141 0.262" material="0" price="250" />
+
+        <!-- Green hues -->
+        <designColor2Configuration name="RAL 6000" color="0.045 0.175 0.117" material="0" price="250" />
+        <designColor2Configuration name="RAL 6001" color="0.037 0.136 0.036" material="0" price="250" />
+        <designColor2Configuration name="RAL 6002" color="0.032 0.1 0.021" material="0" price="250" />
+        <designColor2Configuration name="RAL 6004" color="0.001 0.058 0.054" material="0" price="250" />
+        <designColor2Configuration name="RAL 6010" color="0.074 0.159 0.041" material="0" price="250" />
+        <designColor2Configuration name="RAL 6018" color="0.12 0.319 0.044" material="0" price="250" />
+        <designColor2Configuration name="RAL 6019" color="0.485 0.617 0.413" material="0" price="250" />
+        <designColor2Configuration name="RAL 6024" color="0 0.227 0.082" material="0" price="250" />
+        <designColor2Configuration name="RAL 6037" color="0 0.258 0.022" material="0" price="250" />
+        <designColor2Configuration name="RAL 6038" color="0 0.462 0.01" material="0" price="250" />
+
+        <!-- Grey hues -->
+        <designColor2Configuration name="RAL 7000" color="0.195 0.246 0.27" material="0" price="250" />
+        <designColor2Configuration name="RAL 7001" color="0.262 0.305 0.337" material="0" price="250" />
+        <designColor2Configuration name="RAL 7002" color="0.22 0.188 0.125" material="0" price="250" />
+        <designColor2Configuration name="RAL 7005" color="0.15 0.156 0.147" material="0" price="250" />
+        <designColor2Configuration name="RAL 7013" color="0.095 0.08 0.058" material="0" price="250" />
+        <designColor2Configuration name="RAL 7016" color="0.04 0.048 0.054" material="0" price="250" />
+        <designColor2Configuration name="RAL 7021" color="0.028 0.032 0.034" material="0" price="250" />
+        <designColor2Configuration name="RAL 7035" color="0.558 0.571 0.552" material="0" price="250" />
+
+        <!-- Brown hues -->
+        <designColor2Configuration name="RAL 8000" color="0.25 0.141 0.048" material="0" price="250" />
+        <designColor2Configuration name="RAL 8001" color="0.337 0.122 0.024" material="0" price="250" />
+        <designColor2Configuration name="RAL 8004" color="0.266 0.067 0.031" material="0" price="250" />
+        <designColor2Configuration name="RAL 8011" color="0.102 0.04 0.019" material="0" price="250" />
+        <designColor2Configuration name="RAL 8015" color="0.112 0.028 0.019" material="0" price="250" />
+
+        <!-- White & black hues -->
+        <designColor2Configuration name="RAL 9001" color="0.815 0.745 0.644" material="0" price="250" />
+        <designColor2Configuration name="RAL 9002" color="0.68 0.665 0.597" material="0" price="250" />
+        <designColor2Configuration name="RAL 9003" color="0.839 0.839 0.799" material="0" price="250" />
+        <designColor2Configuration name="RAL 9004" color="0.024 0.024 0.025" material="0" price="250" />
+        <designColor2Configuration name="RAL 9005" color="0.004 0.004 0.005" material="0" price="250" />
+        <designColor2Configuration name="RAL 9022" color="0.235 0.235 0.227" material="0" price="250" />
+
+        <material materialSlotName="Surveyor_Silver_Mat" />
+    </designColor2Configurations>
+
+    <foldable>
+        <foldingConfigurations>
+            <foldingConfiguration>
+                <foldingParts posDirectionText="Fold Surveyor" negDirectionText="Unfold Surveyor" requiresPower="false" startAnimTime="0">
+                    <foldingPart animationName="fold" speedScale="1" />
+                </foldingParts>
+            </foldingConfiguration>
+        </foldingConfigurations>
+    </foldable>
+
+    <animations>
+        <animation name="fold">
+            <part node="tripod_leg1_lower_lock" startTime="1.5" endTime="2" startRot="0 0 0" endRot="-75 0 0" />
+            <part node="tripod_leg2_lower_lock" startTime="1.5" endTime="2" startRot="0 0 0" endRot="-75 0 0" />
+            <part node="tripod_leg3_lower_lock" startTime="1.5" endTime="2" startRot="0 0 0" endRot="-75 0 0" />
+
+            <part node="tripod_leg1_lower" startTime="2" endTime="3" endTrans="0 0.01 1.12199998" startTrans="-0.00000002 0.00999991 0.67778605" />
+            <part node="tripod_leg2_lower" startTime="2" endTime="3" endTrans="0 0.01 1.12199998" startTrans="-0.00000002 0.00999991 0.67778605" />
+            <part node="tripod_leg3_lower" startTime="2" endTime="3" endTrans="0 0.01 1.12199998" startTrans="-0.00000002 0.00999991 0.67778605" />
+            <part node="tripod_leg1_lower_lock" startTime="3" endTime="3.5" startRot="-75 0 0" endRot="0 0 0" />
+            <part node="tripod_leg2_lower_lock" startTime="3" endTime="3.5" startRot="-75 0 0" endRot="0 0 0" />
+            <part node="tripod_leg3_lower_lock" startTime="3" endTime="3.5" startRot="-75 0 0" endRot="0 0 0" />
+            <part node="tripod_leg1" startTime="2" endTime="3" endRot="-25 0 -120" startRot="0 0 -120" />
+            <part node="tripod_leg2" startTime="2" endTime="3" endRot="-25 0 0" startRot="0 0 0" />
+            <part node="tripod_leg3" startTime="2" endTime="3" endRot="-25 0 120" startRot="0 0 120" />
+            <part node="Tripod" startTime="2.5" endTime="3.5" startRot="0 0 28" endRot="90 0 0" />
+            <part node="Tripod" startTime="1.5" endTime="2.5" startTrans="-0.055 0.28010995 0.00000003" endTrans="-0.055 2.4 0.00000026" />
+            <part node="Tripod" startTime="3.5" endTime="4.5" startTrans="-0.055 2.4 0.00000026" endTrans="-0.055 1.522 0.00000003" />
+
+            <part node="pelicanCover" startTime=".5" endTime="1.5" startRot=".651 0 0" endRot="-90 0 0" />
+            <part node="pelicanCover_latchF1" startTime="0" endTime=".5" startRot="100 0 0" endRot="0 0 0" />
+            <part node="pelicanCover_latchF2" startTime="0" endTime=".5" startRot="100 0 0" endRot="0 0 0" />
+            <part node="pelicanCover_latchF3" startTime="0" endTime=".5" startRot="100 0 0" endRot="0 0 0" />
+            <part node="pelicanCover_latchF4" startTime="0" endTime=".5" startRot="100 0 0" endRot="0 0 0" />
+            <part node="pelicanCover_latchL" startTime="0" endTime=".5" startRot="100 0 90" endRot="0 0 90" />
+            <part node="pelicanCover_latchR" startTime="0" endTime=".5" startRot="100 0 -90" endRot="0 0 -90" />
+            <part node="pelicanCase" startTime="2.69" endTime="2.7" startVisibility="true" endVisibility="false" />
+            <part node="main_col" startTime="2.5" endTime="3.5" startRot="0 0 0" endRot="90 0 0" />
+            <part node="main_col" startTime="1.5" endTime="2.5" endTrans="-0.048 1.00893283 0.01975742" startTrans="-0.048 0.30383691 0.30602434" />
+        </animation>
+    </animations>
+
+    <cylindered>
+        <movingParts>
+            <!-- Pitch Level Function -->
+            <movingPart node="total_station_v7300_Leveler" referenceFrame="total_station_zero" limitedAxis="1" alignToWorldY="true" isActiveDirty="true" smoothedDirectionScale="true" maxUpdateDistance="-" />
+        </movingParts>
+    </cylindered>
+
+    <surveyor trigger="trigger">
+        <objectChanges>
+            <objectChange node="ActiveVisual" shaderParameter="colorScale" shaderParameterActive="1 0 0 0" shaderParameterInactive="0 0 1 0" />
+            <objectChange node="ActiveVisual" shaderParameter="lightControl" shaderParameterActive="10 0 0 0" shaderParameterInactive=".5 0 0 0" />
+            <objectChange node="ActiveVisual2" shaderParameter="colorScale" shaderParameterActive="0 .05 .4 0" shaderParameterInactive="0 0 1 0" />
+            <objectChange node="ActiveVisual2" shaderParameter="lightControl" shaderParameterActive="10 0 0 0" shaderParameterInactive=".5 0 0 0" />
+            <objectChange node="ActiveVisual3" shaderParameter="colorScale" shaderParameterActive="0 1 0 0" shaderParameterInactive="0 0 1 0" />
+            <objectChange node="ActiveVisual3" shaderParameter="lightControl" shaderParameterActive="10 0 0 0" shaderParameterInactive=".5 0 0 0" />
+            <objectChange node="ActiveVisual4" shaderParameter="colorScale" shaderParameterActive="0 1 0 0" shaderParameterInactive="0 0 1 0" />
+            <objectChange node="ActiveVisual4" shaderParameter="lightControl" shaderParameterActive="10 0 0 0" shaderParameterInactive=".5 0 0 0" />
+        </objectChanges>
+    </surveyor>
+
+    <tensionBeltObject>
+        <meshNodes>
+            <meshNode node="pelicanCase" />
+            <meshNode node="pelicanCover" />
+        </meshNodes>
+    </tensionBeltObject>
+
+    <wearable wearDuration="1200" workMultiplier="2" fieldMultiplier="1" />
+
+    <washable dirtDuration="600" washDuration="1.5" workMultiplier="2" fieldMultiplier="1" />
+
+    <i3dMappings>
+        <i3dMapping id="surveyor" node="0>" />
+        <i3dMapping id="trigger" node="0>0" />
+        <i3dMapping id="Tripod" node="0>1" />
+        <i3dMapping id="tripod_leg1" node="0>1|0" />
+        <i3dMapping id="tripod_leg1_lower" node="0>1|0|0" />
+        <i3dMapping id="tripod_leg1_lower_lock" node="0>1|0|0|0" />
+        <i3dMapping id="tripod_leg2" node="0>1|1" />
+        <i3dMapping id="tripod_leg2_lower" node="0>1|1|0" />
+        <i3dMapping id="tripod_leg2_lower_lock" node="0>1|1|0|0" />
+        <i3dMapping id="tripod_leg3" node="0>1|2" />
+        <i3dMapping id="tripod_leg3_lower" node="0>1|2|0" />
+        <i3dMapping id="tripod_leg3_lower_lock" node="0>1|2|0|0" />
+        <i3dMapping id="total_station_fbx_v7300" node="0>1|3" />
+        <i3dMapping id="total_station_fbx_v7300_base" node="0>1|3|0" />
+        <i3dMapping id="total_station_fbx_v7300_body" node="0>1|3|1" />
+        <i3dMapping id="total_station_fbx_v7300_buttons" node="0>1|3|2" />
+        <i3dMapping id="total_station_fbx_v7300_handle" node="0>1|3|3" />
+        <i3dMapping id="total_station_zero" node="0>1|3|4" />
+        <i3dMapping id="total_station_v7300_Leveler" node="0>1|3|4|0" />
+        <i3dMapping id="total_station_fbx_v7300_Leveler_Lens" node="0>1|3|4|0|0" />
+        <i3dMapping id="ActiveVisual" node="0>1|3|4|0|0|0" />
+        <i3dMapping id="ActiveVisual2" node="0>1|3|4|0|0|0|0" />
+        <i3dMapping id="ActiveVisual3" node="0>1|3|4|0|0|0|1" />
+        <i3dMapping id="ActiveVisual4" node="0>1|3|4|0|0|0|2" />
+        <i3dMapping id="LensBlock1" node="0>1|3|4|0|0|1" />
+        <i3dMapping id="LensBlock2" node="0>1|3|4|0|0|2" />
+        <i3dMapping id="LensBlock3" node="0>1|3|4|0|0|3" />
+        <i3dMapping id="LensBlock4" node="0>1|3|4|0|0|4" />
+        <i3dMapping id="main_col" node="0>2" />
+        <i3dMapping id="pelicanCase" node="0>3" />
+        <i3dMapping id="foam_bottom" node="0>3|0" />
+        <i3dMapping id="pelicanCover" node="0>3|1" />
+        <i3dMapping id="foam_upper" node="0>3|1|0" />
+        <i3dMapping id="pelicanCover_latchF1" node="0>3|1|1" />
+        <i3dMapping id="pelicanCover_latchF2" node="0>3|1|2" />
+        <i3dMapping id="pelicanCover_latchF3" node="0>3|1|3" />
+        <i3dMapping id="pelicanCover_latchF4" node="0>3|1|4" />
+        <i3dMapping id="pelicanCover_latchL" node="0>3|1|5" />
+        <i3dMapping id="pelicanCover_latchR" node="0>3|1|6" />
+    </i3dMappings>
+
+</vehicle>

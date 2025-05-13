@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<configurations>
+    <!-- Base game -->
+    <!-- DO NOT EDIT UNLESS FOR PRIVATE USE, use external mods to add new configurations -->
+
+    <configuration
+        vehicle="data/vehicles/albutt/frontloaderShovel/frontloaderShovel.xml"
+        file="xml/machines/giants/Albutt_frontloaderShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/magsi/telehandlerShovel/telehandlerShovel.xml"
+        file="xml/machines/giants/Magsi_telehandlerShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/mcCormack/overtippingBucket/overtippingBucket.xml"
+        file="xml/machines/giants/mcCormack_overtippingBucket.xml" />
+    <configuration
+        vehicle="data/vehicles/paladin/highDumpBucket/highDumpBucket.xml"
+        file="xml/machines/giants/Paladin_highDumpBucket.xml" />
+    <configuration
+        vehicle="data/vehicles/holaras/mes400/mes400.xml"
+        file="xml/machines/giants/holaras_mes400.xml" />
+
+    <configuration
+        vehicle="data/vehicles/volvo/l120HHighTipShovel/l120HHighTipShovel.xml"
+        file="xml/machines/giants/l120H_highTipShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/volvo/l120HRockShovel/l120HRockShovel.xml"
+        file="xml/machines/giants/l120H_rockShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/volvo/l120HShovel/l120HShovel.xml"
+        file="xml/machines/giants/l120H_shovel.xml" />
+    <configuration
+        vehicle="data/vehicles/volvo/l180HHighTipShovel/l180HHighTipShovel.xml"
+        file="xml/machines/giants/l180H_highTipShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/volvo/l180HRockShovel/l180HRockShovel.xml"
+        file="xml/machines/giants/l180H_rockShovel.xml" />
+    <configuration
+        vehicle="data/vehicles/volvo/l180HShovel/l180HShovel.xml"
+        file="xml/machines/giants/l180H_shovel.xml" />
+
+</configurations>

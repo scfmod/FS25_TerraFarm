@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GuiProfiles>
+    <!-- Shared GuiProfiles -->
+    <Profile name="tf_listShadow" with="anchorTopCenter">
+        <size value="115px 16px" />
+        <position value="0 0" />
+
+        <imageSliceId value="terraFarm.list_shadow" />
+        <imageColor value="0 0 0 0.5" />
+    </Profile>
+
+    <Profile name="tf_listShadowBottom" extends="tf_listShadow" with="anchorBottomCenter">
+        <imageUVRotation value="180" />
+    </Profile>
+
+    <Profile name="tf_listSliderBox" extends="fs25_subCategoryListSliderBox">
+    </Profile>
+
+    <Profile name="tf_listSliderBoxLeft" extends="tf_listSliderBox" with="pivotTopLeft">
+        <position value="-8px 0px" />
+    </Profile>
+
+    <Profile name="tf_listSlider" extends="fs25_listSlider">
+        <sliderImageColor value="$preset_fs25_colorGreen" />
+        <startImageColor value="$preset_fs25_colorGreen" />
+        <endImageColor value="$preset_fs25_colorGreen" />
+    </Profile>
+
+    <Profile name="tf_listHeaderText" extends="textDefault" with="anchorTopCenter">
+        <size value="120px 20px" />
+        <position value="-9px 48px" />
+
+        <textAutoWidth value="true" />
+    </Profile>
+
+
+    <Profile name="tf_dialogFullscreenBg" extends="dialogFullscreenBg">
+        <imageColor value="0.013 0.013 0.013 0.9" />
+    </Profile>
+
+    <Profile name="tf_dialogBg" extends="fs25_dialogBg">
+        <size value="820px 760px" />
+        <imageColor value="0 0 0 0" />
+    </Profile>
+
+    <Profile name="tf_dialogBgTopSmall" extends="fs25_dialogBgTopSmall">
+    </Profile>
+    <Profile name="tf_dialogBgMiddleSmall" extends="fs25_dialogBgMiddleSmall">
+    </Profile>
+    <Profile name="tf_dialogBgBottom" extends="fs25_dialogBgBottom">
+    </Profile>
+
+
+    <Profile name="tf_dialogTitle" extends="fs25_dialogTitle">
+        <textSize value="18px" />
+    </Profile>
+
+    <Profile name="tf_dialogSectionHeader" extends="fs25_settingsSectionHeader">
+        <size value="100% 64px" />
+
+        <textSize value="18px" />
+        <textBold value="true" />
+    </Profile>
+
+    <Profile name="tf_dialogButtonBox" extends="fs25_dialogButtonBox">
+    </Profile>
+
+    <Profile name="tf_dialogButtonBoxSeparator" extends="fs25_dialogButtonBoxSeparator">
+    </Profile>
+
+    <!-- BinaryOptionElement -->
+
+    <Profile name="tf_binaryOptionLeft" extends="emptyPanel" with="anchorStretchingYLeft">
+        <size value="50% 100%" />
+        <absoluteSizeOffset value="20px 0px" />
+        <position value="10px 0px" />
+        <textSize value="16px" />
+        <textMaxNumLines value="1" />
+        <textUpperCase value="true" />
+        <textAlignment value="center" />
+        <textLayoutMode value="scrolling" />
+        <textColor value="$preset_fs25_colorMainLight_80" />
+        <textSelectedColor value="$preset_fs25_colorMainDark" />
+    </Profile>
+
+    <Profile name="tf_binaryOptionRight" extends="fs25_binaryOptionLeft" with="anchorStretchingYRight">
+        <position value="-10px 0px" />
+    </Profile>
+
+    <Profile name="tf_binaryOptionSlider" extends="baseReference" with="anchorStretchingYLeft">
+        <size value="50% 100%" />
+        <imageSliceId value="gui.3dShop_button_middle" />
+        <imageColor value="$preset_fs25_colorGreyBinarySlider" />
+        <imageFocusedColor value="$preset_fs25_colorMainHighlight" />
+        <imageHighlightedColor value="$preset_fs25_colorMainHighlight" />
+        <imageDisabledColor value="0 0 0 0.2" />
+        <startImageSize value="6px 0" />
+        <startImageSliceId value="gui.3dShop_button_left" />
+        <startImageColor value="$preset_fs25_colorGreyBinarySlider" />
+        <startImageFocusedColor value="$preset_fs25_colorMainHighlight" />
+        <startImageHighlightedColor value="$preset_fs25_colorMainHighlight" />
+        <startImageDisabledColor value="0 0 0 0.2" />
+        <endImageSize value="6px 0" />
+        <endImageSliceId value="gui.3dShop_button_right" />
+        <endImageColor value="$preset_fs25_colorGreyBinarySlider" />
+        <endImageFocusedColor value="$preset_fs25_colorMainHighlight" />
+        <endImageHighlightedColor value="$preset_fs25_colorMainHighlight" />
+        <endImageDisabledColor value="0 0 0 0.2" />
+    </Profile>
+
+    <Profile name="tf_binaryOptionBg" extends="fs25_binaryOptionBg">
+        <startImageDisabledColor value="1 0 0 0" />
+        <imageDisabledColor value="1 0 0 0" />
+        <endImageDisabledColor value="1 0 0 0" />
+    </Profile>
+
+    <Profile name="tf_binaryOption" extends="baseReference" with="anchorMiddleRight">
+        <size value="276px 32px" />
+        <position value="-12px 0px" />
+        <focusOnHighlight value="true" />
+
+        <autoAddDefaultElements value="true" />
+        <defaultProfileBgThreePart value="tf_binaryOptionBg" />
+        <defaultProfileButtonLeft value="tf_binaryOptionLeft" />
+        <defaultProfileButtonRight value="tf_binaryOptionRight" />
+        <defaultProfileSliderThreePart value="tf_binaryOptionSlider" />
+    </Profile>
+
+
+    <!-- Screen profiles -->
+    <Profile name="tfMenuScreen_FullscreenBg" extends="tf_dialogFullscreenBg">
+        <imageColor value="0.013 0.013 0.013 0.9" />
+    </Profile>
+
+
+    <!-- Frame profiles -->
+    <Profile name="tfMenuFrame_contentContainer" extends="emptyPanel" with="anchorMiddleCenter">
+        <size value="1234px 740px" />
+        <position value="-13px -2px" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_content" extends="baseReference" with="anchorTopLeft">
+        <size value="100% 100%" />
+
+        <imageColor value="0.2 0.2 0.2 0.025" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentHeader" extends="baseReference" with="anchorTopLeft">
+        <size value="100% 56px" />
+        <position value="-72px 64px" />
+        <imageColor value="0 0 0 0" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentHeaderText" extends="textDefault" with="anchorMiddleCenter">
+        <size value="300px 32px" />
+
+        <textSize value="24px" />
+        <textAlignment value="center" />
+        <textUpperCase value="true" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentShadowTop" with="anchorTopCenter">
+        <size value="1200px 24px" />
+        <position value="0 0" />
+
+        <imageSliceId value="terraFarm.list_shadow" />
+        <imageColor value="0 0 0 0.5" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentShadowBottom" extends="tfMenuFrame_contentShadowTop" with="anchorBottomCenter">
+        <position value="0 0" />
+
+        <imageUVRotation value="180" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentLayout" with="anchorTopCenter">
+        <size value="1000px 740px" />
+
+        <elementSpacing value="4px" />
+        <fitFlowToElements value="true" />
+        <flowDirection value="vertical" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentLayoutSectionHeader">
+        <size value="100% 64pxpx" />
+
+        <hasFrame value="true" />
+        <frameThickness value="0dp 0dp 0dp 2dp" />
+        <frameBottomColor value="1 1 1 0.05" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_contentLayoutSectionHeaderText" extends="textDefault">
+        <size value="100% 40px" />
+        <absoluteSizeOffset value="0 130px" />
+
+        <textUpperCase value="true" />
+        <textOffset value="16px 0" />
+        <textSize value="16px" />
+        <textBold value="true" />
+
+        <textColor value="1 1 1 0.25" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_optionWrapper" extends="baseReference">
+        <size value="100% 60px" />
+
+        <imageColor value="0 0 0 0.1" />
+
+        <imageHighlightedColor value="0 0 0 0.2" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_optionTitle" extends="textDefault" with="anchorMiddleLeft">
+        <height value="32px" />
+        <position value="16px 0" />
+
+        <textAutoWidth value="true" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_optionTooltip" extends="textDefault" with="anchorMiddleLeft">
+        <height value="32px" />
+        <position value="550px 0" />
+
+        <textSize value="13px" />
+        <textColor value="1 1 1 0.65" />
+        <textAutoWidth value="true" />
+        <textMaxWidth value="424px" />
+        <textMaxNumLines value="3" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_binaryOption" extends="tf_binaryOption" with="anchorMiddleLeft">
+        <size value="180px 32px" />
+        <position value="340px 0" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_textInput" extends="fs25_dialogTextInput" with="anchorMiddleLeft">
+        <size value="180px 40px" />
+        <position value="340px 0" />
+
+        <textBold value="false" />
+
+        <imageSliceId value="gui.colorPreset" />
+        <imageColor value="0 0 0 0.5" />
+        <imageFocusedColor value="0 0 0 0.8" />
+        <imageSelectedColor value="0 0 0 0.8" />
+        <imageHighlightedColor value="0 0 0 0.65" />
+        <imageDisabledColor value="0 0 0 0.3" />
+
+        <hasFrame value="true" />
+        <frameThickness value="1dp 1dp 1dp 1dp" />
+        <frameTopColor value="$preset_fs25_colorMainHighlight" />
+        <frameRightColor value="$preset_fs25_colorMainHighlight" />
+        <frameBottomColor value="$preset_fs25_colorMainHighlight" />
+        <frameLeftColor value="$preset_fs25_colorMainHighlight" />
+
+        <hasFrameWhenFocused value="false" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_button" extends="baseReference" with="anchorMiddleLeft">
+        <size value="192px 42px" />
+        <position value="336px -4px" />
+        <iconSize value="0 0" />
+        <textSize value="15px" />
+        <textUpperCase value="true" />
+
+        <imageColor value="0 0 0 0" />
+        <imageDisabledColor value="0 0 0 0" />
+        <imageFocusedColor value="0 0 0 0" />
+        <imageHighlightedColor value="0 0 0 0" />
+
+        <textColor value="1 1 1 1" />
+        <textDisabledColor value="0.5 0.5 0.5 0.5" />
+        <textHighlightedColor value="$preset_fs25_colorMainDark" />
+        <textFocusedColor value="$preset_fs25_colorMainDark" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_optionImage" extends="baseReference" with="anchorMiddleLeft">
+        <size value="36px 36px" />
+        <position value="12px 0" />
+
+        <imageSliceId value="noSlice" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_optionImageText" extends="tfMenuFrame_optionTitle">
+        <position value="62px 0" />
+
+        <textBold value="true" />
+    </Profile>
+
+    <Profile name="tfMenuFrame_multiTextOption" extends="fs25_settingsMultiTextOption" with="anchorMiddleLeft">
+        <position value="336px -4px" />
+        <size value="192px 42px" />
+
+        <wrap value="true" />
+    </Profile>
+
+    <Profile name="tf_shopListAttributeIconSurveyor" extends="fs25_itemDetailsIcon">
+        <imageSliceId value="terraFarm.icon_surveyor" />
+    </Profile>
+
+    <Profile name="tf_shopListAttributeIconMachine" extends="fs25_itemDetailsIcon">
+        <imageSliceId value="terraFarm.icon_excavator" />
+    </Profile>
+</GuiProfiles>

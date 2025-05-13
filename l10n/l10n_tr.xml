@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l10n>
+    <texts>
+        <!-- Input bindings -->
+        <text name="input_MACHINE_SETTINGS" text="Makine ayarları iletişim kutusunu aç" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Makineyi etkinleştirmeyi aç / kapat" />
+        <text name="input_MACHINE_TOGGLE_INPUT" text="Giriş modunu değiştir" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Çıkış modunu değiştir" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Materyal diyaloğunu aç" />
+        <text name="input_MACHINE_SELECT_TEXTURE" text="Zemin dokusu iletişim kutusunu aç" />
+        <text name="input_MACHINE_SELECT_SURVEYOR" text="Haritacı diyaloğunu aç" />
+        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Genel ayarlar iletişim kutusunu aç" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="HUD görünürlüğünü değiştir" />
+
+        <!-- Generic texts-->
+        <text name="ui_mode" text="Mod" />
+        <text name="ui_enable" text="Etkinleştir" />
+        <text name="ui_enabled" text="Etkinleştirilmiş" />
+        <text name="ui_disable" text="Devre dışı bırakmak" />
+        <text name="ui_disabled" text="Devre dışı bırakılmış" />
+        <text name="ui_toggleHud" text="HUD değiştir" />
+        <text name="ui_globalSettings" text="Genel ayarlar" />
+        <text name="ui_materialSettings" text="Malzeme ayarları" />
+        <text name="ui_material" text="Malzeme" />
+        <text name="ui_texture" text="Texture" />
+        <text name="ui_changeMaterial" text="Malzemeyi değiştir" />
+        <text name="ui_changeTexture" text="Texture değiştir" />
+        <text name="ui_circle" text="Daire" />
+        <text name="ui_square" text="Kare" />
+        <text name="ui_terrainDeformation" text="Arazi deformasyonu" />
+        <text name="ui_enableHud" text="HUD etkinleştir" />
+        <text name="ui_machines" text="Makineler" />
+        <text name="ui_machinesEmpty" text="Kullanılabilir makine bulunamadı" />
+        <text name="ui_surveyors" text="Araştırmacı" />
+        <text name="ui_surveyorsEmpty" text="Kullanılabilir araştırmacı bulunamadı" />
+        <text name="ui_angleFormat" text="Açı: %.2f" tag="format" />
+        <text name="ui_distanceFormat" text="Mesafe: %.0f m" tag="format" />
+        <text name="ui_copySettings" text="Ayarları kopyala" />
+        <text name="ui_copySettingsTooltip" text="Makine ayarlarını başka bir araçtan kopyalayın" />
+        <text name="ui_areaModifiers" text="Alan değiştiriciler" />
+        <text name="ui_postDeformation" text="Sonrası deformasyon" />
+
+        <!-- Machine texts -->
+        <text name="ui_machineSettings" text="Makine ayarları" />
+        <text name="ui_machineActivate" text="Makineyi etkinleştir" />
+        <text name="ui_machineDeactivate" text="Makineyi devre dışı bırak" />
+        <text name="ui_machineToggleInput" text="Giriş modunu değiştir" />
+        <text name="ui_machineToggleOutput" text="Çıkış modunu değiştir" />
+        <text name="ui_enableMachine" text="Makineyi etkinleştir" />
+        <text name="ui_enableMapResources" text="Harita kaynaklarını kullanın" />
+        <text name="ui_enableMapResourcesTooltip" text="" />
+
+        <text name="ui_modeMaterial" text="Malzeme" />
+        <text name="ui_modeFlatten" text="Düzleşmek" />
+        <text name="ui_modeSmooth" text="Düz" />
+        <text name="ui_modeLower" text="Aşağı" />
+        <text name="ui_modePaint" text="Boya" />
+        <text name="ui_raise" text="Yukarı" />
+
+        <text name="ui_terraform" text="Terraform" />
+        <text name="ui_discharge" text="Boşaltma" />
+
+        <!-- Map resources texts -->
+        <text name="ui_mapResourcesAvailable" text="Bu harita için özellik mevcut." />
+        <text name="ui_mapResourcesNotAvailable" text="Özellik bu haritada mevcut değil." />
+        <text name="ui_mapResourcesDescription" text="Yalnızca uygulanan özelliğe sahip haritalar için kullanılabilir. Etkinleştirilirse, harita yazarı tarafından tanımlanan farklı alanlardaki malzeme ve boya katmanları kullanılacaktır. Etkinleştirilirse her makine özelliği açabilir/kapatabilir." />
+
+        <!-- Surveyor texts -->
+        <text name="ui_selectSurveyor" text="Haritacıyı seçin" />
+        <text name="ui_calibrate" text="Ayarlamak" />
+        <text name="ui_calibration" text="Kalibrasyon" />
+        <text name="ui_calibrationDescription" text="Kalibrasyon, ölçüm cihazı ekipmanından kalibre edilmiş bir açı kullanarak GRADE yapmanızı sağlar." />
+        <text name="ui_calibratedAngleFormat" text="Kalibrasyon Açısı: %.2f°" tag="format" />
+        <text name="ui_calibrated" text="Kalibre edildi" />
+        <text name="ui_calibratedFormat" text="Kalibre edildi: %.2f°" tag="format" />
+        <text name="ui_calibrateCopy" text="Makineden kopyala" />
+        <text name="ui_notCalibrated" text="Kalibre edilmedi" />
+        <text name="ui_setTarget" text="Hedefi belirle" />
+        <text name="ui_setAngle" text="Açıyı ayarla" />
+        <text name="ui_setLevel" text="Seviyeyi ayarla" />
+        <text name="ui_useTerrain" text="Araziyi kullan" />
+        <text name="ui_useTerrainTooltip" text="Arazide kalibrasyonu etkinleştir" />
+        <text name="ui_notAvailable" text="Müsait değil" />
+        <text name="warning_unfoldSurveyor" text="İlk önce aleti açmanız gerekiyor!" />
+
+        <!-- Global settings texts -->
+        <text name="ui_globalEnabled" text="TerraFarm'ı etkinleştir" />
+        <text name="ui_globalDefaultEnabled" text="Makineleri varsayılan olarak etkinleştir" />
+        <text name="ui_globalResourcesEnabled" text="Harita kaynaklarını etkinleştir" />
+        <text name="ui_displayMode" text="HUD ekran modu" />
+        <text name="ui_debugNodes" text="Makine düğümlerinde hata ayıklama" />
+        <text name="ui_debugCalibration" text="Makine kalibrasyonunda hata ayıklama" />
+
+        <!-- Store items -->
+        <text name="storeItem_surveyor" text="PSV-2 Haritacı" />
+        <text name="typeDesc_surveyor" text="Haritacı ekipmanı" />
+        <text name="ui_steelStainless" text="Paslanmaz çelik" />
+        <text name="ui_steelGalvanized" text="Galvanizli çelik" />
+        <text name="displayItem_machine" text="Makine" />
+        <text name="displayItem_surveyor" text="Haritacı" />
+
+        <!-- MachineState -->
+        <text name="ui_stateEnableEffects" text="Görsel efektleri etkinleştir" />
+        <text name="ui_stateEnableEffectsTooltip" text="Yalnızca desteklenen ekipmanlarda mevcuttur" />
+        <text name="ui_stateClearDecoArea" text="Yaprakları temizle" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Dünyalaştırma sırasında bitki örtüsünü ve çalıları kaldırın" />
+        <text name="ui_stateClearDensityMapHeightArea" text="Malzemeyi Temizle" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Arazi deformasyonunun etrafındaki malzemeyi kaldırın" />
+        <text name="ui_stateEnableInputMaterial" text="Malzemeyi etkinleştir" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Dünyalaştırma sırasında malzeme oluşturmayı etkinleştir" />
+        <text name="ui_stateEnableOutputMaterial" text="Deşarjı etkinleştir" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Malzemenin yere boşaltılmasına izin verin" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Boyayı etkinleştir" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Dünyalaştırma sırasında yeni zemin dokularının boyanması" />
+        <text name="ui_stateRadius" text="Yarıçap" />
+        <text name="ui_stateRadiusTooltip" text="" />
+        <text name="ui_stateStrength" text="Güç" />
+        <text name="ui_stateStrengthTooltip" text="" />
+        <text name="ui_stateHardness" text="Sertlik" />
+        <text name="ui_stateHardnessTooltip" text="" />
+        <text name="ui_stateBrushShape" text="Deformasyon fırçası şekli" />
+        <text name="ui_stateBrushShapeTooltip" text="" />
+        <text name="ui_stateEraseTireTracks" text="Lastik izlerini kaldırın" />
+        <text name="ui_stateEraseTireTracksTooltip" text="" />
+        <text name="ui_stateRemoveFieldArea" text="Tarla alanlarını kaldır" />
+        <text name="ui_stateRemoveFieldAreaTooltip" text="" />
+        <text name="ui_stateRemoveStoneArea" text="Taşları kaldır" />
+        <text name="ui_stateRemoveStoneAreaTooltip" text="" />
+        <text name="ui_stateRemoveWeedArea" text="Yabani otları kaldır" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Dünyalaştırma sırasında yabani otları temizler" />
+        <text name="ui_stateAllowGradingUp" text="Yükseltmeye izin ver" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Aktif olduğunda malzeme girişinin kapatılması önerilir" />
+        <text name="ui_stateForceNodes" text="Düğümleri zorla" />
+        <text name="ui_stateForceNodesTooltip" text="Bir veya daha fazlası etkinse tüm düğümleri zorla" />
+        <text name="ui_statePaintRadiusModifier" text="Boya yarıçapı değiştiricisi" />
+        <text name="ui_statePaintRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifier" text="Yoğunluk yarıçapı değiştiricisi" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateInputRatio" text="Giriş oranı" />
+        <text name="ui_stateInputRatioTooltip" text="" />
+
+        <!-- Machine types -->
+        <text name="machineType_compactor" text="Silinidr" />
+        <text name="machineType_excavator" text="Excavator" />
+        <text name="machineType_leveler" text="Tesviye" />
+        <text name="machineType_ripper" text="Zemin sökücü" />
+        <text name="machineType_shovel" text="Kepçe" />
+        <text name="machineType_trencher" text="Kanal kazıcı" />
+    </texts>
+</l10n>

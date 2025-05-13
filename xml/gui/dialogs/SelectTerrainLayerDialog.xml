@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tfSelectTerrainLayer_dialogBg">
+        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
+        <ThreePartBitmap profile="tf_dialogBgBottom" />
+
+        <Text position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_changeTexture" />
+
+        <GuiElement profile="tfSelectTerrainLayer_dialogContent">
+
+            <GuiElement profile="tfSelectTerrainLayer_dialogContentLeft">
+                <TerrainLayer profile="tfSelectTerrainLayer_previewImage" id="previewImage" />
+                <Bitmap profile="tfSelectTerrainLayer_maskImage" />
+                <Text profile="tfSelectTerrainLayer_previewTitle" text="Preview" />
+            </GuiElement>
+
+            <GuiElement profile="tfSelectTerrainLayer_dialogContentRight">
+                <SmoothList profile="tfSelectTerrainLayer_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick" onClick="onItemClick">
+                    <ListItem profile="tfSelectTerrainLayer_listItem">
+                        <TerrainLayer name="image" profile="tfSelectTerrainLayer_listItemImage" />
+                        <Text name="name" profile="tfSelectTerrainLayer_listItemText" />
+                    </ListItem>
+                </SmoothList>
+
+                <ThreePartBitmap profile="tf_listSliderBox">
+                    <Slider dataElementId="list" profile="tf_listSlider" />
+                </ThreePartBitmap>
+
+                <Bitmap profile="tfSelectTerrainLayer_listShadowTop" />
+                <Bitmap profile="tfSelectTerrainLayer_listShadowBottom" />
+            </GuiElement>
+
+
+        </GuiElement>
+
+        <BoxLayout profile="tf_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+            <Bitmap profile="tf_dialogButtonBoxSeparator" />
+            <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tf_testTop" extends="baseReference" with="anchorTopCenter">
+            <size value="100% 8px" />
+            <imageColor value="0 0 0 0.85" />
+            <imageSize value="1024 1024" />
+            <imageSliceId value="gui.hudExtension_top" />
+        </Profile>
+        <Profile name="tf_testMiddle" extends="baseReference" with="anchorMiddleCenter">
+            <absoluteSizeOffset value="0px 16px" />
+            <imageColor value="0 0 0 0.85" />
+            <imageSize value="1024 1024" />
+            <imageSliceId value="gui.hudExtension_middle" />
+        </Profile>
+        <Profile name="tf_testBottom" extends="baseReference" with="anchorBottomCenter">
+            <size value="100% 8px" />
+            <imageColor value="0 0 0 0.85" />
+            <imageSize value="1024 1024" />
+            <imageSliceId value="gui.hudExtension_bottom" />
+        </Profile>
+
+        <Profile name="tf_testEx" extends="fs25_dialogBgBottom">
+            <size value="100% 90px" />
+            <position value="0 40px" />
+        </Profile>
+        <Profile name="tf_test" extends="fs25_dialogBgTopSmall" with="anchorBottomStretchingX">
+            <size value="100% 24px" />
+            <position value="-11px 80px" />
+
+            <endImageSize value="34px 0" />
+            <startImageSliceId value="gui.dialogue_box_small_gradient_right" />
+            <startImageRotation value="180" />
+            <endImageSliceId value="gui.dialogue_box_small_gradient_left" />
+            <endImageRotation value="180" />
+            <imageRotation value="180" />
+        </Profile>
+        <Profile name="tfSelectTerrainLayer_dialogBg" extends="tf_dialogBg">
+            <size value="790px 760px" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_dialogContent" with="anchorBottomCenter">
+            <size value="790px 600px" />
+            <position value="0px 80px" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_dialogContentLeft" with="anchorTopLeft">
+            <size value="376px 600px" />
+            <position value="0px 0" />
+        </Profile>
+        <Profile name="tfSelectTerrainLayer_dialogContentRight" with="anchorTopRight">
+            <size value="376px 600px" />
+            <position value="-32px 0" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_list" extends="list" with="anchorTopLeft">
+            <size value="372px 600px" />
+            <isHorizontalList value="false" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_listItem" with="anchorTopStretchingX">
+            <height value="56px" />
+
+            <imageSliceId value="terraFarm.list_box" />
+            <imageSelectedSliceId value="terraFarm.list_box_selected" />
+            <imageHighlightedSliceId value="terraFarm.list_box_hover" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_listItemImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="42px 42px" />
+            <position value="10px -1px" />
+
+            <imageSliceId value="noSlice" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_listItemText" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
+            <size value="200px 48px" />
+            <position value="68px 0" />
+
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_listShadowTop" extends="tf_listShadow">
+            <position value="6px 0" />
+            <size value="370px 32px" />
+        </Profile>
+        <Profile name="tfSelectTerrainLayer_listShadowBottom" extends="tfSelectTerrainLayer_listShadowTop" with="anchorBottomCenter">
+            <position value="0 0" />
+
+            <imageUVRotation value="180" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_previewImage" extends="baseReference" with="anchorMiddleCenter">
+            <size value="256px 256px" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_previewTitle" extends="textDefault" with="anchorMiddleCenter">
+            <size value="100% 32px" />
+            <position value="0px 170px" />
+
+            <textColor value="0.21 0.21 0.21 0.25" />
+            <textSize value="24px" />
+            <textBold value="true" />
+            <textAlignment value="center" />
+            <textUpperCase value="true" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_maskImage" extends="baseReference" with="anchorMiddleCenter">
+            <size value="256px 256px" />
+
+            <imageSliceId value="terraFarm.mask_overlay_shadow" />
+            <imageMaskFilename value="g_tfPreviewMaskFilename" />
+
+            <overlayMaskSize value="256px 256px" />
+            <overlayMaskPos value="0px 0px" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

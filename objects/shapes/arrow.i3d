@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="arrow.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3" />
+  </Asset>
+
+  <Files>
+    <File fileId="3" filename="shape_specular.dds" />
+    <File fileId="1" filename="shape_diffuse.dds" />
+    <File fileId="2" filename="shape_normal.dds" />
+    <File fileId="4" filename="lineShader.xml" />
+  </Files>
+
+
+  <Materials>
+    <Material name="line_mat" materialId="5" customShaderId="4">
+      <Texture fileId="1" />
+      <Normalmap fileId="2" />
+      <Glossmap fileId="3" />
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="arrow.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="arrow" shapeId="1" clipDistance="100" nodeId="8" castsShadows="false" receiveShadows="false" materialIds="5" />
+  </Scene>
+</i3D>

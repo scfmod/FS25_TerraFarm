@@ -1,0 +1,25 @@
+{
+    "archive": {
+        "targetFile": "build/FS25_0_TerraFarm.zip",
+        "extensions": [
+            "i3d",
+            "shapes",
+            "xml",
+            "dds",
+            "lua"
+        ],
+        "exclude": [
+            ".git/",
+            ".vscode/",
+            "build/",
+            "docs/",
+            "scripts/types.lua"
+        ],
+        "debug": {
+            "exclude": []
+        },
+        "release": {
+            "exclude": []
+        }
+    }
+}

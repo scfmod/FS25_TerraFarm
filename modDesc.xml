@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="97">
+    <author>scfmod</author>
+    <version>0.9.0.0</version>
+    <title>
+        <en>TerraFarm BETA</en>
+    </title>
+    <description>
+        <en>
+            <![CDATA[TerraFarm - The true landscaping experience]]>
+        </en>
+        <de>
+            <![CDATA[TerraFarm - Das wahre Landschaftserlebnis]]>
+        </de>
+        <fr>
+            <![CDATA[TerraFarm - Le simulateur de terrassement]]>
+        </fr>
+    </description>
+
+    <iconFilename>icon_terraFarm.dds</iconFilename>
+
+    <multiplayer supported="true" />
+
+    <specializations>
+        <specialization name="machine" className="Machine" filename="scripts/specializations/Machine.lua" />
+        <specialization name="surveyor" className="Surveyor" filename="scripts/specializations/Surveyor.lua" />
+    </specializations>
+
+    <vehicleTypes>
+        <type name="surveyorObject" className="Vehicle" filename="$dataS/scripts/vehicles/Vehicle.lua">
+            <specialization name="baseMaterial" />
+            <specialization name="vehicleSettings" />
+            <specialization name="cylindered" />
+            <specialization name="animatedVehicle" />
+            <specialization name="foldable" />
+            <specialization name="tensionBeltObject" />
+            <specialization name="surveyor" />
+        </type>
+    </vehicleTypes>
+
+    <storeItems>
+        <storeItem xmlFilename="objects/surveyorPSV2/psv2.xml" />
+    </storeItems>
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/main.lua" />
+    </extraSourceFiles>
+
+    <l10n filenamePrefix="l10n/l10n" />
+
+    <actions>
+        <action name="MACHINE_TOGGLE_ACTIVE" />
+        <action name="MACHINE_TOGGLE_INPUT" />
+        <action name="MACHINE_TOGGLE_OUTPUT" />
+        <action name="MACHINE_SETTINGS" />
+        <action name="MACHINE_SELECT_MATERIAL" />
+        <action name="MACHINE_SELECT_TEXTURE" />
+        <action name="MACHINE_SELECT_SURVEYOR" />
+        <action name="MACHINE_GLOBAL_SETTINGS" />
+        <action name="MACHINE_TOGGLE_HUD" />
+    </actions>
+
+    <inputBinding>
+        <actionBinding action="MACHINE_TOGGLE_ACTIVE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_o" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_19" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_SETTINGS">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_y" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_6 BUTTON_4" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_TOGGLE_INPUT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_comma" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_4" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_TOGGLE_OUTPUT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_minus" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_1" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_SELECT_MATERIAL">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_0" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_SELECT_TEXTURE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_period" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_SELECT_SURVEYOR">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_7" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_GLOBAL_SETTINGS">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_9" index="1" />
+        </actionBinding>
+        <actionBinding action="MACHINE_TOGGLE_HUD">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_4" index="1" />
+        </actionBinding>
+    </inputBinding>
+</modDesc>

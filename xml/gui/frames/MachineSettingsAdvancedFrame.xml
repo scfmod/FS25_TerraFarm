@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI name="machineSettingsAdvanced">
+
+    <GuiElement profile="tfMenuFrame_contentContainer">
+        <Bitmap profile="tfMenuFrame_content" id="settingsContainer">
+            <Bitmap profile="tfMenuFrame_contentHeader">
+                <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_settingsAdvanced" />
+            </Bitmap>
+
+            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_areaModifiers" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_statePaintRadiusModifier" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_statePaintRadiusModifierTooltip" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" name="paintModifier" id="paintModifierOption" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateDensityRadiusModifier" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateDensityRadiusModifierTooltip" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" name="densityModifier" id="densityModifierOption" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_helpLine_Misc" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateInputRatio" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateInputRatioTooltip" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" name="inputRatio" id="inputRatioOption" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableEffects" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableEffectsTooltip" />
+
+                    <BinaryOption id="enableEffectsOption" name="enableEffects" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateAllowGradingUp" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateAllowGradingUpTooltip" />
+
+                    <BinaryOption id="allowGradingUpOption" name="allowGradingUp" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateForceNodes" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateForceNodesTooltip" />
+
+                    <BinaryOption id="forceNodesOption" name="forceNodes" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_copySettings" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_copySettingsTooltip" />
+                    <Button id="selectMachineButton" onClick="onClickSelectMachine" profile="tfMenuFrame_button" text="$l10n_ui_machines">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+            </ScrollingLayout>
+
+            <Bitmap profile="tfMenuFrame_contentShadowTop" />
+            <Bitmap profile="tfMenuFrame_contentShadowBottom" />
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+            </ThreePartBitmap>
+        </Bitmap>
+    </GuiElement>
+</GUI>

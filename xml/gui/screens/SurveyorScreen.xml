@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <Bitmap profile="tfCalibrationScreen_menuContainer" id="menuBox">
+        <GuiElement profile="tfCalibrationScreen_menu" id="menuContainer">
+            <Bitmap profile="tfCalibrationScreen_imageBg" id="detailsBox">
+                <Bitmap profile="tfCalibrationScreen_detailsImage" id="vehicleImage" />
+            </Bitmap>
+
+            <BoxLayout profile="tfCalibrationScreen_buttonBoxLeft">
+                <TFButton profile="tfCalibrationScreen_button" id="calibrateButton" onClick="onClickCalibrate" text="$l10n_ui_calibrate">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+                <TFButton profile="tfCalibrationScreen_button" id="setLevelButton" onClick="onClickSetLevel" text="$l10n_ui_setLevel">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+                <TFButton profile="tfCalibrationScreen_button" id="resetButton" onClick="onClickReset" text="$l10n_button_reset">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+            </BoxLayout>
+
+            <BoxLayout profile="tfCalibrationScreen_buttonBoxCenter">
+                <TFButton profile="tfCalibrationScreen_button" id="applyButton" onClick="onClickApply" text="$l10n_button_apply">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+                <TFButton profile="tfCalibrationScreen_button" id="cancelButton" onClick="onClickCancel" text="$l10n_button_cancel">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+            </BoxLayout>
+            <BoxLayout profile="tfCalibrationScreen_buttonBoxRight">
+                <TFButton profile="tfCalibrationScreen_button" id="exitButton" onClick="onClickExit" text="$l10n_input_CONSTRUCTION_EXIT">
+                    <TFThreePartBitmap profile="tfCalibrationScreen_buttonBg" />
+                </TFButton>
+            </BoxLayout>
+
+            <Bitmap profile="tfSurveyorScreen_bottomBoxLine" />
+            <BoxLayout profile="tfSurveyorScreen_bottomBox">
+                <GuiElement profile="tfSurveyorScreen_bottomBoxItem" id="calibrationAngleItem">
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Angle" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemText" id="calibrationText" />
+                    <Bitmap profile="tfCalibrationScreen_calibrationAngleImage" />
+
+                    <TFButton profile="tfSurveyorScreen_bottomBoxItemIconButton" onClick="onClickSetAngle" id="setAngleButton" />
+                </GuiElement>
+                <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
+                <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Start offset" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemText" text="0.0m" id="startOffsetText" />
+                    <Bitmap profile="tfCalibrationScreen_calibrationOffsetImageInvertX" />
+
+                    <TFButton profile="tfSurveyorScreen_bottomBoxItemIconButton" onClick="onClickStartOffset" />
+                </GuiElement>
+                <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
+                <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Target offset" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemText" text="0.0m" id="endOffsetText" />
+                    <Bitmap profile="tfCalibrationScreen_calibrationOffsetImage" />
+
+                    <TFButton profile="tfSurveyorScreen_bottomBoxItemIconButton" onClick="onClickEndOffset" />
+                </GuiElement>
+                <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
+                <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Use terrain" />
+                    <Bitmap profile="tfCalibrationScreen_calibrationTerrainImage" />
+                    <TFBinaryOption profile="tfSurveyorScreen_bottomBoxItemOption" id="useTerrainOption" onClick="onClickUseTerrainOption" />
+                </GuiElement>
+                <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
+                <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Name" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemText" text="" id="vehicleText" />
+                    <Bitmap profile="tfCalibrationScreen_calibrationNameImage" />
+
+                    <TFButton profile="tfSurveyorScreen_bottomBoxItemIconButton" onClick="onClickRename" id="renameButton" />
+                </GuiElement>
+            </BoxLayout>
+        </GuiElement>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfCalibrationScreen_menuContainer" extends="baseReference" with="anchorBottomLeft">
+            <size value="100% 310px" />
+            <imageColor value="0.8 0.8 0.8 0.98" />
+            <imageFilename value="dataS/menu/gui.png" />
+            <imageSliceId value="noSlice" />
+            <imageSize value="4096 2048" />
+            <imageUVs value="30px 20px 200px 140px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_menu" with="anchorMiddleCenter">
+            <size value="1920px 310px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_imageBg" extends="fs25_vehiclesDetailsImageBg" with="anchorMiddleLeft">
+            <size value="256px 290px" />
+            <position value="0 0" />
+
+            <imageSliceId value="gui.shopMods" />
+            <imageColor value="1 1 1 1" />
+            <imageDisabledSliceId value="gui.shopMods" />
+            <imageDisabledColor value="1 1 1 0.4" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_detailsImage" extends="baseReference" with="anchorMiddleCenter">
+            <size value="192px 192px" />
+
+            <imageSliceId value="noSlice" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_detailsText" extends="textDefault" with="anchorBottomCenter">
+            <size value="100% 18px" />
+            <position value="-8px 52px" />
+            <textSize value="14px" />
+            <textAlignment value="center" />
+            <textDisabledColor value="1 1 1 1" />
+            <textColor value="$preset_fs25_colorMainDark" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_buttonBoxLeft" with="anchorMiddleLeft">
+            <size value="192px 256px" />
+            <position value="256px 0" />
+
+            <flowDirection value="vertical" />
+            <elementSpacing value="6px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_buttonBoxCenter" with="anchorMiddleCenter">
+            <size value="800px 256px" />
+            <flowDirection value="horizontal" />
+            <elementSpacing value="4px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_buttonBoxRight" with="anchorMiddleRight">
+            <size value="400px 256px" />
+            <flowDirection value="vertical" />
+            <elementSpacing value="12px" />
+            <alignmentX value="right" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_buttonBg" extends="baseReference" with="anchorBottomStretchingX">
+            <size value="100% 42px" />
+
+            <startImageSize value="8px 0" />
+            <startImageSliceId value="gui.multiplayer_farm_left" />
+            <startImageHighlightedSliceId value="gui.multiplayer_farmSelected_left" />
+            <startImageDisabledColor value="0 0 0 0.15" />
+
+            <imageSliceId value="gui.multiplayer_farm_middle" />
+            <imageHighlightedSliceId value="gui.multiplayer_farmSelected_middle" />
+            <imageDisabledColor value="0 0 0 0.15" />
+
+            <endImageSize value="8px 0" />
+            <endImageSliceId value="gui.multiplayer_farm_right" />
+            <endImageHighlightedSliceId value="gui.multiplayer_farmSelected_right" />
+            <endImageDisabledColor value="0 0 0 0.15" />
+        </Profile>
+        <Profile name="tfCalibrationScreen_button" extends="baseReference" with="anchorTopLeft">
+            <size value="192px 42px" />
+            <iconSize value="0 0" />
+            <textSize value="15px" />
+            <textUpperCase value="true" />
+            <ignoreOverlayFocused value="true" />
+
+            <imageColor value="0 0 0 0" />
+            <imageDisabledColor value="0 0 0 0" />
+            <imageFocusedColor value="0 0 0 0" />
+            <imageHighlightedColor value="0 0 0 0" />
+            <imagePressedColor value="0 0 0 0" />
+
+            <textColor value="1 1 1 1" />
+            <textDisabledColor value="0.5 0.5 0.5 0.5" />
+            <textHighlightedColor value="$preset_fs25_colorMainDark" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_optionContainer">
+            <size value="100% 32px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_option" extends="tf_binaryOption" with="anchorMiddleRight">
+            <size value="180px 32px" />
+            <position value="0 0" />
+
+            <ignoreOverlayFocused value="true" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_optionText" extends="textDefault" with="anchorMiddleLeft">
+            <size value="100% 20px" />
+        </Profile>
+
+        <Profile name="tfCalibrationScreen_statusText" extends="textDefault" with="anchorBottomCenter">
+            <size value="100% 18px" />
+            <position value="-8px 52px" />
+            <textSize value="16px" />
+            <textAlignment value="center" />
+            <textDisabledColor value="1 1 1 1" />
+            <textColor value="$preset_fs25_colorMainDark" />
+        </Profile>
+
+
+        <Profile name="tfSurveyorScreen_bottomBoxLine" extends="baseReference" with="anchorBottomLeft">
+            <size value="1664px 2dp" />
+            <position value="256px 134px" />
+
+            <imageColor value="1 1 1 0.05" />
+        </Profile>
+        <Profile name="tfSurveyorScreen_bottomBox" with="anchorBottomLeft">
+            <size value="1664px 128px" />
+            <position value="256px 0" />
+            <alignmentX value="center" />
+
+            <elementSpacing value="16px" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItem">
+            <size value="304px 128px" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItemSeparator" extends="baseReference">
+            <size value="2dp 118px" />
+
+            <imageColor value="1 1 1 0.05" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItemImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="96px 96px" />
+
+            <imageColor value="1 1 1 1" />
+            <imageDisabledColor value="1 1 1 0.2" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItemText" extends="textDefault" with="anchorMiddleLeft">
+            <position value="104px 0" />
+            <size value="144px 20px" />
+
+            <textAlignment value="left" />
+            <textColor value="$preset_fs25_colorGreen" />
+            <textDisabledColor value="0.33716 0.55834 0.0003 0.2" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItemTitle" extends="textDefault" with="anchorMiddleLeft">
+            <position value="104px 20px" />
+            <size value="144px 20px" />
+
+            <textAlignment value="left" />
+            <textColor value="1 1 1 1" />
+            <textDisabledColor value="1 1 1 0.15" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_bottomBoxItemIconButton" extends="baseReference" with="anchorMiddleRight">
+            <position value="-12px 12px" />
+            <size value="32px 32px" />
+
+            <ignoreOverlayFocused value="true" />
+            <imageSliceId value="gui.matte" />
+            <imageColor value="0 0 0 0.7" />
+            <imageDisabledColor value="0 0 0 0.2" />
+            <imageHighlightedColor value="$preset_fs25_colorGreen" />
+
+            <iconSize value="14px 14px" />
+            <iconSliceId value="gui.icon_pen" />
+            <iconColor value="$preset_fs25_colorGreen" />
+            <iconHighlightedColor value="0 0 0 0.7" />
+            <iconDisabledColor value="0.33716 0.55834 0.0003 0.2" />
+        </Profile>
+
+
+        <Profile name="tfCalibrationScreen_calibrationAngleImage" extends="tfSurveyorScreen_bottomBoxItemImage">
+            <imageSliceId value="terraFarm.surveyor_angle" />
+        </Profile>
+        <Profile name="tfCalibrationScreen_calibrationOffsetImage" extends="tfSurveyorScreen_bottomBoxItemImage">
+            <imageSliceId value="terraFarm.surveyor_offset" />
+        </Profile>
+        <Profile name="tfCalibrationScreen_calibrationOffsetImageInvertX" extends="tfSurveyorScreen_bottomBoxItemImage">
+            <imageSliceId value="terraFarm.surveyor_offset" />
+            <imageInvertX value="true" />
+        </Profile>
+        <Profile name="tfCalibrationScreen_calibrationTerrainImage" extends="tfSurveyorScreen_bottomBoxItemImage">
+            <imageSliceId value="terraFarm.surveyor_terrain" />
+        </Profile>
+        <Profile name="tfCalibrationScreen_calibrationNameImage" extends="tfSurveyorScreen_bottomBoxItemImage">
+            <imageSliceId value="terraFarm.surveyor_map" />
+        </Profile>
+        <Profile name="tfSurveyorScreen_bottomBoxItemOption" extends="tf_binaryOption" with="anchorMiddleLeft">
+            <size value="150px 32px" />
+            <position value="104px -12px" />
+
+            <ignoreOverlayFocused value="true" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_menuBox" extends="baseReference">
+            <size value="1920px 305px" />
+            <anchors value="0 1 0 0" />
+            <position value="0 -400px" />
+            <imageColor value="0.01 0.136 0.212 0.9" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_contentBox" with="anchorMiddleCenter">
+            <size value="1920px 305px" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_layoutLeft" extends="baseReference" with="anchorTopLeft">
+            <size value="1120px 305px" />
+
+            <imageColor value="$preset_colorTransparent" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_infoBox" extends="baseReference" with="anchorMiddleLeft">
+            <size value="281px 281px" />
+
+            <imageColor value="1 1 1 0.01" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_infoBoxText" extends="textDefault" with="anchorBottomCenter">
+            <size value="120px 20px" />
+            <position value="0 16px" />
+
+            <textAlignment value="center" />
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfSurveyorScreen_layoutRight" extends="baseReference" with="anchorTopRight">
+            <size value="400px 305px" />
+
+            <imageColor value="$preset_colorTransparent" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

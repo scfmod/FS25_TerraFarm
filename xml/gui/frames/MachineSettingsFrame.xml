@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI name="machineSettings">
+    <GuiElement profile="tfMenuFrame_contentContainer">
+        <Bitmap profile="tfMenuFrame_content" id="settingsContainer">
+            <Bitmap profile="tfMenuFrame_contentHeader">
+                <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_machineSettings" />
+            </Bitmap>
+
+            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_settingsGeneral" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_enableMachine" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickEnabledOption" id="enabledOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_enableMapResources" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickResourcesEnabledOption" id="resourcesEnabledOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_enableMapResourcesTooltip" />
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_material" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Button id="materialButton" onClick="onClickSelectMaterial" profile="tfMenuFrame_button" text="$l10n_ui_changeMaterial">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+
+                    <Bitmap profile="tfMenuFrame_optionImage" id="materialImage" />
+                    <Text profile="tfMenuFrame_optionImageText" id="materialText" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableInputMaterial" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" name="enableInputMaterial" id="enableInputMaterialOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableInputMaterialTooltip" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableOutputMaterial" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" name="enableOutputMaterial" id="enableOutputMaterialOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableOutputMaterialTooltip" />
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_texture" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Button id="terrainLayerButton" onClick="onClickSelectTerrainLayer" profile="tfMenuFrame_button" text="$l10n_ui_changeTexture">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+
+                    <TerrainLayer profile="tfMenuFrame_optionImage" id="terrainLayerImage" />
+                    <Bitmap profile="tfMenuFrame_optionMaskImage" />
+                    <Text profile="tfMenuFrame_optionImageText" id="terrainLayerText" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnablePaintGroundTexture" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" name="enablePaintGroundTexture" id="enablePaintGroundTextureOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnablePaintGroundTextureTooltip" />
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_terrainDeformation" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateRadius" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" id="radiusOption" name="radius" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateRadiusTooltip" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateStrength" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" id="strengthOption" name="strength" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateStrengthTooltip" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateHardness" />
+                    <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedInput" id="hardnessOption" name="hardness" profile="tfMenuFrame_textInput">
+                        <ThreePartBitmap profile="fs25_textInputBg" />
+                        <Bitmap profile="fs25_textInputIconBox">
+                            <Bitmap profile="fs25_textInputIcon" />
+                        </Bitmap>
+                    </TextInput>
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateHardnessTooltip" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateBrushShape" />
+
+                    <MultiTextOption id="brushShapeOption" onClick="onClickBrushShapeOption" profile="tfMenuFrame_multiTextOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateBrushShapeTooltip" />
+                </Bitmap>
+            </ScrollingLayout>
+
+            <Bitmap profile="tfMenuFrame_contentShadowTop" />
+            <Bitmap profile="tfMenuFrame_contentShadowBottom" />
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+            </ThreePartBitmap>
+        </Bitmap>
+    </GuiElement>
+
+    <GuiProfiles>
+        <Profile name="tfMenuFrame_optionMaskImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="36px 36px" />
+            <position value="12px 0" />
+
+            <imageSliceId value="terraFarm.mask_overlay" />
+            <imageMaskFilename value="g_tfPreviewMaskFilename" />
+
+            <overlayMaskSize value="36px 36px" />
+            <overlayMaskPos value="0px 0px" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_button" extends="emptyPanel" with="anchorMiddleLeft">
+            <size value="180px 32px" />
+            <position value="340px 0px" />
+            <focusOnHighlight value="true" />
+            <textResizeWidth value="200px" />
+            <textSize value="15px" />
+            <textBold value="true" />
+            <textUpperCase value="true" />
+            <textAlignment value="center" />
+            <textColor value="$preset_fs25_colorMainLight" />
+            <textDisabledColor value="$preset_colorDisabled" />
+            <textFocusedColor value="$preset_fs25_colorMainDark" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_textInput" extends="fs25_textInput" with="anchorMiddleLeft">
+            <size value="150px 31px" />
+            <position value="340px 0px" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

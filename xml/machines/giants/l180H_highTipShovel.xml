@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<vehicle>
+    <machine type="shovel">
+        <workArea offset="0 -0.1 0.5" />
+        <input modes="FLATTEN SMOOTH LOWER PAINT" />
+    </machine>
+</vehicle>

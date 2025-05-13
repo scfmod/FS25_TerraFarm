@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tf_globalMaterialsBg">
+        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
+        <ThreePartBitmap profile="tf_dialogBgBottom" />
+
+        <Text position="0px -32px" profile="tf_dialogTitle" text="$l10n_ui_materialSettings" />
+
+        <GuiElement profile="tf_globalMaterialsContent">
+
+            <GuiElement profile="tf_globalMaterialSettingsListBoxLeft">
+                <Text type="text" profile="tf_listHeaderText" text="$l10n_ui_enabled" />
+
+                <SmoothList
+                    profile="tfGlobalMaterials_list"
+                    id="enabledList"
+                    focusInit="onOpen"
+                    focusId="enabledList"
+                    focusChangeRight="disabledList"
+                    focusChangeLeft="nil"
+                    focusChangeBottom="nil"
+                    focusChangeTop="nil"
+                    onClick="onItemClick"
+                    onDoubleClick="onItemDoubleClick"
+                    selectedWithoutFocus="false"
+                    listItemSpacing="2dp"
+                >
+                    <ListItem profile="tfGlobalMaterials_listItem">
+                        <Bitmap name="icon" profile="tfGlobalMaterials_listItemImage" />
+                        <Text name="name" profile="tfGlobalMaterials_listItemText" />
+                    </ListItem>
+                </SmoothList>
+
+                <ThreePartBitmap profile="tf_listSliderBoxLeft">
+                    <Slider dataElementId="enabledList" profile="tf_listSlider" />
+                </ThreePartBitmap>
+
+                <Bitmap profile="tfGlobalMaterials_listShadowTop" />
+                <Bitmap profile="tfGlobalMaterials_listShadowBottom" />
+            </GuiElement>
+
+            <GuiElement profile="tf_globalMaterialSettingsListBoxRight">
+                <Text profile="tf_listHeaderText" text="$l10n_ui_disabled" />
+
+                <SmoothList
+                    profile="tfGlobalMaterials_list"
+                    id="disabledList"
+                    focusInit="onOpen"
+                    focusId="disabledList"
+                    focusChangeRight="nil"
+                    focusChangeLeft="enabledList"
+                    focusChangeBottom="nil"
+                    focusChangeTop="nil"
+                    onClick="onItemClick"
+                    onDoubleClick="onItemDoubleClick"
+                    selectedWithoutFocus="false"
+                    listItemSpacing="2dp"
+                >
+                    <ListItem type="listItem" profile="tfGlobalMaterials_listItemRight">
+                        <Bitmap name="icon" profile="tfGlobalMaterials_listItemRightImage" />
+                        <Text name="name" profile="tfGlobalMaterials_listItemRightText" />
+                    </ListItem>
+                </SmoothList>
+
+                <ThreePartBitmap profile="tf_listSliderBox">
+                    <Slider dataElementId="disabledList" profile="tf_listSlider" />
+                </ThreePartBitmap>
+
+                <Bitmap profile="tfGlobalMaterials_listShadowTop" />
+                <Bitmap profile="tfGlobalMaterials_listShadowBottom" />
+            </GuiElement>
+        </GuiElement>
+
+        <BoxLayout profile="fs25_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+            <Bitmap profile="fs25_dialogButtonBoxSeparator" />
+            <Button id="actionButton" profile="buttonActivate" text="$l10n_ui_disable" onClick="onClickAction" />
+            <Bitmap profile="fs25_dialogButtonBoxSeparator" />
+            <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfGlobalMaterials_list" extends="list" with="anchorMiddleCenter">
+            <size value="350px 560px" />
+
+            <isHorizontalList value="false" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItem" with="anchorTopStretchingX">
+            <height value="56px" />
+
+            <imageFilename value="dataS/menu/gui.png" />
+            <imageSliceId value="noSlice" />
+            <imageUVs value="1171px 4px 340px 48px" />
+            <imageSize value="4096 2048" />
+
+            <imageSelectedFilename value="dataS/menu/gui.png" />
+            <imageSelectedSliceId value="noSlice" />
+            <imageSelectedUVs value="1171px 74px 340px 48px" />
+            <imageSelectedSize value="4096 2048" />
+
+            <imageHighlightedFilename value="dataS/menu/gui.png" />
+            <imageHighlightedSliceId value="noSlice" />
+            <imageHighlightedUVs value="1171px 143px 340px 70px" />
+            <imageHighlightedSize value="4096 2048" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItemRight" extends="tfGlobalMaterials_listItem">
+            <imageUVRotation value="180" />
+            <imageSelectedUVRotation value="180" />
+            <imageHighlightedUVRotation value="180" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItemImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="32px 32px" />
+            <position value="12px 0" />
+
+            <imageSliceId value="noSlice" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItemRightImage" extends="tfGlobalMaterials_listItemImage">
+            <position value="24px 0" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItemText" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
+            <size value="200px 32px" />
+            <position value="56px 0" />
+
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listItemRightText" extends="tfGlobalMaterials_listItemText">
+            <position value="68px 0" />
+        </Profile>
+
+        <Profile name="tf_globalMaterialsBg" extends="tf_dialogBg">
+            <size value="820px 760px" />
+        </Profile>
+
+        <Profile name="tf_globalMaterialsContent">
+            <size value="820px 720px" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listShadowTop" extends="tf_listShadow" with="anchorTopLeft">
+            <position value="6px 2px" />
+            <size value="350px 32px" />
+            <imageColor value="0 0 0 0.5" />
+        </Profile>
+
+        <Profile name="tfGlobalMaterials_listShadowBottom" extends="tfGlobalMaterials_listShadowTop" with="anchorBottomLeft">
+            <position value="0 0" />
+            <imageUVRotation value="180" />
+        </Profile>
+
+        <Profile name="tf_globalMaterialSettingsListBoxLeft" with="anchorMiddleLeft">
+            <size value="362px 560px" />
+            <position value="16px 0" />
+        </Profile>
+
+        <Profile name="tf_globalMaterialSettingsListBoxRight" extends="tf_globalMaterialSettingsListBoxLeft" with="anchorMiddleRight">
+            <position value="-32px 0" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

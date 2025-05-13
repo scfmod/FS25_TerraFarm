@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tfSelectSurveyor_dialogBg">
+        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
+        <ThreePartBitmap profile="tf_dialogBgBottom" />
+
+        <Text position="0 -32px" profile="tfSelectSurveyor_dialogTitle" text="$l10n_ui_surveyors" />
+
+        <Text id="listEmptyText" text="$l10n_ui_surveyorsEmpty" />
+
+        <GuiElement profile="tfSelectSurveyor_dialogContent">
+            <SmoothList profile="tfSelectSurveyor_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick">
+                <ListItem profile="tfSelectSurveyor_listItem">
+                    <Bitmap name="image" profile="tfSelectSurveyor_listItemImage" />
+                    <Text name="name" profile="tfSelectSurveyor_listItemTitle" />
+                    <Text name="text" profile="tfSelectSurveyor_listItemText" />
+                    <Text name="status" profile="tfSelectSurveyor_listItemStatus" />
+                    <Bitmap profile="tfSelectSurveyor_listItemLine" />
+                </ListItem>
+            </SmoothList>
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider dataElementId="list" profile="tf_listSlider" />
+            </ThreePartBitmap>
+
+            <Bitmap profile="tfSelectSurveyor_listShadowTop" />
+            <Bitmap profile="tfSelectSurveyor_listShadowBottom" />
+        </GuiElement>
+
+        <BoxLayout profile="tf_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+            <Bitmap profile="tf_dialogButtonBoxSeparator" />
+            <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfSelectSurveyor_dialogBg" extends="tf_dialogBg">
+            <size value="420px 760px" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_dialogContent" with="anchorBottomCenter">
+            <size value="376px 600px" />
+            <position value="-10px 80px" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_dialogTitle" extends="tf_dialogTitle" with="anchorTopLeft">
+            <size value="95% 20px" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_list" extends="list" with="anchorTopLeft">
+            <size value="372px 600px" />
+            <isHorizontalList value="false" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listItem" with="anchorTopStretchingX">
+            <height value="64px" />
+
+            <imageSliceId value="terraFarm.list_box" />
+            <imageSelectedSliceId value="terraFarm.list_box_selected" />
+            <imageHighlightedSliceId value="terraFarm.list_box_hover" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listItemImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="42px 42px" />
+            <position value="12px 0px" />
+
+            <imageSliceId value="noSlice" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listItemLine" extends="baseReference" with="anchorMiddleLeft">
+            <size value="2dp 48px" />
+            <position value="260px 0px" />
+
+            <imageColor value="1 1 1 0.15" />
+            <imageSelectedColor value="0.00439 0.00478 0.00368 0.35" />
+        </Profile>
+
+
+        <Profile name="tfSelectSurveyor_listItemText" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
+            <size value="200px 18px" />
+            <position value="280px 0" />
+
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listItemTitle" extends="tfSelectSurveyor_listItemText">
+            <position value="64px 6px" />
+            <textBold value="true" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listItemStatus" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
+            <size value="200px 48px" />
+            <position value="64px -9px" />
+
+            <textSize value="12px" />
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listShadowTop" extends="tf_listShadow">
+            <position value="6px 0" />
+            <size value="370px 32px" />
+        </Profile>
+
+        <Profile name="tfSelectSurveyor_listShadowBottom" extends="tfSelectTerrainLayer_listShadowTop" with="anchorBottomCenter">
+            <position value="0 0" />
+
+            <imageUVRotation value="180" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

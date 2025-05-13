@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<vehicle>
+    <machine type="leveler">
+        <input modes="FLATTEN SMOOTH PAINT" />
+
+        <workArea offset="0 -0.1 -0.4" />
+    </machine>
+</vehicle>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI name="machineSettingsCalibration">
+    <GuiElement profile="tfMenuFrame_contentContainer">
+        <Bitmap profile="tfMenuFrame_content" id="settingsContainer">
+            <Bitmap profile="tfMenuFrame_contentHeader">
+                <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_calibration" />
+            </Bitmap>
+
+            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+                <Text profile="tfMenuFrame_contentDescriptionText" text="$l10n_ui_calibrationDescription" />
+
+                <Bitmap profile="tfMenuFrame_infoBox">
+                    <BoxLayout handleFocus="false" profile="tfMenuFrame_infoBoxLayout" id="statusLayout">
+                        <Text profile="tfMenuFrame_infoTitle" id="surveyorName" />
+                        <Text profile="tfMenuFrame_infoText" id="statusText" />
+                    </BoxLayout>
+
+                    <Bitmap profile="tfMenuFrame_infoBoxImage" id="surveyorImage" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_selectSurveyor" />
+                    <Button id="selectSurveyorButton" onClick="onClickSelectSurveyor" profile="tfMenuFrame_button" text="$l10n_ui_calibrate">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_calibrateCopy" />
+
+                    <Button id="selectMachineButton" onClick="onClickSelectMachine" profile="tfMenuFrame_button" text="$l10n_ui_machines">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Button id="resetButton" onClick="onClickReset" profile="tfMenuFrame_button" text="$l10n_button_reset">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+            </ScrollingLayout>
+
+            <Bitmap profile="tfMenuFrame_contentShadowTop" />
+            <Bitmap profile="tfMenuFrame_contentShadowBottom" />
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+            </ThreePartBitmap>
+        </Bitmap>
+    </GuiElement>
+
+    <GuiProfiles>
+        <Profile name="tfMenuFrame_contentDescriptionText" extends="textDefault">
+            <size value="100% 64px" />
+
+            <textOffset value="8px 0" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBox" extends="baseReference">
+            <size value="1000px 96px" />
+
+            <imageColor value="0 0 0 0.7" />
+
+            <hasFrame value="true" />
+            <frameThickness value="0dp 2dp 0dp 2dp" />
+            <frameBottomColor value="1 1 1 0.1" />
+            <frameTopColor value="1 1 1 0.1" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBoxLayout" extends="baseReference" with="anchorTopLeft">
+            <size value="100% 96px" />
+
+            <imageColor value="0 0 0 0" />
+            <alignmentY value="middle" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBoxImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="64px 64px" />
+            <position value="16px 0" />
+
+            <imageSliceId value="noSlice" />
+            <imageUVs value="0 0 1 1" />
+            <imageColor value="1 1 1 1" />
+            <imageDisabledSliceId value="terraFarm.icon_surveyor" />
+            <!-- <imageDisabledUVs value="0.75 0.5 0.25 0.25" /> -->
+            <imageDisabledColor value="0.4 0.4 0.4 1" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoTitle" extends="textDefault" with="anchorTopLeft">
+            <size value="600px 20px" />
+            <margin value="96px 0 0 0" />
+
+            <textSize value="16px" />
+            <textBold value="true" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoText" extends="textDefault" with="anchorTopLeft">
+            <size value="600px 20px" />
+            <margin value="96px 0 0 0" />
+
+            <textColor value="1 1 1 1" />
+            <textSize value="14px" />
+            <textDisabledColor value="0.4 0.4 0.4 1" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

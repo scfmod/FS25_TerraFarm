@@ -1,0 +1,21 @@
+<!--
+    Template for map InfoLayer
+    Add this to your map.i3d and set up mapping
+
+    Name is only used in Giants Editor for painting resource areas
+    Set up numChannels according to how many layers you are going to use
+    (max number of layers = numChannels ^ 2)
+
+    NOTE: Make sure none if the layers overlap when painting in GE
+    NOTE: runtime="true" is required for the InfoLayer to be accessible in-game
+-->
+<InfoLayer name="mapGroundResources" fileId="..." numChannels="3" runtime="true">
+    <Group name="Ground resource" firstChannel="0" numChannels="3">
+        <!-- value="0" is required and default fallback option -->
+        <!-- Areas which are not painted will use this value -->
+        <Option value="0" name="None" />
+        <Option value="1" name="Soil" />
+        <Option value="2" name="Stone" />
+        <Option value="3" name="Gravel" />
+    </Group>
+</InfoLayer>
