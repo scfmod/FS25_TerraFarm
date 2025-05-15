@@ -220,7 +220,7 @@
     <foldable>
         <foldingConfigurations>
             <foldingConfiguration>
-                <foldingParts posDirectionText="Fold Surveyor" negDirectionText="Unfold Surveyor" requiresPower="false" startAnimTime="0">
+                <foldingParts posDirectionText="$l10n_foldSurveyor" negDirectionText="$l10n_unfoldSurveyor" requiresPower="false" startAnimTime="0">
                     <foldingPart animationName="fold" speedScale="1" />
                 </foldingParts>
             </foldingConfiguration>

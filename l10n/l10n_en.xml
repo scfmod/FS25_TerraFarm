@@ -39,6 +39,10 @@
         <text name="ui_copySettingsTooltip" text="Copy machine settings from another vehicle" />
         <text name="ui_areaModifiers" text="Area modifiers" />
         <text name="ui_postDeformation" text="Post deformation" />
+        <text name="ui_operator" text="Operator" />
+        <text name="ui_angle" text="Angle" />
+        <text name="ui_startOffset" text="Start offset" />
+        <text name="ui_targetOffset" text="Target offset" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Machine settings" />
@@ -82,12 +86,16 @@
         <text name="ui_useTerrainTooltip" text="Enable calibrate on terrain" />
         <text name="ui_notAvailable" text="Not available" />
         <text name="warning_unfoldSurveyor" text="You first need to unfold the tool!" />
+        <text name="foldSurveyor" text="Fold surveyor" />
+        <text name="unfoldSurveyor" text="Unfold surveyor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Enable TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Enable machines by default" />
+        <text name="ui_mapResources" text="Map resources" />
         <text name="ui_globalResourcesEnabled" text="Enable map resources" />
         <text name="ui_displayMode" text="HUD display mode" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Debug machine nodes" />
         <text name="ui_debugCalibration" text="Debug machine calibration" />
 

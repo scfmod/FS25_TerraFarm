@@ -35,7 +35,7 @@
             <Bitmap profile="tfSurveyorScreen_bottomBoxLine" />
             <BoxLayout profile="tfSurveyorScreen_bottomBox">
                 <GuiElement profile="tfSurveyorScreen_bottomBoxItem" id="calibrationAngleItem">
-                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Angle" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="$l10n_ui_angle" />
                     <Text profile="tfSurveyorScreen_bottomBoxItemText" id="calibrationText" />
                     <Bitmap profile="tfCalibrationScreen_calibrationAngleImage" />
 
@@ -43,7 +43,7 @@
                 </GuiElement>
                 <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
                 <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
-                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Start offset" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="$l10n_ui_startOffset" />
                     <Text profile="tfSurveyorScreen_bottomBoxItemText" text="0.0m" id="startOffsetText" />
                     <Bitmap profile="tfCalibrationScreen_calibrationOffsetImageInvertX" />
 
@@ -51,7 +51,7 @@
                 </GuiElement>
                 <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
                 <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
-                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Target offset" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="$l10n_ui_targetOffset" />
                     <Text profile="tfSurveyorScreen_bottomBoxItemText" text="0.0m" id="endOffsetText" />
                     <Bitmap profile="tfCalibrationScreen_calibrationOffsetImage" />
 
@@ -59,13 +59,13 @@
                 </GuiElement>
                 <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
                 <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
-                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Use terrain" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="$l10n_ui_useTerrain" />
                     <Bitmap profile="tfCalibrationScreen_calibrationTerrainImage" />
                     <TFBinaryOption profile="tfSurveyorScreen_bottomBoxItemOption" id="useTerrainOption" onClick="onClickUseTerrainOption" />
                 </GuiElement>
                 <Bitmap profile="tfSurveyorScreen_bottomBoxItemSeparator" />
                 <GuiElement profile="tfSurveyorScreen_bottomBoxItem">
-                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="Name" />
+                    <Text profile="tfSurveyorScreen_bottomBoxItemTitle" text="$l10n_infohud_name" />
                     <Text profile="tfSurveyorScreen_bottomBoxItemText" text="" id="vehicleText" />
                     <Bitmap profile="tfCalibrationScreen_calibrationNameImage" />
 

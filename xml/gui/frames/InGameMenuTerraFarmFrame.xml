@@ -9,9 +9,9 @@
         </GuiElement>
 
         <GuiElement profile="fs25_statisticsHeaderBox">
-            <Text profile="fs25_vehiclesHeaderName" text="Machine" />
+            <Text profile="fs25_vehiclesHeaderName" text="$l10n_displayItem_machine" />
             <GuiElement position="440px 0px" profile="fs25_vehiclesHeaderTextContainer">
-                <Text profile="fs25_vehiclesHeaderText" text="Operator" />
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_operator" />
             </GuiElement>
             <GuiElement position="620px 0px" profile="fs25_vehiclesHeaderTextContainer">
                 <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_age" />
@@ -23,10 +23,10 @@
                 <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_condition" />
             </GuiElement>
             <GuiElement position="1160px 0px" profile="fs25_vehiclesHeaderTextContainer">
-                <Text profile="fs25_vehiclesHeaderText" text="Type" />
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_infohud_type" />
             </GuiElement>
             <GuiElement position="1340px 0px" profile="fs25_vehiclesHeaderTextContainer">
-                <Text profile="fs25_vehiclesHeaderText" text="Status" />
+                <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_missionStatusTitle" />
             </GuiElement>
             <ThreePartBitmap position="0px -2dp" profile="fs25_lineSeparatorBottom" />
         </GuiElement>

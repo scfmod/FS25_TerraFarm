@@ -27,7 +27,7 @@
                     <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_enableHud" />
                 </Bitmap>
 
-                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="Debug" />
+                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="$l10n_ui_debug" />
 
                 <Bitmap profile="tf_globalSettingsOptionContainer">
                     <BinaryOption id="debugNodesOption" onClick="onClickDebugNodesOption" profile="tf_globalSettingsBinaryOption" />
@@ -39,7 +39,7 @@
                     <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_debugCalibration" />
                 </Bitmap>
 
-                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="Map resources" />
+                <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="$l10n_ui_mapResources" />
 
                 <Bitmap profile="tf_globalSettingsExtensionBg">
                     <Text profile="tf_globalSettingsExtensionText" text="$l10n_ui_mapResourcesDescription" />

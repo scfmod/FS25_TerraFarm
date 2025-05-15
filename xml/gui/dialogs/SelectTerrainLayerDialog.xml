@@ -15,7 +15,7 @@
             <GuiElement profile="tfSelectTerrainLayer_dialogContentLeft">
                 <TerrainLayer profile="tfSelectTerrainLayer_previewImage" id="previewImage" />
                 <Bitmap profile="tfSelectTerrainLayer_maskImage" />
-                <Text profile="tfSelectTerrainLayer_previewTitle" text="Preview" />
+                <Text profile="tfSelectTerrainLayer_previewTitle" text="$l10n_ui_colorPicker_preview" />
             </GuiElement>
 
             <GuiElement profile="tfSelectTerrainLayer_dialogContentRight">
