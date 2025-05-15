@@ -49,5 +49,5 @@ end
 function LandscapingPaintDischarge:onDeformationSuccess(area)
     self:applyDeformationChanges()
 
-    self.droppedLiters = area
+    self.droppedLiters = area * g_modSettings.experimental_dischargePaintModifier
 end
