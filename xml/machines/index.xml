@@ -4,6 +4,9 @@
     <!-- DO NOT EDIT UNLESS FOR PRIVATE USE, use external mods to add new configurations -->
 
     <configuration
+        vehicle="data/vehicles/prinoth/leitwolf/leitwolf.xml"
+        file="xml/machines/giants/Prinoth_leitwolf.xml" />
+    <configuration
         vehicle="data/vehicles/albutt/frontloaderShovel/frontloaderShovel.xml"
         file="xml/machines/giants/Albutt_frontloaderShovel.xml" />
     <configuration
