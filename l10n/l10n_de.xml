@@ -26,20 +26,24 @@
         <text name="ui_texture" text="Textur" />
         <text name="ui_changeMaterial" text="Material ändern" />
         <text name="ui_changeTexture" text="Textur ändern" />
-        <text name="ui_circle" text="Kreis" />
-        <text name="ui_square" text="Quadrat" />
+        <text name="ui_circle" text="Rund" />
+        <text name="ui_square" text="Eckig" />
         <text name="ui_terrainDeformation" text="Bodenverformung" />
         <text name="ui_enableHud" text="HUD einschalten" />
         <text name="ui_machines" text="Maschinen" />
         <text name="ui_machinesEmpty" text="Keine verfügbaren Maschinen gefunden" />
         <text name="ui_surveyors" text="Vermesser" />
-        <text name="ui_surveyorsEmpty" text="Keine verfügbaren Besichtiger gefunden" />
+        <text name="ui_surveyorsEmpty" text="Keine verfügbaren Vermesser gefunden" />
         <text name="ui_angleFormat" text="Winkel: %.2f" tag="format" />
         <text name="ui_distanceFormat" text="%.0f m" tag="format" />
         <text name="ui_copySettings" text="Einstellungen kopieren" />
-        <text name="ui_copySettingsTooltip" text="Maschineneinstellungen von einem anderen Fahrzeug kopieren" />
+        <text name="ui_copySettingsTooltip" text="Maschineneinstellungen von anderen Fahrzeug kopieren" />
         <text name="ui_areaModifiers" text="Bereichsmodifikatoren" />
-        <text name="ui_postDeformation" text="Nach der Verformung" />
+        <text name="ui_postDeformation" text="Nach Verformung" />
+        <text name="ui_operator" text="Bediener" />
+        <text name="ui_angle" text="Winkel" />
+        <text name="ui_startOffset" text="Startversatz" />
+        <text name="ui_targetOffset" text="Zielversatz" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Maschinen Einstellungen" />
@@ -48,11 +52,11 @@
         <text name="ui_machineToggleInput" text="Eingabemodus umschalten" />
         <text name="ui_machineToggleOutput" text="Ausgabemodus umschalten" />
         <text name="ui_enableMachine" text="Maschine einschalten" />
-        <text name="ui_enableMapResources" text="Kartenressourcen verwenden" />
+        <text name="ui_enableMapResources" text="Mapmaterialien verwenden" />
         <text name="ui_enableMapResourcesTooltip" text="" />
 
         <text name="ui_modeMaterial" text="Material" />
-        <text name="ui_modeFlatten" text="Einebnen" />
+        <text name="ui_modeFlatten" text="Ebnen" />
         <text name="ui_modeSmooth" text="Glätten" />
         <text name="ui_modeLower" text="Absenken" />
         <text name="ui_modePaint" text="Malen" />
@@ -62,15 +66,15 @@
         <text name="ui_discharge" text="Abladen" />
 
         <!-- Map resources texts -->
-        <text name="ui_mapResourcesAvailable" text="Diese Funktion ist für diese Karte verfügbar." />
-        <text name="ui_mapResourcesNotAvailable" text="Diese Funktion ist für diese Karte nicht verfügbar." />
-        <text name="ui_mapResourcesDescription" text="Nur verfügbar für Karten mit implementierter Funktion. Wenn diese Funktion aktiviert ist, werden Materialien und Texturen in verschiedenen, vom Kartenautor festgelegten Bereichen verwendet. Jede Maschine kann die Funktion ein- und ausschalten, wenn sie aktiviert ist." />
+        <text name="ui_mapResourcesAvailable" text="Diese Funktion ist für diese Map verfügbar." />
+        <text name="ui_mapResourcesNotAvailable" text="Diese Funktion ist für diese Map nicht verfügbar." />
+        <text name="ui_mapResourcesDescription" text="Nur verfügbar für Maps mit implementierter Funktion. Wenn diese Funktion aktiviert ist, werden Materialien und Texturen in verschiedenen, vom Mapersteller festgelegten Bereichen verwendet. Jede Maschine kann die Funktion ein- und ausschalten, wenn sie aktiviert ist." />
 
         <!-- Surveyor texts -->
         <text name="ui_selectSurveyor" text="Vermesser auswählen" />
         <text name="ui_calibrate" text="Kalibrieren" />
         <text name="ui_calibration" text="Kalibrierung" />
-        <text name="ui_calibrationDescription" text="Die Kalibrierung ermöglicht es Ihnen, unter Verwendung eines kalibrierten Winkels von Vermessungsgeräten EINZUEBNEN." />
+        <text name="ui_calibrationDescription" text="Die Kalibrierung ermöglicht es Ihnen, unter Verwendung eines kalibrierten Winkels von Vermessungsgeräten ZU EBNEN." />
         <text name="ui_calibratedAngleFormat" text="Kalibriert: %.2f°" tag="format" />
         <text name="ui_calibrated" text="Kalibriert" />
         <text name="ui_calibratedFormat" text="Kalibriert: %.2f°" tag="format" />
@@ -78,17 +82,21 @@
         <text name="ui_notCalibrated" text="Nicht kalibriert" />
         <text name="ui_setTarget" text="Ziel setzen" />
         <text name="ui_setAngle" text="Winkel setzen" />
-        <text name="ui_setLevel" text="Level setzen" />
+        <text name="ui_setLevel" text="Position setzen" />
         <text name="ui_useTerrain" text="Terrain verwenden" />
-        <text name="ui_useTerrainTooltip" text="Kalibrierung im Gelände aktivieren" />
+        <text name="ui_useTerrainTooltip" text="Kalibrierung nach Terrain aktivieren" />
         <text name="ui_notAvailable" text="Nicht verfügbar" />
         <text name="warning_unfoldSurveyor" text="Sie müssen das Werkzeug erst aufklappen!" />
+        <text name="foldSurveyor" text="Vermesser zusammenklappen" />
+        <text name="unfoldSurveyor" text="Vermesser ausklappen" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="TerraFarm aktivieren" />
         <text name="ui_globalDefaultEnabled" text="Maschinen standardmäßig einschalten" />
-        <text name="ui_globalResourcesEnabled" text="Aktiviere Kartenressourcen" />
+        <text name="ui_mapResources" text="Map Materialien" />
+        <text name="ui_globalResourcesEnabled" text="Aktiviere Mapmaterialien" />
         <text name="ui_displayMode" text="HUD-Anzeigemodus" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Maschinen-Nodes debuggen" />
         <text name="ui_debugCalibration" text="Maschinenkalibrierung debuggen" />
 
@@ -102,7 +110,7 @@
 
         <!-- MachineState -->
         <text name="ui_stateEnableEffects" text="Visuelle Effekte einschalten" />
-        <text name="ui_stateEnableEffectsTooltip" text="Nur auf unterstützten Geräten verfügbar" />
+        <text name="ui_stateEnableEffectsTooltip" text="Nur für unterstützte Geräte verfügbar" />
         <text name="ui_stateClearDecoArea" text="Foliage löschen" />
         <text name="ui_stateClearDecoAreaTooltip" text="Foliage und Büsche während des Terraformings entfernen" />
         <text name="ui_stateClearDensityMapHeightArea" text="Material löschen" />
