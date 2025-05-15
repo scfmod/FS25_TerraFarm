@@ -72,6 +72,7 @@ TerraFarm supports vehicle specialization for modders to integrate configuration
 - Magsi wheel loader bucket
 - mcCormack overtipping bucket
 - Paladin high dump bucket
+- Prinoth Leitwolf Agripower
 - Volvo L120H general purpose bucket
 - Volvo L120H high tip bucket
 - Volvo L120H rock bucket
