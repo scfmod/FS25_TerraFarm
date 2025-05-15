@@ -10,7 +10,7 @@
 
         <Text position="0 -32px" profile="tfSelectSurveyor_dialogTitle" text="$l10n_ui_surveyors" />
 
-        <Text id="listEmptyText" text="$l10n_ui_surveyorsEmpty" />
+        <Text id="listEmptyText" profile="tfDialog_listEmptyText" text="$l10n_ui_surveyorsEmpty" />
 
         <GuiElement profile="tfSelectSurveyor_dialogContent">
             <SmoothList profile="tfSelectSurveyor_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick">

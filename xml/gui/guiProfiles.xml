@@ -300,4 +300,11 @@
     <Profile name="tf_shopListAttributeIconMachine" extends="fs25_itemDetailsIcon">
         <imageSliceId value="terraFarm.icon_excavator" />
     </Profile>
+
+    <Profile name="tfDialog_listEmptyText" extends="textDefault" with="anchorMiddleCenter">
+        <size value="320px 20px" />
+
+        <textColor value="1 1 1 0.5" />
+        <textAlignment value="center" />
+    </Profile>
 </GuiProfiles>

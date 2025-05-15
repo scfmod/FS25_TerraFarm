@@ -10,7 +10,7 @@
 
         <Text position="0 -32px" profile="tfSelectMachine_dialogTitle" text="$l10n_ui_machines" />
 
-        <Text id="listEmptyText" text="$l10n_ui_machinesEmpty" />
+        <Text id="listEmptyText" profile="tfDialog_listEmptyText" text="$l10n_ui_machinesEmpty" />
 
         <GuiElement profile="tfSelectMachine_dialogContent">
             <SmoothList profile="tfSelectMachine_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick">
