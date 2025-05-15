@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l10n>
+    <translationContributors>FirenzeIT</translationContributors>
+    <texts>
+        <!-- Input bindings -->
+        <text name="input_MACHINE_SETTINGS" text="Aprire la finestra di dialogo delle impostazioni della macchina" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Attiva la macchina" />
+        <text name="input_MACHINE_TOGGLE_INPUT" text="Alterna la modalità di input" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Attiva la modalità di uscita" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Aprire la finestra di dialogo sui materiali" />
+        <text name="input_MACHINE_SELECT_TEXTURE" text="Aprire finestra di dialogo texture terreno" />
+        <text name="input_MACHINE_SELECT_SURVEYOR" text="Aprire finestra di dialogo geometra" />
+        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Aprire la finestra di dialogo delle impostazioni globali" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="Attiva la visibilità dell'HUD" />
+
+        <!-- Generic texts-->
+        <text name="ui_mode" text="Modalità" />
+        <text name="ui_enable" text="Abilita" />
+        <text name="ui_enabled" text="Abilitato" />
+        <text name="ui_disable" text="Disabilita" />
+        <text name="ui_disabled" text="Disabilitato" />
+        <text name="ui_toggleHud" text="Attiva HUD" />
+        <text name="ui_globalSettings" text="Impostazioni globali" />
+        <text name="ui_materialSettings" text="Impostazioni del materiale" />
+        <text name="ui_material" text="Materiale" />
+        <text name="ui_texture" text="Struttura" />
+        <text name="ui_changeMaterial" text="Cambia il materiale" />
+        <text name="ui_changeTexture" text="Cambia texture" />
+        <text name="ui_circle" text="Cerchio" />
+        <text name="ui_square" text="Quadrato" />
+        <text name="ui_terrainDeformation" text="Deformazione del terreno" />
+        <text name="ui_enableHud" text="Attiva HUD" />
+        <text name="ui_machines" text="Macchine" />
+        <text name="ui_machinesEmpty" text="Non sono state trovate macchine disponibili" />
+        <text name="ui_surveyors" text="Geometri" />
+        <text name="ui_surveyorsEmpty" text="Non sono stati trovati geometri disponibili" />
+        <text name="ui_angleFormat" text="Angolo: %.2f" tag="format" />
+        <text name="ui_distanceFormat" text="%.0f m" tag="format" />
+        <text name="ui_copySettings" text="Impostazioni di copia" />
+        <text name="ui_copySettingsTooltip" text="Copia impostazioni macchina da un altro veicolo" />
+        <text name="ui_areaModifiers" text="Modificatori di area" />
+        <text name="ui_postDeformation" text="Post-deformazione" />
+
+        <!-- Machine texts -->
+        <text name="ui_machineSettings" text="Impostazioni della macchina" />
+        <text name="ui_machineActivate" text="Attiva macchina" />
+        <text name="ui_machineDeactivate" text="Disattiva macchina" />
+        <text name="ui_machineToggleInput" text="Alterna la modalità di input" />
+        <text name="ui_machineToggleOutput" text="Attiva la modalità di uscita" />
+        <text name="ui_enableMachine" text="Attiva macchina" />
+        <text name="ui_enableMapResources" text="Usa le risorse della mappa" />
+        <text name="ui_enableMapResourcesTooltip" text="" />
+
+        <text name="ui_modeMaterial" text="Materiale" />
+        <text name="ui_modeFlatten" text="Grado" />
+        <text name="ui_modeSmooth" text="Liscio" />
+        <text name="ui_modeLower" text="Inferiore" />
+        <text name="ui_modePaint" text="Dipingere" />
+        <text name="ui_raise" text="Solleva" />
+
+        <text name="ui_terraform" text="Terraformare" />
+        <text name="ui_discharge" text="Scarico" />
+
+        <!-- Map resources texts -->
+        <text name="ui_mapResourcesAvailable" text="La caratteristica è disponibile per questa mappa." />
+        <text name="ui_mapResourcesNotAvailable" text="La caratteristica non è disponibile per questa mappa" />
+        <text name="ui_mapResourcesDescription" text="Disponibile solo per le mappe con la funzione implementata. Se abilitata, utilizzerà materiali e livelli di pittura in diverse aree definite dall'autore della mappa. Ogni macchina può attivare/disattivare la funzione se abilitata." />
+
+        <!-- Surveyor texts -->
+        <text name="ui_selectSurveyor" text="Seleziona il geometra" />
+        <text name="ui_calibrate" text="Calibrazione" />
+        <text name="ui_calibration" text="Calibrazione" />
+        <text name="ui_calibrationDescription" text="La calibrazione consente di effettuare la classificazione utilizzando un angolo calibrato dall'attrezzatura del rilevatore." />
+        <text name="ui_calibratedAngleFormat" text="Calibrato: %.2f°" tag="format" />
+        <text name="ui_calibrated" text="Calibrata" />
+        <text name="ui_calibratedFormat" text="Calibrato: %.2f°" tag="format" />
+        <text name="ui_calibrateCopy" text="Copia dalla macchina" />
+        <text name="ui_notCalibrated" text="Non calibrato" />
+        <text name="ui_setTarget" text="Imposta obiettivo" />
+        <text name="ui_setAngle" text="Imposta angolo" />
+        <text name="ui_setLevel" text="Imposta livello" />
+        <text name="ui_useTerrain" text="Utilizza il terreno" />
+        <text name="ui_useTerrainTooltip" text="Abilita la calibrazione sul terreno" />
+        <text name="ui_notAvailable" text="Non disponibile" />
+        <text name="warning_unfoldSurveyor" text="È necessario prima dispiegare lo strumento!" />
+
+        <!-- Global settings texts -->
+        <text name="ui_globalEnabled" text="Attiva TerraFarm" />
+        <text name="ui_globalDefaultEnabled" text="Abilita le macchine per impostazione predefinita" />
+        <text name="ui_globalResourcesEnabled" text="Abilita risorse mappa" />
+        <text name="ui_displayMode" text="Modalità di visualizzazione dell'HUD" />
+        <text name="ui_debugNodes" text="Nodi macchina di debug" />
+        <text name="ui_debugCalibration" text="Debug della calibrazione della macchina" />
+
+        <!-- Store items -->
+        <text name="storeItem_surveyor" text="Surveyor PSV-2" />
+        <text name="typeDesc_surveyor" text="Attrezzatura per geometri" />
+        <text name="ui_steelStainless" text="Acciaio inossidabile" />
+        <text name="ui_steelGalvanized" text="Acciaio galvanizzato" />
+        <text name="displayItem_machine" text="Macchina" />
+        <text name="displayItem_surveyor" text="Geometra" />
+
+        <!-- MachineState -->
+        <text name="ui_stateEnableEffects" text="Abilita gli effetti visivi" />
+        <text name="ui_stateEnableEffectsTooltip" text="Disponibile solo su apparecchiature supportate" />
+        <text name="ui_stateClearDecoArea" text="Cancella il fogliame" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Rimuovi fogliame e cespugli durante la terraformazione" />
+        <text name="ui_stateClearDensityMapHeightArea" text="Cancella materiale" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Rimuovi il materiale intorno alla deformazione del terreno" />
+        <text name="ui_stateEnableInputMaterial" text="Abilita materiale" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Abilita la creazione di materiale durante la terraformazione" />
+        <text name="ui_stateEnableOutputMaterial" text="Abilita discarica" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Consente di scaricare materiale a terra" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Abilita la pittura" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Dipingere nuove texture del terreno quando si terraforma" />
+        <text name="ui_stateRadius" text="Raggio" />
+        <text name="ui_stateRadiusTooltip" text="" />
+        <text name="ui_stateStrength" text="Forza" />
+        <text name="ui_stateStrengthTooltip" text="" />
+        <text name="ui_stateHardness" text="Durezza" />
+        <text name="ui_stateHardnessTooltip" text="" />
+        <text name="ui_stateBrushShape" text="Forma del pennello di deformazione" />
+        <text name="ui_stateBrushShapeTooltip" text="" />
+        <text name="ui_stateEraseTireTracks" text="Rimuovi le tracce dei pneumatici" />
+        <text name="ui_stateEraseTireTracksTooltip" text="" />
+        <text name="ui_stateRemoveFieldArea" text="Rimuovi le aree di campo" />
+        <text name="ui_stateRemoveFieldAreaTooltip" text="" />
+        <text name="ui_stateRemoveStoneArea" text="Rimuovi le pietre" />
+        <text name="ui_stateRemoveStoneAreaTooltip" text="" />
+        <text name="ui_stateRemoveWeedArea" text="Rimuovi le erbacce" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Rimuove le erbacce durante la terraformazione" />
+        <text name="ui_stateAllowGradingUp" text="Permette di salire di livello" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Si consiglia di disattivare l'input di materiale quando è attivo" />
+        <text name="ui_stateForceNodes" text="Forza i nodi" />
+        <text name="ui_stateForceNodesTooltip" text="Forza tutti i nodi se uno o più sono attivi" />
+        <text name="ui_statePaintRadiusModifier" text="Modificatore del raggio di pittura" />
+        <text name="ui_statePaintRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifier" text="Modificatore del raggio di densità" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateInputRatio" text="Rapporto di ingresso" />
+        <text name="ui_stateInputRatioTooltip" text="" />
+
+        <!-- Machine types -->
+        <text name="machineType_compactor" text="Compattatore" />
+        <text name="machineType_excavator" text="Escavatore" />
+        <text name="machineType_leveler" text="Livellatrice" />
+        <text name="machineType_ripper" text="Ripper del terreno" />
+        <text name="machineType_shovel" text="Pala" />
+        <text name="machineType_trencher" text="Escavatore" />
+    </texts>
+</l10n>

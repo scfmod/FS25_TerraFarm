@@ -15,6 +15,9 @@
         <fr>
             <![CDATA[TerraFarm - Le simulateur de terrassement]]>
         </fr>
+        <it>
+            <![CDATA[TerraFarm - Simulatore Di Movimento Terra]]>
+        </it>
     </description>
 
     <iconFilename>icon_terraFarm.dds</iconFilename>
