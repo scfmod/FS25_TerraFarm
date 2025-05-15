@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l10n>
+    <translationContributors>Kalderone</translationContributors>
+    <texts>
+        <!-- Input bindings -->
+        <text name="input_MACHINE_SETTINGS" text="Відкрити налаштування машини" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Активувати машину" />
+        <text name="input_MACHINE_TOGGLE_INPUT" text="Змінити режим введення" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Змінити режим виведення" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Відкрити вікно матеріалів" />
+        <text name="input_MACHINE_SELECT_TEXTURE" text="Відкрити вікно текстур ґрунту" />
+        <text name="input_MACHINE_SELECT_SURVEYOR" text="Відкрити вікно геодезиста" />
+        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Відкрити глобальні налаштування" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="Показати/приховати HUD" />
+
+        <!-- Generic texts-->
+        <text name="ui_mode" text="Режим" />
+        <text name="ui_enable" text="Увімкнути" />
+        <text name="ui_enabled" text="Увімкнено" />
+        <text name="ui_disable" text="Вимкнути" />
+        <text name="ui_disabled" text="Вимкнено" />
+        <text name="ui_toggleHud" text="Переключити HUD" />
+        <text name="ui_globalSettings" text="Глобальні налаштування" />
+        <text name="ui_materialSettings" text="Налаштування матеріалу" />
+        <text name="ui_material" text="Матеріал" />
+        <text name="ui_texture" text="Текстура" />
+        <text name="ui_changeMaterial" text="Змінити матеріал" />
+        <text name="ui_changeTexture" text="Змінити текстуру" />
+        <text name="ui_circle" text="Коло" />
+        <text name="ui_square" text="Квадрат" />
+        <text name="ui_terrainDeformation" text="Деформація рельєфу" />
+        <text name="ui_enableHud" text="Вкл. HUD" />
+        <text name="ui_machines" text="Машини" />
+        <text name="ui_machinesEmpty" text="Доступні машини не знайдено" />
+        <text name="ui_surveyors" text="Геодезисти" />
+        <text name="ui_surveyorsEmpty" text="Доступних геодезистів не знайдено" />
+        <text name="ui_angleFormat" text="Кут: %.2f" tag="format" />
+        <text name="ui_distanceFormat" text="Дистанція %.0f м" tag="format" />
+        <text name="ui_copySettings" text="Копіювати налаштування" />
+        <text name="ui_copySettingsTooltip" text="Копіювати налаштування машини з іншого транспортного засобу" />
+        <text name="ui_areaModifiers" text="Модифікатори ділянки" />
+        <text name="ui_postDeformation" text="Постдеформація" />
+
+        <!-- Machine texts -->
+        <text name="ui_machineSettings" text="Налаштування машини" />
+        <text name="ui_machineActivate" text="Активувати машину" />
+        <text name="ui_machineDeactivate" text="Деактивувати машину" />
+        <text name="ui_machineToggleInput" text="Змінити режим введення" />
+        <text name="ui_machineToggleOutput" text="Змінити режим виведення" />
+        <text name="ui_enableMachine" text="Вкл. машину" />
+        <text name="ui_enableMapResources" text="Використовувати ресурси карти" />
+        <text name="ui_enableMapResourcesTooltip" text="Вкл. підказку Ресурси карти" />
+
+        <text name="ui_modeMaterial" text="Матеріал" />
+        <text name="ui_modeFlatten" text="Вирівнювання" />
+        <text name="ui_modeSmooth" text="Згладжування" />
+        <text name="ui_modeLower" text="Нижче" />
+        <text name="ui_modePaint" text="Фарбування" />
+        <text name="ui_raise" text="Підняти" />
+
+        <text name="ui_terraform" text="Терраформ" />
+        <text name="ui_discharge" text="Розвантаження" />
+
+        <!-- Map resources texts -->
+        <text name="ui_mapResourcesAvailable" text="Функція доступна для цієї карти." />
+        <text name="ui_mapResourcesNotAvailable" text="Функція недоступна для цієї карти." />
+        <text name="ui_mapResourcesDescription" text="Доступно лише для карт з реалізованою функцією. Якщо TerraFarm підтримується, будуть використовуватись матеріали й шари фарбування, визначені автором карти. Кожна машина може окремо вкл./викл. цю функцію." />
+
+        <!-- Surveyor texts -->
+        <text name="ui_selectSurveyor" text="Вибрати геодезиста" />
+        <text name="ui_calibrate" text="Калібрувати" />
+        <text name="ui_calibration" text="Калібрування" />
+        <text name="ui_calibrationDescription" text="Калібрування дозволяє вирівнення з урахуванням кута, отриманого від геодезичного обладнання." />
+        <text name="ui_calibratedAngleFormat" text="Відкалібровано: %.2f°" tag="format" />
+        <text name="ui_calibrated" text="Відкалібровано" />
+        <text name="ui_calibratedFormat" text="Відкалібровано: %.2f°" tag="format" />
+        <text name="ui_calibrateCopy" text="Копіювати з машини" />
+        <text name="ui_notCalibrated" text="Не відкалібровано" />
+        <text name="ui_setTarget" text="Встановити ціль" />
+        <text name="ui_setAngle" text="Встановити кут" />
+        <text name="ui_setLevel" text="Встановити рівень" />
+        <text name="ui_useTerrain" text="Використовувати рельєф" />
+        <text name="ui_useTerrainTooltip" text="Увімкнути калібрування по рельєфу" />
+        <text name="ui_notAvailable" text="Недоступно" />
+        <text name="warning_unfoldSurveyor" text="Спочатку потрібно розкласти інструмент!" />
+
+        <!-- Global settings texts -->
+        <text name="ui_globalEnabled" text="Увімкнути TerraFarm" />
+        <text name="ui_globalDefaultEnabled" text="Увімкнути машини за замовчуванням" />
+        <text name="ui_globalResourcesEnabled" text="Увімкнути ресурси карти" />
+        <text name="ui_displayMode" text="Режим відображення HUD" />
+        <text name="ui_debugNodes" text="Відлагодження вузлів машини" />
+        <text name="ui_debugCalibration" text="Відлагодження калібрування машини" />
+
+        <!-- Store items -->
+        <text name="storeItem_surveyor" text="Геодезист PSV-2" />
+        <text name="typeDesc_surveyor" text="Геодезичне обладнання" />
+        <text name="ui_steelStainless" text="Нержавіюча сталь" />
+        <text name="ui_steelGalvanized" text="Оцинкована сталь" />
+        <text name="displayItem_machine" text="Машина" />
+        <text name="displayItem_surveyor" text="Геодезист" />
+
+        <!-- MachineState -->
+        <text name="ui_stateEnableEffects" text="Увімкнути візуальні ефекти" />
+        <text name="ui_stateEnableEffectsTooltip" text="Доступно лише для підтримуваного обладнання" />
+        <text name="ui_stateClearDecoArea" text="Очистити рослинність" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Видалити рослинність і кущі під час тераформування" />
+        <text name="ui_stateClearDensityMapHeightArea" text="Очистити матеріал" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Видалити матеріал навколо деформації рельєфу" />
+        <text name="ui_stateEnableInputMaterial" text="Увімкнути створення матеріалу" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Увімкнути створення матеріалу при тераформуванні" />
+        <text name="ui_stateEnableOutputMaterial" text="Увімкнути розвантаження" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Дозволити розвантаження матеріалу на землю" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Увімкнути фарбування" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Фарбування нових текстур рельєфу при тераформуванні" />
+        <text name="ui_stateRadius" text="Радіус" />
+        <text name="ui_stateRadiusTooltip" text="" />
+        <text name="ui_stateStrength" text="Сила" />
+        <text name="ui_stateStrengthTooltip" text="" />
+        <text name="ui_stateHardness" text="Твердість" />
+        <text name="ui_stateHardnessTooltip" text="" />
+        <text name="ui_stateBrushShape" text="Форма кисті деформації" />
+        <text name="ui_stateBrushShapeTooltip" text="" />
+        <text name="ui_stateEraseTireTracks" text="Видалити сліди шин" />
+        <text name="ui_stateEraseTireTracksTooltip" text="" />
+        <text name="ui_stateRemoveFieldArea" text="Видалити поля" />
+        <text name="ui_stateRemoveFieldAreaTooltip" text="" />
+        <text name="ui_stateRemoveStoneArea" text="Видалити каміння" />
+        <text name="ui_stateRemoveStoneAreaTooltip" text="" />
+        <text name="ui_stateRemoveWeedArea" text="Видалити бур’яни" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Видаляти бур’яни під час тераформування" />
+        <text name="ui_stateAllowGradingUp" text="Дозволити вирівнювання вгору" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Рекомендується вимкнути створення матеріалу при активації" />
+        <text name="ui_stateForceNodes" text="Примусове включення вузлів" />
+        <text name="ui_stateForceNodesTooltip" text="Примусово включити всі вузли, якщо активовано один або більше" />
+        <text name="ui_statePaintRadiusModifier" text="Модифікатор радіуса фарбування" />
+        <text name="ui_statePaintRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifier" text="Модифікатор радіуса щільності" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateInputRatio" text="Коефіцієнт введення" />
+        <text name="ui_stateInputRatioTooltip" text="" />
+
+        <!-- Machine types -->
+        <text name="machineType_compactor" text="Ущільнювач" />
+        <text name="machineType_excavator" text="Екскаватор" />
+        <text name="machineType_leveler" text="Вирівнювач" />
+        <text name="machineType_ripper" text="Розпушувач ґрунту" />
+        <text name="machineType_shovel" text="Лопата" />
+        <text name="machineType_trencher" text="Траншеєкопач" />
+    </texts>
+</l10n>
