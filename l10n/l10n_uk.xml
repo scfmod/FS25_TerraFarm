@@ -40,6 +40,10 @@
         <text name="ui_copySettingsTooltip" text="Копіювати налаштування машини з іншого транспортного засобу" />
         <text name="ui_areaModifiers" text="Модифікатори ділянки" />
         <text name="ui_postDeformation" text="Постдеформація" />
+        <text name="ui_operator" text="Operator" />
+        <text name="ui_angle" text="Angle" />
+        <text name="ui_startOffset" text="Start offset" />
+        <text name="ui_targetOffset" text="Target offset" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Налаштування машини" />
@@ -83,12 +87,16 @@
         <text name="ui_useTerrainTooltip" text="Увімкнути калібрування по рельєфу" />
         <text name="ui_notAvailable" text="Недоступно" />
         <text name="warning_unfoldSurveyor" text="Спочатку потрібно розкласти інструмент!" />
+        <text name="foldSurveyor" text="Fold surveyor" />
+        <text name="unfoldSurveyor" text="Unfold surveyor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Увімкнути TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Увімкнути машини за замовчуванням" />
+        <text name="ui_mapResources" text="Map resources" />
         <text name="ui_globalResourcesEnabled" text="Увімкнути ресурси карти" />
         <text name="ui_displayMode" text="Режим відображення HUD" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Відлагодження вузлів машини" />
         <text name="ui_debugCalibration" text="Відлагодження калібрування машини" />
 

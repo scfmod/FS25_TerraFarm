@@ -40,6 +40,10 @@
         <text name="ui_copySettingsTooltip" text="Copia impostazioni macchina da un altro veicolo" />
         <text name="ui_areaModifiers" text="Modificatori di area" />
         <text name="ui_postDeformation" text="Post-deformazione" />
+        <text name="ui_operator" text="Operator" />
+        <text name="ui_angle" text="Angle" />
+        <text name="ui_startOffset" text="Start offset" />
+        <text name="ui_targetOffset" text="Target offset" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Impostazioni della macchina" />
@@ -83,12 +87,16 @@
         <text name="ui_useTerrainTooltip" text="Abilita la calibrazione sul terreno" />
         <text name="ui_notAvailable" text="Non disponibile" />
         <text name="warning_unfoldSurveyor" text="È necessario prima dispiegare lo strumento!" />
+        <text name="foldSurveyor" text="Fold surveyor" />
+        <text name="unfoldSurveyor" text="Unfold surveyor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Attiva TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Abilita le macchine per impostazione predefinita" />
+        <text name="ui_mapResources" text="Map resources" />
         <text name="ui_globalResourcesEnabled" text="Abilita risorse mappa" />
         <text name="ui_displayMode" text="Modalità di visualizzazione dell'HUD" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Nodi macchina di debug" />
         <text name="ui_debugCalibration" text="Debug della calibrazione della macchina" />
 

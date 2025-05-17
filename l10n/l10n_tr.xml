@@ -39,6 +39,10 @@
         <text name="ui_copySettingsTooltip" text="Makine ayarlarını başka bir araçtan kopyalayın" />
         <text name="ui_areaModifiers" text="Alan değiştiriciler" />
         <text name="ui_postDeformation" text="Sonrası deformasyon" />
+        <text name="ui_operator" text="Operator" />
+        <text name="ui_angle" text="Angle" />
+        <text name="ui_startOffset" text="Start offset" />
+        <text name="ui_targetOffset" text="Target offset" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Makine ayarları" />
@@ -82,12 +86,16 @@
         <text name="ui_useTerrainTooltip" text="Arazide kalibrasyonu etkinleştir" />
         <text name="ui_notAvailable" text="Müsait değil" />
         <text name="warning_unfoldSurveyor" text="İlk önce aleti açmanız gerekiyor!" />
+        <text name="foldSurveyor" text="Fold surveyor" />
+        <text name="unfoldSurveyor" text="Unfold surveyor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="TerraFarm'ı etkinleştir" />
         <text name="ui_globalDefaultEnabled" text="Makineleri varsayılan olarak etkinleştir" />
+        <text name="ui_mapResources" text="Map resources" />
         <text name="ui_globalResourcesEnabled" text="Harita kaynaklarını etkinleştir" />
         <text name="ui_displayMode" text="HUD ekran modu" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Makine düğümlerinde hata ayıklama" />
         <text name="ui_debugCalibration" text="Makine kalibrasyonunda hata ayıklama" />
 

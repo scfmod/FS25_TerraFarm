@@ -5,7 +5,7 @@
         <text name="input_MACHINE_SETTINGS" text="Abrir el cuadro de diálogo de configuración de la máquina" />
         <text name="input_MACHINE_TOGGLE_ACTIVE" text="Activar o desactivar la máquina" />
         <text name="input_MACHINE_TOGGLE_INPUT" text="Cambiar modo de carga" />
-		<text name="input_MACHINE_TOGGLE_OUTPUT" text="Cambiar modo de descarga" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Cambiar modo de descarga" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir diálogo de material" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir cuadro de diálogo de textura de suelo" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Abrir el cuadro de diálogo del topógrafo" />
@@ -39,6 +39,10 @@
         <text name="ui_copySettingsTooltip" text="Copiar la configuración de la máquina desde otro vehículo" />
         <text name="ui_areaModifiers" text="Modificadores de area" />
         <text name="ui_postDeformation" text="Post deformación" />
+        <text name="ui_operator" text="Operator" />
+        <text name="ui_angle" text="Angle" />
+        <text name="ui_startOffset" text="Start offset" />
+        <text name="ui_targetOffset" text="Target offset" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Configuración de la máquina" />
@@ -82,12 +86,16 @@
         <text name="ui_useTerrainTooltip" text="Habilitar calibración en terreno" />
         <text name="ui_notAvailable" text="No disponible" />
         <text name="warning_unfoldSurveyor" text="¡Primero debes desplegar la herramienta!" />
+        <text name="foldSurveyor" text="Fold surveyor" />
+        <text name="unfoldSurveyor" text="Unfold surveyor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Habilitar TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Habilitar máquinas por defecto" />
+        <text name="ui_mapResources" text="Map resources" />
         <text name="ui_globalResourcesEnabled" text="Habilitar recursos de mapas" />
         <text name="ui_displayMode" text="Modo de visualización HUD" />
+        <text name="ui_debug" text="Debug" />
         <text name="ui_debugNodes" text="Nodos de la máquina de depuración" />
         <text name="ui_debugCalibration" text="Depurar la calibración de la máquina" />
 
