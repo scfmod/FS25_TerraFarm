@@ -4,6 +4,7 @@
   - [Vehicle type](#vehicle-type)
   - [Vehicle XML](#vehicle-xml)
 - [Machine configurations](#machine-configurations)
+- [InteractiveControl](#interactivecontrol)
 - [Console commands](#console-commands)
 
 TerraFarm supports integrating configurations in mods using following methods:
@@ -100,6 +101,26 @@ Uses the same format as vehicle specialization configuration.
 | [```ripper```](./MACHINE_RIPPER.md) | For ground rippers. |
 | [```shovel``` ](./MACHINE_SHOVEL.md) | For wheel loaders, generic shovels etc. |
 | [```trencher```](./MACHINE_TRENCHER.md) | For trenchers and similar equipment. |
+
+## InteractiveControl
+
+When [FS25_interactiveControl](https://www.farming-simulator.com/mod.php?mod_id=323135) mod is active, TerraFarm will add new functions available for use:
+
+| Function | Description |
+|----------|-------------|
+| MACHINE_TOGGLE_ENABLED | Toggle whether machine is enabled or not. |
+| MACHINE_TOGGLE_ACTIVE | Toggle whether machine is active or not. |
+| MACHINE_TOGGLE_INPUT | Toggle input mode if applicable. |
+| MACHINE_TOGGLE_OUTPUT | Toggle output mode if applicable. |
+| MACHINE_TOGGLE_HUD | Toggle HUD visibility. |
+| MACHINE_SETTINGS | Open machine settings dialog. |
+| MACHINE_SELECT_MATERIAL | Open select material dialog. |
+| MACHINE_SELECT_TEXTURE | Open select ground texture dialog. |
+| MACHINE_SELECT_SURVEYOR | Open select surveyor dialog for calibration. Only available if machine has FLATTEN mode for input and/or output. |
+
+**NOTE**: Outside triggers are not supported.
+
+**NOTE**: These IC functions will use the current active selected machine, so you don't need Machine specialization implemented on entered vehicle in order for functions to work.
 
 ## Console commands
 
