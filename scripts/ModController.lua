@@ -12,8 +12,7 @@ end
 ---@param self nil
 function ModController:loadMods()
     g_machineManager:onModsLoaded()
-    -- TODO: When/if IC for FS25 is released.
-    -- g_interactiveControlExtension:onModsLoaded()
+    g_interactiveControlExtension:onModsLoaded()
 end
 
 ---@param self FSBaseMission

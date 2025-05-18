@@ -37,6 +37,7 @@ source(g_currentModDirectory .. 'scripts/events/SetMaterialsEvent.lua')
 source(g_currentModDirectory .. 'scripts/events/SetResourcesEvent.lua')
 
 source(g_currentModDirectory .. 'scripts/extensions/GuiOverlayExtension.lua')
+source(g_currentModDirectory .. 'scripts/extensions/InteractiveControlExtension.lua')
 source(g_currentModDirectory .. 'scripts/extensions/SavegameControllerExtension.lua')
 source(g_currentModDirectory .. 'scripts/extensions/ShopControllerExtension.lua')
 source(g_currentModDirectory .. 'scripts/extensions/VehicleExtension.lua')
