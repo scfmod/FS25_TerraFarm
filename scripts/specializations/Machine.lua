@@ -1491,8 +1491,8 @@ function Machine:selectTerrainLayerCallback(terrainLayerId)
 end
 
 function Machine:actionEventSelectSurveyor()
-    -- g_selectSurveyorDialog:setSelectCallback(Machine.selectSurveyorCallback, self)
-    -- g_selectSurveyorDialog:show(self)
+    g_selectSurveyorDialog:setSelectCallback(Machine.selectSurveyorCallback, self)
+    g_selectSurveyorDialog:show(self)
 end
 
 function Machine:actionEventGlobalSettings()
