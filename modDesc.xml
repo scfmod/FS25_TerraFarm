@@ -58,6 +58,7 @@
         <action name="MACHINE_SETTINGS" />
         <action name="MACHINE_SELECT_MATERIAL" />
         <action name="MACHINE_SELECT_TEXTURE" />
+        <action name="MACHINE_SELECT_DISCHARGE_TEXTURE" />
         <action name="MACHINE_SELECT_SURVEYOR" />
         <action name="MACHINE_GLOBAL_SETTINGS" />
         <action name="MACHINE_TOGGLE_HUD" />
