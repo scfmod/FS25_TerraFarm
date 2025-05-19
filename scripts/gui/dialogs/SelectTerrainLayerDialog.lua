@@ -3,6 +3,7 @@
 ---@field name string
 
 ---@class SelectTerrainLayerDialog : MessageDialog
+---@field title TextElement
 ---@field list SmoothListElement
 ---@field previewImage TerrainLayerElement
 ---@field superClass fun(): MessageDialog
@@ -49,8 +50,16 @@ function SelectTerrainLayerDialog:setSelectCallback(fn, target)
     self.selectCallbackTarget = target
 end
 
+---@param title? string
+function SelectTerrainLayerDialog:setTitle(title)
+    self.title:setText(title or g_i18n:getText('ui_changeTexture'))
+end
+
 ---@param selectTerrainLayerId number | nil
-function SelectTerrainLayerDialog:show(selectTerrainLayerId)
+---@param title? string
+function SelectTerrainLayerDialog:show(selectTerrainLayerId, title)
+    self:setTitle(title)
+
     g_gui:showDialog(SelectTerrainLayerDialog.CLASS_NAME)
 
     self:setSelectedItem(selectTerrainLayerId)

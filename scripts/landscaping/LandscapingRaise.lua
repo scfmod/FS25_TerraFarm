@@ -18,6 +18,7 @@ function LandscapingRaise.new(workArea, litersToDrop, fillTypeIndex)
     self.droppedLiters = 0
     self.litersToDrop = litersToDrop
     self.fillType = g_fillTypeManager:getFillTypeByIndex(fillTypeIndex)
+    self.terrainLayerId = self.vehicle.spec_machine.dischargeTerrainLayerId or 0
 
     self.strength = 0.25
     self.radius = math.max(2, math.min(self.radius, 6))

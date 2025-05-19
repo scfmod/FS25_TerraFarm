@@ -68,6 +68,20 @@
                 </Bitmap>
 
                 <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_dischargeTexture" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Button id="dischargeTerrainLayerButton" onClick="onClickSelectDischargeTerrainLayer" profile="tfMenuFrame_button" text="$l10n_ui_changeTexture">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+
+                    <TerrainLayer profile="tfMenuFrame_optionImage" id="dischargeTerrainLayerImage" />
+                    <Bitmap profile="tfMenuFrame_optionMaskImage" />
+                    <Text profile="tfMenuFrame_optionImageText" id="dischargeTerrainLayerText" />
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
                     <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_terrainDeformation" />
                 </GuiElement>
 

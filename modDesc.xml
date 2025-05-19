@@ -86,6 +86,9 @@
         <actionBinding action="MACHINE_SELECT_TEXTURE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_period" index="1" />
         </actionBinding>
+        <actionBinding action="MACHINE_SELECT_DISCHARGE_TEXTURE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_8" index="1" />
+        </actionBinding>
         <actionBinding action="MACHINE_SELECT_SURVEYOR">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_7" index="1" />
         </actionBinding>

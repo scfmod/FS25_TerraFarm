@@ -18,6 +18,9 @@
 ---@field textureItem BitmapElement
 ---@field textureImage TerrainLayerElement
 ---@field textureText TextElement
+---@field dischargeTextureItem BitmapElement
+---@field dischargeTextureImage TerrainLayerElement
+---@field dischargeTextureText TextElement
 ---@field surveyorItem BitmapElement
 ---@field surveyorImage BitmapElement
 ---@field surveyorTitle TextElement
@@ -49,6 +52,9 @@ HUDMachineDisplayElement.CONTROLS = {
     'textureItem',
     'textureImage',
     'textureText',
+    'dischargeTextureItem',
+    'dischargeTextureImage',
+    'dischargeTextureText',
     'surveyorItem',
     'surveyorImage',
     'surveyorTitle',
@@ -306,6 +312,7 @@ function HUDMachineDisplayElement:updateDisplay()
         self:updateModeDisplay()
         self:updateMaterialDisplay()
         self:updateTextureDisplay()
+        self:updateDischargeTextureDisplay()
         self:updateSurveyorDisplay()
 
         self.boxLayout:invalidateLayout()
@@ -350,7 +357,7 @@ end
 function HUDMachineDisplayElement:updateTextureDisplay()
     local spec = g_modHud.vehicle.spec_machine
 
-    if #spec.modesInput > 0 or #spec.modesOutput > 0 then
+    if #spec.modesInput > 0 then
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
 
         self.textureItem:setVisible(true)
@@ -358,6 +365,20 @@ function HUDMachineDisplayElement:updateTextureDisplay()
         self.textureText:setText(terrainLayer.title)
     else
         self.textureItem:setVisible(false)
+    end
+end
+
+function HUDMachineDisplayElement:updateDischargeTextureDisplay()
+    local spec = g_modHud.vehicle.spec_machine
+
+    if #spec.modesOutput > 0 then
+        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
+
+        self.dischargeTextureItem:setVisible(true)
+        self.dischargeTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+        self.dischargeTextureText:setText(terrainLayer.title)
+    else
+        self.dischargeTextureItem:setVisible(false)
     end
 end
 

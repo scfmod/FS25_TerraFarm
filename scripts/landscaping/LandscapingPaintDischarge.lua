@@ -10,6 +10,7 @@ function LandscapingPaintDischarge.new(workArea)
     local self = LandscapingPaint.new(workArea, LandscapingPaintDischarge_mt)
 
     self.droppedLiters = 0
+    self.terrainLayerId = self.vehicle.spec_machine.dischargeTerrainLayerId or 0
 
     return self
 end

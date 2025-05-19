@@ -50,6 +50,7 @@
 ---@field state MachineState
 ---@field surveyorId string | nil
 ---@field terrainLayerId number
+---@field dischargeTerrainLayerId number
 ---@field fillUnitIndex number | nil
 ---@field fillUnit FillUnitObject | nil
 ---@field fillTypeIndex number

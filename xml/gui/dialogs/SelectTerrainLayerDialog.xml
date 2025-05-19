@@ -8,7 +8,7 @@
         <ThreePartBitmap profile="tf_dialogBgTopSmall" />
         <ThreePartBitmap profile="tf_dialogBgBottom" />
 
-        <Text position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_changeTexture" />
+        <Text id="title" position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_changeTexture" />
 
         <GuiElement profile="tfSelectTerrainLayer_dialogContent">
 

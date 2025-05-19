@@ -14,6 +14,9 @@
 ---@field terrainLayerButton ButtonElement
 ---@field terrainLayerText TextElement
 ---@field terrainLayerImage TerrainLayerElement
+---@field dischargeTerrainLayerButton ButtonElement
+---@field dischargeTerrainLayerText TextElement
+---@field dischargeTerrainLayerImage TerrainLayerElement
 ---
 ---@field radiusOption TextInputElement
 ---@field strengthOption TextInputElement
@@ -60,6 +63,7 @@ function MachineSettingsFrame:onFrameOpen()
     self:updateState()
     self:updateMaterial()
     self:updateTerrainLayer()
+    self:updateDischargeTerrainLayer()
 
     self.boxLayout:invalidateLayout()
 
@@ -69,6 +73,7 @@ function MachineSettingsFrame:onFrameOpen()
     g_messageCenter:subscribe(SetMachineResourcesEvent, self.updateMachine, self)
     g_messageCenter:subscribe(SetMachineFillTypeEvent, self.updateMaterial, self)
     g_messageCenter:subscribe(SetMachineTerrainLayerEvent, self.updateTerrainLayer, self)
+    g_messageCenter:subscribe(SetMachineDischargeTerrainLayerEvent, self.updateDischargeTerrainLayer, self)
 
     g_messageCenter:subscribe(SetMachineStateEvent, self.updateState, self)
 
@@ -158,12 +163,30 @@ end
 ---@param vehicle Machine | nil
 function MachineSettingsFrame:updateTerrainLayer(vehicle)
     if vehicle == nil or vehicle == self.target.vehicle then
+        ---@type SpecializationProperties
         local spec = self.target.vehicle.spec_machine
 
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
 
         self.terrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
         self.terrainLayerText:setText(terrainLayer.title)
+
+        self.terrainLayerButton:setDisabled(#spec.modesInput == 0)
+    end
+end
+
+---@param vehicle Machine | nil
+function MachineSettingsFrame:updateDischargeTerrainLayer(vehicle)
+    if vehicle == nil or vehicle == self.target.vehicle then
+        ---@type SpecializationProperties
+        local spec = self.target.vehicle.spec_machine
+
+        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
+
+        self.dischargeTerrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+        self.dischargeTerrainLayerText:setText(terrainLayer.title)
+
+        self.dischargeTerrainLayerButton:setDisabled(#spec.modesOutput == 0)
     end
 end
 
@@ -266,5 +289,21 @@ end
 function MachineSettingsFrame:selectTerrainLayerCallback(terrainLayerId)
     if self.target.vehicle ~= nil and terrainLayerId ~= nil then
         self.target.vehicle:setMachineTerrainLayerId(terrainLayerId)
+    end
+end
+
+function MachineSettingsFrame:onClickSelectDischargeTerrainLayer()
+    if self.target.vehicle ~= nil then
+        local spec = self.target.vehicle.spec_machine
+
+        g_selectTerrainLayerDialog:setSelectCallback(self.selectDischargeTerrainLayerCallback, self)
+        g_selectTerrainLayerDialog:show(spec.dischargeTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
+    end
+end
+
+---@param terrainLayerId number | nil
+function MachineSettingsFrame:selectDischargeTerrainLayerCallback(terrainLayerId)
+    if self.target.vehicle ~= nil and terrainLayerId ~= nil then
+        self.target.vehicle:setMachineDischargeTerrainLayerId(terrainLayerId)
     end
 end

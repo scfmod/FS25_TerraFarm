@@ -42,6 +42,8 @@ local function registerMachineFunctions(vehicle)
 
     vehicle['setMachineTerrainLayerId'] = Machine.setMachineTerrainLayerId
     vehicle['getMachineTerrainLayerId'] = Machine.getMachineTerrainLayerId
+    vehicle['setMachineDischargeTerrainLayerId'] = Machine.setMachineDischargeTerrainLayerId
+    vehicle['getMachineDischargeTerrainLayerId'] = Machine.getMachineDischargeTerrainLayerId
 
     vehicle['getCanAccessMachine'] = Machine.getCanAccessMachine
     vehicle['getCanActivateMachine'] = Machine.getCanActivateMachine

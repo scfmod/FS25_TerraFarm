@@ -11,7 +11,7 @@
             <Bitmap profile="tfHud_itemBar" />
             <Bitmap profile="tfHud_itemModeImage" id="inputImage" />
             <Text profile="tfHud_itemTitle" id="inputTitle" text="$l10n_ui_terraform" />
-            <Text profile="tfHud_itemText" id="inputText" />
+            <Text profile="tfHud_itemDescription" id="inputText" />
         </Bitmap>
 
         <Bitmap profile="tfHud_item" id="outputItem">
@@ -30,7 +30,15 @@
         <Bitmap profile="tfHud_item" id="textureItem">
             <Bitmap profile="tfHud_itemBar" />
             <TerrainLayer profile="tfHud_itemImage" id="textureImage" />
-            <Text profile="tfHud_itemText" id="textureText" />
+            <Text profile="tfHud_itemTitle" text="$l10n_ui_terraform" />
+            <Text profile="tfHud_itemDescription" id="textureText" />
+        </Bitmap>
+
+        <Bitmap profile="tfHud_item" id="dischargeTextureItem">
+            <Bitmap profile="tfHud_itemBar" />
+            <TerrainLayer profile="tfHud_itemImage" id="dischargeTextureImage" />
+            <Text profile="tfHud_itemTitle" text="$l10n_ui_discharge" />
+            <Text profile="tfHud_itemDescription" id="dischargeTextureText" />
         </Bitmap>
 
         <Bitmap profile="tfHud_item" id="surveyorItem">

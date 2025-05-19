@@ -7,6 +7,7 @@ source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineResour
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineStateEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineSurveyorEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineTerrainLayerEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineDischargeTerrainLayerEvent.lua')
 
 ---@class Machine : Vehicle, FillUnit, FillVolume, TurnOnVehicle, Cylindered, Enterable, Dischargeable, Shovel
 ---@field spec_attachable AttachableSpecialization
@@ -58,6 +59,7 @@ Machine.L10N_ACTION_TOGGLE_OUTPUT = g_i18n:getText('ui_machineToggleOutput')
 Machine.L10N_ACTION_MACHINE_SETTINGS = g_i18n:getText('ui_machineSettings')
 Machine.L10N_ACTION_SELECT_MATERIAL = g_i18n:getText('ui_changeMaterial')
 Machine.L10N_ACTION_SELECT_GROUND_TEXTURE = g_i18n:getText('ui_changeTexture')
+Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE = g_i18n:getText('ui_changeDischargeTexture')
 Machine.L10N_ACTION_SELECT_SURVEYOR = g_i18n:getText('ui_selectSurveyor')
 Machine.L10N_ACTION_GLOBAL_SETTINGS = g_i18n:getText('ui_globalSettings')
 Machine.L10N_ACTION_TOGGLE_HUD = g_i18n:getText('ui_toggleHud')
@@ -68,6 +70,7 @@ Machine.ACTION_TOGGLE_OUTPUT = 'MACHINE_TOGGLE_OUTPUT'
 Machine.ACTION_SETTINGS = 'MACHINE_SETTINGS'
 Machine.ACTION_SELECT_MATERIAL = 'MACHINE_SELECT_MATERIAL'
 Machine.ACTION_SELECT_TEXTURE = 'MACHINE_SELECT_TEXTURE'
+Machine.ACTION_SELECT_DISCHARGE_TEXTURE = 'MACHINE_SELECT_DISCHARGE_TEXTURE'
 Machine.ACTION_SELECT_SURVEYOR = 'MACHINE_SELECT_SURVEYOR'
 Machine.ACTION_GLOBAL_SETTINGS = 'MACHINE_GLOBAL_SETTINGS'
 Machine.ACTION_TOGGLE_HUD = 'MACHINE_TOGGLE_HUD'
@@ -145,6 +148,7 @@ function Machine.registerSavegameXMLPaths(schema, key)
     schema:register(XMLValueType.STRING, key .. '#surveyorId')
     schema:register(XMLValueType.STRING, key .. '#fillType')
     schema:register(XMLValueType.STRING, key .. '#terrainLayer')
+    schema:register(XMLValueType.STRING, key .. '#dischargeTerrainLayer')
     schema:register(XMLValueType.STRING, key .. '#inputMode')
     schema:register(XMLValueType.STRING, key .. '#outputMode')
 
@@ -196,6 +200,9 @@ function Machine.registerFunctions(vehicleType)
 
     SpecializationUtil.registerFunction(vehicleType, 'setMachineTerrainLayerId', Machine.setMachineTerrainLayerId)
     SpecializationUtil.registerFunction(vehicleType, 'getMachineTerrainLayerId', Machine.getMachineTerrainLayerId)
+
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineDischargeTerrainLayerId', Machine.setMachineDischargeTerrainLayerId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineDichargeTerrainLayerId', Machine.getMachineDischargeTerrainLayerId)
 
     SpecializationUtil.registerFunction(vehicleType, 'getCanAccessMachine', Machine.getCanAccessMachine)
     SpecializationUtil.registerFunction(vehicleType, 'getCanActivateMachine', Machine.getCanActivateMachine)
@@ -307,6 +314,7 @@ function Machine:onLoad()
     spec.outputMode = Machine.MODE.MATERIAL
 
     spec.terrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
+    spec.dischargeTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
     spec.fillTypeIndex = g_resourceManager:getDefaultFillTypeIndex()
 
     spec.hasAttachable = SpecializationUtil.hasSpecialization(Attachable, self.specializations)
@@ -562,6 +570,14 @@ function Machine:saveToXMLFile(xmlFile, key)
         end
     end
 
+    if spec.dischargeTerrainLayerId ~= nil then
+        local layerName = getTerrainLayerName(g_terrainNode, spec.dischargeTerrainLayerId)
+
+        if layerName ~= nil then
+            xmlFile:setValue(key .. '#dischargeTerrainLayer', layerName)
+        end
+    end
+
     spec.state:saveToXMLFile(xmlFile, key .. '.state')
 end
 
@@ -604,6 +620,16 @@ function Machine:loadFromXMLFile(xmlFile, key)
 
         if layer ~= nil then
             self:setMachineTerrainLayerId(layer.id, true)
+        end
+    end
+
+    local dischargeTerrainLayerName = xmlFile:getValue(key .. '#dischargeTerrainLayer')
+
+    if dischargeTerrainLayerName ~= nil then
+        local layer = g_resourceManager:getTerrainLayerByName(dischargeTerrainLayerName)
+
+        if layer ~= nil then
+            self:setMachineDischargeTerrainLayerId(layer.id, true)
         end
     end
 
@@ -780,6 +806,26 @@ end
 ---@nodiscard
 function Machine:getMachineTerrainLayerId()
     return self.spec_machine.terrainLayerId
+end
+
+---@param terrainLayerId number
+---@param noEventSend boolean | nil
+function Machine:setMachineDischargeTerrainLayerId(terrainLayerId, noEventSend)
+    local spec = self.spec_machine
+
+    if spec.dischargeTerrainLayerId ~= terrainLayerId then
+        SetMachineDischargeTerrainLayerEvent.sendEvent(self, terrainLayerId, noEventSend)
+
+        spec.dischargeTerrainLayerId = terrainLayerId
+
+        g_messageCenter:publish(SetMachineDischargeTerrainLayerEvent, self, terrainLayerId)
+    end
+end
+
+---@return number
+---@nodiscard
+function Machine:getMachineDischargeTerrainLayerId()
+    return self.spec_machine.dischargeTerrainLayerId
 end
 
 ---@param isActive boolean
@@ -1152,6 +1198,7 @@ function Machine:onWriteStream(streamId, connection)
         streamWriteUIntN(streamId, spec.outputMode, Machine.NUM_BITS_MODE)
         streamWriteUIntN(streamId, spec.fillTypeIndex or 0, FillTypeManager.SEND_NUM_BITS)
         streamWriteUIntN(streamId, spec.terrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
+        streamWriteUIntN(streamId, spec.dischargeTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
 
         spec.state:writeStream(streamId, connection)
     end
@@ -1178,6 +1225,7 @@ function Machine:onReadStream(streamId, connection)
         self:setOutputMode(streamReadUIntN(streamId, Machine.NUM_BITS_MODE), true)
         self:setMachineFillTypeIndex(streamReadUIntN(streamId, FillTypeManager.SEND_NUM_BITS), true)
         self:setMachineTerrainLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
+        self:setMachineDischargeTerrainLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
 
         spec.state:readStream(streamId, connection)
     end
@@ -1281,6 +1329,15 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectTerrainLayer, false, true, false, true)
 
             g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_GROUND_TEXTURE)
+            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+        end
+
+        action = InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]
+
+        if action ~= nil then
+            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectDischargeTerrainLayer, false, true, false, true)
+
+            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE)
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
         end
 
@@ -1392,6 +1449,16 @@ function Machine:updateActionEvents()
             end
         end
 
+        action = InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]
+
+        if action ~= nil then
+            local event = spec.actionEvents[action]
+
+            if event ~= nil then
+                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
+            end
+        end
+
         action = InputAction[Machine.ACTION_SELECT_SURVEYOR]
 
         if action ~= nil then
@@ -1487,6 +1554,20 @@ end
 function Machine:selectTerrainLayerCallback(terrainLayerId)
     if terrainLayerId ~= nil then
         self:setMachineTerrainLayerId(terrainLayerId)
+    end
+end
+
+function Machine:actionEventSelectDischargeTerrainLayer()
+    local spec = self.spec_machine
+
+    g_selectTerrainLayerDialog:setSelectCallback(Machine.selectDischargeTerrainLayerCallback, self)
+    g_selectTerrainLayerDialog:show(spec.dischargeTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
+end
+
+---@param terrainLayerId number | nil
+function Machine:selectDischargeTerrainLayerCallback(terrainLayerId)
+    if terrainLayerId ~= nil then
+        self:setMachineDischargeTerrainLayerId(terrainLayerId)
     end
 end
 

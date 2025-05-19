@@ -19,6 +19,7 @@ function LandscapingFlattenDischarge.new(workArea, targetY, litersToDrop, fillTy
     self.droppedLiters = 0
     self.litersToDrop = litersToDrop
     self.fillType = g_fillTypeManager:getFillTypeByIndex(fillTypeIndex)
+    self.terrainLayerId = self.vehicle.spec_machine.dischargeTerrainLayerId or 0
 
     self.heightChangeAmount = 0.75
 
