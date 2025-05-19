@@ -8,6 +8,7 @@
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Çıkış modunu değiştir" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Materyal diyaloğunu aç" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Zemin dokusu iletişim kutusunu aç" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Haritacı diyaloğunu aç" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Genel ayarlar iletişim kutusunu aç" />
         <text name="input_MACHINE_TOGGLE_HUD" text="HUD görünürlüğünü değiştir" />
@@ -23,8 +24,10 @@
         <text name="ui_materialSettings" text="Malzeme ayarları" />
         <text name="ui_material" text="Malzeme" />
         <text name="ui_texture" text="Texture" />
+        <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Malzemeyi değiştir" />
         <text name="ui_changeTexture" text="Texture değiştir" />
+        <text name="ui_changeDischargeTexture" text="Change discharge texture" />
         <text name="ui_circle" text="Daire" />
         <text name="ui_square" text="Kare" />
         <text name="ui_terrainDeformation" text="Arazi deformasyonu" />

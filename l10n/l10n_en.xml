@@ -8,6 +8,7 @@
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Toggle output mode" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Open material dialog" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Open ground texture dialog" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Open surveyor dialog" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Open global settings dialog" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Toggle HUD visibility" />
@@ -23,8 +24,10 @@
         <text name="ui_materialSettings" text="Material settings" />
         <text name="ui_material" text="Material" />
         <text name="ui_texture" text="Texture" />
+        <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Change material" />
         <text name="ui_changeTexture" text="Change texture" />
+        <text name="ui_changeDischargeTexture" text="Change discharge texture" />
         <text name="ui_circle" text="Circle" />
         <text name="ui_square" text="Square" />
         <text name="ui_terrainDeformation" text="Terrain deformation" />

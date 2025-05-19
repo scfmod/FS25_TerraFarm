@@ -8,6 +8,7 @@
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Alternar modo de saída" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir o diálogo de material" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir o diálogo de textura do solo" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Abrir o diálogo do agrimensor" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir o diálogo de configurações globais" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Alternar a visibilidade do HUD" />
@@ -23,8 +24,10 @@
         <text name="ui_materialSettings" text="Configurações de material" />
         <text name="ui_material" text="Material" />
         <text name="ui_texture" text="Textura" />
+        <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Mudar material" />
         <text name="ui_changeTexture" text="Mudar textura" />
+        <text name="ui_changeDischargeTexture" text="Change discharge texture" />
         <text name="ui_circle" text="Círculo" />
         <text name="ui_square" text="Quadrado" />
         <text name="ui_terrainDeformation" text="Deformação de terreno" />

@@ -8,6 +8,7 @@
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Cambiar modo de descarga" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir diálogo de material" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir cuadro de diálogo de textura de suelo" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Abrir el cuadro de diálogo del topógrafo" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir el cuadro de diálogo de configuración global" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Activar o desactivar la visibilidad del HUD" />
@@ -23,8 +24,10 @@
         <text name="ui_materialSettings" text="Configuraciones de materiales" />
         <text name="ui_material" text="Material" />
         <text name="ui_texture" text="Textura" />
+        <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Cambiar material" />
         <text name="ui_changeTexture" text="Cambiar textura" />
+        <text name="ui_changeDischargeTexture" text="Change discharge texture" />
         <text name="ui_circle" text="Círculo" />
         <text name="ui_square" text="Cuadrado" />
         <text name="ui_terrainDeformation" text="Deformación del terreno" />
