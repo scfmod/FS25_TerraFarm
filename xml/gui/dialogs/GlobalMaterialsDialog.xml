@@ -75,7 +75,7 @@
             </GuiElement>
         </GuiElement>
 
-        <BoxLayout profile="fs25_dialogButtonBox">
+        <BoxLayout profile="fs25_dialogButtonBox" id="buttonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
             <Bitmap profile="fs25_dialogButtonBoxSeparator" />
             <Button id="actionButton" profile="buttonActivate" text="$l10n_ui_disable" onClick="onClickAction" />

@@ -7,6 +7,7 @@
 ---@field disabledItems FillTypeObject[]
 ---@field applyButton ButtonElement
 ---@field actionButton ButtonElement
+---@field buttonBox BoxLayoutElement
 ---
 ---@field superClass fun(): MessageDialog
 GlobalMaterialsDialog = {}
@@ -236,7 +237,7 @@ function GlobalMaterialsDialog:updateActionButtons()
         self.actionButton:setVisible(false)
     end
 
-    -- self.buttonBox:invalidateLayout()
+    self.buttonBox:invalidateLayout()
 end
 
 function GlobalMaterialsDialog:onClickAction()
