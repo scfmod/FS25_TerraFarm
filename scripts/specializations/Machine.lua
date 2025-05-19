@@ -1445,7 +1445,7 @@ function Machine:updateActionEvents()
             local event = spec.actionEvents[action]
 
             if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
+                g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesInput > 0 and isActive and (canActivate or hasAccess))
             end
         end
 
@@ -1455,7 +1455,7 @@ function Machine:updateActionEvents()
             local event = spec.actionEvents[action]
 
             if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
+                g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesOutput > 0 and isActive and (canActivate or hasAccess))
             end
         end
 
