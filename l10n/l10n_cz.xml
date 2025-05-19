@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<l10n>
+    <translationContributors>SniperKittenCZ</translationContributors>
+    <texts>
+        <!-- Input bindings -->
+        <text name="input_MACHINE_SETTINGS" text="Otevřít dialog nastavení stroje" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Přepnout aktivaci stroje" />
+        <text name="input_MACHINE_TOGGLE_INPUT" text="Přepnout režim vstupu" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Přepnout režim výstupu" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Otevřít dialog materiálu" />
+        <text name="input_MACHINE_SELECT_TEXTURE" text="Otevřít dialog textury terénu" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Otevřít dialog textury výsypu" />
+        <text name="input_MACHINE_SELECT_SURVEYOR" text="Otevřít dialog zaměřovače" />
+        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Otevřít dialog globálních nastavení" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="Přepnout viditelnost HUD" />
+
+        <!-- Generic texts-->
+        <text name="ui_mode" text="Režim" />
+        <text name="ui_enable" text="Povolit" />
+        <text name="ui_enabled" text="Povoleno" />
+        <text name="ui_disable" text="Zakázat" />
+        <text name="ui_disabled" text="Zakázáno" />
+        <text name="ui_toggleHud" text="Přepnout HUD" />
+        <text name="ui_globalSettings" text="Globální nastavení" />
+        <text name="ui_materialSettings" text="Nastavení materiálu" />
+        <text name="ui_material" text="Materiál" />
+        <text name="ui_texture" text="Textura" />
+        <text name="ui_dischargeTexture" text="Textura výsypu" />
+        <text name="ui_changeMaterial" text="Změnit materiál" />
+        <text name="ui_changeTexture" text="Změnit texturu" />
+        <text name="ui_changeDischargeTexture" text="Změnit texturu výsypu" />
+        <text name="ui_circle" text="Kruh" />
+        <text name="ui_square" text="Čtverec" />
+        <text name="ui_terrainDeformation" text="Deformace terénu" />
+        <text name="ui_enableHud" text="Povolit HUD" />
+        <text name="ui_machines" text="Stroje" />
+        <text name="ui_machinesEmpty" text="Žádné dostupné stroje nenalezeny" />
+        <text name="ui_surveyors" text="Zaměřovače" />
+        <text name="ui_surveyorsEmpty" text="Žádné dostupné zaměřovače nenalezeny" />
+        <text name="ui_angleFormat" text="Úhel: %.2f" tag="format" />
+        <text name="ui_distanceFormat" text="%.0f m" tag="format" />
+        <text name="ui_copySettings" text="Kopírovat nastavení" />
+        <text name="ui_copySettingsTooltip" text="Kopírovat nastavení stroje z jiného vozidla" />
+        <text name="ui_areaModifiers" text="Modifikátory oblasti" />
+        <text name="ui_postDeformation" text="Po deformaci" />
+        <text name="ui_operator" text="Operátor" />
+        <text name="ui_angle" text="Úhel" />
+        <text name="ui_startOffset" text="Počáteční posun" />
+        <text name="ui_targetOffset" text="Cílový posun" />
+
+        <!-- Machine texts -->
+        <text name="ui_machineSettings" text="Nastavení stroje" />
+        <text name="ui_machineActivate" text="Aktivovat stroj" />
+        <text name="ui_machineDeactivate" text="Deaktivovat stroj" />
+        <text name="ui_machineToggleInput" text="Přepnout režim vstupu" />
+        <text name="ui_machineToggleOutput" text="Přepnout režim výstupu" />
+        <text name="ui_enableMachine" text="Povolit stroj" />
+        <text name="ui_enableMapResources" text="Použít zdroje mapy" />
+        <text name="ui_enableMapResourcesTooltip" text="" />
+
+        <text name="ui_modeMaterial" text="Materiál" />
+        <text name="ui_modeFlatten" text="Zarovnat" />
+        <text name="ui_modeSmooth" text="Vyhladit" />
+        <text name="ui_modeLower" text="Snížit" />
+        <text name="ui_modePaint" text="Malovat" />
+        <text name="ui_raise" text="Zvýšit" />
+
+        <text name="ui_terraform" text="Terénní úpravy" />
+        <text name="ui_discharge" text="Vysypat" />
+
+        <!-- Map resources texts -->
+        <text name="ui_mapResourcesAvailable" text="Funkce je pro tuto mapu dostupná." />
+        <text name="ui_mapResourcesNotAvailable" text="Funkce pro tuto mapu není dostupná." />
+        <text name="ui_mapResourcesDescription" text="Dostupné pouze pro mapy s implementovanou funkcí. Pokud je povoleno, bude používat materiály a vrstvy barev v různých oblastech definovaných autorem mapy. Každý stroj může tuto funkci zapnout/vypnout, pokud je povolena." />
+
+        <!-- Surveyor texts -->
+        <text name="ui_selectSurveyor" text="Vybrat zaměřovač" />
+        <text name="ui_calibrate" text="Kalibrovat" />
+        <text name="ui_calibration" text="Kalibrace" />
+        <text name="ui_calibrationDescription" text="Kalibrace umožňuje ZAROVNÁVAT pomocí kalibrovaného úhlu ze zaměřovacího zařízení." />
+        <text name="ui_calibratedAngleFormat" text="Kalibrováno: %.2f°" tag="format" />
+        <text name="ui_calibrated" text="Kalibrováno" />
+        <text name="ui_calibratedFormat" text="Kalibrováno: %.2f°" tag="format" />
+        <text name="ui_calibrateCopy" text="Kopírovat ze stroje" />
+        <text name="ui_notCalibrated" text="Nekalibrováno" />
+        <text name="ui_setTarget" text="Nastavit cíl" />
+        <text name="ui_setAngle" text="Nastavit úhel" />
+        <text name="ui_setLevel" text="Nastavit úroveň" />
+        <text name="ui_useTerrain" text="Použít terén" />
+        <text name="ui_useTerrainTooltip" text="Povolit kalibraci na terénu" />
+        <text name="ui_notAvailable" text="Není dostupné" />
+        <text name="warning_unfoldSurveyor" text="Nejprve musíte rozložit nástroj!" />
+        <text name="foldSurveyor" text="Složit zaměřovač" />
+        <text name="unfoldSurveyor" text="Rozložit zaměřovač" />
+
+        <!-- Global settings texts -->
+        <text name="ui_globalEnabled" text="Povolit TerraFarm" />
+        <text name="ui_globalDefaultEnabled" text="Povolit stroje ve výchozím nastavení" />
+        <text name="ui_mapResources" text="Zdroje mapy" />
+        <text name="ui_globalResourcesEnabled" text="Povolit zdroje mapy" />
+        <text name="ui_displayMode" text="Režim zobrazení HUD" />
+        <text name="ui_debug" text="Ladění" />
+        <text name="ui_debugNodes" text="Ladit uzly stroje" />
+        <text name="ui_debugCalibration" text="Ladit kalibraci stroje" />
+
+        <!-- Store items -->
+        <text name="storeItem_surveyor" text="PSV-2 Zaměřovač" />
+        <text name="typeDesc_surveyor" text="Zaměřovací zařízení" />
+        <text name="ui_steelStainless" text="Nerezová ocel" />
+        <text name="ui_steelGalvanized" text="Pozinkovaná ocel" />
+        <text name="displayItem_machine" text="Stroj" />
+        <text name="displayItem_surveyor" text="Zaměřovač" />
+
+        <!-- MachineState -->
+        <text name="ui_stateEnableEffects" text="Povolit vizuální efekty" />
+        <text name="ui_stateEnableEffectsTooltip" text="Dostupné pouze na podporovaném vybavení" />
+        <text name="ui_stateClearDecoArea" text="Odstranit vegetaci" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Odstranit listí a keře při terénních úpravách" />
+        <text name="ui_stateClearDensityMapHeightArea" text="Odstranit materiál" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Odstranit materiál kolem deformace terénu" />
+        <text name="ui_stateEnableInputMaterial" text="Povolit materiál" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Povolit vytváření materiálu při terénních úpravách" />
+        <text name="ui_stateEnableOutputMaterial" text="Povolit vysypání" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Povolit vysypání materiálu na zem" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Povolit malování" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Malování nových textur terénu při terénních úpravách" />
+        <text name="ui_stateRadius" text="Poloměr" />
+        <text name="ui_stateRadiusTooltip" text="" />
+        <text name="ui_stateStrength" text="Síla" />
+        <text name="ui_stateStrengthTooltip" text="" />
+        <text name="ui_stateHardness" text="Tvrdost" />
+        <text name="ui_stateHardnessTooltip" text="" />
+        <text name="ui_stateBrushShape" text="Tvar štětce deformace" />
+        <text name="ui_stateBrushShapeTooltip" text="" />
+        <text name="ui_stateEraseTireTracks" text="Odstranit stopy pneumatik" />
+        <text name="ui_stateEraseTireTracksTooltip" text="Odstraňuje stopy pneumatik při terénních úpravách" />
+        <text name="ui_stateRemoveFieldArea" text="Odstranit pole" />
+        <text name="ui_stateRemoveFieldAreaTooltip" text="Odstraňuje masku pole při terénních úpravách" />
+        <text name="ui_stateRemoveStoneArea" text="Odstranit kameny" />
+        <text name="ui_stateRemoveStoneAreaTooltip" text="Odstraňuje kameny při terénních úpravách" />
+        <text name="ui_stateRemoveWeedArea" text="Odstranit plevel" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Odstraňuje plevel při terénních úpravách" />
+        <text name="ui_stateAllowGradingUp" text="Povolit zarovnávání nahoru" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Při aktivaci se doporučuje vypnout vstup materiálu" />
+        <text name="ui_stateForceNodes" text="Vynutit uzly" />
+        <text name="ui_stateForceNodesTooltip" text="Vynutit všechny uzly, pokud je jeden nebo více aktivních" />
+        <text name="ui_statePaintRadiusModifier" text="Modifikátor poloměru malování" />
+        <text name="ui_statePaintRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifier" text="Modifikátor poloměru hustoty" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateInputRatio" text="Poměr vstupu" />
+        <text name="ui_stateInputRatioTooltip" text="" />
+
+        <!-- Machine types -->
+        <text name="machineType_compactor" text="Válec" />
+        <text name="machineType_excavator" text="Bagr" />
+        <text name="machineType_leveler" text="Grejdr" />
+        <text name="machineType_ripper" text="Hloubkový kypřič" />
+        <text name="machineType_shovel" text="Lžíce" />
+        <text name="machineType_trencher" text="Rýhovač" />
+    </texts>
+</l10n>
