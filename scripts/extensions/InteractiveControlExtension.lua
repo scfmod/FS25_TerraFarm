@@ -40,6 +40,7 @@ function InteractiveControlExtension:onModsLoaded()
             self:registerSettingsFunction(InteractiveFunctions)
             self:registerMaterialFunction(InteractiveFunctions)
             self:registerTextureFunction(InteractiveFunctions)
+            self:registerDischargeTextureFunction(InteractiveFunctions)
             self:registerSelectSurveyorFunction(InteractiveFunctions)
         end
     end
@@ -260,7 +261,7 @@ function InteractiveControlExtension:registerTextureFunction(icf)
                 isBlockedFunc = function ()
                     local vehicle = g_machineManager.activeVehicle
                     if vehicle ~= nil then
-                        return vehicle:getCanAccessMachine()
+                        return vehicle:getCanAccessMachine() and #vehicle.spec_machine.modesInput > 0
                     end
 
                     return false
@@ -268,6 +269,31 @@ function InteractiveControlExtension:registerTextureFunction(icf)
             }
         ) then
         g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_TEXTURE"')
+    end
+end
+
+---@param icf InteractiveFunctions
+function InteractiveControlExtension:registerDischargeTextureFunction(icf)
+    if icf.addFunction('MACHINE_SELECT_DISCHARGE_TEXTURE',
+            {
+                posFunc = function ()
+                    local vehicle = g_machineManager.activeVehicle
+
+                    if vehicle ~= nil then
+                        Machine.actionEventSelectDischargeTerrainLayer(vehicle)
+                    end
+                end,
+                isBlockedFunc = function ()
+                    local vehicle = g_machineManager.activeVehicle
+                    if vehicle ~= nil then
+                        return vehicle:getCanAccessMachine() and #vehicle.spec_machine.modesOutput > 0
+                    end
+
+                    return false
+                end
+            }
+        ) then
+        g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_DISCHARGE_TEXTURE"')
     end
 end
 

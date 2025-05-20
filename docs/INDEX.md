@@ -116,6 +116,7 @@ When [FS25_interactiveControl](https://www.farming-simulator.com/mod.php?mod_id=
 | MACHINE_SETTINGS | Open machine settings dialog. |
 | MACHINE_SELECT_MATERIAL | Open select material dialog. |
 | MACHINE_SELECT_TEXTURE | Open select ground texture dialog. |
+| MACHINE_SELECT_DISCHARGE_TEXTURE | Open select discharge ground texture dialog. |
 | MACHINE_SELECT_SURVEYOR | Open select surveyor dialog for calibration. Only available if machine has FLATTEN mode for input and/or output. |
 
 **NOTE**: Outside triggers are not supported.
