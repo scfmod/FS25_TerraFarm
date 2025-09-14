@@ -23,6 +23,11 @@
 ---@field hardnessOption TextInputElement
 ---@field brushShapeOption MultiTextOptionElement
 ---
+---@field enabledOptionWrapper BitmapElement
+---@field resourcesEnabledOptionWrapper BitmapElement
+---@field enableInputMaterialOptionWrapper BitmapElement
+---@field enableOutputMaterialWrapper BitmapElement
+---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsFrame = {}
 
@@ -99,10 +104,10 @@ function MachineSettingsFrame:updateMachine(vehicle)
         local hasManagePermission = MachineUtils.getPlayerHasPermission('manageRights', nil, self.target.vehicle:getOwnerFarmId())
         local resourcesAvailable = g_resourceManager:getIsActive()
 
-        self.enabledOption:setDisabled(not hasManagePermission or not g_modSettings:getIsEnabled())
+        self.enabledOptionWrapper:setDisabled(not hasManagePermission or not g_modSettings:getIsEnabled())
         self.enabledOption:setIsChecked(spec.enabled)
 
-        self.resourcesEnabledOption:setDisabled(not resourcesAvailable or not hasManagePermission)
+        self.resourcesEnabledOptionWrapper:setDisabled(not resourcesAvailable or not hasManagePermission)
         self.resourcesEnabledOption:setIsChecked(spec.resourcesEnabled)
 
         if not g_resourceManager:getIsAvailable() then
@@ -119,7 +124,7 @@ function MachineSettingsFrame:updateState(vehicle)
         local enableInput = (spec.machineType.useFillUnit and spec.hasFillUnit) or spec.machineType.id == 'ripper' or spec.machineType.id == 'excavatorRipper'
 
         self.enableInputMaterialOption:setIsChecked(spec.state.enableInputMaterial)
-        self.enableInputMaterialOption:setDisabled(not enableInput)
+        self.enableInputMaterialOptionWrapper:setDisabled(not enableInput)
 
         if not enableInput then
             self.enableInputMaterialOption.textElement:setText(g_i18n:getText('ui_notAvailable'))
@@ -128,7 +133,7 @@ function MachineSettingsFrame:updateState(vehicle)
         local enableOutput = spec.dischargeNode ~= nil
 
         self.enableOutputMaterialOption:setIsChecked(spec.state.enableOutputMaterial)
-        self.enableOutputMaterialOption:setDisabled(not enableOutput)
+        self.enableOutputMaterialWrapper:setDisabled(not enableOutput)
 
         if not enableOutput then
             self.enableOutputMaterialOption.textElement:setText(g_i18n:getText('ui_notAvailable'))

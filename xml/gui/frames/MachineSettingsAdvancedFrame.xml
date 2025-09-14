@@ -49,7 +49,7 @@
                     </TextInput>
                 </Bitmap>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="enableEffectsOptionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableEffects" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableEffectsTooltip" />
 
@@ -68,6 +68,12 @@
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateForceNodesTooltip" />
 
                     <BinaryOption id="forceNodesOption" name="forceNodes" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="drivingDirectionModeOptionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateDrivingDirectionMode" />
+                    <MultiTextOption id="drivingDirectionModeOption" onClick="onClickDrivingDirectionModeOption" profile="tfMenuFrame_multiTextOption" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateDrivingDirectionModeTooltip" />
                 </Bitmap>
 
                 <Bitmap profile="tfMenuFrame_optionWrapper">

@@ -214,6 +214,7 @@
         <position value="16px 0" />
 
         <textAutoWidth value="true" />
+        <textDisabledColor value="1 1 1 0.15" />
     </Profile>
 
     <Profile name="tfMenuFrame_optionTooltip" extends="textDefault" with="anchorMiddleLeft">
@@ -222,6 +223,7 @@
 
         <textSize value="13px" />
         <textColor value="1 1 1 0.65" />
+        <textDisabledColor value="1 1 1 0.15" />
         <textAutoWidth value="true" />
         <textMaxWidth value="424px" />
         <textMaxNumLines value="3" />

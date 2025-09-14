@@ -11,6 +11,10 @@
 ---@field allowGradingUpOption BinaryOptionElement
 ---@field forceNodesOption BinaryOptionElement
 ---@field autoDeactivateOption BinaryOptionElement
+---@field drivingDirectionModeOption MultiTextOptionElement
+---
+---@field enableEffectsOptionWrapper BitmapElement
+---@field drivingDirectionModeOptionWrapper BitmapElement
 ---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsAdvancedFrame = {}
@@ -28,6 +32,17 @@ function MachineSettingsAdvancedFrame.new(target)
     ---@cast self MachineSettingsAdvancedFrame
 
     return self
+end
+
+function MachineSettingsAdvancedFrame:onGuiSetupFinished()
+    self:superClass().onGuiSetupFinished(self)
+
+    self.drivingDirectionModeOption:setTexts({
+        g_i18n:getText('ui_forwards'),
+        g_i18n:getText('ui_backwards'),
+        g_i18n:getText('ui_both'),
+        g_i18n:getText('ui_ignore'),
+    })
 end
 
 function MachineSettingsAdvancedFrame:initialize()
@@ -76,8 +91,10 @@ function MachineSettingsAdvancedFrame:updateState(vehicle)
         self.allowGradingUpOption:setIsChecked(spec.state.allowGradingUp)
         self.forceNodesOption:setIsChecked(spec.state.forceNodes)
         self.autoDeactivateOption:setIsChecked(spec.state.autoDeactivate)
+        self.drivingDirectionModeOption:setState(spec.state.drivingDirectionMode)
 
-        self.enableEffectsOption:setDisabled(#spec.effects == 0)
+        self.enableEffectsOptionWrapper:setDisabled(#spec.effects == 0)
+        self.drivingDirectionModeOptionWrapper:setDisabled(not (spec.machineType.useDrivingDirection and #spec.modesInput > 0))
 
         if #spec.effects == 0 then
             self.enableEffectsOption.textElement:setText(g_i18n:getText('ui_notAvailable'))
@@ -126,4 +143,9 @@ function MachineSettingsAdvancedFrame:selectMachineCallback(vehicle)
         self.target.vehicle:setMachineFillTypeIndex(spec.fillTypeIndex)
         self.target.vehicle:setMachineTerrainLayerId(spec.terrainLayerId)
     end
+end
+
+function MachineSettingsAdvancedFrame:onClickDrivingDirectionModeOption(state)
+    ---@diagnostic disable-next-line: param-type-mismatch
+    MachineSettingsFrame.setStateValue(self, 'drivingDirectionMode', state)
 end

@@ -11,12 +11,12 @@
                     <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_settingsGeneral" />
                 </GuiElement>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="enabledOptionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_enableMachine" />
                     <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickEnabledOption" id="enabledOption" />
                 </Bitmap>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="resourcesEnabledOptionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_enableMapResources" />
                     <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickResourcesEnabledOption" id="resourcesEnabledOption" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_enableMapResourcesTooltip" />
@@ -35,13 +35,13 @@
                     <Text profile="tfMenuFrame_optionImageText" id="materialText" />
                 </Bitmap>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="enableInputMaterialOptionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableInputMaterial" />
                     <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" name="enableInputMaterial" id="enableInputMaterialOption" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableInputMaterialTooltip" />
                 </Bitmap>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="enableOutputMaterialWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateEnableOutputMaterial" />
                     <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" name="enableOutputMaterial" id="enableOutputMaterialOption" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateEnableOutputMaterialTooltip" />

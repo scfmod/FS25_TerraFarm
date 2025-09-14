@@ -982,7 +982,15 @@ function Machine:getIsAvailable()
     local spec = self.spec_machine
 
     if g_modSettings:getIsEnabled() and spec.enabled and spec.active and spec.inputMode ~= Machine.MODE.MATERIAL and (spec.inputMode == Machine.MODE.PAINT or not self:getIsFull()) then
-        return Machine.getDrivingDirection(self) > 0
+        if spec.state.drivingDirectionMode == DrivingDirectionMode.FORWARDS then
+            return Machine.getDrivingDirection(self) > 0
+        elseif spec.state.drivingDirectionMode == DrivingDirectionMode.BACKWARDS then
+            return Machine.getDrivingDirection(self) < 0
+        elseif spec.state.drivingDirectionMode == DrivingDirectionMode.BOTH then
+            return Machine.getDrivingDirection(self) ~= 0
+        else
+            return true
+        end
     end
 
     return false

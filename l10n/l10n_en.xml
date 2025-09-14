@@ -46,6 +46,10 @@
         <text name="ui_angle" text="Angle" />
         <text name="ui_startOffset" text="Start offset" />
         <text name="ui_targetOffset" text="Target offset" />
+        <text name="ui_forwards" text="Forwards" />
+        <text name="ui_backwards" text="Backwards" />
+        <text name="ui_both" text="Both" />
+        <text name="ui_ignore" text="Ignore" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Machine settings" />
@@ -145,6 +149,8 @@
         <text name="ui_stateForceNodesTooltip" text="Force all nodes if one or more are active" />
         <text name="ui_stateAutoDeactivate" text="Automatically deactivate" />
         <text name="ui_stateAutoDeactivateTooltip" text="Deactivate machine when player leaves vehicle" />
+        <text name="ui_stateDrivingDirectionMode" text="Active driving direction" />
+        <text name="ui_stateDrivingDirectionModeTooltip" text="Apply terraform action(s) depending on selected driving direction" />
         <text name="ui_statePaintRadiusModifier" text="Paint radius modifier" />
         <text name="ui_statePaintRadiusModifierTooltip" text="" />
         <text name="ui_stateDensityRadiusModifier" text="Density radius modifier" />
