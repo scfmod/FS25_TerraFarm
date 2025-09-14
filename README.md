@@ -2,7 +2,7 @@
 
 Tired of using the landscaping tool to carve out your land? Not satisfied with using fill types on the ground to supply your mining team? No worries, with TerraFarm you can shape your own land using the equipment of your choice.
 
-# TerraFarm 0.9 BETA
+# TerraFarm
 
 ```
 author: scfmod
