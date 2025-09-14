@@ -1127,13 +1127,17 @@ function Machine:getDrivingDirection()
 end
 
 function Machine:onLeaveVehicle()
-    if self.isServer then
+    local state = self:getMachineState()
+
+    if self.isServer and state.autoDeactivate then
         self:setMachineActive(false)
     end
 end
 
 function Machine:onLeaveRootVehicle()
-    if self.isServer then
+    local state = self:getMachineState()
+
+    if self.isServer and state.autoDeactivate then
         self:setMachineActive(false)
     end
 end

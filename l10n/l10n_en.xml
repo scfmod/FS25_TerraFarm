@@ -143,6 +143,8 @@
         <text name="ui_stateAllowGradingUpTooltip" text="Recommended to turn off material input when active" />
         <text name="ui_stateForceNodes" text="Force nodes" />
         <text name="ui_stateForceNodesTooltip" text="Force all nodes if one or more are active" />
+        <text name="ui_stateAutoDeactivate" text="Automatically deactivate" />
+        <text name="ui_stateAutoDeactivateTooltip" text="Deactivate machine when player leaves vehicle" />
         <text name="ui_statePaintRadiusModifier" text="Paint radius modifier" />
         <text name="ui_statePaintRadiusModifierTooltip" text="" />
         <text name="ui_stateDensityRadiusModifier" text="Density radius modifier" />

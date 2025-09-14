@@ -23,6 +23,7 @@
 ---@field allowGradingUp boolean
 ---@field forceNodes boolean
 ---@field inputRatio number
+---@field autoDeactivate boolean
 MachineState = {}
 
 local MachineState_mt = Class(MachineState)
@@ -53,6 +54,7 @@ function MachineState.registerSavegameXMLPaths(schema, key)
 
     schema:register(XMLValueType.BOOL, key .. '#forceNodes')
     schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
+    schema:register(XMLValueType.BOOL, key .. '#autoDeactivate')
 end
 
 ---@return MachineState
@@ -84,6 +86,7 @@ function MachineState.new()
 
     self.allowGradingUp = false
     self.forceNodes = false
+    self.autoDeactivate = true
 
     return self
 end
@@ -114,6 +117,7 @@ function MachineState:saveToXMLFile(xmlFile, key)
 
     xmlFile:setValue(key .. '#allowGradingUp', self.allowGradingUp)
     xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
+    xmlFile:setValue(key .. '#autoDeactivate', self.autoDeactivate)
 end
 
 ---@param xmlFile XMLFile
@@ -142,6 +146,7 @@ function MachineState:loadFromXMLFile(xmlFile, key)
 
     self.allowGradingUp = xmlFile:getValue(key .. '#allowGradingUp', self.allowGradingUp)
     self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
+    self.autoDeactivate = xmlFile:getValue(key .. '#autoDeactivate', self.autoDeactivate)
 end
 
 ---@return MachineState
@@ -172,6 +177,7 @@ function MachineState:clone()
 
     clone.allowGradingUp = self.allowGradingUp
     clone.forceNodes = self.forceNodes
+    clone.autoDeactivate = self.autoDeactivate
 
     return clone
 end
@@ -202,6 +208,7 @@ function MachineState:writeStream(streamId, connection)
 
     streamWriteBool(streamId, self.allowGradingUp)
     streamWriteBool(streamId, self.forceNodes)
+    streamWriteBool(streamId, self.autoDeactivate)
 end
 
 ---@param streamId number
@@ -230,4 +237,5 @@ function MachineState:readStream(streamId, connection)
 
     self.allowGradingUp = streamReadBool(streamId)
     self.forceNodes = streamReadBool(streamId)
+    self.autoDeactivate = streamReadBool(streamId)
 end

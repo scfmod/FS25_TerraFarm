@@ -10,6 +10,7 @@
 ---@field enableEffectsOption BinaryOptionElement
 ---@field allowGradingUpOption BinaryOptionElement
 ---@field forceNodesOption BinaryOptionElement
+---@field autoDeactivateOption BinaryOptionElement
 ---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsAdvancedFrame = {}
@@ -62,6 +63,7 @@ end
 ---@param vehicle Machine | nil
 function MachineSettingsAdvancedFrame:updateState(vehicle)
     if vehicle == nil or vehicle == self.target.vehicle then
+        ---@type SpecializationProperties
         local spec = self.target.vehicle.spec_machine
 
         self.paintModifierOption:setText(string.format('%.2f', spec.state.paintModifier))
@@ -70,9 +72,10 @@ function MachineSettingsAdvancedFrame:updateState(vehicle)
 
         self.inputRatioOption:setDisabled(#spec.modesInput == 0)
 
-        self.enableEffectsOption:setIsChecked(spec.state.enableEffectsOption)
+        self.enableEffectsOption:setIsChecked(spec.state.enableEffects)
         self.allowGradingUpOption:setIsChecked(spec.state.allowGradingUp)
         self.forceNodesOption:setIsChecked(spec.state.forceNodes)
+        self.autoDeactivateOption:setIsChecked(spec.state.autoDeactivate)
 
         self.enableEffectsOption:setDisabled(#spec.effects == 0)
 

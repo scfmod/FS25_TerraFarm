@@ -70,6 +70,13 @@
                     <BinaryOption id="forceNodesOption" name="forceNodes" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
                 </Bitmap>
 
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateAutoDeactivate" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateAutoDeactivateTooltip" />
+
+                    <BinaryOption id="autoDeactivateOption" name="autoDeactivate" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
                 <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
                     <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_copySettings" />
                 </GuiElement>
