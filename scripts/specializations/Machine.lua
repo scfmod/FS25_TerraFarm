@@ -1171,6 +1171,10 @@ function Machine:onStopMotor()
     local spec = self.spec_machine
 
     if self.isServer and spec.requirePoweredOn then
+        if not spec.state.autoDeactivate and g_currentMission.missionInfo.automaticMotorStartEnabled and self.getIsControlled ~= nil and not self:getIsControlled() then
+            return
+        end
+
         self:setMachineActive(false)
     end
 end
