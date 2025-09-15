@@ -44,6 +44,8 @@
 ---
 ---@field mouseCalibrationDisplay CalibrationDisplay
 ---@field calibrationDisplay CalibrationDisplay
+---
+---@field cameraTransition CameraTransition
 SurveyorScreen = {}
 
 SurveyorScreen.CLASS_NAME = 'SurveyorScreen'
@@ -55,6 +57,8 @@ SurveyorScreen.L10N_EXIT_MENU = g_i18n:getText('input_CONSTRUCTION_EXIT')
 SurveyorScreen.L10N_CANCEL_CALIBRATION = g_i18n:getText('button_cancel')
 SurveyorScreen.L10N_STATUS_CALIBRATED = g_i18n:getText('ui_calibrated')
 SurveyorScreen.L10N_STATUS_NOT_CALIBRATED = g_i18n:getText('ui_notCalibrated')
+
+SurveyorScreen.CAMERA_TRANSITION_MAX_DISTANCE = 50
 
 local SurveyorScreen_mt = Class(SurveyorScreen, ScreenElement)
 
@@ -81,6 +85,9 @@ function SurveyorScreen.new()
     self.calibrationDisplay:setColor(0.1, 0.3, 1.0)
     self.mouseCalibrationDisplay = CalibrationDisplay.new()
     self.mouseCalibrationDisplay:setColor(1.0, 0.3, 0)
+
+    self.cameraTransition = CameraTransition.new(750)
+    self.cameraTransition:setFinishedCallback(self.onEnterCameraTransitionFinished, self)
 
     self:resetPositions()
 
@@ -149,11 +156,24 @@ function SurveyorScreen:onOpen()
 
     self.camera:updatePosition()
 
-    self.camera:activate()
-    self.cursor:activate()
+    local activeCamera = g_cameraManager:getActiveCamera()
 
-    ---@diagnostic disable-next-line: undefined-field
-    g_currentMission.hud.ingameMap:setTopDownCamera(self.camera)
+    if activeCamera ~= nil then
+        self.camera:activate()
+        self.camera:deactivate()
+
+        self.cameraTransition:setFinishedCallback(self.onEnterCameraTransitionFinished, self)
+        self.cameraTransition:start(activeCamera, self.camera.camera)
+
+        ---@diagnostic disable-next-line: undefined-field
+        g_currentMission.hud.ingameMap:setTopDownCamera(self.cameraTransition)
+    else
+        self.camera:activate()
+        self.cursor:activate()
+
+        ---@diagnostic disable-next-line: undefined-field
+        g_currentMission.hud.ingameMap:setTopDownCamera(self.camera)
+    end
 
     local posY = 1 - self.menuBox.absSize[2]
 
@@ -177,6 +197,15 @@ function SurveyorScreen:onOpen()
     g_messageCenter:subscribe(SetSurveyorNameEvent, self.onSurveyorRenamed, self)
     g_messageCenter:subscribe(SetSurveyorCoordinatesEvent, self.onSurveyorChanged, self)
     g_messageCenter:subscribe(SetSurveyorSettingsEvent, self.onOffsetChanged, self)
+end
+
+function SurveyorScreen:onEnterCameraTransitionFinished()
+    self.camera:activate()
+    self.cursor:activate()
+end
+
+function SurveyorScreen:onLeaveCameraTransitionFinished()
+    g_gui:showGui(nil)
 end
 
 function SurveyorScreen:onClose()
@@ -318,11 +347,42 @@ function SurveyorScreen:setEndOffsetCallback(value, clickOk)
     end
 end
 
+---@return number
+---@nodiscard
+function SurveyorScreen:getTargetCameraDistance()
+    if self.camera.previousCamera ~= nil then
+        local sx, sy, sz = getWorldTranslation(self.camera.camera)
+        local tx, ty, tz = getWorldTranslation(self.camera.previousCamera)
+
+        return MathUtil.vector3Length(sx - tx, sy - ty, sz - tz)
+    end
+
+    return 0
+end
+
+---@param distance number
+function SurveyorScreen:closeWithTransition(distance)
+    self.cursor:deactivate()
+
+    self.cameraTransition:setFinishedCallback(self.onLeaveCameraTransitionFinished, self)
+    self.cameraTransition:start(self.camera.camera, self.camera.previousCamera)
+
+    self:updateButtons()
+end
+
 function SurveyorScreen:onButtonMenuBack()
-    if self.isCalibrating then
-        self:onClickCancel()
-    else
-        g_gui:showGui(nil)
+    if not self.cameraTransition.isActive then
+        if self.isCalibrating then
+            self:onClickCancel()
+        else
+            local distance = self:getTargetCameraDistance()
+
+            if self.camera.previousCamera == nil or distance > SurveyorScreen.CAMERA_TRANSITION_MAX_DISTANCE then
+                g_gui:showGui(nil)
+            else
+                self:closeWithTransition(distance)
+            end
+        end
     end
 end
 
@@ -553,6 +613,12 @@ function SurveyorScreen:updateShapes()
 end
 
 function SurveyorScreen:updateButtons()
+    if self.cameraTransition.isActive then
+        self.menuBox:setDisabled(true)
+    else
+        self.menuBox:setDisabled(false)
+    end
+
     self.calibrateButton:setDisabled(self.isCalibrating)
 
     local disableModifyAngle = self.isCalibrating or (self.startPosY == math.huge or self.endPosY == math.huge)

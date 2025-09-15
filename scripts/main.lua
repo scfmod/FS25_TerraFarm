@@ -51,6 +51,8 @@ source(g_currentModDirectory .. 'scripts/landscaping/LandscapingRaise.lua')
 source(g_currentModDirectory .. 'scripts/landscaping/LandscapingSmooth.lua')
 source(g_currentModDirectory .. 'scripts/landscaping/LandscapingSmoothDischarge.lua')
 
+source(g_currentModDirectory .. 'scripts/misc/CameraTransition.lua')
+
 source(g_currentModDirectory .. 'scripts/visualization/CalibrationDisplay.lua')
 source(g_currentModDirectory .. 'scripts/visualization/Shape.lua')
 source(g_currentModDirectory .. 'scripts/visualization/ShapeLine.lua')
