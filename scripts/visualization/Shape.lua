@@ -15,10 +15,10 @@ Shape.TYPE = {
 }
 
 ---@type table<ShapeType, string>
-Shape.SHAPE_FILENAME = {
-    [Shape.TYPE.ARROW] = g_modDirectory .. 'objects/arrow.i3d',
-    [Shape.TYPE.LINE] = g_modDirectory .. 'objects/shapes/lineShape.i3d',
-    [Shape.TYPE.MARKER] = g_modDirectory .. 'objects/shapes/markerShape.i3d',
+Shape.SHAPE_UNIQUEID = {
+    [Shape.TYPE.ARROW] = g_modName .. '.visArrowShape',
+    [Shape.TYPE.LINE] = g_modName .. '.visLineShape',
+    [Shape.TYPE.MARKER] = g_modName .. '.visMarkerShape',
 }
 
 local Shape_mt = Class(Shape)
@@ -93,14 +93,11 @@ function Shape:setEmission(value)
 end
 
 function Shape:load()
-    local rootNode = g_i3DManager:loadSharedI3DFile(Shape.SHAPE_FILENAME[self.type], false, false)
+    local node = g_modI3DManager:getCachedI3DNode(Shape.SHAPE_UNIQUEID[self.type])
 
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    self.node = getChildAt(rootNode, 0)
+    assert(node ~= nil, 'Shape:load() failed, node is nil')
 
-    link(getRootNode(), self.node)
-    setTranslation(self.node, 0, 0, 0)
-    delete(rootNode)
+    self.node = node
 end
 
 ---@param sx number

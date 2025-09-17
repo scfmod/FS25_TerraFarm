@@ -18,6 +18,7 @@ MessageType.SURVEYOR_REMOVED = nextMessageTypeId()
 source(g_modDirectory .. 'scripts/ModDebug.lua')
 source(g_modDirectory .. 'scripts/ModGui.lua')
 source(g_modDirectory .. 'scripts/ModHud.lua')
+source(g_modDirectory .. 'scripts/ModI3DManager.lua')
 source(g_modDirectory .. 'scripts/ModSettings.lua')
 
 source(g_modDirectory .. 'scripts/managers/MachineManager.lua')
