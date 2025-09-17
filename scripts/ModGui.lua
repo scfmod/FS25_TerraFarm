@@ -1,37 +1,36 @@
-source(g_currentModDirectory .. 'scripts/gui/dialogs/input/FloatInputDialog.lua')
-source(g_currentModDirectory .. 'scripts/gui/dialogs/input/NameInputDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/input/FloatInputDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/input/NameInputDialog.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/dialogs/SelectSurveyorDialog.lua')
-source(g_currentModDirectory .. 'scripts/gui/dialogs/SelectMachineDialog.lua')
-source(g_currentModDirectory .. 'scripts/gui/dialogs/SelectMaterialDialog.lua')
-source(g_currentModDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectSurveyorDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectMachineDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectMaterialDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
-source(g_currentModDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/frames/MachineSettingsAdvancedFrame.lua')
-source(g_currentModDirectory .. 'scripts/gui/frames/MachineSettingsCalibrationFrame.lua')
-source(g_currentModDirectory .. 'scripts/gui/frames/MachineSettingsLandscapingFrame.lua')
-source(g_currentModDirectory .. 'scripts/gui/frames/MachineSettingsFrame.lua')
-source(g_currentModDirectory .. 'scripts/gui/screens/MachineScreen.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsAdvancedFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsCalibrationFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsLandscapingFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsFrame.lua')
+source(g_modDirectory .. 'scripts/gui/screens/MachineScreen.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/screens/SurveyorCamera.lua')
-source(g_currentModDirectory .. 'scripts/gui/screens/SurveyorCursor.lua')
-source(g_currentModDirectory .. 'scripts/gui/screens/SurveyorScreen.lua')
+source(g_modDirectory .. 'scripts/gui/screens/SurveyorCamera.lua')
+source(g_modDirectory .. 'scripts/gui/screens/SurveyorCursor.lua')
+source(g_modDirectory .. 'scripts/gui/screens/SurveyorScreen.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/elements/TFBinaryOptionElement.lua')
-source(g_currentModDirectory .. 'scripts/gui/elements/TFButtonElement.lua')
-source(g_currentModDirectory .. 'scripts/gui/elements/TFTextInputElement.lua')
-source(g_currentModDirectory .. 'scripts/gui/elements/TFThreePartBitmapElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFBinaryOptionElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFButtonElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFTextInputElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFThreePartBitmapElement.lua')
 
-source(g_currentModDirectory .. 'scripts/gui/frames/InGameMenuTerraFarmFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/InGameMenuTerraFarmFrame.lua')
 
 ---@class ModGui
 ModGui = {}
 
-ModGui.MOD_SETTINGS_FOLDER = g_currentModSettingsDirectory
-ModGui.PROFILES_FILENAME = g_currentModDirectory .. 'xml/gui/guiProfiles.xml'
-ModGui.TEXTURE_CONFIG_FILENAME = g_currentModDirectory .. 'textures/ui_elements.xml'
+ModGui.PROFILES_FILENAME = g_modDirectory .. 'xml/gui/guiProfiles.xml'
+ModGui.TEXTURE_CONFIG_FILENAME = g_modDirectory .. 'textures/ui_elements.xml'
 
 local ModGui_mt = Class(ModGui)
 

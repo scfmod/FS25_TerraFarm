@@ -10,7 +10,7 @@
 SelectTerrainLayerDialog = {}
 
 SelectTerrainLayerDialog.CLASS_NAME = 'SelectTerrainLayerDialog'
-SelectTerrainLayerDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/SelectTerrainLayerDialog.xml'
+SelectTerrainLayerDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectTerrainLayerDialog.xml'
 
 local SelectTerrainLayerDialog_mt = Class(SelectTerrainLayerDialog, MessageDialog)
 

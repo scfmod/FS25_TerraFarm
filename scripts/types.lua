@@ -1,5 +1,11 @@
 ---@meta
 
+g_modName = ''
+g_modDirectory = ''
+g_modDirectorySettings = ''
+g_previewMaskFilename = ''
+g_gameVersion = 0
+
 ---@class Array<T>: { [integer]: T }
 
 ---@class Theme
@@ -21,13 +27,6 @@
 ---@field useFillUnit boolean
 ---@field useLeveler boolean
 ---@field useShovel boolean
-
----@class FillUnitObject
----@field fillUnitIndex number
----@field capacity number
----@field fillLevel number
----@field fillType number
----@field lastValidFillType number
 
 ---@class SavegameObject
 ---@field key string

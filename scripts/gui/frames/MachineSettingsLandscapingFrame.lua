@@ -13,7 +13,7 @@
 MachineSettingsLandscapingFrame = {}
 
 MachineSettingsLandscapingFrame.CLASS_NAME = 'MachineSettingsLandscapingFrame'
-MachineSettingsLandscapingFrame.XML_FILENAME = g_currentModDirectory .. 'xml/gui/frames/MachineSettingsLandscapingFrame.xml'
+MachineSettingsLandscapingFrame.XML_FILENAME = g_modDirectory .. 'xml/gui/frames/MachineSettingsLandscapingFrame.xml'
 
 local MachineSettingsLandscapingFrame_mt = Class(MachineSettingsLandscapingFrame, TabbedMenuFrameElement)
 

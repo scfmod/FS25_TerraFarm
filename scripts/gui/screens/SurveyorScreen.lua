@@ -49,7 +49,7 @@
 SurveyorScreen = {}
 
 SurveyorScreen.CLASS_NAME = 'SurveyorScreen'
-SurveyorScreen.XML_FILENAME = g_currentModDirectory .. 'xml/gui/screens/SurveyorScreen.xml'
+SurveyorScreen.XML_FILENAME = g_modDirectory .. 'xml/gui/screens/SurveyorScreen.xml'
 SurveyorScreen.INPUT_CONTEXT = 'SURVEYOR_SCREEN'
 
 SurveyorScreen.L10N_TARGET_POSITION = g_i18n:getText('ui_setTarget')
@@ -784,52 +784,4 @@ function SurveyorScreen:drawCursorCalibration()
         self.lineEnd:setIsVisible(true)
         self.lineEnd:setPosition(endPosX, terrainEndY, endPosZ, endPosX, endPosY + self.endOffset, endPosZ)
     end
-
-
-    -- local dx, _, dz, distance = MachineUtils.getVector3Direction(startPosX, startPosY, startPosZ, endPosX, terrainPosY, endPosZ)
-    -- local rotY = math.atan2(dx, dz)
-    -- local dy = terrainPosY - startPosY
-    -- local dist2D = MathUtil.vector2Length(endPosX - startPosX, endPosZ - startPosZ)
-    -- local rotX = -math.atan2(dy, dist2D)
-
-    -- setScale(self.cursorLine, 1, 1, distance)
-    -- setRotation(self.cursorLine, rotX, rotY, 0)
-
-    -- if self.vehicle ~= nil then
-    --     local startPosX, startPosY, startPosZ = MachineUtils.getVehicleTerrainHeight(self.vehicle)
-    --     local endPosX, endPosY, endPosZ = self.cursor.currentHitX, self.cursor.currentHitY, self.cursor.currentHitZ
-    --     local distance = MachineUtils.getVector3Distance(startPosX, startPosY, startPosZ, endPosX, endPosY, endPosZ)
-    --     local offsetY = self.vehicle.spec_surveyor.offsetY
-
-    --     if distance < 2 then
-    --         return
-    --     end
-
-    --     ---@type Vehicle | nil
-    --     local hitVehicle = nil
-
-    --     if self.cursor.currentHitId ~= g_terrainNode then
-    --         hitVehicle = self.cursor:getHitVehicle()
-
-    --         if hitVehicle ~= nil then
-    --             endPosX, endPosY, endPosZ = MachineUtils.getVehicleTerrainHeight(hitVehicle)
-    --         else
-    --             return
-    --         end
-    --     elseif not self.useTerrain then
-    --         return
-    --     end
-
-    --     g_machineDebug:drawCalibration(startPosX, startPosY, startPosZ, self.startOffset, endPosX, endPosY, endPosZ, self.endOffset, offsetY, true)
-
-    --     if hitVehicle ~= nil then
-    --         Utils.renderTextAtWorldPosition(endPosX, endPosY + 2, endPosZ, hitVehicle:getFullName(), 0.016)
-    --     end
-
-    --     local textPosX, textPosY = self.cursor.mousePosX, self.cursor.mousePosY + 0.02
-    --     local angle = MachineUtils.getAngleBetweenPoints(startPosX, startPosY, startPosZ, endPosX, endPosY, endPosZ)
-
-    --     setTextBold(false)
-    --     renderText(textPosX, textPosY, 0.014, string.format('Angle: %.2f', angle))
-    -- end
 end

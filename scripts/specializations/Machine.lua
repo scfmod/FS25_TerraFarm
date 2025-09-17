@@ -20,9 +20,6 @@ source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineDischa
 Machine = {}
 
 Machine.MOD_NAME = g_currentModName
-Machine.MOD_FOLDER = g_currentModDirectory
-Machine.MOD_SETTINGS_FOLDER = g_currentModSettingsDirectory
-Machine.MOD_CONFIGURATIONS_FILE = g_currentModDirectory .. 'xml/machines/index.xml'
 Machine.SPEC_NAME = string.format('spec_%s.machine', g_currentModName)
 Machine.DEFAULT_FILLTYPE = 'STONE'
 Machine.DEFAULT_TERRAIN_LAYERS = {

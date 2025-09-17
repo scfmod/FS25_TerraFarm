@@ -6,7 +6,7 @@
 SelectMaterialDialog = {}
 
 SelectMaterialDialog.CLASS_NAME = 'SelectMaterialDialog'
-SelectMaterialDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/SelectMaterialDialog.xml'
+SelectMaterialDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectMaterialDialog.xml'
 
 local SelectMaterialDialog_mt = Class(SelectMaterialDialog, MessageDialog)
 

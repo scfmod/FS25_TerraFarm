@@ -32,7 +32,7 @@
 MachineSettingsFrame = {}
 
 MachineSettingsFrame.CLASS_NAME = 'MachineSettingsFrame'
-MachineSettingsFrame.XML_FILENAME = g_currentModDirectory .. 'xml/gui/frames/MachineSettingsFrame.xml'
+MachineSettingsFrame.XML_FILENAME = g_modDirectory .. 'xml/gui/frames/MachineSettingsFrame.xml'
 
 local MachineSettingsFrame_mt = Class(MachineSettingsFrame, TabbedMenuFrameElement)
 

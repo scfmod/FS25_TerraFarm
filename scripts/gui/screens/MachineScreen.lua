@@ -3,7 +3,7 @@
 MachineScreen = {}
 
 MachineScreen.CLASS_NAME = 'MachineScreen'
-MachineScreen.XML_FILENAME = g_currentModDirectory .. 'xml/gui/screens/MachineScreen.xml'
+MachineScreen.XML_FILENAME = g_modDirectory .. 'xml/gui/screens/MachineScreen.xml'
 
 local MachineScreen_mt = Class(MachineScreen, TabbedMenuWithDetails)
 

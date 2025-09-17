@@ -7,6 +7,8 @@
 ---@field displayWarning boolean
 MachineManager = {}
 
+MachineManager.CONFIGURATIONS_FILE = g_modDirectory .. 'xml/machines/index.xml'
+
 local MachineManager_mt = Class(MachineManager)
 
 ---@return MachineManager
@@ -191,7 +193,7 @@ function MachineManager:loadConfigurationsFromXMLFile(xmlFilename, modEnv)
 end
 
 function MachineManager:loadInternalConfigurations()
-    self:loadConfigurationsFromXMLFile(Machine.MOD_CONFIGURATIONS_FILE, Machine.MOD_NAME)
+    self:loadConfigurationsFromXMLFile(MachineManager.CONFIGURATIONS_FILE, g_modName)
 end
 
 function MachineManager:loadModsConfigurations()
@@ -199,7 +201,7 @@ function MachineManager:loadModsConfigurations()
     local mods = g_modManager:getActiveMods()
 
     for _, mod in ipairs(mods) do
-        if mod.modName ~= Machine.MOD_NAME then
+        if mod.modName ~= g_modName then
             ---@type string | nil
             local xmlFilename
 
@@ -230,7 +232,7 @@ function MachineManager:onModsLoaded()
     self:loadInternalConfigurations()
     self:loadModsConfigurations()
 
-    self.displayWarning = g_client ~= nil and Machine.MOD_NAME ~= 'FS25_0_TerraFarm'
+    self.displayWarning = g_client ~= nil and g_modName ~= 'FS25_0_TerraFarm'
 end
 
 function MachineManager:consoleReloadConfigurations()

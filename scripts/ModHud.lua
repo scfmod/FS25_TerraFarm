@@ -1,4 +1,4 @@
-source(g_currentModDirectory .. 'scripts/hud/elements/HUDMachineDisplayElement.lua')
+source(g_modDirectory .. 'scripts/hud/elements/HUDMachineDisplayElement.lua')
 
 ---@class ModHud
 ---@field vehicle Machine | nil
@@ -6,7 +6,7 @@ source(g_currentModDirectory .. 'scripts/hud/elements/HUDMachineDisplayElement.l
 ---@field display HUDMachineDisplayElement
 ModHud = {}
 
-ModHud.XML_FILENAME = g_currentModDirectory .. 'xml/gui/hud/MachineHUD.xml'
+ModHud.XML_FILENAME = g_modDirectory .. 'xml/gui/hud/MachineHUD.xml'
 
 local ModHud_mt = Class(ModHud)
 

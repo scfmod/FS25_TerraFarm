@@ -13,7 +13,7 @@
 SelectMachineDialog = {}
 
 SelectMachineDialog.CLASS_NAME = 'SelectMachineDialog'
-SelectMachineDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/SelectMachineDialog.xml'
+SelectMachineDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectMachineDialog.xml'
 
 local SelectMachineDialog_mt = Class(SelectMachineDialog, MessageDialog)
 

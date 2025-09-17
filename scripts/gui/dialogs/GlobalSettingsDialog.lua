@@ -13,7 +13,7 @@
 GlobalSettingsDialog = {}
 
 GlobalSettingsDialog.CLASS_NAME = 'GlobalSettingsDialog'
-GlobalSettingsDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/GlobalSettingsDialog.xml'
+GlobalSettingsDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/GlobalSettingsDialog.xml'
 
 GlobalSettingsDialog.L10N_FEATURE_AVAILABLE = g_i18n:getText('ui_mapResourcesAvailable')
 GlobalSettingsDialog.L10N_FEATURE_NOT_AVAILABLE = g_i18n:getText('ui_mapResourcesNotAvailable')
@@ -52,8 +52,6 @@ function GlobalSettingsDialog:onOpen()
 
     self:updateSettings()
     self:updateMenuButtons()
-
-    -- self.boxLayout:invalidateLayout()
 
     local focusedElement = FocusManager:getFocusedElement()
 

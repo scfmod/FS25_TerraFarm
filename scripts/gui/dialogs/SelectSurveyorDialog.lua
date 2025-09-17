@@ -15,7 +15,7 @@
 SelectSurveyorDialog = {}
 
 SelectSurveyorDialog.CLASS_NAME = 'SelectSurveyorDialog'
-SelectSurveyorDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/SelectSurveyorDialog.xml'
+SelectSurveyorDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectSurveyorDialog.xml'
 
 local SelectSurveyorDialog_mt = Class(SelectSurveyorDialog, MessageDialog)
 

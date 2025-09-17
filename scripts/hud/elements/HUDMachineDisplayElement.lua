@@ -119,9 +119,6 @@ function HUDMachineDisplayElement:loadFromXMLFile(xmlFile, key)
         end
     end
 
-    -- self.inputImage:setImageFilename(g_machineUIFilename)
-    -- self.outputImage:setImageFilename(g_machineUIFilename)
-
     self.elements = {}
 end
 
@@ -154,25 +151,6 @@ function HUDMachineDisplayElement:loadHUDElements(xmlFile, xmlKey, parent)
 
         self:onCreateElement(element)
     end
-    -- xmlFile:iterate(xmlKey .. '.HudElement', function(_, key)
-    --     local typeName = xmlFile:getString(key .. '#type', 'empty')
-    --     local class = Gui.CONFIGURATION_CLASS_MAPPING[typeName] or GuiElement
-    --     ---@type GuiElement
-    --     local element = class.new()
-    --     local profile = xmlFile:getString(key .. '#profile')
-
-    --     element.handleFocus = false
-    --     element.soundDisabled = true
-
-    --     element:loadFromXML(xmlFile.handle, key)
-    --     element:applyProfile(profile)
-
-    --     parent:addElement(element)
-
-    --     self:loadHUDElements(xmlFile, key, element)
-
-    --     self:onCreateElement(element)
-    -- end)
 end
 
 ---@param element GuiElement

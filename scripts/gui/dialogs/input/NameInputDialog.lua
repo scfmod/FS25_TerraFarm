@@ -11,7 +11,7 @@
 NameInputDialog = {}
 
 NameInputDialog.CLASS_NAME = 'NameInputDialog'
-NameInputDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/TextInputDialog.xml'
+NameInputDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/TextInputDialog.xml'
 
 local NameInputDialog_mt = Class(NameInputDialog, TextInputDialog)
 

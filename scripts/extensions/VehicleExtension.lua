@@ -127,7 +127,7 @@ local function inj_Vehicle_load(vehicle, superFunc, vehicleData, ...)
     local specEntryName = Machine.SPEC_NAME
 
     if vehicle[specEntryName] == nil then
-        local specName = Machine.MOD_NAME .. '.machine'
+        local specName = g_modName .. '.machine'
         local spec = g_specializationManager:getSpecializationObjectByName(specName)
 
         if spec ~= nil then

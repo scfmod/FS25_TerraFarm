@@ -14,9 +14,8 @@ InGameMenuTerraFarmFrame = {}
 
 InGameMenuTerraFarmFrame.CLASS_NAME = 'InGameMenuTerraFarmFrame'
 InGameMenuTerraFarmFrame.MENU_PAGE_NAME = 'ingameMenuTerraFarm'
-InGameMenuTerraFarmFrame.MENU_ICON_FILENAME = g_modUIFilename
 InGameMenuTerraFarmFrame.MENU_ICON_SLICE_ID = 'terraFarm.icon_excavator'
-InGameMenuTerraFarmFrame.XML_FILENAME = g_currentModDirectory .. 'xml/gui/frames/InGameMenuTerraFarmFrame.xml'
+InGameMenuTerraFarmFrame.XML_FILENAME = g_modDirectory .. 'xml/gui/frames/InGameMenuTerraFarmFrame.xml'
 InGameMenuTerraFarmFrame.UPDATE_INTERVAL = 4000
 
 InGameMenuTerraFarmFrame.L10N_ENABLED = g_i18n:getText('ui_enabled')

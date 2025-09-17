@@ -12,7 +12,7 @@
 FloatInputDialog = {}
 
 FloatInputDialog.CLASS_NAME = 'FloatInputDialog'
-FloatInputDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/TextInputDialog.xml'
+FloatInputDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/TextInputDialog.xml'
 
 local FloatInputDialog_mt = Class(FloatInputDialog, TextInputDialog)
 

@@ -14,7 +14,7 @@
 MachineSettingsCalibrationFrame = {}
 
 MachineSettingsCalibrationFrame.CLASS_NAME = 'MachineSettingsCalibrationFrame'
-MachineSettingsCalibrationFrame.XML_FILENAME = g_currentModDirectory .. 'xml/gui/frames/MachineSettingsCalibrationFrame.xml'
+MachineSettingsCalibrationFrame.XML_FILENAME = g_modDirectory .. 'xml/gui/frames/MachineSettingsCalibrationFrame.xml'
 
 local MachineSettingsCalibrationFrame_mt = Class(MachineSettingsCalibrationFrame, TabbedMenuFrameElement)
 
@@ -86,7 +86,7 @@ function MachineSettingsCalibrationFrame:updateSettings(vehicle)
             self.surveyorName:setText('')
             self.surveyorName:setVisible(false)
 
-            self.surveyorImage:setImageFilename(g_modUIFilename)
+            self.surveyorImage:setImageFilename('data/store/store_empty.png')
             self.surveyorImage:setDisabled(true)
 
             self.statusText:setText(SurveyorScreen.L10N_STATUS_NOT_CALIBRATED)

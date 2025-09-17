@@ -13,7 +13,7 @@
 GlobalMaterialsDialog = {}
 
 GlobalMaterialsDialog.CLASS_NAME = 'GlobalMaterialsDialog'
-GlobalMaterialsDialog.XML_FILENAME = g_currentModDirectory .. 'xml/gui/dialogs/GlobalMaterialsDialog.xml'
+GlobalMaterialsDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/GlobalMaterialsDialog.xml'
 
 GlobalMaterialsDialog.L10N_ACTION_ENABLE = g_i18n:getText('ui_enable')
 GlobalMaterialsDialog.L10N_ACTION_DISABLE = g_i18n:getText('ui_disable')

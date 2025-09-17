@@ -16,12 +16,9 @@ Shape.TYPE = {
 
 ---@type table<ShapeType, string>
 Shape.SHAPE_FILENAME = {
-    -- [Shape.TYPE.ARROW] = g_currentModDirectory .. 'objects/arrow.i3d',
-    -- [Shape.TYPE.LINE] = g_currentModDirectory .. 'objects/line.i3d',
-    -- [Shape.TYPE.MARKER] = g_currentModDirectory .. 'objects/marker.i3d',
-    [Shape.TYPE.ARROW] = g_currentModDirectory .. 'objects/arrow.i3d',
-    [Shape.TYPE.LINE] = g_currentModDirectory .. 'objects/shapes/lineShape.i3d',
-    [Shape.TYPE.MARKER] = g_currentModDirectory .. 'objects/shapes/markerShape.i3d',
+    [Shape.TYPE.ARROW] = g_modDirectory .. 'objects/arrow.i3d',
+    [Shape.TYPE.LINE] = g_modDirectory .. 'objects/shapes/lineShape.i3d',
+    [Shape.TYPE.MARKER] = g_modDirectory .. 'objects/shapes/markerShape.i3d',
 }
 
 local Shape_mt = Class(Shape)

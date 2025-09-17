@@ -45,11 +45,9 @@ local defaultExcludeFillTypes = {
 ---@field hudEnabled boolean
 ---@field debugMachineNodes boolean
 ---@field debugMachineCalibration boolean
----@field experimental_dischargePaintModifier number
 ModSettings = {}
 
-ModSettings.MOD_SETTINGS_FOLDER = g_currentModSettingsDirectory
-ModSettings.XML_FILENAME_USER_SETTINGS = g_currentModSettingsDirectory .. 'userSettings.xml'
+ModSettings.XML_FILENAME_USER_SETTINGS = g_modDirectorySettings .. 'userSettings.xml'
 
 local ModSettings_mt = Class(ModSettings)
 
@@ -67,12 +65,8 @@ function ModSettings.new()
     self.debugMachineNodes = true
     self.debugMachineCalibration = true
 
-    -- Experimental settings
-    self.experimental_dischargePaintModifier = 1
-
     if g_client ~= nil then
         addConsoleCommand('tfSetConversionModifier', '', 'consoleSetConversionModifier', self)
-        addConsoleCommand('tfSetDischargePaintModifier', '', 'consoleSetDischargePaintModifier', self)
     end
 
     return self
@@ -276,7 +270,7 @@ end
 
 function ModSettings:saveUserSettings()
     if g_client ~= nil then
-        createFolder(ModSettings.MOD_SETTINGS_FOLDER)
+        createFolder(g_modDirectorySettings)
 
         ---@type XMLFile | nil
         local xmlFile = XMLFile.create('userSettings', ModSettings.XML_FILENAME_USER_SETTINGS, 'userSettings')
@@ -320,22 +314,6 @@ function ModSettings:consoleSetConversionModifier(modifier)
         end
 
         return 'conversionModifier: ' .. tostring(self.conversionModifier)
-    else
-        return 'Only available in single player'
-    end
-end
-
-function ModSettings:consoleSetDischargePaintModifier(modifier)
-    if g_server ~= nil and not g_currentMission.missionDynamicInfo.isMultiplayer then
-        if modifier ~= nil then
-            local value = tonumber(modifier)
-
-            if value ~= nil then
-                self.experimental_dischargePaintModifier = math.min(math.max(value, 0.001), 500)
-            end
-        end
-
-        return 'dischargePaintModifier: ' .. tostring(self.experimental_dischargePaintModifier)
     else
         return 'Only available in single player'
     end

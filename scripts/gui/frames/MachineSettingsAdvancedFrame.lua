@@ -20,7 +20,7 @@
 MachineSettingsAdvancedFrame = {}
 
 MachineSettingsAdvancedFrame.CLASS_NAME = 'MachineSettingsAdvancedFrame'
-MachineSettingsAdvancedFrame.XML_FILENAME = g_currentModDirectory .. 'xml/gui/frames/MachineSettingsAdvancedFrame.xml'
+MachineSettingsAdvancedFrame.XML_FILENAME = g_modDirectory .. 'xml/gui/frames/MachineSettingsAdvancedFrame.xml'
 
 local MachineSettingsAdvancedFrame_mt = Class(MachineSettingsAdvancedFrame, TabbedMenuFrameElement)
 
