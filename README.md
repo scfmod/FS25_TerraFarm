@@ -2,6 +2,8 @@
 
 Tired of using the landscaping tool to carve out your land? Not satisfied with using fill types on the ground to supply your mining team? No worries, with TerraFarm you can shape your own land using the equipment of your choice.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/scfmod) [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dscfmod%3F%26type%3Dpatrons&style=for-the-badge)](https://patreon.com/scfmod?)
+
 # TerraFarm
 
 ```
@@ -12,7 +14,6 @@ DO NOT UPLOAD IT TO MONETARY UPLOAD SERVICES.
 THIS CODE IS AVAILABLE TO ANYONE FOR FREE AND YOU CAN USE
 IT TO LEARN, FORK AND SPREAD THE KNOWLEDGE.
 ```
-
 
 ## Table of Content
 
