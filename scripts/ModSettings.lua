@@ -156,14 +156,21 @@ function ModSettings:getMaterials()
     return self.materials
 end
 
+---@return string?
+function ModSettings:getSavegameDirectory()
+    if g_currentMission ~= nil and g_currentMission.missionInfo ~= nil then
+        return g_currentMission.missionInfo.savegameDirectory
+    end
+end
+
 ---@private
 function ModSettings:loadSettings()
-    if g_server ~= nil then
-        if g_currentMission.missionInfo.savegameDirectory ~= nil then
-            local xmlFilename = g_currentMission.missionInfo.savegameDirectory .. '/terraFarmSettings.xml'
+    local savegameDirectory = self:getSavegameDirectory()
 
+    if g_server ~= nil then
+        if savegameDirectory ~= nil then
             ---@type XMLFile | nil
-            local xmlFile = XMLFile.loadIfExists('modSettings', xmlFilename)
+            local xmlFile = XMLFile.loadIfExists('modSettings', savegameDirectory .. '/terraFarmSettings.xml')
 
             if xmlFile ~= nil then
                 self.enabled = xmlFile:getBool('settings.enabled', self.enabled)
@@ -234,11 +241,11 @@ function ModSettings:setDefaultMaterials()
 end
 
 function ModSettings:saveSettings()
-    if g_server ~= nil then
-        local xmlFilename = g_currentMission.missionInfo.savegameDirectory .. '/terraFarmSettings.xml'
+    local savegameDirectory = self:getSavegameDirectory()
 
+    if g_server ~= nil and savegameDirectory ~= nil then
         ---@type XMLFile | nil
-        local xmlFile = XMLFile.create('modSettings', xmlFilename, 'settings')
+        local xmlFile = XMLFile.create('modSettings', savegameDirectory .. '/terraFarmSettings.xml', 'settings')
 
         if xmlFile ~= nil then
             xmlFile:setBool('settings.enabled', self.enabled)
