@@ -306,12 +306,12 @@ function MachineWorkArea:getTargetTerrainHeight()
 
         if endPosY ~= math.huge then
             local nodePosX, nodePosY, nodePosZ = self:getPosition()
-            local _, linePosY, _, _ = MachineUtils.getClosestPointOnLine(startPosX, startPosY, startPosZ + startOffset, endPosX, endPosY + endOffset, endPosZ, nodePosX, nodePosY, nodePosZ)
+            local _, linePosY, _, _ = MachineUtils.getClosestPointOnLine(startPosX, startPosY + startOffset, startPosZ, endPosX, endPosY + endOffset, endPosZ, nodePosX, nodePosY, nodePosZ)
 
             return linePosY
         end
 
-        return startPosY
+        return startPosY + startOffset
     end
 
     return MachineUtils.getVehicleTargetHeight(self.vehicle)
