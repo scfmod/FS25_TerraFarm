@@ -448,14 +448,37 @@ end
 ---@param worldPosX number
 ---@param worldPosY number
 ---@param worldPosZ number
-function MachineUtils.writeCompressedPosition(streamId, worldPosX, worldPosY, worldPosZ)
+function MachineUtils.writeCompressedXYZPos(streamId, worldPosX, worldPosY, worldPosZ)
     local paramsXZ = g_currentMission.vehicleXZPosCompressionParams
     local paramsY = g_currentMission.vehicleYPosCompressionParams
 
+    NetworkUtil.writeCompressedWorldPosition(streamId, worldPosX, paramsXZ)
+    NetworkUtil.writeCompressedWorldPosition(streamId, worldPosY, paramsY)
+    NetworkUtil.writeCompressedWorldPosition(streamId, worldPosZ, paramsXZ)
+end
+
+---@param streamId number
+---@return number worldPosX
+---@return number worldPosY
+---@return number worldPosZ
+function MachineUtils.readCompressedXYZPos(streamId)
+    local paramsXZ = g_currentMission.vehicleXZPosCompressionParams
+    local paramsY = g_currentMission.vehicleYPosCompressionParams
+
+    local x = NetworkUtil.readCompressedWorldPosition(streamId, paramsXZ)
+    local y = NetworkUtil.readCompressedWorldPosition(streamId, paramsY)
+    local z = NetworkUtil.readCompressedWorldPosition(streamId, paramsXZ)
+
+    return x, y, z
+end
+
+---@param streamId number
+---@param worldPosX number
+---@param worldPosY number
+---@param worldPosZ number
+function MachineUtils.writeCompressedPosition(streamId, worldPosX, worldPosY, worldPosZ)
     if streamWriteBool(streamId, worldPosY ~= math.huge) then
-        NetworkUtil.writeCompressedWorldPosition(streamId, worldPosX, paramsXZ)
-        NetworkUtil.writeCompressedWorldPosition(streamId, worldPosY, paramsY)
-        NetworkUtil.writeCompressedWorldPosition(streamId, worldPosZ, paramsXZ)
+        MachineUtils.writeCompressedXYZPos(streamId, worldPosX, worldPosY, worldPosZ)
     end
 end
 
@@ -464,14 +487,10 @@ end
 ---@return number worldPosY
 ---@return number worldPosZ
 function MachineUtils.readCompressedPosition(streamId)
-    local paramsXZ = g_currentMission.vehicleXZPosCompressionParams
-    local paramsY = g_currentMission.vehicleYPosCompressionParams
     local x, y, z = 0, math.huge, 0
 
     if streamReadBool(streamId) then
-        x = NetworkUtil.readCompressedWorldPosition(streamId, paramsXZ)
-        y = NetworkUtil.readCompressedWorldPosition(streamId, paramsY)
-        z = NetworkUtil.readCompressedWorldPosition(streamId, paramsXZ)
+        x, y, z = MachineUtils.readCompressedXYZPos(streamId)
     end
 
     return x, y, z
