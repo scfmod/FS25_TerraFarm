@@ -202,6 +202,7 @@ end
 function SurveyorScreen:onEnterCameraTransitionFinished()
     self.camera:activate()
     self.cursor:activate()
+    self:updateButtons()
 end
 
 function SurveyorScreen:onLeaveCameraTransitionFinished()

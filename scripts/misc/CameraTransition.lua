@@ -123,6 +123,7 @@ function CameraTransition:onFinished()
     self.posAnimCurve = nil
     self.rotAnimCurve = nil
     self.speedAnimCurve = nil
+    self.isActive = false
 
     if self.overriddenCamera ~= nil then
         g_cameraManager:setActiveCamera(self.overriddenCamera)
@@ -133,8 +134,6 @@ function CameraTransition:onFinished()
     if self.finishedCallback ~= nil then
         self.finishedCallback(self.finishedCallbackTarget)
     end
-
-    self.isActive = false
 end
 
 ---@param startCamera number
