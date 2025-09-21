@@ -66,6 +66,7 @@ function ModHud:activate()
     g_messageCenter:subscribe(SetMachineInputModeEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineOutputModeEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineTerrainLayerEvent, self.onMachineUpdated, self)
+    g_messageCenter:subscribe(SetMachineDischargeTerrainLayerEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineSurveyorEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetSurveyorCoordinatesEvent, self.onSurveyorChanged, self)
 
