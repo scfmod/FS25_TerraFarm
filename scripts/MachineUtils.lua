@@ -603,3 +603,25 @@ function MachineUtils.getNumOutputs(vehicle)
 
     return #spec.modesOutput
 end
+
+---@param x1 number
+---@param y1 number
+---@param z1 number
+---@param x2 number
+---@param y2 number
+---@param z2 number
+---@return number normalX
+---@return number normalY
+---@return number normalZ
+---@return number direction
+---@return number slopeAngle
+function MachineUtils.getSlopeParams(x1, y1, z1, x2, y2, z2)
+    local vx1, vy1, vz1 = MathUtil.vector3Normalize(x2 - x1, y2 - y1, z2 - z1)
+    local slope = math.abs((y1 - y2) / math.max(MathUtil.vector2Length(x1 - x2, z1 - z2), 1e-6))
+    local slopeAngle = math.clamp(slope, 0, 1)
+    local vx2, vy2, vz2 = MathUtil.vector3Normalize(-vz1, 0, vx1)
+    local nx, ny, nz = MathUtil.crossProduct(vx2, vy2, vz2, vx1, vy1, vz1)
+    local d = -(nx * x1 + ny * y1 + nz * z1)
+
+    return nx, ny, nz, d, slopeAngle
+end

@@ -112,6 +112,7 @@ function Surveyor.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, 'setCalibrationOffset', Surveyor.setCalibrationOffset)
     SpecializationUtil.registerFunction(vehicleType, 'getCalibration', Surveyor.getCalibration)
     SpecializationUtil.registerFunction(vehicleType, 'getCalibrationOffset', Surveyor.getCalibrationOffset)
+    SpecializationUtil.registerFunction(vehicleType, 'getCalibrationWithOffset', Surveyor.getCalibrationWithOffset)
     SpecializationUtil.registerFunction(vehicleType, 'resetCalibration', Surveyor.resetCalibration)
     SpecializationUtil.registerFunction(vehicleType, 'getSurveyorId', Surveyor.getSurveyorId)
 
@@ -363,6 +364,26 @@ function Surveyor:getCalibrationOffset()
     local spec = self.spec_surveyor
 
     return spec.startOffset, spec.endOffset
+end
+
+---@return number startPosX
+---@return number startPosX
+---@return number startPosX
+---@return number endPosX
+---@return number endPosY
+---@return number endPosX
+function Surveyor:getCalibrationWithOffset()
+    local spec = self.spec_surveyor
+
+    if spec.startPosY ~= math.huge then
+        if spec.endPosY ~= math.huge then
+            return spec.startPosX, spec.startPosY + spec.startOffset, spec.startPosZ, spec.endPosX, spec.endPosY + spec.endOffset, spec.endPosZ
+        end
+
+        return spec.startPosX, spec.startPosY + spec.startOffset, spec.startPosZ, spec.endPosX, spec.endPosY, spec.endPosZ
+    end
+
+    return spec.startPosX, spec.startPosY, spec.startPosZ, spec.endPosX, spec.endPosY, spec.endPosZ
 end
 
 function Surveyor:resetCalibration()

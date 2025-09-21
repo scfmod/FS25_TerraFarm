@@ -4,7 +4,8 @@ LandscapingOperation = {
     RAISE = 2,
     SMOOTH = 3,
     FLATTEN = 4,
-    PAINT = 5
+    SLOPE = 5,
+    PAINT = 6
 }
 
 ---@class MachineLandscaping

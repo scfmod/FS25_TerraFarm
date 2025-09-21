@@ -222,8 +222,28 @@ function MachineWorkArea:paintDischarge()
 end
 
 function MachineWorkArea:flatten()
-    local targetWorldPosY = self:getTargetTerrainHeight()
-    local op = LandscapingFlatten.new(self, targetWorldPosY)
+    local surveyor = self.vehicle:getSurveyor()
+    local targetWorldY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+
+    if surveyor ~= nil and surveyor:getIsCalibrated() then
+        local x1, y1, z1, x2, y2, z2 = surveyor:getCalibrationWithOffset()
+
+        if y2 ~= math.huge then
+            local x, y, z = self:getPosition()
+            local nx, ny, nz, d, slopeAngle = MachineUtils.getSlopeParams(x1, y1, z1, x2, y2, z2)
+
+            if slopeAngle ~= 0 then
+                local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
+                local op = LandscapingSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY)
+                op:apply()
+                return
+            end
+        end
+
+        targetWorldY = y1
+    end
+
+    local op = LandscapingFlatten.new(self, targetWorldY)
 
     op:apply()
 end
@@ -233,8 +253,28 @@ end
 ---@return number
 ---@nodiscard
 function MachineWorkArea:flattenDischarge(litersToDrop, fillTypeIndex)
-    local targetWorldPosY = self:getTargetTerrainHeight()
-    local op = LandscapingFlattenDischarge.new(self, targetWorldPosY, litersToDrop, fillTypeIndex)
+    local surveyor = self.vehicle:getSurveyor()
+    local targetWorldY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+
+    if surveyor ~= nil and surveyor:getIsCalibrated() then
+        local x1, y1, z1, x2, y2, z2 = surveyor:getCalibrationWithOffset()
+
+        if y2 ~= math.huge then
+            local x, y, z = self:getPosition()
+            local nx, ny, nz, d, slopeAngle = MachineUtils.getSlopeParams(x1, y1, z1, x2, y2, z2)
+
+            if slopeAngle ~= 0 then
+                local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
+                local op = LandscapingSlopeDischarge.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY, litersToDrop, fillTypeIndex)
+                op:apply()
+                return op.droppedLiters
+            end
+        end
+
+        targetWorldY = y1
+    end
+
+    local op = LandscapingFlattenDischarge.new(self, targetWorldY, litersToDrop, fillTypeIndex)
 
     op:apply()
 

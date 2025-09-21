@@ -47,6 +47,8 @@ source(g_modDirectory .. 'scripts/landscaping/LandscapingLower.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingPaint.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingPaintDischarge.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingRaise.lua')
+source(g_modDirectory .. 'scripts/landscaping/LandscapingSlope.lua')
+source(g_modDirectory .. 'scripts/landscaping/LandscapingSlopeDischarge.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingSmooth.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingSmoothDischarge.lua')
 
