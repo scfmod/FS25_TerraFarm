@@ -62,6 +62,7 @@
         <action name="MACHINE_SELECT_SURVEYOR" />
         <action name="MACHINE_GLOBAL_SETTINGS" />
         <action name="MACHINE_TOGGLE_HUD" />
+        <action name="SURVEYOR_TOGGLE_FOLD" />
     </actions>
 
     <inputBinding>
@@ -98,6 +99,11 @@
         </actionBinding>
         <actionBinding action="MACHINE_TOGGLE_HUD">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_4" index="1" />
+        </actionBinding>
+
+        <actionBinding action="SURVEYOR_TOGGLE_FOLD">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_b" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_1" index="1" />
         </actionBinding>
     </inputBinding>
 </modDesc>

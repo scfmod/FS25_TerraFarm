@@ -12,6 +12,7 @@
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Open surveyor dialog" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Open global settings dialog" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Toggle HUD visibility" />
+        <text name="input_SURVEYOR_TOGGLE_FOLD" text="Toggle surveyor fold" />
 
         <!-- Generic texts-->
         <text name="ui_mode" text="Mode" />

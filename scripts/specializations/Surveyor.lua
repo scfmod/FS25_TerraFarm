@@ -28,6 +28,8 @@ Surveyor = {}
 Surveyor.MOD_NAME = g_currentModName
 Surveyor.SPEC_NAME = string.format('spec_%s.surveyor', g_currentModName)
 
+Surveyor.ACTION_TOGGLE_FOLD = 'SURVEYOR_TOGGLE_FOLD'
+
 ---@return boolean
 function Surveyor.prerequisitesPresent()
     return true
@@ -530,7 +532,7 @@ function SurveyorActivatable:registerCustomInput()
     self.activateEventId = actionEventId
 
     if Surveyor.getIsFoldable(self.vehicle) then
-        _, actionEventId = g_inputBinding:registerActionEvent(InputAction.IMPLEMENT_EXTRA, self, self.onPressToggleFold, false, true, false, true)
+        _, actionEventId = g_inputBinding:registerActionEvent(Surveyor.ACTION_TOGGLE_FOLD, self, self.onPressToggleFold, false, true, false, true)
 
         g_inputBinding:setActionEventText(actionEventId, self.vehicle.spec_foldable.negDirectionText)
         g_inputBinding:setActionEventTextPriority(actionEventId, GS_PRIO_VERY_HIGH)
