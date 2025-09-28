@@ -47,6 +47,10 @@
         <text name="ui_angle" text="Winkel" />
         <text name="ui_startOffset" text="Startversatz" />
         <text name="ui_targetOffset" text="Zielversatz" />
+        <text name="ui_forwards" text="Vorwärts" />
+        <text name="ui_backwards" text="Rückwärts" />
+        <text name="ui_both" text="Beide" />
+        <text name="ui_ignore" text="Ignorieren" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Maschinen Einstellungen" />
@@ -144,6 +148,10 @@
         <text name="ui_stateAllowGradingUpTooltip" text="Empfohlen, den Materialeingang auszuschalten, wenn er aktiv ist" />
         <text name="ui_stateForceNodes" text="Nodes erzwingen" />
         <text name="ui_stateForceNodesTooltip" text="Erzwinge alle Nodes, wenn einer oder mehrere aktiv sind" />
+        <text name="ui_stateAutoDeactivate" text="Automatisch deaktivieren" />
+        <text name="ui_stateAutoDeactivateTooltip" text="Maschine ausschalten wenn der Spieler das Fahrzeug verlässt" />
+        <text name="ui_stateDrivingDirectionMode" text="Fahrtrichtung" />
+        <text name="ui_stateDrivingDirectionModeTooltip" text="Terraforming anhand der Fahrtrichtung anwenden" />
         <text name="ui_statePaintRadiusModifier" text="Mal-Radius-Modifikator" />
         <text name="ui_statePaintRadiusModifierTooltip" text="" />
         <text name="ui_stateDensityRadiusModifier" text="Dichte-Radius-Modifikator" />
