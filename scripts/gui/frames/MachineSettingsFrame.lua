@@ -173,8 +173,12 @@ function MachineSettingsFrame:updateTerrainLayer(vehicle)
 
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
 
-        self.terrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-        self.terrainLayerText:setText(terrainLayer.title)
+        if terrainLayer ~= nil then
+            self.terrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.terrainLayerText:setText(terrainLayer.title)
+        else
+            self.terrainLayerText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+        end
 
         self.terrainLayerButton:setDisabled(#spec.modesInput == 0)
     end
@@ -188,8 +192,12 @@ function MachineSettingsFrame:updateDischargeTerrainLayer(vehicle)
 
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
 
-        self.dischargeTerrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-        self.dischargeTerrainLayerText:setText(terrainLayer.title)
+        if terrainLayer ~= nil then
+            self.dischargeTerrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.dischargeTerrainLayerText:setText(terrainLayer.title)
+        else
+            self.dischargeTerrainLayerText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+        end
 
         self.dischargeTerrainLayerButton:setDisabled(#spec.modesOutput == 0)
     end

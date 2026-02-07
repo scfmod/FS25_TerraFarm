@@ -339,7 +339,7 @@ function ResourceManager:getDefaultFillTypeIndex()
 end
 
 ---@param id number
----@return TerrainLayer
+---@return TerrainLayer?
 ---@nodiscard
 function ResourceManager:getTerrainLayerById(id)
     return self.idToTerrainLayer[id]

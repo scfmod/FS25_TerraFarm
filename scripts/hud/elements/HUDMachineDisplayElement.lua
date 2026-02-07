@@ -339,8 +339,13 @@ function HUDMachineDisplayElement:updateTextureDisplay()
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
 
         self.textureItem:setVisible(true)
-        self.textureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-        self.textureText:setText(terrainLayer.title)
+
+        if terrainLayer ~= nil then
+            self.textureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.textureText:setText(terrainLayer.title)
+        else
+            self.textureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+        end
     else
         self.textureItem:setVisible(false)
     end
@@ -353,8 +358,13 @@ function HUDMachineDisplayElement:updateDischargeTextureDisplay()
         local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
 
         self.dischargeTextureItem:setVisible(true)
-        self.dischargeTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-        self.dischargeTextureText:setText(terrainLayer.title)
+
+        if terrainLayer ~= nil then
+            self.textureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.textureText:setText(terrainLayer.title)
+        else
+            self.textureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+        end
     else
         self.dischargeTextureItem:setVisible(false)
     end
