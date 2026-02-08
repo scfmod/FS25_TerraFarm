@@ -114,10 +114,12 @@ function MachineWorkArea:createNodes()
     end
 end
 
+---@return boolean
+---@nodiscard
 function MachineWorkArea:initialize()
     if self.rootNode ~= nil then
         Logging.error('MachineWorkArea:initialize() workArea is already initialized!')
-        return
+        return false
     end
 
     local spec = self.vehicle.spec_machine
@@ -167,7 +169,10 @@ function MachineWorkArea:initialize()
         end
     end
 
-    assert(self.referenceNode ~= nil, 'No referenceNode found ...')
+    if self.referenceNode == nil then
+        Logging.error('No referenceNode found ...')
+        return false
+    end
 
     self.rootNode = createTransformGroup('root')
 
@@ -176,6 +181,8 @@ function MachineWorkArea:initialize()
     setRotation(self.rootNode, self.rotation[1], self.rotation[2], self.rotation[3])
 
     self:createNodes()
+
+    return true
 end
 
 ---@param x number

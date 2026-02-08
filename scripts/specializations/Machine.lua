@@ -329,19 +329,7 @@ function Machine:onLoad()
         spec.fillUnitSource = Machine.FILLUNIT_SOURCE[xmlFile:getValue('vehicle.machine#fillUnitSource')] or Machine.FILLUNIT_SOURCE.VEHICLE
     end
 
-    if spec.hasAttachable then
-        SpecializationUtil.registerEventListener(self, 'onPostAttach', Machine)
-        SpecializationUtil.registerEventListener(self, 'onPostDetach', Machine)
-        SpecializationUtil.registerEventListener(self, 'onLeaveRootVehicle', Machine)
-    end
-
     if spec.hasDischargeable and #self.spec_dischargeable.dischargeNodes > 0 then
-        self.getCanDischargeToGround = Utils.overwrittenFunction(self.getCanDischargeToGround, Machine.getCanDischargeToGround)
-
-        if MachineUtils.getIsDischargeable(self) then
-            self.discharge = Utils.overwrittenFunction(self.discharge, Machine.discharge)
-        end
-
         if spec.machineType.useDischargeable then
             local dischargeNodeIndex = xmlFile:getValue('vehicle.machine#dischargeNodeIndex')
 
@@ -363,10 +351,6 @@ function Machine:onLoad()
         end
     end
 
-    if spec.hasEnterable then
-        SpecializationUtil.registerEventListener(self, 'onLeaveVehicle', Machine)
-    end
-
     if spec.hasLeveler and spec.machineType.useLeveler and #self.spec_leveler.nodes > 0 then
         local levelerNodeIndex = xmlFile:getValue('vehicle.machine#levelerNodeIndex', 1)
 
@@ -375,11 +359,6 @@ function Machine:onLoad()
         if spec.machineType.useFillUnit and spec.fillUnitSource == Machine.FILLUNIT_SOURCE.VEHICLE and spec.levelerNode ~= nil and spec.levelerNode.fillUnitIndex ~= nil and spec.fillUnitIndex ~= spec.levelerNode.fillUnitIndex then
             spec.fillUnitIndex = spec.levelerNode.fillUnitIndex
         end
-    end
-
-    if spec.hasMotorized then
-        SpecializationUtil.registerEventListener(self, 'onStartMotor', Machine)
-        SpecializationUtil.registerEventListener(self, 'onStopMotor', Machine)
     end
 
     if spec.hasShovel and spec.machineType.useShovel and #self.spec_shovel.shovelNodes > 0 then
@@ -396,11 +375,6 @@ function Machine:onLoad()
 
             spec.dischargeNode = self.spec_dischargeable.dischargeNodes[dischargeNodeIndex]
         end
-    end
-
-    if spec.hasTurnOnVehicle then
-        SpecializationUtil.registerEventListener(self, 'onTurnedOn', Machine)
-        SpecializationUtil.registerEventListener(self, 'onTurnedOff', Machine)
     end
 
     if spec.machineType.useFillUnit and spec.fillUnitIndex == nil and spec.fillUnitSource == Machine.FILLUNIT_SOURCE.VEHICLE then
@@ -429,7 +403,7 @@ function Machine:onLoad()
     spec.modesInput = MachineUtils.loadMachineModesFromXML(xmlFile, 'vehicle.machine.input#modes')
     spec.modesOutput = {}
 
-    if MachineUtils.getIsDischargeable(self) then
+    if spec.machineType.useDischargeable then
         table.insert(spec.modesOutput, Machine.MODE.MATERIAL)
         table.insert(spec.modesOutput, Machine.MODE.RAISE)
         table.insert(spec.modesOutput, Machine.MODE.FLATTEN)
@@ -441,45 +415,85 @@ function Machine:onLoad()
         end
     end
 
-    spec.effectTurnOffThreshold = xmlFile:getValue('vehicle.machine.effects#effectTurnOffThreshold', 0.25)
-    spec.effects = g_effectManager:loadEffect(xmlFile, 'vehicle.machine.effects', self.components, self, self.i3dMappings)
-
-    spec.lastEffect = spec.effects[#spec.effects]
-    spec.isEffectActive = false
-    spec.isEffectActiveSent = false
-
-    for _, effect in ipairs(spec.effects) do
-        if effect.setFillType ~= nil then
-            effect:setFillType(spec.fillTypeIndex)
-        end
-    end
-
-    spec.stateObjectChanges = {}
-
-    ObjectChangeUtil.loadObjectChangeFromXML(xmlFile, 'vehicle.machine.stateObjectChanges', spec.stateObjectChanges, self.components, self)
-
-    if #spec.stateObjectChanges == 0 then
-        spec.stateObjectChanges = nil
-    else
-        ObjectChangeUtil.setObjectChanges(spec.stateObjectChanges, false)
-    end
-
-    if self.isClient then
-        spec.effectAnimationNodes = g_animationManager:loadAnimations(self.xmlFile, 'vehicle.machine.effectAnimations', self.components, self, self.i3dMappings)
-        spec.playSound = xmlFile:getValue('vehicle.machine#playSound', true)
-
-        if #spec.effects > 0 and spec.playSound then
-            spec.sample = g_soundManager:loadSampleFromXML(self.xmlFile, 'vehicle.machine', 'workSound', self.baseDirectory, self.components, 0, AudioGroup.VEHICLE, self.i3dMappings, self)
-        end
-
-        if spec.sample == nil then
-            spec.playSound = false
-        end
-    end
-
     spec.workArea = MachineWorkArea.new(self)
     spec.workArea:loadFromXMLFile(xmlFile, 'vehicle.machine.workArea')
-    spec.workArea:initialize()
+
+    if spec.workArea:initialize() then
+        spec.effectTurnOffThreshold = xmlFile:getValue('vehicle.machine.effects#effectTurnOffThreshold', 0.25)
+        spec.effects = g_effectManager:loadEffect(xmlFile, 'vehicle.machine.effects', self.components, self, self.i3dMappings)
+
+        spec.lastEffect = spec.effects[#spec.effects]
+        spec.isEffectActive = false
+        spec.isEffectActiveSent = false
+
+        for _, effect in ipairs(spec.effects) do
+            if effect.setFillType ~= nil then
+                effect:setFillType(spec.fillTypeIndex)
+            end
+        end
+
+        spec.stateObjectChanges = {}
+
+        ObjectChangeUtil.loadObjectChangeFromXML(xmlFile, 'vehicle.machine.stateObjectChanges', spec.stateObjectChanges, self.components, self)
+
+        if #spec.stateObjectChanges == 0 then
+            spec.stateObjectChanges = nil
+        else
+            ObjectChangeUtil.setObjectChanges(spec.stateObjectChanges, false)
+        end
+
+        if self.isClient then
+            spec.effectAnimationNodes = g_animationManager:loadAnimations(self.xmlFile, 'vehicle.machine.effectAnimations', self.components, self, self.i3dMappings)
+            spec.playSound = xmlFile:getValue('vehicle.machine#playSound', true)
+
+            if #spec.effects > 0 and spec.playSound then
+                spec.sample = g_soundManager:loadSampleFromXML(self.xmlFile, 'vehicle.machine', 'workSound', self.baseDirectory, self.components, 0, AudioGroup.VEHICLE, self.i3dMappings, self)
+            end
+
+            if spec.sample == nil then
+                spec.playSound = false
+            end
+        end
+
+        if spec.hasAttachable then
+            SpecializationUtil.registerEventListener(self, 'onPostAttach', Machine)
+            SpecializationUtil.registerEventListener(self, 'onPostDetach', Machine)
+            SpecializationUtil.registerEventListener(self, 'onLeaveRootVehicle', Machine)
+        end
+
+        if spec.hasEnterable then
+            SpecializationUtil.registerEventListener(self, 'onLeaveVehicle', Machine)
+        end
+
+        if spec.hasMotorized then
+            SpecializationUtil.registerEventListener(self, 'onStartMotor', Machine)
+            SpecializationUtil.registerEventListener(self, 'onStopMotor', Machine)
+        end
+
+        if spec.hasTurnOnVehicle then
+            SpecializationUtil.registerEventListener(self, 'onTurnedOn', Machine)
+            SpecializationUtil.registerEventListener(self, 'onTurnedOff', Machine)
+        end
+
+        if spec.hasDischargeable and #self.spec_dischargeable.dischargeNodes > 0 then
+            self.getCanDischargeToGround = Utils.overwrittenFunction(self.getCanDischargeToGround, Machine.getCanDischargeToGround)
+
+            if spec.machineType.useDischargeable then
+                self.discharge = Utils.overwrittenFunction(self.discharge, Machine.discharge)
+            end
+        end
+    else
+        -- WorkArea initialize() failed, remove event listeners
+        SpecializationUtil.removeEventListener(self, 'onPostLoad', Machine)
+        SpecializationUtil.removeEventListener(self, 'onDelete', Machine)
+        SpecializationUtil.removeEventListener(self, 'onUpdate', Machine)
+        SpecializationUtil.removeEventListener(self, 'onUpdateTick', Machine)
+        SpecializationUtil.removeEventListener(self, 'onRegisterActionEvents', Machine)
+        SpecializationUtil.removeEventListener(self, 'onWriteStream', Machine)
+        SpecializationUtil.removeEventListener(self, 'onReadStream', Machine)
+        SpecializationUtil.removeEventListener(self, 'onWriteUpdateStream', Machine)
+        SpecializationUtil.removeEventListener(self, 'onReadUpdateStream', Machine)
+    end
 
     if spec.isExternal then
         xmlFile:delete()
@@ -1610,7 +1624,7 @@ function Machine:getCanDischargeToGround(superFunc, dischargeNode)
             if not spec.state.enableOutputMaterial then
                 return false
             end
-        elseif MachineUtils.getIsDischargeable(self) and g_modSettings:getIsEnabled() and self:getMachineEnabled() then
+        elseif spec.machineType.useDischargeable and g_modSettings:getIsEnabled() and self:getMachineEnabled() then
             if self:getMachineActive() then
                 if spec.outputMode == Machine.MODE.PAINT then
                     return true
