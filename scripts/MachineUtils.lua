@@ -14,19 +14,6 @@ function MachineUtils.getIsShovel(vehicle)
     return false
 end
 
----@param vehicle Machine
----@return boolean
----@nodiscard
-function MachineUtils.getIsDischargeable(vehicle)
-    local spec = vehicle.spec_machine
-
-    if spec ~= nil then
-        return spec.machineType.useDischargeable
-    end
-
-    return false
-end
-
 ---@param targetVehicle Machine
 ---@return Machine | nil
 function MachineUtils.getActiveVehicle(targetVehicle)
