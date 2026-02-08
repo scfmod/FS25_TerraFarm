@@ -360,10 +360,10 @@ function HUDMachineDisplayElement:updateDischargeTextureDisplay()
         self.dischargeTextureItem:setVisible(true)
 
         if terrainLayer ~= nil then
-            self.textureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.textureText:setText(terrainLayer.title)
+            self.dischargeTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.dischargeTextureText:setText(terrainLayer.title)
         else
-            self.textureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+            self.dischargeTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
         end
     else
         self.dischargeTextureItem:setVisible(false)
