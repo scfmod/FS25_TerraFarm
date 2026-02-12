@@ -117,14 +117,14 @@
 
         <!-- MachineState -->
         <text name="ui_stateEnableEffects" text="Enable visual effects" />
-        <text name="ui_stateEnableEffectsTooltip" text="Only available on supported equipment" />
+        <text name="ui_stateEnableEffectsTooltip" text="Terraforming visual effects" />
         <text name="ui_stateClearDecoArea" text="Clear foliage" />
         <text name="ui_stateClearDecoAreaTooltip" text="Remove foliage and bushes when terraforming" />
         <text name="ui_stateClearDensityMapHeightArea" text="Clear material" />
         <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Remove material around terrain deformation" />
         <text name="ui_stateEnableInputMaterial" text="Enable material" />
         <text name="ui_stateEnableInputMaterialTooltip" text="Enable creating material when terraforming" />
-        <text name="ui_stateEnableOutputMaterial" text="Enable discarge" />
+        <text name="ui_stateEnableOutputMaterial" text="Enable discharge" />
         <text name="ui_stateEnableOutputMaterialTooltip" text="Allow discharging material to the ground" />
         <text name="ui_stateEnablePaintGroundTexture" text="Enable paint" />
         <text name="ui_stateEnablePaintGroundTextureTooltip" text="Painting new ground textures textures when terraforming" />
@@ -155,8 +155,9 @@
         <text name="ui_statePaintRadiusModifier" text="Paint radius modifier" />
         <text name="ui_statePaintRadiusModifierTooltip" text="" />
         <text name="ui_stateDensityRadiusModifier" text="Density radius modifier" />
-        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="Post deformation radius modifier" />
         <text name="ui_stateInputRatio" text="Input ratio" />
+        <text name="ui_stateInputRatioTooltip" text="Material input ratio" />
         <text name="ui_stateInputRatioTooltip" text="" />
 
         <!-- Machine types -->
