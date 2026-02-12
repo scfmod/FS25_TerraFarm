@@ -65,6 +65,7 @@ Machine work area adjustments.
 | offset        | vector3 | No | ```0 0 0``` | Offset position |
 | rotation      | vector3 | No | ```0 0 0``` | Rotation in degrees |
 | raycastDistance | float | No | ```0.4```   | Raycast distance for preventing discharge. |
+| outputOffset  | vector3 | No | ```0 0 0``` | Output node offset position from center of area |
 
 ## State object changes
 
