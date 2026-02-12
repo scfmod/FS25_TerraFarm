@@ -9,9 +9,10 @@ source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
 
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsAdvancedFrame.lua')
 source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsCalibrationFrame.lua')
 source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsLandscapingFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsInputFrame.lua')
+source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsOutputFrame.lua')
 source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsFrame.lua')
 source(g_modDirectory .. 'scripts/gui/screens/MachineScreen.lua')
 

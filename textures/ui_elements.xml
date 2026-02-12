@@ -16,6 +16,9 @@
         <slice id="surveyor_offset" uvs="128px 128px 128px 128px" />
         <slice id="surveyor_terrain" uvs="256px 128px 128px 128px" />
         <slice id="surveyor_map" uvs="384px 128px 128px 128px" />
+		
+		<slice id="icon_input" uvs="512px 128px 128px 128px" />
+		<slice id="icon_output" uvs="640px 128px 128px 128px" />
 
         <slice id="icon_excavator" uvs="0px 256px 128px 128px" />
         <slice id="icon_surveyor" uvs="128px 256px 128px 128px" />

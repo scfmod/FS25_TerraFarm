@@ -1,5 +1,11 @@
 ---@class MachineScreen : TabbedMenuWithDetails
 ---@field superClass fun(): TabbedMenuWithDetails
+---@field settingsFrame MachineSettingsFrame
+---@field landscapingSettingsFrame MachineSettingsLandscapingFrame
+---@field inputSettingsFrame MachineSettingsInputFrame
+---@field outputSettingsFrame MachineSettingsOutputFrame
+---@field calibrationSettingsFrame MachineSettingsCalibrationFrame
+---@field vehicle? Machine
 MachineScreen = {}
 
 MachineScreen.CLASS_NAME = 'MachineScreen'
@@ -18,13 +24,15 @@ end
 
 function MachineScreen:load()
     self.settingsFrame = MachineSettingsFrame.new(self)
+    self.inputSettingsFrame = MachineSettingsInputFrame.new(self)
+    self.outputSettingsFrame = MachineSettingsOutputFrame.new(self)
     self.landscapingSettingsFrame = MachineSettingsLandscapingFrame.new(self)
-    self.advancedSettingsFrame = MachineSettingsAdvancedFrame.new(self)
     self.calibrationSettingsFrame = MachineSettingsCalibrationFrame.new(self)
 
     g_gui:loadGui(MachineSettingsFrame.XML_FILENAME, MachineSettingsFrame.CLASS_NAME, self.settingsFrame, true)
+    g_gui:loadGui(MachineSettingsInputFrame.XML_FILENAME, MachineSettingsInputFrame.CLASS_NAME, self.inputSettingsFrame, true)
+    g_gui:loadGui(MachineSettingsOutputFrame.XML_FILENAME, MachineSettingsOutputFrame.CLASS_NAME, self.outputSettingsFrame, true)
     g_gui:loadGui(MachineSettingsLandscapingFrame.XML_FILENAME, MachineSettingsLandscapingFrame.CLASS_NAME, self.landscapingSettingsFrame, true)
-    g_gui:loadGui(MachineSettingsAdvancedFrame.XML_FILENAME, MachineSettingsAdvancedFrame.CLASS_NAME, self.advancedSettingsFrame, true)
     g_gui:loadGui(MachineSettingsCalibrationFrame.XML_FILENAME, MachineSettingsCalibrationFrame.CLASS_NAME, self.calibrationSettingsFrame, true)
 
     g_gui:loadGui(MachineScreen.XML_FILENAME, MachineScreen.CLASS_NAME, self)
@@ -34,8 +42,9 @@ function MachineScreen:onGuiSetupFinished()
     self:superClass().onGuiSetupFinished(self)
 
     self.settingsFrame:initialize()
+    self.inputSettingsFrame:initialize()
+    self.outputSettingsFrame:initialize()
     self.landscapingSettingsFrame:initialize()
-    self.advancedSettingsFrame:initialize()
     self.calibrationSettingsFrame:initialize()
 
     self:setupPages()
@@ -43,7 +52,7 @@ end
 
 function MachineScreen:setupPages()
     ---@return boolean
-    local function calibrationPredicateFunction()
+    local function calibrationPredicateFn()
         if self.vehicle ~= nil and self.vehicle.spec_machine ~= nil then
             return MachineUtils.getHasInputMode(self.vehicle, Machine.MODE.FLATTEN) or MachineUtils.getHasOutputMode(self.vehicle, Machine.MODE.FLATTEN)
         end
@@ -54,20 +63,24 @@ function MachineScreen:setupPages()
     local pages = {
         {
             self.settingsFrame,
-            'gui.icon_options_generalSettings2'
+            'terraFarm.icon_excavator'
+        },
+        {
+            self.inputSettingsFrame,
+            'terraFarm.icon_input'
+        },
+        {
+            self.outputSettingsFrame,
+            'terraFarm.icon_output'
         },
         {
             self.landscapingSettingsFrame,
             'gui.icon_construction_terraforming'
         },
         {
-            self.advancedSettingsFrame,
-            'gui.icon_options_device'
-        },
-        {
             self.calibrationSettingsFrame,
             'terraFarm.icon_surveyor',
-            calibrationPredicateFunction
+            calibrationPredicateFn
         },
     }
 

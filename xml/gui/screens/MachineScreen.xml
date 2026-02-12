@@ -10,8 +10,9 @@
 
     <Paging id="pagingElement" onPageChange="onPageChange" onPageUpdate="onPageUpdate" profile="tfMachineScreen_paging">
         <frameReference ref="machineSettings" name="machineSettings" id="settingsFrame" />
+        <frameReference ref="machineSettingsInput" name="machineSettingsInput" id="inputSettingsFrame" />
+        <frameReference ref="machineSettingsOutput" name="machineSettingsOutput" id="outputSettingsFrame" />
         <frameReference ref="machineSettingsLandscaping" name="machineSettingsLandscaping" id="landscapingSettingsFrame" />
-        <frameReference ref="machineSettingsAdvanced" name="machineSettingsAdvanced" id="advancedSettingsFrame" />
         <frameReference ref="machineSettingsCalibration" name="machineSettingsCalibration" id="calibrationSettingsFrame" />
     </Paging>
 

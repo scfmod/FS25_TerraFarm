@@ -198,7 +198,8 @@
         <textSize value="16px" />
         <textBold value="true" />
 
-        <textColor value="1 1 1 0.25" />
+        <textColor value="$preset_fs25_colorGreen" />
+        <textDisabledColor value="1 1 1 0.25" />
     </Profile>
 
     <Profile name="tfMenuFrame_optionWrapper" extends="baseReference">
@@ -231,7 +232,7 @@
 
     <Profile name="tfMenuFrame_binaryOption" extends="tf_binaryOption" with="anchorMiddleLeft">
         <size value="180px 32px" />
-        <position value="340px 0" />
+        <position value="340px 0px" />
     </Profile>
 
     <Profile name="tfMenuFrame_textInput" extends="fs25_dialogTextInput" with="anchorMiddleLeft">
@@ -289,7 +290,7 @@
     </Profile>
 
     <Profile name="tfMenuFrame_multiTextOption" extends="fs25_settingsMultiTextOption" with="anchorMiddleLeft">
-        <position value="336px -4px" />
+        <position value="336px -1px" />
         <size value="192px 42px" />
 
         <wrap value="true" />

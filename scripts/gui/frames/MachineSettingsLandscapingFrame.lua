@@ -75,6 +75,6 @@ end
 function MachineSettingsLandscapingFrame:onClickStateCheckedOption(state, element)
     if element.name ~= nil then
         ---@diagnostic disable-next-line: param-type-mismatch
-        MachineSettingsFrame.setStateValue(self, element.name, state == CheckedOptionElement.STATE_CHECKED)
+        MachineSettingsFrame.setStateProperty(self, element.name, state == CheckedOptionElement.STATE_CHECKED)
     end
 end

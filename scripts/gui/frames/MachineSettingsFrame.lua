@@ -4,29 +4,13 @@
 ---
 ---@field enabledOption BinaryOptionElement
 ---@field resourcesEnabledOption BinaryOptionElement
----@field enableInputMaterialOption BinaryOptionElement
----@field enableOutputMaterialOption BinaryOptionElement
----@field enablePaintGroundTextureOption BinaryOptionElement
----
----@field materialButton ButtonElement
----@field materialText TextElement
----@field materialImage BitmapElement
----@field terrainLayerButton ButtonElement
----@field terrainLayerText TextElement
----@field terrainLayerImage TerrainLayerElement
----@field dischargeTerrainLayerButton ButtonElement
----@field dischargeTerrainLayerText TextElement
----@field dischargeTerrainLayerImage TerrainLayerElement
----
----@field radiusOption TextInputElement
----@field strengthOption TextInputElement
----@field hardnessOption TextInputElement
----@field brushShapeOption MultiTextOptionElement
----
----@field enabledOptionWrapper BitmapElement
----@field resourcesEnabledOptionWrapper BitmapElement
----@field enableInputMaterialOptionWrapper BitmapElement
----@field enableOutputMaterialWrapper BitmapElement
+---@field paintModifierOption TextInputElement
+---@field densityModifierOption TextInputElement
+---@field enableEffectsOption BinaryOptionElement
+---@field allowGradingUpOption BinaryOptionElement
+---@field forceNodesOption BinaryOptionElement
+---@field autoDeactivateOption BinaryOptionElement
+---@field drivingDirectionModeOption MultiTextOptionElement
 ---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsFrame = {}
@@ -49,9 +33,11 @@ end
 function MachineSettingsFrame:onGuiSetupFinished()
     self:superClass().onGuiSetupFinished(self)
 
-    self.brushShapeOption:setTexts({
-        g_i18n:getText('ui_square'),
-        g_i18n:getText('ui_circle')
+    self.drivingDirectionModeOption:setTexts({
+        g_i18n:getText('ui_forwards'),
+        g_i18n:getText('ui_backwards'),
+        g_i18n:getText('ui_both'),
+        g_i18n:getText('ui_ignore'),
     })
 end
 
@@ -66,20 +52,11 @@ function MachineSettingsFrame:onFrameOpen()
 
     self:updateMachine()
     self:updateState()
-    self:updateMaterial()
-    self:updateTerrainLayer()
-    self:updateDischargeTerrainLayer()
 
     self.boxLayout:invalidateLayout()
 
     g_messageCenter:subscribe(SetMachineEnabledEvent, self.updateMachine, self)
-    g_messageCenter:subscribe(SetMachineInputModeEvent, self.updateMachine, self)
-    g_messageCenter:subscribe(SetMachineOutputModeEvent, self.updateMachine, self)
     g_messageCenter:subscribe(SetMachineResourcesEvent, self.updateMachine, self)
-    g_messageCenter:subscribe(SetMachineFillTypeEvent, self.updateMaterial, self)
-    g_messageCenter:subscribe(SetMachineTerrainLayerEvent, self.updateTerrainLayer, self)
-    g_messageCenter:subscribe(SetMachineDischargeTerrainLayerEvent, self.updateDischargeTerrainLayer, self)
-
     g_messageCenter:subscribe(SetMachineStateEvent, self.updateState, self)
 
     local focusedElement = FocusManager:getFocusedElement()
@@ -104,14 +81,16 @@ function MachineSettingsFrame:updateMachine(vehicle)
         local hasManagePermission = MachineUtils.getPlayerHasPermission('manageRights', nil, self.target.vehicle:getOwnerFarmId())
         local resourcesAvailable = g_resourceManager:getIsActive()
 
-        self.enabledOptionWrapper:setDisabled(not hasManagePermission or not g_modSettings:getIsEnabled())
         self.enabledOption:setIsChecked(spec.enabled)
+        self.enabledOption.parent:setDisabled(not hasManagePermission or not g_modSettings:getIsEnabled())
 
-        self.resourcesEnabledOptionWrapper:setDisabled(not resourcesAvailable or not hasManagePermission)
         self.resourcesEnabledOption:setIsChecked(spec.resourcesEnabled)
+        self.resourcesEnabledOption.parent:setDisabled(not resourcesAvailable or not hasManagePermission)
 
         if not g_resourceManager:getIsAvailable() then
-            self.resourcesEnabledOption.textElement:setText(g_i18n:getText('ui_notAvailable'))
+            self.resourcesEnabledOption.parent.elements[3]:setText(g_i18n:getText('ui_notAvailable'))
+        else
+            self.resourcesEnabledOption.parent.elements[3]:setText(g_i18n:getText('ui_enableMapResourcesTooltip'))
         end
     end
 end
@@ -119,115 +98,47 @@ end
 ---@param vehicle Machine | nil
 function MachineSettingsFrame:updateState(vehicle)
     if vehicle == nil or vehicle == self.target.vehicle then
-        local spec = self.target.vehicle.spec_machine
-
-        local enableInput = (spec.machineType.useFillUnit and spec.hasFillUnit) or spec.machineType.id == 'ripper' or spec.machineType.id == 'excavatorRipper'
-
-        self.enableInputMaterialOption:setIsChecked(spec.state.enableInputMaterial)
-        self.enableInputMaterialOptionWrapper:setDisabled(not enableInput)
-
-        if not enableInput then
-            self.enableInputMaterialOption.textElement:setText(g_i18n:getText('ui_notAvailable'))
-        end
-
-        local enableOutput = spec.dischargeNode ~= nil
-
-        self.enableOutputMaterialOption:setIsChecked(spec.state.enableOutputMaterial)
-        self.enableOutputMaterialWrapper:setDisabled(not enableOutput)
-
-        if not enableOutput then
-            self.enableOutputMaterialOption.textElement:setText(g_i18n:getText('ui_notAvailable'))
-        end
-
-        self.enablePaintGroundTextureOption:setIsChecked(spec.state.enablePaintGroundTexture)
-
-        self.radiusOption:setText(string.format('%.2f', spec.state.radius))
-        self.strengthOption:setText(string.format('%.2f', spec.state.strength))
-        self.hardnessOption:setText(string.format('%.2f', spec.state.hardness))
-        self.brushShapeOption:setState(spec.state.brushShape)
-    end
-end
-
----@param vehicle Machine | nil
-function MachineSettingsFrame:updateMaterial(vehicle)
-    if vehicle == nil or vehicle == self.target.vehicle then
-        local spec = self.target.vehicle.spec_machine
-
-        local fillType = g_fillTypeManager:getFillTypeByIndex(spec.fillTypeIndex)
-
-        if fillType ~= nil then
-            self.materialText:setText(fillType.title)
-            self.materialImage:setImageFilename(fillType.hudOverlayFilename)
-        else
-            self.materialText:setText('')
-            self.materialImage:setImageFilename(nil)
-        end
-    end
-end
-
----@param vehicle Machine | nil
-function MachineSettingsFrame:updateTerrainLayer(vehicle)
-    if vehicle == nil or vehicle == self.target.vehicle then
         ---@type SpecializationProperties
         local spec = self.target.vehicle.spec_machine
 
-        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
+        self.paintModifierOption:setText(string.format('%.2f', spec.state.paintModifier))
+        self.densityModifierOption:setText(string.format('%.2f', spec.state.densityModifier))
 
-        if terrainLayer ~= nil then
-            self.terrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.terrainLayerText:setText(terrainLayer.title)
+        self.enableEffectsOption:setIsChecked(spec.state.enableEffects)
+        self.allowGradingUpOption:setIsChecked(spec.state.allowGradingUp)
+        self.forceNodesOption:setIsChecked(spec.state.forceNodes)
+        self.autoDeactivateOption:setIsChecked(spec.state.autoDeactivate)
+        self.drivingDirectionModeOption:setState(spec.state.drivingDirectionMode)
+
+        self.enableEffectsOption.parent:setDisabled(#spec.effects == 0)
+        self.drivingDirectionModeOption.parent:setDisabled(not (spec.machineType.useDrivingDirection and #spec.modesInput > 0))
+
+        if #spec.effects == 0 then
+            self.enableEffectsOption.parent.elements[3]:setText(g_i18n:getText('ui_notAvailable'))
         else
-            self.terrainLayerText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+            self.enableEffectsOption.parent.elements[3]:setText(g_i18n:getText('ui_stateEnableEffectsTooltip'))
         end
-
-        self.terrainLayerButton:setDisabled(#spec.modesInput == 0)
     end
 end
 
----@param vehicle Machine | nil
-function MachineSettingsFrame:updateDischargeTerrainLayer(vehicle)
-    if vehicle == nil or vehicle == self.target.vehicle then
-        ---@type SpecializationProperties
-        local spec = self.target.vehicle.spec_machine
-
-        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
-
-        if terrainLayer ~= nil then
-            self.dischargeTerrainLayerImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.dischargeTerrainLayerText:setText(terrainLayer.title)
-        else
-            self.dischargeTerrainLayerText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
-        end
-
-        self.dischargeTerrainLayerButton:setDisabled(#spec.modesOutput == 0)
-    end
-end
-
----@param name string
----@param defaultValue any
----@return any
----@nodiscard
-function MachineSettingsFrame:getStateValue(name, defaultValue)
+---@param property string
+---@param value number|boolean
+function MachineSettingsFrame:setStateProperty(property, value)
     if self.target.vehicle ~= nil then
-        local spec = self.target.vehicle.spec_machine
+        local state = self.target.vehicle:getMachineState()
 
-        return spec.state[name] or defaultValue
+        state:setProperty(self.target.vehicle, property, value)
     end
 end
 
----@param name string
----@param value any
-function MachineSettingsFrame:setStateValue(name, value)
+---@param property string
+---@param defaultValue? boolean|number
+---@return boolean|number?
+function MachineSettingsFrame:getStateProperty(property, defaultValue)
     if self.target.vehicle ~= nil then
-        local spec = self.target.vehicle.spec_machine
+        local state = self.target.vehicle:getMachineState()
 
-        if spec.state[name] ~= value then
-            local newState = spec.state:clone()
-
-            newState[name] = value
-
-            self.target.vehicle:setMachineState(newState)
-        end
+        return state[property] or defaultValue
     end
 end
 
@@ -235,7 +146,7 @@ end
 ---@param element CheckedOptionElement
 function MachineSettingsFrame:onClickStateCheckedOption(state, element)
     if element.name ~= nil then
-        self:setStateValue(element.name, state == CheckedOptionElement.STATE_CHECKED)
+        self:setStateProperty(element.name, state == CheckedOptionElement.STATE_CHECKED)
     end
 end
 
@@ -253,11 +164,6 @@ function MachineSettingsFrame:onClickResourcesEnabledOption(state)
     end
 end
 
----@param state number
-function MachineSettingsFrame:onClickBrushShapeOption(state)
-    self:setStateValue('brushShape', state)
-end
-
 ---@param element TextInputElement
 function MachineSettingsFrame:onEnterPressedInput(element)
     if element.name ~= nil then
@@ -265,58 +171,32 @@ function MachineSettingsFrame:onEnterPressedInput(element)
             local value = tonumber(element.text)
 
             if value ~= nil then
-                self:setStateValue(element.name, MathUtil.round(math.clamp(value, 0, 15), 2))
+                self:setStateProperty(element.name, MathUtil.round(math.clamp(value, 0.1, 8), 2))
             end
         end
 
-        element:setText(string.format('%.2f', self:getStateValue(element.name, 0)))
+        element:setText(string.format('%.2f', self:getStateProperty(element.name, 0)))
     end
 end
 
-function MachineSettingsFrame:onClickSelectMaterial()
-    if self.target.vehicle ~= nil then
-        local spec = self.target.vehicle.spec_machine
+function MachineSettingsFrame:onClickSelectMachine()
+    g_selectMachineDialog:setSelectCallback(self.selectMachineCallback, self)
+    g_selectMachineDialog:show(self.target.vehicle)
+end
 
-        g_selectMaterialDialog:setSelectCallback(self.selectMaterialCallback, self)
-        g_selectMaterialDialog:show(spec.fillTypeIndex)
+---@param vehicle Machine | nil
+function MachineSettingsFrame:selectMachineCallback(vehicle)
+    if vehicle ~= nil and self.target.vehicle ~= nil then
+        local spec = vehicle.spec_machine
+        local state = spec.state:clone()
+
+        self.target.vehicle:setMachineState(state)
+        self.target.vehicle:setMachineFillTypeIndex(spec.fillTypeIndex)
+        self.target.vehicle:setMachineInputLayerId(spec.inputTerrainLayerId)
+        self.target.vehicle:setMachineOutputLayerId(spec.outputTerrainLayerId)
     end
 end
 
----@param fillTypeIndex number | nil
-function MachineSettingsFrame:selectMaterialCallback(fillTypeIndex)
-    if self.target.vehicle ~= nil and fillTypeIndex ~= nil then
-        self.target.vehicle:setMachineFillTypeIndex(fillTypeIndex)
-    end
-end
-
-function MachineSettingsFrame:onClickSelectTerrainLayer()
-    if self.target.vehicle ~= nil then
-        local spec = self.target.vehicle.spec_machine
-
-        g_selectTerrainLayerDialog:setSelectCallback(self.selectTerrainLayerCallback, self)
-        g_selectTerrainLayerDialog:show(spec.terrainLayerId)
-    end
-end
-
----@param terrainLayerId number | nil
-function MachineSettingsFrame:selectTerrainLayerCallback(terrainLayerId)
-    if self.target.vehicle ~= nil and terrainLayerId ~= nil then
-        self.target.vehicle:setMachineTerrainLayerId(terrainLayerId)
-    end
-end
-
-function MachineSettingsFrame:onClickSelectDischargeTerrainLayer()
-    if self.target.vehicle ~= nil then
-        local spec = self.target.vehicle.spec_machine
-
-        g_selectTerrainLayerDialog:setSelectCallback(self.selectDischargeTerrainLayerCallback, self)
-        g_selectTerrainLayerDialog:show(spec.dischargeTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
-    end
-end
-
----@param terrainLayerId number | nil
-function MachineSettingsFrame:selectDischargeTerrainLayerCallback(terrainLayerId)
-    if self.target.vehicle ~= nil and terrainLayerId ~= nil then
-        self.target.vehicle:setMachineDischargeTerrainLayerId(terrainLayerId)
-    end
+function MachineSettingsFrame:onClickDrivingDirectionModeOption(state)
+    self:setStateProperty('drivingDirectionMode', state)
 end
