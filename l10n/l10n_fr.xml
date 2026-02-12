@@ -150,6 +150,8 @@
         <text name="ui_stateDensityRadiusModifierTooltip" text="" />
         <text name="ui_stateInputRatio" text="Ratio d'entrée" />
         <text name="ui_stateInputRatioTooltip" text="" />
+        <text name="ui_stateOutputRatio" text="Output ratio" />
+        <text name="ui_stateOutputRatioTooltip" text="Material output ratio" />
 
         <!-- Machine types -->
         <text name="machineType_compactor" text="Compacteur" />

@@ -8,7 +8,7 @@
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Alternar modo de saída" />
         <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir o diálogo de material" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir o diálogo de textura do solo" />
-		<text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Abrir a caixa de diálogo de textura de solo de descarga" />																								  
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Abrir a caixa de diálogo de textura de solo de descarga" />
         <text name="input_MACHINE_SELECT_SURVEYOR" text="Abrir o diálogo do agrimensor" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir o diálogo de configurações globais" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Alternar a visibilidade do HUD" />
@@ -24,10 +24,10 @@
         <text name="ui_materialSettings" text="Configurações de material" />
         <text name="ui_material" text="Material" />
         <text name="ui_texture" text="Textura" />
-		<text name="ui_dischargeTexture" text="Textura de descarga" />															
+        <text name="ui_dischargeTexture" text="Textura de descarga" />
         <text name="ui_changeMaterial" text="Mudar material" />
         <text name="ui_changeTexture" text="Mudar textura" />
-		<text name="ui_changeDischargeTexture" text="Mudança na textura de descarga" />																		 
+        <text name="ui_changeDischargeTexture" text="Mudança na textura de descarga" />
         <text name="ui_circle" text="Círculo" />
         <text name="ui_square" text="Quadrado" />
         <text name="ui_terrainDeformation" text="Deformação de terreno" />
@@ -42,10 +42,10 @@
         <text name="ui_copySettingsTooltip" text="Copiar configurações da máquina de outro veículo" />
         <text name="ui_areaModifiers" text="Modificadores de área" />
         <text name="ui_postDeformation" text="Pós-deformação" />
-		<text name="ui_operator" text="Operador" />
+        <text name="ui_operator" text="Operador" />
         <text name="ui_angle" text="Ângulo" />
         <text name="ui_startOffset" text="Deslocamento inicial" />
-        <text name="ui_targetOffset" text="Deslocamento alvo" />													
+        <text name="ui_targetOffset" text="Deslocamento alvo" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Configurações da máquina" />
@@ -89,16 +89,16 @@
         <text name="ui_useTerrainTooltip" text="Habilitar calibração no terreno" />
         <text name="ui_notAvailable" text="Não disponível" />
         <text name="warning_unfoldSurveyor" text="Primeiro você precisa desdobrar a ferramenta!" />
-		<text name="foldSurveyor" text="Dobrar o agrimensor" />
-        <text name="unfoldSurveyor" text="Desdobrar o agrimensor" /> 
+        <text name="foldSurveyor" text="Dobrar o agrimensor" />
+        <text name="unfoldSurveyor" text="Desdobrar o agrimensor" />
 
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Habilitar TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Habilitar máquinas por padrão" />
         <text name="ui_mapResources" text="Recursos do mapas" />
-		<text name="ui_globalResourcesEnabled" text="Habilitar recursos do mapa" />																			 
+        <text name="ui_globalResourcesEnabled" text="Habilitar recursos do mapa" />
         <text name="ui_displayMode" text="Modo de exibição do HUD" />
-		<text name="ui_debug" text="Depurar" />									 
+        <text name="ui_debug" text="Depurar" />
         <text name="ui_debugNodes" text="Depuração dos nós da máquina" />
         <text name="ui_debugCalibration" text="Depuração da calibração da máquina" />
 
@@ -149,6 +149,8 @@
         <text name="ui_stateDensityRadiusModifierTooltip" text="Altera o raio da densidade durante a terraformação" />
         <text name="ui_stateInputRatio" text="Taxa de entrada" />
         <text name="ui_stateInputRatioTooltip" text="" />
+        <text name="ui_stateOutputRatio" text="Output ratio" />
+        <text name="ui_stateOutputRatioTooltip" text="Material output ratio" />
 
         <!-- Machine types -->
         <text name="machineType_compactor" text="Compactador" />

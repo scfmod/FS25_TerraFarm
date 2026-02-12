@@ -158,7 +158,8 @@
         <text name="ui_stateDensityRadiusModifierTooltip" text="Post deformation radius modifier" />
         <text name="ui_stateInputRatio" text="Input ratio" />
         <text name="ui_stateInputRatioTooltip" text="Material input ratio" />
-        <text name="ui_stateInputRatioTooltip" text="" />
+        <text name="ui_stateOutputRatio" text="Output ratio" />
+        <text name="ui_stateOutputRatioTooltip" text="Material output ratio" />
 
         <!-- Machine types -->
         <text name="machineType_compactor" text="Compactor" />
