@@ -152,6 +152,8 @@ Ingame menu
 
 Machine settings
 ![Machine settings](./docs/images/machine_settings.webp)
+![Input](./docs/images/machine_input.webp)
+![Output](./docs/images/machine_output.webp)
 
 Global settings
 ![Global settings](./docs/images/global_settings.webp)
