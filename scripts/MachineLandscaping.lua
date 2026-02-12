@@ -8,6 +8,14 @@ LandscapingOperation = {
     PAINT = 6
 }
 
+LANDSCAPING_OPERATION_TO_STRING = {
+    [LandscapingOperation.FLATTEN] = 'FLATTEN',
+    [LandscapingOperation.SLOPE] = 'SLOPE',
+    [LandscapingOperation.SMOOTH] = 'SMOOTH',
+    [LandscapingOperation.LOWER] = 'LOWER',
+    [LandscapingOperation.RAISE] = 'RAISE',
+}
+
 ---@class MachineLandscaping
 ---@field workArea MachineWorkArea
 ---@field vehicle Machine
@@ -50,81 +58,19 @@ function MachineLandscaping.new(operation, workArea, customMt)
     self.terrainUnit = getTerrainHeightmapUnitSize(g_terrainNode)
     self.halfTerrainUnit = self.terrainUnit / 2
 
-    self.radius = self.state.radius
-    self.strength = self.state.strength
-    self.hardness = self.state.hardness
-    self.terrainLayerId = self.vehicle.spec_machine.terrainLayerId or 0
+    self.terrainLayerId = 0
     self.heightChangeAmount = 0.05
-    self.brushShape = self.state.brushShape
+    self.brushShape = Landscaping.BRUSH_SHAPE.CIRCLE
     self.fillType = g_fillTypeManager:getFillTypeByIndex(self.vehicle.spec_machine.fillTypeIndex)
     self.yield = 1
 
     return self
 end
 
-function MachineLandscaping:verifyAndApplyMapResources()
+function MachineLandscaping:checkMapResources()
     if g_resourceManager:getIsActive() and self.vehicle.spec_machine.resourcesEnabled then
-        local worldPosX, _, worldPosZ = getWorldTranslation(self.workArea.rootNode)
-        local layer = g_resourceManager:getResourceLayerAtWorldPos(worldPosX, worldPosZ)
-
-        if layer ~= nil then
-            self.terrainLayerId = g_resourceManager:getResourcePaintLayerId(layer, false)
-
-            local fillType = g_fillTypeManager:getFillTypeByName(layer.fillTypeName)
-
-            if fillType ~= nil then
-                self.fillType = fillType
-            end
-
-            self.yield = layer.yield
-        end
+        self:applyMapResources()
     end
-end
-
-function MachineLandscaping:apply()
-    local deformation = self:createTerrainDeformation()
-    local paintDeformation = self:createPaintDeformation()
-
-    local densityRadius = self.radius * self.state.densityModifier
-    local paintRadius = self.radius * self.state.paintModifier
-
-    if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.workArea.nodeActive[node] then
-                deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, -1)
-                MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
-                MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
-
-                if paintDeformation ~= nil then
-                    paintDeformation:addSoftCircleBrush(position[1], position[3], paintRadius, 0.2, 0.5, self.terrainLayerId)
-                end
-            end
-        end
-    else
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.workArea.nodeActive[node] then
-                deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, -1)
-                MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], self.radius * 2)
-                MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
-
-                if paintDeformation ~= nil then
-                    paintDeformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, 0.2, 0.5, self.terrainLayerId)
-                end
-            end
-        end
-    end
-
-    if #self.modifiedAreas == 0 then
-        deformation:delete()
-        return
-    end
-
-    deformation:setOutsideAreaConstraints(0, math.rad(75), math.rad(75))
-    deformation:setBlockedAreaMaxDisplacement(0)
-    deformation:setDynamicObjectCollisionMask(0)
-    deformation:setDynamicObjectMaxDisplacement(0)
-
-    deformation:apply(false, 'onDeformationCallback', self)
 end
 
 ---@param code number
@@ -133,7 +79,6 @@ function MachineLandscaping:onDeformationCallback(code, volume)
     if code == TerrainDeformation.STATE_SUCCESS then
         self:onDeformationSuccess(volume)
     else
-        print('onDeformationCallback error code: ' .. tostring(code))
         self.deformation:cancel()
 
         if self.paintDeformation ~= nil then
@@ -200,16 +145,10 @@ function MachineLandscaping:onPaintDeformationCallback(code, volume)
     -- void
 end
 
----@return TerrainDeformation | nil
+---@return TerrainDeformation?
 ---@nodiscard
 function MachineLandscaping:createPaintDeformation()
-    if self.state.enablePaintGroundTexture then
-        self.paintDeformation = MachineUtils.createTerrainDeformation()
-
-        self.paintDeformation:enablePaintingMode()
-
-        return self.paintDeformation
-    end
+    assert(false, 'MachineLandscaping:createPaintDeformation() must be handled by inherited class!')
 end
 
 ---@param volume number
@@ -222,4 +161,12 @@ end
 function MachineLandscaping:createTerrainDeformation()
     ---@diagnostic disable-next-line: missing-return
     assert(false, 'MachineLandscaping:createTerrainDeformation() must be handled by inherited class!')
+end
+
+function MachineLandscaping:applyMapResources()
+    assert(false, 'MachineLandscaping:applyMapResources() must be handled by inherited class!')
+end
+
+function MachineLandscaping:apply()
+    assert(false, 'MachineLandscaping:apply() must be handled by inherited class!')
 end

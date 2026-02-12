@@ -1,13 +1,13 @@
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineActiveEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineEnabledEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineFillTypeEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputModeEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputModeEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineResourcesEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineStateEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineSurveyorEvent.lua')
-source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineTerrainLayerEvent.lua')
-source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineDischargeTerrainLayerEvent.lua')
 
 ---@class Machine : Vehicle, FillUnit, FillVolume, TurnOnVehicle, Cylindered, Enterable, Dischargeable, Shovel
 ---@field spec_attachable AttachableSpecialization
@@ -195,20 +195,18 @@ function Machine.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, 'setMachineFillTypeIndex', Machine.setMachineFillTypeIndex)
     SpecializationUtil.registerFunction(vehicleType, 'getMachineFillTypeIndex', Machine.getMachineFillTypeIndex)
 
-    SpecializationUtil.registerFunction(vehicleType, 'setMachineTerrainLayerId', Machine.setMachineTerrainLayerId)
-    SpecializationUtil.registerFunction(vehicleType, 'getMachineTerrainLayerId', Machine.getMachineTerrainLayerId)
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineInputLayerId', Machine.setMachineInputLayerId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineInputLayerId', Machine.getMachineInputLayerId)
 
-    SpecializationUtil.registerFunction(vehicleType, 'setMachineDischargeTerrainLayerId', Machine.setMachineDischargeTerrainLayerId)
-    SpecializationUtil.registerFunction(vehicleType, 'getMachineDichargeTerrainLayerId', Machine.getMachineDischargeTerrainLayerId)
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineOutputLayerId', Machine.setMachineOutputLayerId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineOutputLayerId', Machine.getMachineOutputLayerId)
 
     SpecializationUtil.registerFunction(vehicleType, 'getCanAccessMachine', Machine.getCanAccessMachine)
     SpecializationUtil.registerFunction(vehicleType, 'getCanActivateMachine', Machine.getCanActivateMachine)
     SpecializationUtil.registerFunction(vehicleType, 'getIsAvailable', Machine.getIsAvailable)
-    SpecializationUtil.registerFunction(vehicleType, 'getIsEmpty', Machine.getIsEmpty)
     SpecializationUtil.registerFunction(vehicleType, 'getIsFull', Machine.getIsFull)
 
-    SpecializationUtil.registerFunction(vehicleType, 'updateWorkArea', Machine.updateWorkArea)
-    SpecializationUtil.registerFunction(vehicleType, 'workAreaInput', Machine.workAreaInput)
+    SpecializationUtil.registerFunction(vehicleType, 'handleDeformationInput', Machine.handleDeformationInput)
     SpecializationUtil.registerFunction(vehicleType, 'setResourcesEnabled', Machine.setResourcesEnabled)
 
     SpecializationUtil.registerFunction(vehicleType, 'setSurveyorId', Machine.setSurveyorId)
@@ -310,8 +308,8 @@ function Machine:onLoad()
     spec.inputMode = Machine.MODE.MATERIAL
     spec.outputMode = Machine.MODE.MATERIAL
 
-    spec.terrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
-    spec.dischargeTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
+    spec.inputTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
+    spec.outputTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
     spec.fillTypeIndex = g_resourceManager:getDefaultFillTypeIndex()
 
     spec.hasAttachable = SpecializationUtil.hasSpecialization(Attachable, self.specializations)
@@ -573,16 +571,16 @@ function Machine:saveToXMLFile(xmlFile, key)
         xmlFile:setValue(key .. '#fillType', fillType.name)
     end
 
-    if spec.terrainLayerId ~= nil then
-        local layerName = getTerrainLayerName(g_terrainNode, spec.terrainLayerId)
+    if spec.inputTerrainLayerId ~= nil then
+        local layerName = getTerrainLayerName(g_terrainNode, spec.inputTerrainLayerId)
 
         if layerName ~= nil then
             xmlFile:setValue(key .. '#terrainLayer', layerName)
         end
     end
 
-    if spec.dischargeTerrainLayerId ~= nil then
-        local layerName = getTerrainLayerName(g_terrainNode, spec.dischargeTerrainLayerId)
+    if spec.outputTerrainLayerId ~= nil then
+        local layerName = getTerrainLayerName(g_terrainNode, spec.outputTerrainLayerId)
 
         if layerName ~= nil then
             xmlFile:setValue(key .. '#dischargeTerrainLayer', layerName)
@@ -630,7 +628,7 @@ function Machine:loadFromXMLFile(xmlFile, key)
         local layer = g_resourceManager:getTerrainLayerByName(terrainLayerName)
 
         if layer ~= nil then
-            self:setMachineTerrainLayerId(layer.id, true)
+            self:setMachineInputLayerId(layer.id, true)
         end
     end
 
@@ -640,7 +638,7 @@ function Machine:loadFromXMLFile(xmlFile, key)
         local layer = g_resourceManager:getTerrainLayerByName(dischargeTerrainLayerName)
 
         if layer ~= nil then
-            self:setMachineDischargeTerrainLayerId(layer.id, true)
+            self:setMachineOutputLayerId(layer.id, true)
         end
     end
 
@@ -801,42 +799,42 @@ end
 
 ---@param terrainLayerId number
 ---@param noEventSend boolean | nil
-function Machine:setMachineTerrainLayerId(terrainLayerId, noEventSend)
+function Machine:setMachineInputLayerId(terrainLayerId, noEventSend)
     local spec = self.spec_machine
 
-    if spec.terrainLayerId ~= terrainLayerId then
-        SetMachineTerrainLayerEvent.sendEvent(self, terrainLayerId, noEventSend)
+    if spec.inputTerrainLayerId ~= terrainLayerId then
+        SetMachineInputLayerEvent.sendEvent(self, terrainLayerId, noEventSend)
 
-        spec.terrainLayerId = terrainLayerId
+        spec.inputTerrainLayerId = terrainLayerId
 
-        g_messageCenter:publish(SetMachineTerrainLayerEvent, self, terrainLayerId)
+        g_messageCenter:publish(SetMachineInputLayerEvent, self, terrainLayerId)
     end
 end
 
 ---@return number
 ---@nodiscard
-function Machine:getMachineTerrainLayerId()
-    return self.spec_machine.terrainLayerId
+function Machine:getMachineInputLayerId()
+    return self.spec_machine.inputTerrainLayerId
 end
 
 ---@param terrainLayerId number
 ---@param noEventSend boolean | nil
-function Machine:setMachineDischargeTerrainLayerId(terrainLayerId, noEventSend)
+function Machine:setMachineOutputLayerId(terrainLayerId, noEventSend)
     local spec = self.spec_machine
 
-    if spec.dischargeTerrainLayerId ~= terrainLayerId then
-        SetMachineDischargeTerrainLayerEvent.sendEvent(self, terrainLayerId, noEventSend)
+    if spec.outputTerrainLayerId ~= terrainLayerId then
+        SetMachineOutputLayerEvent.sendEvent(self, terrainLayerId, noEventSend)
 
-        spec.dischargeTerrainLayerId = terrainLayerId
+        spec.outputTerrainLayerId = terrainLayerId
 
-        g_messageCenter:publish(SetMachineDischargeTerrainLayerEvent, self, terrainLayerId)
+        g_messageCenter:publish(SetMachineOutputLayerEvent, self, terrainLayerId)
     end
 end
 
 ---@return number
 ---@nodiscard
-function Machine:getMachineDischargeTerrainLayerId()
-    return self.spec_machine.dischargeTerrainLayerId
+function Machine:getMachineOutputLayerId()
+    return self.spec_machine.outputTerrainLayerId
 end
 
 ---@param isActive boolean
@@ -899,13 +897,9 @@ function Machine:updateMachineSound(dt)
     end
 end
 
-function Machine:updateWorkArea()
-    self.spec_machine.workArea:update()
-end
-
 ---@param liters number
 ---@param fillTypeIndex number
-function Machine:workAreaInput(liters, fillTypeIndex)
+function Machine:handleDeformationInput(liters, fillTypeIndex)
     local spec = self.spec_machine
 
     if spec.hasFillUnit and spec.fillUnit ~= nil then
@@ -916,9 +910,10 @@ function Machine:workAreaInput(liters, fillTypeIndex)
         local offsetZ = -1
         local halfLength = 1
         local halfWidth = 1
+        local outputNode = spec.workArea.outputNode or spec.workArea.referenceNode
 
-        local sx, sy, sz = localToWorld(spec.workArea.referenceNode, -halfWidth, 0, -halfLength + offsetZ)
-        local ex, ey, ez = localToWorld(spec.workArea.referenceNode, halfWidth, 0, halfLength + offsetZ)
+        local sx, sy, sz = localToWorld(outputNode, -halfWidth, 0, -halfLength + offsetZ)
+        local ex, ey, ez = localToWorld(outputNode, halfWidth, 0, halfLength + offsetZ)
 
         DensityMapHeightUtil.tipToGroundAroundLine(
             self, liters, fillTypeIndex or spec.fillTypeIndex,
@@ -944,7 +939,7 @@ function Machine:dischargeToGround(emptyLiters)
     end
 
     ---@type number, number
-    local fillTypeIndex, factor = self:getDischargeFillType(spec.dischargeNode)
+    local fillTypeIndex, conversionFactor = self:getDischargeFillType(spec.dischargeNode)
     local fillLevel = self:getFillUnitFillLevel(spec.dischargeNode.fillUnitIndex)
     local minLiterToDrop = g_densityMapHeightManager:getMinValidLiterValue(fillTypeIndex)
 
@@ -954,19 +949,9 @@ function Machine:dischargeToGround(emptyLiters)
     local hasMinDropFillLevel = minLiterToDrop < fillLevel
     local dischargedLiters = 0
 
-    local dropped = 0
+    local dropped = spec.workArea:output(spec.outputMode, spec.dischargeNode.litersToDrop * conversionFactor, fillTypeIndex)
 
-    if spec.outputMode == Machine.MODE.RAISE then
-        dropped = spec.workArea:raise(spec.dischargeNode.litersToDrop * factor, fillTypeIndex)
-    elseif spec.outputMode == Machine.MODE.FLATTEN then
-        dropped = spec.workArea:flattenDischarge(spec.dischargeNode.litersToDrop * factor, fillTypeIndex)
-    elseif spec.outputMode == Machine.MODE.SMOOTH then
-        dropped = spec.workArea:smoothDischarge(spec.dischargeNode.litersToDrop * factor, fillTypeIndex)
-    elseif spec.outputMode == Machine.MODE.PAINT then
-        dropped = spec.workArea:paintDischarge()
-    end
-
-    dropped = dropped / factor
+    dropped = dropped / conversionFactor
     spec.dischargeNode.litersToDrop = math.max(0, spec.dischargeNode.litersToDrop - dropped)
 
     if dropped > 0 then
@@ -1009,18 +994,6 @@ end
 
 ---@return boolean
 ---@nodiscard
-function Machine:getIsEmpty()
-    local spec = self.spec_machine
-
-    if spec.hasFillUnit and spec.fillUnit ~= nil then
-        return spec.fillUnit.fillLevel < 0.01
-    end
-
-    return true
-end
-
----@return boolean
----@nodiscard
 function Machine:getIsFull()
     local spec = self.spec_machine
 
@@ -1036,11 +1009,6 @@ end
 ---@return boolean
 ---@nodiscard
 function Machine:getCanAccessMachine()
-    -- if self.isServer then
-    --     return MachineUtils.getPlayerHasPermission('landscaping', self:getOwner())
-    -- else
-    --     return MachineUtils.getPlayerHasPermission('landscaping')
-    -- end
     return MachineUtils.getPlayerHasPermission('landscaping')
 end
 
@@ -1072,28 +1040,19 @@ function Machine:onUpdate(dt, isActiveForInput, isActiveForInputIgnoreSelection,
     local spec = self.spec_machine
 
     if (self.isServer and spec.active) or (self.isClient and g_modSettings:getIsEnabled() and spec.enabled and g_modSettings:getDebugNodes()) then
-        self:updateWorkArea()
+        spec.workArea:update()
     end
 
     if self.isServer then
         if self:getIsAvailable() then
-            if spec.workArea.isActive and spec.lastIntervalUpdate >= spec.updateInterval then
-                if spec.inputMode == Machine.MODE.FLATTEN then
-                    spec.workArea:flatten()
-                elseif spec.inputMode == Machine.MODE.SMOOTH then
-                    spec.workArea:smooth()
-                elseif spec.inputMode == Machine.MODE.LOWER then
-                    spec.workArea:lower()
-                elseif spec.inputMode == Machine.MODE.PAINT then
-                    spec.workArea:paint()
-                end
-
+            if spec.workArea.isAreaNodeActive and spec.lastIntervalUpdate >= spec.updateInterval then
+                spec.workArea:input(spec.inputMode)
                 spec.lastIntervalUpdate = 0
             else
                 spec.lastIntervalUpdate = spec.lastIntervalUpdate + dt
             end
 
-            self:setMachineEffectActive(spec.workArea.isActive)
+            self:setMachineEffectActive(spec.workArea.isAreaNodeActive)
         else
             self:setMachineEffectActive(false)
         end
@@ -1224,8 +1183,8 @@ function Machine:onWriteStream(streamId, connection)
         streamWriteUIntN(streamId, spec.inputMode, Machine.NUM_BITS_MODE)
         streamWriteUIntN(streamId, spec.outputMode, Machine.NUM_BITS_MODE)
         streamWriteUIntN(streamId, spec.fillTypeIndex or 0, FillTypeManager.SEND_NUM_BITS)
-        streamWriteUIntN(streamId, spec.terrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
-        streamWriteUIntN(streamId, spec.dischargeTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
+        streamWriteUIntN(streamId, spec.inputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
+        streamWriteUIntN(streamId, spec.outputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
 
         spec.state:writeStream(streamId, connection)
     end
@@ -1251,8 +1210,8 @@ function Machine:onReadStream(streamId, connection)
         self:setInputMode(streamReadUIntN(streamId, Machine.NUM_BITS_MODE), true)
         self:setOutputMode(streamReadUIntN(streamId, Machine.NUM_BITS_MODE), true)
         self:setMachineFillTypeIndex(streamReadUIntN(streamId, FillTypeManager.SEND_NUM_BITS), true)
-        self:setMachineTerrainLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
-        self:setMachineDischargeTerrainLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
+        self:setMachineInputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
+        self:setMachineOutputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
 
         spec.state:readStream(streamId, connection)
     end
@@ -1574,13 +1533,13 @@ function Machine:actionEventSelectTerrainLayer()
     local spec = self.spec_machine
 
     g_selectTerrainLayerDialog:setSelectCallback(Machine.selectTerrainLayerCallback, self)
-    g_selectTerrainLayerDialog:show(spec.terrainLayerId)
+    g_selectTerrainLayerDialog:show(spec.inputTerrainLayerId)
 end
 
 ---@param terrainLayerId number | nil
 function Machine:selectTerrainLayerCallback(terrainLayerId)
     if terrainLayerId ~= nil then
-        self:setMachineTerrainLayerId(terrainLayerId)
+        self:setMachineInputLayerId(terrainLayerId)
     end
 end
 
@@ -1588,13 +1547,13 @@ function Machine:actionEventSelectDischargeTerrainLayer()
     local spec = self.spec_machine
 
     g_selectTerrainLayerDialog:setSelectCallback(Machine.selectDischargeTerrainLayerCallback, self)
-    g_selectTerrainLayerDialog:show(spec.dischargeTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
+    g_selectTerrainLayerDialog:show(spec.outputTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
 end
 
 ---@param terrainLayerId number | nil
 function Machine:selectDischargeTerrainLayerCallback(terrainLayerId)
     if terrainLayerId ~= nil then
-        self:setMachineDischargeTerrainLayerId(terrainLayerId)
+        self:setMachineOutputLayerId(terrainLayerId)
     end
 end
 
@@ -1630,7 +1589,7 @@ function Machine:getCanDischargeToGround(superFunc, dischargeNode)
                     return true
                 end
 
-                return spec.workArea:getCanOutput()
+                return spec.workArea:getCanOutputToTerrain()
             elseif not spec.state.enableOutputMaterial then
                 return false
             end

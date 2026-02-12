@@ -40,19 +40,17 @@ local function registerMachineFunctions(vehicle)
     vehicle['setMachineFillTypeIndex'] = Machine.setMachineFillTypeIndex
     vehicle['getMachineFillTypeIndex'] = Machine.getMachineFillTypeIndex
 
-    vehicle['setMachineTerrainLayerId'] = Machine.setMachineTerrainLayerId
-    vehicle['getMachineTerrainLayerId'] = Machine.getMachineTerrainLayerId
-    vehicle['setMachineDischargeTerrainLayerId'] = Machine.setMachineDischargeTerrainLayerId
-    vehicle['getMachineDischargeTerrainLayerId'] = Machine.getMachineDischargeTerrainLayerId
+    vehicle['setMachineInputLayerId'] = Machine.setMachineInputLayerId
+    vehicle['getMachineInputLayerId'] = Machine.getMachineInputLayerId
+    vehicle['setMachineOutputLayerId'] = Machine.setMachineOutputLayerId
+    vehicle['getMachineOutputLayerId'] = Machine.getMachineOutputLayerId
 
     vehicle['getCanAccessMachine'] = Machine.getCanAccessMachine
     vehicle['getCanActivateMachine'] = Machine.getCanActivateMachine
     vehicle['getIsAvailable'] = Machine.getIsAvailable
-    vehicle['getIsEmpty'] = Machine.getIsEmpty
     vehicle['getIsFull'] = Machine.getIsFull
 
-    vehicle['updateWorkArea'] = Machine.updateWorkArea
-    vehicle['workAreaInput'] = Machine.workAreaInput
+    vehicle['handleDeformationInput'] = Machine.handleDeformationInput
     vehicle['setResourcesEnabled'] = Machine.setResourcesEnabled
 
     vehicle['setSurveyorId'] = Machine.setSurveyorId

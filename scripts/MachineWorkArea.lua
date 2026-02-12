@@ -3,15 +3,21 @@
 ---@field machineType MachineType
 ---@field referenceNode number
 ---@field rootNode number
----@field nodes number[]
 ---@field width number
 ---@field offset Position
 ---@field rotation Position
----@field isActive boolean
 ---
----@field nodeActive table<number, boolean>
----@field nodePosition table<number, Position>
----@field nodeTerrainY table<number, number>
+---@field areaNodes number[]
+---@field areaNodeActive table<number, boolean>
+---@field areaNodePosition table<number, Position>
+---@field areaNodeTerrainY table<number, number>
+---@field isAreaNodeActive boolean
+---
+---@field outputNode number?
+---@field outputNodeActive boolean
+---@field outputNodePosition Position
+---@field outputNodeTerrainY number
+---@field outputOffset Position
 ---
 ---@field density number
 ---@field raycastHitTerrain boolean
@@ -29,6 +35,7 @@ function MachineWorkArea.registerXMLPaths(schema, key)
     schema:register(XMLValueType.FLOAT, key .. '#density', 'Node density', 0.75)
     schema:register(XMLValueType.VECTOR_3, key .. '#offset', 'Offset position from reference node', '0 0 0')
     schema:register(XMLValueType.VECTOR_ROT, key .. '#rotation', 'Rotation in degrees', '0 0 0')
+    schema:register(XMLValueType.VECTOR_3, key .. '#outputOffset', 'Output node offset position from center of area', '0 0 0', false)
 end
 
 ---@param vehicle Machine
@@ -40,14 +47,18 @@ function MachineWorkArea.new(vehicle)
 
     self.vehicle = vehicle
     self.machineType = vehicle.spec_machine.machineType
-    self.isActive = false
-    -- self.density = 0.75
+    self.isAreaNodeActive = false
     self.density = 0.5
 
-    self.nodes = {}
-    self.nodeActive = {}
-    self.nodePosition = {}
-    self.nodeTerrainY = {}
+    self.areaNodes = {}
+    self.areaNodeActive = {}
+    self.areaNodePosition = {}
+    self.areaNodeTerrainY = {}
+
+    self.outputNode = nil
+    self.outputNodeActive = false
+    self.outputNodePosition = { 0, 0, 0 }
+    self.outputNodeTerrainY = 0
 
     self.raycastHitTerrain = false
     self.raycastDistance = 0.5
@@ -69,39 +80,30 @@ function MachineWorkArea:loadFromXMLFile(xmlFile, key)
     self.density = math.clamp(xmlFile:getValue(key .. '#density', self.density), 0.25, 4)
     self.offset = xmlFile:getValue(key .. '#offset', '0 0 0', true)
     self.rotation = xmlFile:getValue(key .. '#rotation', '0 0 0', true)
+    self.outputOffset = xmlFile:getValue(key .. '#outputOffset', '0 0 0', true)
     self.raycastDistance = xmlFile:getValue(key .. '#raycastDistance', self.raycastDistance)
 end
 
-function MachineWorkArea:rebuild()
-    -- Logging.info('MachineWorkArea:rebuild()')
+function MachineWorkArea:createOutputNode()
+    self.outputNode = createTransformGroup('output_node')
 
-    self.isActive = false
-    self.nodeActive = {}
-    self.nodePosition = {}
-    self.nodeTerrainY = {}
-
-    for _, node in ipairs(self.nodes) do
-        delete(node)
-    end
-
-    self.nodes = {}
-
-    self:createNodes()
+    link(self.rootNode, self.outputNode)
+    setTranslation(self.outputNode, self.outputOffset[1], self.outputOffset[2], self.outputOffset[3])
 end
 
-function MachineWorkArea:createNodes()
+function MachineWorkArea:createAreaNodes()
     local halfWidth = self.width / 2
     local z = 0
 
     if self.width < 0.5 then
-        self:addWorkAreaNode(0, 0, z)
+        self:addAreaNode(0, 0, z)
     elseif self.width < 0.8 then
-        self:addWorkAreaNode(-halfWidth, 0, z)
-        self:addWorkAreaNode(halfWidth, 0, z)
+        self:addAreaNode(-halfWidth, 0, z)
+        self:addAreaNode(halfWidth, 0, z)
     elseif self.width < 1.5 then
-        self:addWorkAreaNode(-halfWidth, 0, z)
-        self:addWorkAreaNode(0, 0, z)
-        self:addWorkAreaNode(halfWidth, 0, z)
+        self:addAreaNode(-halfWidth, 0, z)
+        self:addAreaNode(0, 0, z)
+        self:addAreaNode(halfWidth, 0, z)
     else
         local numOfNodes = MathUtil.round(self.width / self.density)
         local distance = self.width / numOfNodes
@@ -109,7 +111,7 @@ function MachineWorkArea:createNodes()
         for i = 0, numOfNodes do
             local x = -halfWidth + (i * distance)
 
-            self:addWorkAreaNode(x, 0, z)
+            self:addAreaNode(x, 0, z)
         end
     end
 end
@@ -180,7 +182,11 @@ function MachineWorkArea:initialize()
     setTranslation(self.rootNode, self.offset[1], self.offset[2], self.offset[3])
     setRotation(self.rootNode, self.rotation[1], self.rotation[2], self.rotation[3])
 
-    self:createNodes()
+    self:createAreaNodes()
+
+    if MachineUtils.getHasOutputs(self.vehicle) then
+        self:createOutputNode()
+    end
 
     return true
 end
@@ -188,44 +194,81 @@ end
 ---@param x number
 ---@param y number
 ---@param z number
-function MachineWorkArea:addWorkAreaNode(x, y, z)
+function MachineWorkArea:addAreaNode(x, y, z)
     local node = createTransformGroup('node')
 
     link(self.rootNode, node)
     setTranslation(node, x, y, z)
 
-    table.insert(self.nodes, node)
+    table.insert(self.areaNodes, node)
+
+    self.areaNodePosition[node] = { 0, 0, 0 }
+    self.areaNodeTerrainY[node] = 0
+    self.areaNodeActive[node] = false
 end
 
 function MachineWorkArea:update()
-    self.isActive = false
+    self.isAreaNodeActive = false
 
-    for _, node in ipairs(self.nodes) do
-        local x, y, z = getWorldTranslation(node)
-        local h = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
-        local active = h >= y
+    if self.outputNode ~= nil then
+        self.outputNodePosition[1], self.outputNodePosition[2], self.outputNodePosition[3] = getWorldTranslation(self.outputNode)
+        self.outputNodeTerrainY = getTerrainHeightAtWorldPos(g_terrainNode, self.outputNodePosition[1], 0, self.outputNodePosition[3])
+        self.outputNodeActive = self.outputNodeTerrainY >= self.outputNodePosition[2]
+    end
 
-        self.nodePosition[node] = { x, y, z }
-        self.nodeTerrainY[node] = h
-        self.nodeActive[node] = active
+    for _, node in ipairs(self.areaNodes) do
+        local position = self.areaNodePosition[node]
 
-        if active then
-            self.isActive = true
+        position[1], position[2], position[3] = getWorldTranslation(node)
+
+        self.areaNodeTerrainY[node] = getTerrainHeightAtWorldPos(g_terrainNode, position[1], 0, position[3])
+        self.areaNodeActive[node] = self.areaNodeTerrainY[node] >= position[2]
+
+        if self.areaNodeActive[node] then
+            self.isAreaNodeActive = true
         end
     end
 end
 
-function MachineWorkArea:paint()
-    local op = LandscapingPaint.new(self)
-    op:apply()
+---@param mode MachineMode
+function MachineWorkArea:input(mode)
+    if mode == Machine.MODE.PAINT then
+        local op = LandscapingInputPaint.new(self)
+        op:apply()
+    elseif mode == Machine.MODE.LOWER then
+        local op = LandscapingInputLower.new(self)
+        op:apply()
+    elseif mode == Machine.MODE.SMOOTH then
+        local op = LandscapingInputSmooth.new(self)
+        op:apply()
+    elseif mode == Machine.MODE.FLATTEN then
+        self:flatten()
+    end
 end
 
-function MachineWorkArea:paintDischarge()
-    local op = LandscapingPaintDischarge.new(self)
+---@param mode MachineMode
+---@param liters number
+---@param fillTypeIndex number
+---@return number litersDropped
+---@nodiscard
+function MachineWorkArea:output(mode, liters, fillTypeIndex)
+    if mode == Machine.MODE.PAINT then
+        local op = LandscapingOutputPaint.new(self)
+        op:apply()
+        return op.outputLiters
+    elseif mode == Machine.MODE.RAISE then
+        local op = LandscapingOutputRaise.new(self, liters, fillTypeIndex)
+        op:apply()
+        return op.outputLiters
+    elseif mode == Machine.MODE.SMOOTH then
+        local op = LandscapingOutputSmooth.new(self, liters, fillTypeIndex)
+        op:apply()
+        return op.outputLiters
+    elseif mode == Machine.MODE.FLATTEN then
+        return self:flattenDischarge(liters, fillTypeIndex)
+    end
 
-    op:apply()
-
-    return op.droppedLiters
+    return 0
 end
 
 function MachineWorkArea:flatten()
@@ -241,7 +284,7 @@ function MachineWorkArea:flatten()
 
             if slopeAngle ~= 0 then
                 local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
-                local op = LandscapingSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY)
+                local op = LandscapingInputSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY)
                 op:apply()
                 return
             end
@@ -250,7 +293,7 @@ function MachineWorkArea:flatten()
         targetWorldY = y1
     end
 
-    local op = LandscapingFlatten.new(self, targetWorldY)
+    local op = LandscapingInputFlatten.new(self, targetWorldY)
 
     op:apply()
 end
@@ -272,54 +315,20 @@ function MachineWorkArea:flattenDischarge(litersToDrop, fillTypeIndex)
 
             if slopeAngle ~= 0 then
                 local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
-                local op = LandscapingSlopeDischarge.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY, litersToDrop, fillTypeIndex)
+                local op = LandscapingOutputSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY, litersToDrop, fillTypeIndex)
                 op:apply()
-                return op.droppedLiters
+                return op.outputLiters
             end
         end
 
         targetWorldY = y1
     end
 
-    local op = LandscapingFlattenDischarge.new(self, targetWorldY, litersToDrop, fillTypeIndex)
+    local op = LandscapingOutputFlatten.new(self, targetWorldY, litersToDrop, fillTypeIndex)
 
     op:apply()
 
-    return op.droppedLiters
-end
-
-function MachineWorkArea:smooth()
-    local op = LandscapingSmooth.new(self)
-    op:apply()
-end
-
----@param litersToDrop number
----@param fillTypeIndex number
----@return number
----@nodiscard
-function MachineWorkArea:smoothDischarge(litersToDrop, fillTypeIndex)
-    local op = LandscapingSmoothDischarge.new(self, litersToDrop, fillTypeIndex)
-
-    op:apply()
-
-    return op.droppedLiters
-end
-
-function MachineWorkArea:lower()
-    local op = LandscapingLower.new(self)
-    op:apply()
-end
-
----@param litersToDrop number
----@param fillTypeIndex number
----@return number
----@nodiscard
-function MachineWorkArea:raise(litersToDrop, fillTypeIndex)
-    local op = LandscapingRaise.new(self, litersToDrop, fillTypeIndex)
-
-    op:apply()
-
-    return op.droppedLiters
+    return op.outputLiters
 end
 
 -- Get current calibration angle
@@ -340,8 +349,6 @@ function MachineWorkArea:getCalibrationAngle()
     return 0
 end
 
--- Get target height at current position
--- Calculated based on variable conditions
 ---@return number
 ---@nodiscard
 function MachineWorkArea:getTargetTerrainHeight()
@@ -372,25 +379,40 @@ function MachineWorkArea:getPosition()
 end
 
 ---@return boolean
-function MachineWorkArea:getCanOutput()
+---@nodiscard
+function MachineWorkArea:getCanOutputToTerrain()
+    if self.isAreaNodeActive or self.outputNodeActive then
+        return false
+    end
+
     local maxDistance = self.raycastDistance
-    local mask = CollisionFlag.TERRAIN + CollisionFlag.TERRAIN_DISPLACEMENT
+    local collisionMask = CollisionFlag.TERRAIN + CollisionFlag.TERRAIN_DISPLACEMENT
 
     self.raycastHitTerrain = false
 
-    local nodePosX, nodePosY, nodePosZ = self:getPosition()
+    if self.outputNode ~= nil then
+        raycastClosest(self.outputNodePosition[1], self.outputNodePosition[2], self.outputNodePosition[3], 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, collisionMask)
 
-    raycastClosest(nodePosX, nodePosY, nodePosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, mask)
+        if self.raycastHitTerrain then
+            return false
+        end
+    end
 
-    if not self.raycastHitTerrain and #self.nodes > 2 then
-        local firstPosX, firstPosY, firstPosZ = getWorldTranslation(self.nodes[1])
+    if #self.areaNodes > 0 then
+        local nodePosX, nodePosY, nodePosZ = self:getPosition()
 
-        raycastClosest(firstPosX, firstPosY, firstPosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, mask)
+        raycastClosest(nodePosX, nodePosY, nodePosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, collisionMask)
 
-        if not self.raycastHitTerrain then
-            local lastPosX, lastPosY, lastPosZ = getWorldTranslation(self.nodes[#self.nodes])
+        if not self.raycastHitTerrain and #self.areaNodes > 2 then
+            local firstPosX, firstPosY, firstPosZ = getWorldTranslation(self.areaNodes[1])
 
-            raycastClosest(lastPosX, lastPosY, lastPosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, mask)
+            raycastClosest(firstPosX, firstPosY, firstPosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, collisionMask)
+
+            if not self.raycastHitTerrain then
+                local lastPosX, lastPosY, lastPosZ = getWorldTranslation(self.areaNodes[#self.areaNodes])
+
+                raycastClosest(lastPosX, lastPosY, lastPosZ, 0, -1, 0, maxDistance, 'terrainRaycastCallback', self, collisionMask)
+            end
         end
     end
 

@@ -1,24 +1,24 @@
----@class SetMachineDischargeTerrainLayerEvent : Event
+---@class SetMachineOutputLayerEvent : Event
 ---@field vehicle Machine
 ---@field terrainLayerId number
-SetMachineDischargeTerrainLayerEvent = {}
+SetMachineOutputLayerEvent = {}
 
-local SetMachineDischargeTerrainLayerEvent_mt = Class(SetMachineDischargeTerrainLayerEvent, Event)
+local SetMachineOutputLayerEvent_mt = Class(SetMachineOutputLayerEvent, Event)
 
-InitEventClass(SetMachineDischargeTerrainLayerEvent, 'SetMachineDischargeTerrainLayerEvent')
+InitEventClass(SetMachineOutputLayerEvent, 'SetMachineOutputLayerEvent')
 
----@return SetMachineDischargeTerrainLayerEvent
+---@return SetMachineOutputLayerEvent
 ---@nodiscard
-function SetMachineDischargeTerrainLayerEvent.emptyNew()
-    return Event.new(SetMachineDischargeTerrainLayerEvent_mt)
+function SetMachineOutputLayerEvent.emptyNew()
+    return Event.new(SetMachineOutputLayerEvent_mt)
 end
 
 ---@param vehicle Machine
 ---@param terrainLayerId number
----@return SetMachineDischargeTerrainLayerEvent
+---@return SetMachineOutputLayerEvent
 ---@nodiscard
-function SetMachineDischargeTerrainLayerEvent.new(vehicle, terrainLayerId)
-    local self = SetMachineDischargeTerrainLayerEvent.emptyNew()
+function SetMachineOutputLayerEvent.new(vehicle, terrainLayerId)
+    local self = SetMachineOutputLayerEvent.emptyNew()
 
     self.vehicle = vehicle
     self.terrainLayerId = terrainLayerId
@@ -28,14 +28,14 @@ end
 
 ---@param streamId number
 ---@param connection Connection
-function SetMachineDischargeTerrainLayerEvent:writeStream(streamId, connection)
+function SetMachineOutputLayerEvent:writeStream(streamId, connection)
     NetworkUtil.writeNodeObject(streamId, self.vehicle)
     streamWriteUIntN(streamId, self.terrainLayerId, TerrainDeformation.LAYER_SEND_NUM_BITS)
 end
 
 ---@param streamId number
 ---@param connection Connection
-function SetMachineDischargeTerrainLayerEvent:readStream(streamId, connection)
+function SetMachineOutputLayerEvent:readStream(streamId, connection)
     self.vehicle = NetworkUtil.readNodeObject(streamId)
     self.terrainLayerId = streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS)
 
@@ -43,22 +43,22 @@ function SetMachineDischargeTerrainLayerEvent:readStream(streamId, connection)
 end
 
 ---@param connection Connection
-function SetMachineDischargeTerrainLayerEvent:run(connection)
+function SetMachineOutputLayerEvent:run(connection)
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, false, connection, self.vehicle)
     end
 
     if self.vehicle ~= nil and self.vehicle:getIsSynchronized() then
-        self.vehicle:setMachineDischargeTerrainLayerId(self.terrainLayerId, true)
+        self.vehicle:setMachineOutputLayerId(self.terrainLayerId, true)
     end
 end
 
 ---@param vehicle Machine
 ---@param terrainLayerId number
 ---@param noEventSend? boolean
-function SetMachineDischargeTerrainLayerEvent.sendEvent(vehicle, terrainLayerId, noEventSend)
+function SetMachineOutputLayerEvent.sendEvent(vehicle, terrainLayerId, noEventSend)
     if not noEventSend then
-        local event = SetMachineDischargeTerrainLayerEvent.new(vehicle, terrainLayerId)
+        local event = SetMachineOutputLayerEvent.new(vehicle, terrainLayerId)
 
         if g_server ~= nil then
             g_server:broadcastEvent(event, nil, nil, vehicle)

@@ -7,8 +7,8 @@ ModDebug.NODE_TEXT_SIZE = getCorrectTextSize(0.01)
 ModDebug.NODE_WORK_AREA = 0
 
 ModDebug.NODE_COLOR = {
-    DEFAULT = { 0.8, 0.42, 1, 1 },
-    TERRAIN = { 0, 1, 0, 1 },
+    DEFAULT = { 1, 0.3, 0, 1 },
+    TERRAIN = { 1, 0, 0, 1 },
     INACTIVE = { 0.4, 0.4, 0.4, 1 },
     INACTIVE_TERRAIN = { 0.9, 0.3, 0.3, 1 }
 }
@@ -91,9 +91,11 @@ function ModDebug:draw()
         local spec = vehicle.spec_machine
 
         if g_modSettings:getDebugNodes() then
-            for _, node in ipairs(spec.workArea.nodes) do
-                self:drawNode(vehicle, spec.workArea.nodePosition[node], spec.workArea.nodeActive[node])
+            for _, node in ipairs(spec.workArea.areaNodes) do
+                self:drawInputNode(spec.workArea, node)
             end
+
+            self:drawOutputNode(spec.workArea)
         end
 
         if g_modSettings:getDebugCalibration() and (spec.inputMode == Machine.MODE.FLATTEN or spec.outputMode == Machine.MODE.FLATTEN) then
@@ -114,34 +116,56 @@ function ModDebug:drawMachineTarget(vehicle)
     if surveyor ~= nil and surveyor:getIsCalibrated() then
         local spec = vehicle.spec_machine
         local targetHeight = spec.workArea:getTargetTerrainHeight()
-        local x, y, z = spec.workArea:getPosition()
+        local x, _, z = spec.workArea:getPosition()
 
-        DebugUtil.drawDebugCircle(x, targetHeight, z, 1.25, 16, ModDebug.NODE_COLOR.DEFAULT, false, true, true)
+        DebugUtil.drawDebugCircle(x, targetHeight, z, 0.5, 32, ModDebug.NODE_COLOR.DEFAULT, false, true, true)
+        DebugUtil.drawDebugCircle(x, targetHeight, z, spec.workArea.width / 2, 32, ModDebug.NODE_COLOR.INACTIVE, false, true, true)
     end
 end
 
----@param vehicle Machine
----@param position Position
----@param active boolean
-function ModDebug:drawNode(vehicle, position, active)
-    local spec = vehicle.spec_machine
+---@param workArea MachineWorkArea
+---@param node number
+function ModDebug:drawInputNode(workArea, node)
+    local color = ModDebug.NODE_COLOR.DEFAULT
 
-    if position ~= nil then
+    local position = workArea.areaNodePosition[node]
+    local isActive = workArea.areaNodeActive[node]
+
+    if isActive then
+        if workArea.vehicle:getMachineActive() then
+            color = ModDebug.NODE_COLOR.TERRAIN
+        else
+            color = ModDebug.NODE_COLOR.INACTIVE_TERRAIN
+        end
+    elseif not workArea.vehicle:getMachineActive() then
+        color = ModDebug.NODE_COLOR.INACTIVE
+    end
+
+    MachineUtils.renderTextAtWorldPosition(
+        position[1], position[2], position[3],
+        ModDebug.NODE_TEXT, ModDebug.NODE_TEXT_SIZE, 0, color, true
+    )
+end
+
+---@param workArea MachineWorkArea
+function ModDebug:drawOutputNode(workArea)
+    if workArea.outputNode ~= nil then
+        local position = workArea.outputNodePosition
         local color = ModDebug.NODE_COLOR.DEFAULT
 
-        if active then
-            if spec.active then
+        if workArea.outputNodeActive then
+            if workArea.vehicle:getMachineActive() then
                 color = ModDebug.NODE_COLOR.TERRAIN
             else
                 color = ModDebug.NODE_COLOR.INACTIVE_TERRAIN
             end
-        elseif not spec.active then
+        elseif not workArea.vehicle:getMachineActive() then
             color = ModDebug.NODE_COLOR.INACTIVE
         end
 
         MachineUtils.renderTextAtWorldPosition(
             position[1], position[2], position[3],
-            ModDebug.NODE_TEXT, ModDebug.NODE_TEXT_SIZE, 0, color, true
+            'X', ModDebug.NODE_TEXT_SIZE, 0, color, true
         )
     end
 end

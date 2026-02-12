@@ -7,15 +7,25 @@ DrivingDirectionMode = {
 }
 
 ---@class MachineState
----@field enableInputMaterial boolean
----@field enableOutputMaterial boolean
----@field enablePaintGroundTexture boolean
----@field enableEffects boolean -- Only enabled if #effects > 0
+---@field enableEffects boolean
+---@field autoDeactivate boolean
+---@field drivingDirectionMode DrivingDirectionMode
 ---
----@field radius number
----@field strength number
----@field hardness number
----@field brushShape number
+---@field inputRadius number
+---@field inputStrength number
+---@field inputHardness number
+---@field inputBrushShape number
+---@field inputRatio number
+---@field enableInputMaterial boolean
+---@field enableInputGroundTexture boolean
+---
+---@field outputRadius number
+---@field outputStrength number
+---@field outputHardness number
+---@field outputBrushShape number
+---@field outputRatio number
+---@field enableOutputMaterial boolean
+---@field enableOutputGroundTexture boolean
 ---
 ---@field paintModifier number
 ---@field densityModifier number
@@ -30,9 +40,6 @@ DrivingDirectionMode = {
 --- EXPERIMENTAL
 ---@field allowGradingUp boolean
 ---@field forceNodes boolean
----@field inputRatio number
----@field autoDeactivate boolean
----@field drivingDirectionMode DrivingDirectionMode
 MachineState = {}
 
 MachineState.SEND_NUM_BITS_DIRECTION_MODE = 3
@@ -42,15 +49,23 @@ local MachineState_mt = Class(MachineState)
 ---@param schema XMLSchema
 ---@param key string
 function MachineState.registerSavegameXMLPaths(schema, key)
-    schema:register(XMLValueType.BOOL, key .. '#enableInputMaterial')
-    schema:register(XMLValueType.BOOL, key .. '#enableOutputMaterial')
-    schema:register(XMLValueType.BOOL, key .. '#enablePaintGroundTexture')
     schema:register(XMLValueType.BOOL, key .. '#enableEffects')
 
-    schema:register(XMLValueType.FLOAT, key .. '#strength')
-    schema:register(XMLValueType.FLOAT, key .. '#radius')
-    schema:register(XMLValueType.FLOAT, key .. '#hardness')
-    schema:register(XMLValueType.INT, key .. '#brushShape')
+    schema:register(XMLValueType.FLOAT, key .. '#inputStrength')
+    schema:register(XMLValueType.FLOAT, key .. '#inputRadius')
+    schema:register(XMLValueType.FLOAT, key .. '#inputHardness')
+    schema:register(XMLValueType.INT, key .. '#inputBrushShape')
+    schema:register(XMLValueType.BOOL, key .. '#enableInputMaterial')
+    schema:register(XMLValueType.BOOL, key .. '#enableInputGroundTexture')
+    schema:register(XMLValueType.FLOAT, key .. '#inputRatio')
+
+    schema:register(XMLValueType.FLOAT, key .. '#outputStrength')
+    schema:register(XMLValueType.FLOAT, key .. '#outputRadius')
+    schema:register(XMLValueType.FLOAT, key .. '#outputHardness')
+    schema:register(XMLValueType.INT, key .. '#outputBrushShape')
+    schema:register(XMLValueType.BOOL, key .. '#enableOutputMaterial')
+    schema:register(XMLValueType.BOOL, key .. '#enableOutputGroundTexture')
+    schema:register(XMLValueType.FLOAT, key .. '#outputRatio')
 
     schema:register(XMLValueType.BOOL, key .. '#clearDecoArea')
     schema:register(XMLValueType.BOOL, key .. '#clearDensityMapHeightArea')
@@ -61,7 +76,6 @@ function MachineState.registerSavegameXMLPaths(schema, key)
 
     schema:register(XMLValueType.FLOAT, key .. '#paintModifier')
     schema:register(XMLValueType.FLOAT, key .. '#densityModifier')
-    schema:register(XMLValueType.FLOAT, key .. '#inputRatio')
 
     schema:register(XMLValueType.BOOL, key .. '#forceNodes')
     schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
@@ -75,9 +89,6 @@ function MachineState.new()
     ---@type MachineState
     local self = setmetatable({}, MachineState_mt)
 
-    self.enableInputMaterial = true
-    self.enableOutputMaterial = true
-    self.enablePaintGroundTexture = true
     self.enableEffects = true
 
     self.clearDecoArea = true
@@ -87,14 +98,24 @@ function MachineState.new()
     self.removeStoneArea = true
     self.removeWeedArea = true
 
-    self.radius = 2.0
-    self.strength = 0.25
-    self.hardness = 0.2
-    self.brushShape = Landscaping.BRUSH_SHAPE.CIRCLE
+    self.inputRadius = 2
+    self.inputStrength = 0.25
+    self.inputHardness = 0.2
+    self.inputBrushShape = Landscaping.BRUSH_SHAPE.CIRCLE
+    self.enableInputMaterial = true
+    self.enableInputGroundTexture = true
+    self.inputRatio = 1
+
+    self.outputRadius = 3
+    self.outputStrength = 0.25
+    self.outputHardness = 0.2
+    self.outputBrushShape = Landscaping.BRUSH_SHAPE.CIRCLE
+    self.enableOutputMaterial = true
+    self.enableOutputGroundTexture = true
+    self.outputRatio = 1
 
     self.paintModifier = 0.75
     self.densityModifier = 0.75
-    self.inputRatio = 1.0
 
     self.allowGradingUp = false
     self.forceNodes = false
@@ -104,18 +125,53 @@ function MachineState.new()
     return self
 end
 
+---@param vehicle Machine
+---@param property string
+---@param value boolean|number
+function MachineState:setProperty(vehicle, property, value)
+    if self[property] ~= value then
+        local newState = self:clone()
+
+        newState[property] = value
+
+        vehicle:setMachineState(newState)
+    end
+end
+
+---@param vehicle Machine
+---@param property string
+---@param value boolean
+function MachineState:setBool(vehicle, property, value)
+    self:setProperty(vehicle, property, value)
+end
+
+---@param vehicle Machine
+---@param property string
+---@param value number
+function MachineState:setNumber(vehicle, property, value)
+    self:setProperty(vehicle, property, value)
+end
+
 ---@param xmlFile XMLFile
 ---@param key string
 function MachineState:saveToXMLFile(xmlFile, key)
-    xmlFile:setValue(key .. '#enableInputMaterial', self.enableInputMaterial)
-    xmlFile:setValue(key .. '#enableOutputMaterial', self.enableOutputMaterial)
-    xmlFile:setValue(key .. '#enablePaintGroundTexture', self.enablePaintGroundTexture)
     xmlFile:setValue(key .. '#enableEffects', self.enableEffects)
 
-    xmlFile:setValue(key .. '#radius', self.radius)
-    xmlFile:setValue(key .. '#strength', self.strength)
-    xmlFile:setValue(key .. '#hardness', self.hardness)
-    xmlFile:setValue(key .. '#brushShape', self.brushShape)
+    xmlFile:setValue(key .. '#inputRadius', self.inputRadius)
+    xmlFile:setValue(key .. '#inputStrength', self.inputStrength)
+    xmlFile:setValue(key .. '#inputHardness', self.inputHardness)
+    xmlFile:setValue(key .. '#inputBrushShape', self.inputBrushShape)
+    xmlFile:setValue(key .. '#enableInputMaterial', self.enableInputMaterial)
+    xmlFile:setValue(key .. '#enableInputGroundTexture', self.enableInputGroundTexture)
+    xmlFile:setValue(key .. '#inputRatio', self.inputRatio)
+
+    xmlFile:setValue(key .. '#outputRadius', self.outputRadius)
+    xmlFile:setValue(key .. '#outputStrength', self.outputStrength)
+    xmlFile:setValue(key .. '#outputHardness', self.outputHardness)
+    xmlFile:setValue(key .. '#outputBrushShape', self.outputBrushShape)
+    xmlFile:setValue(key .. '#enableOutputMaterial', self.enableOutputMaterial)
+    xmlFile:setValue(key .. '#enableOutputGroundTexture', self.enableOutputGroundTexture)
+    xmlFile:setValue(key .. '#outputRatio', self.outputRatio)
 
     xmlFile:setValue(key .. '#clearDecoArea', self.clearDecoArea)
     xmlFile:setValue(key .. '#clearDensityMapHeightArea', self.clearDensityMapHeightArea)
@@ -126,7 +182,6 @@ function MachineState:saveToXMLFile(xmlFile, key)
 
     xmlFile:setValue(key .. '#paintModifier', self.paintModifier)
     xmlFile:setValue(key .. '#densityModifier', self.densityModifier)
-    xmlFile:setValue(key .. '#inputRatio', self.inputRatio)
 
     xmlFile:setValue(key .. '#allowGradingUp', self.allowGradingUp)
     xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
@@ -137,15 +192,23 @@ end
 ---@param xmlFile XMLFile
 ---@param key string
 function MachineState:loadFromXMLFile(xmlFile, key)
-    self.enableInputMaterial = xmlFile:getValue(key .. '#enableInputMaterial', self.enableInputMaterial)
-    self.enableOutputMaterial = xmlFile:getValue(key .. '#enableOutputMaterial', self.enableOutputMaterial)
-    self.enablePaintGroundTexture = xmlFile:getValue(key .. '#enablePaintGroundTexture', self.enablePaintGroundTexture)
     self.enableEffects = xmlFile:getValue(key .. '#enableEffects', self.enableEffects)
 
-    self.radius = xmlFile:getValue(key .. '#radius', self.radius)
-    self.strength = xmlFile:getValue(key .. '#strength', self.strength)
-    self.hardness = xmlFile:getValue(key .. '#hardness', self.hardness)
-    self.brushShape = xmlFile:getValue(key .. '#brushShape', self.brushShape)
+    self.inputRadius = xmlFile:getValue(key .. '#inputRadius', self.inputRadius)
+    self.inputStrength = xmlFile:getValue(key .. '#inputStrength', self.inputStrength)
+    self.inputHardness = xmlFile:getValue(key .. '#inputHardness', self.inputHardness)
+    self.inputBrushShape = xmlFile:getValue(key .. '#inputBrushShape', self.inputBrushShape)
+    self.enableInputMaterial = xmlFile:getValue(key .. '#enableInputMaterial', self.enableInputMaterial)
+    self.enableInputGroundTexture = xmlFile:getValue(key .. '#enableInputGroundTexture', self.enableInputGroundTexture)
+    self.inputRatio = xmlFile:getValue(key .. '#inputRatio', self.inputRatio)
+
+    self.outputRadius = xmlFile:getValue(key .. '#outputRadius', self.outputRadius)
+    self.outputStrength = xmlFile:getValue(key .. '#outputStrength', self.outputStrength)
+    self.outputHardness = xmlFile:getValue(key .. '#outputHardness', self.outputHardness)
+    self.outputBrushShape = xmlFile:getValue(key .. '#outputBrushShape', self.outputBrushShape)
+    self.enableOutputMaterial = xmlFile:getValue(key .. '#enableOutputMaterial', self.enableOutputMaterial)
+    self.enableOutputGroundTexture = xmlFile:getValue(key .. '#enableOutputGroundTexture', self.enableOutputGroundTexture)
+    self.outputRatio = xmlFile:getValue(key .. '#outputRatio', self.outputRatio)
 
     self.clearDecoArea = xmlFile:getValue(key .. '#clearDecoArea', self.clearDecoArea)
     self.clearDensityMapHeightArea = xmlFile:getValue(key .. '#clearDensityMapHeightArea', self.clearDensityMapHeightArea)
@@ -156,7 +219,6 @@ function MachineState:loadFromXMLFile(xmlFile, key)
 
     self.paintModifier = xmlFile:getValue(key .. '#paintModifier', self.paintModifier)
     self.densityModifier = xmlFile:getValue(key .. '#densityModifier', self.densityModifier)
-    self.inputRatio = xmlFile:getValue(key .. '#inputRatio', self.inputRatio)
 
     self.allowGradingUp = xmlFile:getValue(key .. '#allowGradingUp', self.allowGradingUp)
     self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
@@ -169,15 +231,23 @@ end
 function MachineState:clone()
     local clone = MachineState.new()
 
-    clone.enableInputMaterial = self.enableInputMaterial
-    clone.enableOutputMaterial = self.enableOutputMaterial
-    clone.enablePaintGroundTexture = self.enablePaintGroundTexture
     clone.enableEffects = self.enableEffects
 
-    clone.radius = self.radius
-    clone.strength = self.strength
-    clone.hardness = self.hardness
-    clone.brushShape = self.brushShape
+    clone.inputRadius = self.inputRadius
+    clone.inputStrength = self.inputStrength
+    clone.inputHardness = self.inputHardness
+    clone.inputBrushShape = self.inputBrushShape
+    clone.enableInputMaterial = self.enableInputMaterial
+    clone.enableInputGroundTexture = self.enableInputGroundTexture
+    clone.inputRatio = self.inputRatio
+
+    clone.outputRadius = self.outputRadius
+    clone.outputStrength = self.outputStrength
+    clone.outputHardness = self.outputHardness
+    clone.outputBrushShape = self.outputBrushShape
+    clone.enableOutputMaterial = self.enableOutputMaterial
+    clone.enableOutputGroundTexture = self.enableOutputGroundTexture
+    clone.outputRatio = self.outputRatio
 
     clone.clearDecoArea = self.clearDecoArea
     clone.clearDensityMapHeightArea = self.clearDensityMapHeightArea
@@ -188,7 +258,6 @@ function MachineState:clone()
 
     clone.paintModifier = self.paintModifier
     clone.densityModifier = self.densityModifier
-    clone.inputRatio = self.inputRatio
 
     clone.allowGradingUp = self.allowGradingUp
     clone.forceNodes = self.forceNodes
@@ -201,15 +270,23 @@ end
 ---@param streamId number
 ---@param connection Connection
 function MachineState:writeStream(streamId, connection)
-    streamWriteBool(streamId, self.enableInputMaterial)
-    streamWriteBool(streamId, self.enableOutputMaterial)
-    streamWriteBool(streamId, self.enablePaintGroundTexture)
     streamWriteBool(streamId, self.enableEffects)
 
-    streamWriteFloat32(streamId, self.radius)
-    streamWriteFloat32(streamId, self.strength)
-    streamWriteFloat32(streamId, self.hardness)
-    streamWriteUIntN(streamId, self.brushShape, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    streamWriteFloat32(streamId, self.inputRadius)
+    streamWriteFloat32(streamId, self.inputStrength)
+    streamWriteFloat32(streamId, self.inputHardness)
+    streamWriteUIntN(streamId, self.inputBrushShape, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    streamWriteBool(streamId, self.enableInputMaterial)
+    streamWriteBool(streamId, self.enableInputGroundTexture)
+    streamWriteFloat32(streamId, self.inputRatio)
+
+    streamWriteFloat32(streamId, self.outputRadius)
+    streamWriteFloat32(streamId, self.outputStrength)
+    streamWriteFloat32(streamId, self.outputHardness)
+    streamWriteUIntN(streamId, self.outputBrushShape, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    streamWriteBool(streamId, self.enableOutputMaterial)
+    streamWriteBool(streamId, self.enableOutputGroundTexture)
+    streamWriteFloat32(streamId, self.outputRatio)
 
     streamWriteBool(streamId, self.clearDecoArea)
     streamWriteBool(streamId, self.clearDensityMapHeightArea)
@@ -220,7 +297,6 @@ function MachineState:writeStream(streamId, connection)
 
     streamWriteFloat32(streamId, self.paintModifier)
     streamWriteFloat32(streamId, self.densityModifier)
-    streamWriteFloat32(streamId, self.inputRatio)
 
     streamWriteBool(streamId, self.allowGradingUp)
     streamWriteBool(streamId, self.forceNodes)
@@ -231,15 +307,23 @@ end
 ---@param streamId number
 ---@param connection Connection
 function MachineState:readStream(streamId, connection)
-    self.enableInputMaterial = streamReadBool(streamId)
-    self.enableOutputMaterial = streamReadBool(streamId)
-    self.enablePaintGroundTexture = streamReadBool(streamId)
     self.enableEffects = streamReadBool(streamId)
 
-    self.radius = streamReadFloat32(streamId)
-    self.strength = streamReadFloat32(streamId)
-    self.hardness = streamReadFloat32(streamId)
-    self.brushShape = streamReadUIntN(streamId, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    self.inputRadius = streamReadFloat32(streamId)
+    self.inputStrength = streamReadFloat32(streamId)
+    self.inputHardness = streamReadFloat32(streamId)
+    self.inputBrushShape = streamReadUIntN(streamId, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    self.enableInputMaterial = streamReadBool(streamId)
+    self.enableInputGroundTexture = streamReadBool(streamId)
+    self.inputRatio = streamReadFloat32(streamId)
+
+    self.outputRadius = streamReadFloat32(streamId)
+    self.outputStrength = streamReadFloat32(streamId)
+    self.outputHardness = streamReadFloat32(streamId)
+    self.outputBrushShape = streamReadUIntN(streamId, Landscaping.BRUSH_SHAPE_NUM_SEND_BITS)
+    self.enableOutputMaterial = streamReadBool(streamId)
+    self.enableOutputGroundTexture = streamReadBool(streamId)
+    self.outputRatio = streamReadFloat32(streamId)
 
     self.clearDecoArea = streamReadBool(streamId)
     self.clearDensityMapHeightArea = streamReadBool(streamId)
@@ -250,7 +334,6 @@ function MachineState:readStream(streamId, connection)
 
     self.paintModifier = streamReadFloat32(streamId)
     self.densityModifier = streamReadFloat32(streamId)
-    self.inputRatio = streamReadFloat32(streamId)
 
     self.allowGradingUp = streamReadBool(streamId)
     self.forceNodes = streamReadBool(streamId)

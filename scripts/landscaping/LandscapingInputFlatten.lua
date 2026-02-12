@@ -1,32 +1,26 @@
----@class LandscapingFlatten : MachineLandscaping
+---@class LandscapingInputFlatten : LandscapingInput
 ---@field targetY number
-LandscapingFlatten = {}
+LandscapingInputFlatten = {}
 
-local LandscapingFlatten_mt = Class(LandscapingFlatten, MachineLandscaping)
+local LandscapingInputFlatten_mt = Class(LandscapingInputFlatten, LandscapingInput)
 
 ---@param workArea MachineWorkArea
 ---@param targetY number
----@param customMt table | nil
----@return LandscapingFlatten
+---@return LandscapingInputFlatten
 ---@nodiscard
-function LandscapingFlatten.new(workArea, targetY, customMt)
-    ---@type LandscapingFlatten
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    local self = MachineLandscaping.new(LandscapingOperation.FLATTEN, workArea, customMt or LandscapingFlatten_mt)
+function LandscapingInputFlatten.new(workArea, targetY)
+    local self = LandscapingInput.new(LandscapingOperation.FLATTEN, workArea, LandscapingInputFlatten_mt)
+    ---@cast self LandscapingInputFlatten
 
     self.targetY = targetY
     self.heightChangeAmount = 0.75
 
-    if self.vehicle.spec_machine.machineType.id == 'excavatorShovel' then
-        self.heightChangeAmount = 2.0
-    end
-
-    self:verifyAndApplyMapResources()
+    self:checkMapResources()
 
     return self
 end
 
-function LandscapingFlatten:apply()
+function LandscapingInputFlatten:apply()
     local deformation = self:createTerrainDeformation()
     local paintDeformation = self:createPaintDeformation()
 
@@ -34,9 +28,9 @@ function LandscapingFlatten:apply()
     local paintRadius = self.radius * self.state.paintModifier
 
     if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.state.forceNodes or self.workArea.nodeActive[node] then
-                if self.state.allowGradingUp or self.workArea.nodeTerrainY[node] >= self.targetY then
+        for node, position in pairs(self.workArea.areaNodePosition) do
+            if self.state.forceNodes or self.workArea.areaNodeActive[node] then
+                if self.state.allowGradingUp or self.workArea.areaNodeTerrainY[node] >= self.targetY then
                     deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, -1)
                     MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
                 end
@@ -49,9 +43,9 @@ function LandscapingFlatten:apply()
             end
         end
     else
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.state.forceNodes or self.workArea.nodeActive[node] then
-                if self.state.allowGradingUp or self.workArea.nodeTerrainY[node] >= self.targetY then
+        for node, position in pairs(self.workArea.areaNodePosition) do
+            if self.state.forceNodes or self.workArea.areaNodeActive[node] then
+                if self.state.allowGradingUp or self.workArea.areaNodeTerrainY[node] >= self.targetY then
                     deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, -1)
                     MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], self.radius * 2)
                 end
@@ -78,29 +72,14 @@ function LandscapingFlatten:apply()
     deformation:apply(false, 'onDeformationCallback', self)
 end
 
-function LandscapingFlatten:onSculptingFinished()
-    -- void
-end
-
 ---@return TerrainDeformation
 ---@nodiscard
-function LandscapingFlatten:createTerrainDeformation()
-    self.deformation = MachineUtils.createTerrainDeformation()
+function LandscapingInputFlatten:createTerrainDeformation()
+    self.deformation = TerrainDeformation.new(g_terrainNode)
 
     self.deformation:setAdditiveHeightChangeAmount(self.heightChangeAmount)
     self.deformation:setHeightTarget(self.targetY, self.targetY, 0, 1, 0, -self.targetY)
     self.deformation:enableSetDeformationMode()
 
     return self.deformation
-end
-
----@param volume number
-function LandscapingFlatten:onDeformationSuccess(volume)
-    self:applyDeformationChanges()
-
-    if self.state.enableInputMaterial and volume > 0 and self.fillType ~= nil then
-        local liters = MachineUtils.volumeToFillTypeLiters(volume, self.fillType.index)
-
-        self.vehicle:workAreaInput(liters, self.fillType.index)
-    end
 end

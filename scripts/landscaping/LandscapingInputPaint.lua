@@ -1,16 +1,14 @@
----@class LandscapingPaint : MachineLandscaping
-LandscapingPaint = {}
+---@class LandscapingInputPaint : LandscapingInput
+LandscapingInputPaint = {}
 
-local LandscapingPaint_mt = Class(LandscapingPaint, MachineLandscaping)
+local LandscapingInputPaint_mt = Class(LandscapingInputPaint, LandscapingInput)
 
 ---@param workArea MachineWorkArea
----@param customMt table | nil
----@return LandscapingPaint
+---@return LandscapingInputPaint
 ---@nodiscard
-function LandscapingPaint.new(workArea, customMt)
-    ---@type LandscapingPaint
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    local self = MachineLandscaping.new(LandscapingOperation.PAINT, workArea, customMt or LandscapingPaint_mt)
+function LandscapingInputPaint.new(workArea)
+    local self = LandscapingInput.new(LandscapingOperation.PAINT, workArea, LandscapingInputPaint_mt)
+    ---@cast self LandscapingInputPaint
 
     self.strength = 0.5
     self.hardness = 0.2
@@ -18,22 +16,22 @@ function LandscapingPaint.new(workArea, customMt)
     return self
 end
 
-function LandscapingPaint:apply()
+function LandscapingInputPaint:apply()
     local deformation = self:createTerrainDeformation()
     local densityRadius = self.radius * self.state.densityModifier
     local paintRadius = self.radius * self.state.paintModifier
 
     if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.workArea.nodeActive[node] then
+        for node, position in pairs(self.workArea.areaNodePosition) do
+            if self.workArea.areaNodeActive[node] then
                 deformation:addSoftCircleBrush(position[1], position[3], paintRadius, self.hardness, self.strength, self.terrainLayerId)
                 MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], paintRadius)
                 MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
             end
         end
     else
-        for node, position in pairs(self.workArea.nodePosition) do
-            if self.workArea.nodeActive[node] then
+        for node, position in pairs(self.workArea.areaNodePosition) do
+            if self.workArea.areaNodeActive[node] then
                 deformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, self.hardness, self.strength, self.terrainLayerId)
                 MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], paintRadius * 2)
                 MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
@@ -51,7 +49,7 @@ end
 
 ---@return TerrainDeformation
 ---@nodiscard
-function LandscapingPaint:createTerrainDeformation()
+function LandscapingInputPaint:createTerrainDeformation()
     self.deformation = MachineUtils.createTerrainDeformation()
 
     self.deformation:enablePaintingMode()
@@ -60,11 +58,11 @@ function LandscapingPaint:createTerrainDeformation()
 end
 
 ---@param volume number
-function LandscapingPaint:onDeformationSuccess(volume)
+function LandscapingInputPaint:onDeformationSuccess(volume)
     self:applyDeformationChanges()
 end
 
-function LandscapingPaint:applyDeformationChanges()
+function LandscapingInputPaint:applyDeformationChanges()
     for _, area in ipairs(self.densityModifiedAreas) do
         local x, z, x1, z1, x2, z2 = unpack(area)
 

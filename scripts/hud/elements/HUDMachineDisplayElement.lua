@@ -15,12 +15,12 @@
 ---@field materialItem BitmapElement
 ---@field materialImage BitmapElement
 ---@field materialText TextElement
----@field textureItem BitmapElement
----@field textureImage TerrainLayerElement
----@field textureText TextElement
----@field dischargeTextureItem BitmapElement
----@field dischargeTextureImage TerrainLayerElement
----@field dischargeTextureText TextElement
+---@field inputTextureItem BitmapElement
+---@field inputTextureImage TerrainLayerElement
+---@field inputTextureText TextElement
+---@field outputTextureItem BitmapElement
+---@field outputTextureImage TerrainLayerElement
+---@field outputTextureText TextElement
 ---@field surveyorItem BitmapElement
 ---@field surveyorImage BitmapElement
 ---@field surveyorTitle TextElement
@@ -34,32 +34,6 @@
 HUDMachineDisplayElement = {}
 
 HUDMachineDisplayElement.ANIMATE_DURATION = 150
-HUDMachineDisplayElement.CONTROLS = {
-    'vehicleItem',
-    'vehicleImage',
-    'vehicleText',
-    'inputItem',
-    'inputImage',
-    'inputTitle',
-    'inputText',
-    'outputItem',
-    'outputImage',
-    'outputTitle',
-    'outputText',
-    'materialItem',
-    'materialImage',
-    'materialText',
-    'textureItem',
-    'textureImage',
-    'textureText',
-    'dischargeTextureItem',
-    'dischargeTextureImage',
-    'dischargeTextureText',
-    'surveyorItem',
-    'surveyorImage',
-    'surveyorTitle',
-    'surveyorText'
-}
 
 local MachineHUDDisplay_mt = Class(HUDMachineDisplayElement)
 
@@ -89,6 +63,7 @@ function HUDMachineDisplayElement:delete()
     end
 
     self.animation = nil
+    self.elements = {}
 end
 
 ---@param xmlFile XMLFile
@@ -110,16 +85,6 @@ function HUDMachineDisplayElement:loadFromXMLFile(xmlFile, key)
     self:savePosition()
 
     self.animateDuration = xmlFile:getFloat('HUD#animateDuration', self.animateDuration)
-
-    for _, id in ipairs(HUDMachineDisplayElement.CONTROLS) do
-        if self.elements[id] ~= nil then
-            self[id] = self.elements[id]
-        else
-            Logging.warning('MachineHUDDisplay:loadFromXMLFile() Element with id "%s" not found', id)
-        end
-    end
-
-    self.elements = {}
 end
 
 ---@param xmlFile XMLFile
@@ -129,7 +94,6 @@ function HUDMachineDisplayElement:loadHUDElements(xmlFile, xmlKey, parent)
     for index = 0, getXMLNumOfChildren(xmlFile.handle, xmlKey) - 1 do
         local key = string.format("%s.*(%i)", xmlKey, index)
         local typeName = getXMLElementName(xmlFile.handle, key)
-        -- local class = Gui.CONFIGURATION_CLASS_MAPPING[typeName:upper()] or GuiElement
         local class = Gui.CONFIGURATION_CLASS_MAPPING[typeName:upper()]
 
         if class == nil then
@@ -138,7 +102,6 @@ function HUDMachineDisplayElement:loadHUDElements(xmlFile, xmlKey, parent)
         end
 
         local element = class.new()
-        local profile = xmlFile:getString(key .. '#profile')
 
         element.typeName = typeName
         element.handleFocus = false
@@ -156,7 +119,7 @@ end
 ---@param element GuiElement
 function HUDMachineDisplayElement:onCreateElement(element)
     if element.id ~= nil then
-        self.elements[element.id] = element
+        self[element.id] = element
     end
 end
 
@@ -290,7 +253,7 @@ function HUDMachineDisplayElement:updateDisplay()
         self:updateModeDisplay()
         self:updateMaterialDisplay()
         self:updateTextureDisplay()
-        self:updateDischargeTextureDisplay()
+        self:updateOutputTextureDisplay()
         self:updateSurveyorDisplay()
 
         self.boxLayout:invalidateLayout()
@@ -336,37 +299,37 @@ function HUDMachineDisplayElement:updateTextureDisplay()
     local spec = g_modHud.vehicle.spec_machine
 
     if #spec.modesInput > 0 then
-        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.terrainLayerId)
+        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.inputTerrainLayerId)
 
-        self.textureItem:setVisible(true)
+        self.inputTextureItem:setVisible(true)
 
         if terrainLayer ~= nil then
-            self.textureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.textureText:setText(terrainLayer.title)
+            self.inputTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.inputTextureText:setText(terrainLayer.title)
         else
-            self.textureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+            self.inputTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.inputTerrainLayerId)))
         end
     else
-        self.textureItem:setVisible(false)
+        self.inputTextureItem:setVisible(false)
     end
 end
 
-function HUDMachineDisplayElement:updateDischargeTextureDisplay()
+function HUDMachineDisplayElement:updateOutputTextureDisplay()
     local spec = g_modHud.vehicle.spec_machine
 
     if #spec.modesOutput > 0 then
-        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.dischargeTerrainLayerId)
+        local terrainLayer = g_resourceManager:getTerrainLayerById(spec.outputTerrainLayerId)
 
-        self.dischargeTextureItem:setVisible(true)
+        self.outputTextureItem:setVisible(true)
 
         if terrainLayer ~= nil then
-            self.dischargeTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.dischargeTextureText:setText(terrainLayer.title)
+            self.outputTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
+            self.outputTextureText:setText(terrainLayer.title)
         else
-            self.dischargeTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.terrainLayerId)))
+            self.outputTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.outputTerrainLayerId)))
         end
     else
-        self.dischargeTextureItem:setVisible(false)
+        self.outputTextureItem:setVisible(false)
     end
 end
 

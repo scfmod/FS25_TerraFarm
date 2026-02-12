@@ -48,8 +48,8 @@ g_gameVersion = 0
 ---@field xmlFilenameConfig string | nil -- Only used if isExternal is true
 ---@field state MachineState
 ---@field surveyorId string | nil
----@field terrainLayerId number
----@field dischargeTerrainLayerId number
+---@field inputTerrainLayerId number
+---@field outputTerrainLayerId number
 ---@field fillUnitIndex number | nil
 ---@field fillUnit FillUnitObject | nil
 ---@field fillTypeIndex number
