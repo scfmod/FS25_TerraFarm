@@ -4,8 +4,8 @@
 ---@class InteractiveFunctionsParams
 ---@field posFunc fun(target: Machine, data: any, noEventSend: boolean | nil)
 ---@field negFunc? fun(target: Machine, data: any, noEventSend: boolean | nil)
----@field updateFunc? fun(target: Machine): boolean | nil
----@field isBlockedFunc? fun(target: Machine): boolean
+---@field updateFunc? fun(target: Machine): boolean?
+---@field isBlockedFunc? fun(target: Machine): boolean?
 
 ---@class InteractiveControlExtension
 InteractiveControlExtension = {}
@@ -50,33 +50,41 @@ end
 function InteractiveControlExtension:registerToggleEnabledFunction(icf)
     if icf.addFunction('MACHINE_TOGGLE_ENABLED',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.setMachineEnabled ~= nil then
                         vehicle:setMachineEnabled(true)
                     end
                 end,
-                negFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                negFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.setMachineEnabled ~= nil then
                         vehicle:setMachineEnabled(false)
                     end
                 end,
-                updateFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                updateFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getMachineEnabled ~= nil then
                         return vehicle:getMachineEnabled()
                     end
                 end,
-                isBlockedFunc = function ()
-                    if g_machineManager.activeVehicle ~= nil then
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getMachineEnabled ~= nil then
                         return MachineUtils.getPlayerHasPermission('manageRights')
                     end
-
-                    return false
                 end
             }
         ) then
@@ -88,35 +96,41 @@ end
 function InteractiveControlExtension:registerToggleActiveFunction(icf)
     if icf.addFunction('MACHINE_TOGGLE_ACTIVE',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil and vehicle:getCanActivateMachine() then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanActivateMachine ~= nil and vehicle:getCanActivateMachine() then
                         vehicle:setMachineActive(true)
                     end
                 end,
-                negFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                negFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil and vehicle:getCanActivateMachine() then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanActivateMachine ~= nil and vehicle:getCanActivateMachine() then
                         vehicle:setMachineActive(false)
                     end
                 end,
-                updateFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                updateFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getMachineActive ~= nil then
                         return vehicle:getMachineActive()
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getCanActivateMachine ~= nil then
                         return vehicle:getCanActivateMachine()
                     end
-
-                    return false
                 end
             }
         ) then
@@ -128,7 +142,11 @@ end
 function InteractiveControlExtension:registerToggleHudFunction(icf)
     if icf.addFunction('MACHINE_TOGGLE_HUD',
             {
-                posFunc = function ()
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
+
                     g_modHud.display:setVisible(not g_modHud.display.isVisible, true)
                 end,
                 updateFunc = function ()
@@ -147,21 +165,23 @@ end
 function InteractiveControlExtension:registerToggleInputFunction(icf)
     if icf.addFunction('MACHINE_TOGGLE_INPUT',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventToggleInput(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine() and MachineUtils.getNumInputs(vehicle) > 1
                     end
-
-                    return false
                 end
             }
         ) then
@@ -173,21 +193,23 @@ end
 function InteractiveControlExtension:registerToggleOutputFunction(icf)
     if icf.addFunction('MACHINE_TOGGLE_OUTPUT',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventToggleOutput(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine() and MachineUtils.getNumOutputs(vehicle) > 1
                     end
-
-                    return false
                 end
             }
         ) then
@@ -199,21 +221,23 @@ end
 function InteractiveControlExtension:registerSettingsFunction(icf)
     if icf.addFunction('MACHINE_SETTINGS',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventMachineDialog(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine()
                     end
-
-                    return false
                 end
             }
         ) then
@@ -225,21 +249,23 @@ end
 function InteractiveControlExtension:registerMaterialFunction(icf)
     if icf.addFunction('MACHINE_SELECT_MATERIAL',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventSelectMaterial(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil then
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine()
                     end
-
-                    return false
                 end
             }
         ) then
@@ -251,20 +277,23 @@ end
 function InteractiveControlExtension:registerTextureFunction(icf)
     if icf.addFunction('MACHINE_SELECT_TEXTURE',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventSelectTerrainLayer(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
-                    if vehicle ~= nil then
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine() and #vehicle.spec_machine.modesInput > 0
                     end
-
-                    return false
                 end
             }
         ) then
@@ -276,20 +305,23 @@ end
 function InteractiveControlExtension:registerDischargeTextureFunction(icf)
     if icf.addFunction('MACHINE_SELECT_DISCHARGE_TEXTURE',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventSelectDischargeTerrainLayer(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
-                    if vehicle ~= nil then
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         return vehicle:getCanAccessMachine() and #vehicle.spec_machine.modesOutput > 0
                     end
-
-                    return false
                 end
             }
         ) then
@@ -301,21 +333,23 @@ end
 function InteractiveControlExtension:registerSelectSurveyorFunction(icf)
     if icf.addFunction('MACHINE_SELECT_SURVEYOR',
             {
-                posFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                posFunc = function (target, data, noEventSend)
+                    if noEventSend then
+                        return
+                    end
 
-                    if vehicle ~= nil then
+                    local vehicle = g_machineManager.activeVehicle or target
+
+                    if vehicle.getCanAccessMachine ~= nil then
                         Machine.actionEventSelectSurveyor(vehicle)
                     end
                 end,
-                isBlockedFunc = function ()
-                    local vehicle = g_machineManager.activeVehicle
+                isBlockedFunc = function (target)
+                    local vehicle = g_machineManager.activeVehicle or target
 
-                    if vehicle ~= nil and vehicle:getCanAccessMachine() then
+                    if vehicle.getCanAccessMachine ~= nil and vehicle:getCanAccessMachine() then
                         return MachineUtils.getHasInputMode(vehicle, Machine.MODE.FLATTEN) or MachineUtils.getHasOutputMode(vehicle, Machine.MODE.FLATTEN)
                     end
-
-                    return false
                 end
             }
         ) then
