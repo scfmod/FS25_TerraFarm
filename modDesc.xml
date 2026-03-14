@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="97">
     <author>scfmod</author>
-    <version>1.2.1.0</version>
+    <version>1.3.0.0</version>
     <title>
         <en>TerraFarm</en>
     </title>
@@ -26,24 +26,7 @@
 
     <specializations>
         <specialization name="machine" className="Machine" filename="scripts/specializations/Machine.lua" />
-        <specialization name="surveyor" className="Surveyor" filename="scripts/specializations/Surveyor.lua" />
     </specializations>
-
-    <vehicleTypes>
-        <type name="surveyorObject" className="Vehicle" filename="$dataS/scripts/vehicles/Vehicle.lua">
-            <specialization name="baseMaterial" />
-            <specialization name="vehicleSettings" />
-            <specialization name="cylindered" />
-            <specialization name="animatedVehicle" />
-            <specialization name="foldable" />
-            <specialization name="tensionBeltObject" />
-            <specialization name="surveyor" />
-        </type>
-    </vehicleTypes>
-
-    <storeItems>
-        <storeItem xmlFilename="objects/surveyorPSV2/psv2.xml" />
-    </storeItems>
 
     <extraSourceFiles>
         <sourceFile filename="scripts/main.lua" />
@@ -59,13 +42,57 @@
         <action name="MACHINE_SELECT_MATERIAL" />
         <action name="MACHINE_SELECT_TEXTURE" />
         <action name="MACHINE_SELECT_DISCHARGE_TEXTURE" />
-        <action name="MACHINE_SELECT_SURVEYOR" />
         <action name="MACHINE_GLOBAL_SETTINGS" />
         <action name="MACHINE_TOGGLE_HUD" />
-        <action name="SURVEYOR_TOGGLE_FOLD" />
+        <action name="MACHINE_SELECT_AREA" />
+
+        <action name="AREA_EDITOR_MENU_PREV" locked="true" />
+        <action name="AREA_EDITOR_MENU_NEXT" locked="true" />
+        <action name="AREA_EDITOR_MOVE" locked="true" />
+        <action name="AREA_EDITOR_DELETE" locked="true" />
+        <action name="AREA_EDITOR_ANGLE" locked="true" />
+        <action name="AREA_EDITOR_DIRECTION" locked="true" />
+        <action name="AREA_EDITOR_LEVEL" locked="true" />
     </actions>
 
     <inputBinding>
+        <actionBinding action="AREA_EDITOR_MENU_PREV">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_q" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_20" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_MENU_NEXT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_e" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_18" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_MOVE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_f" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_4" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_LEVEL">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_11" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_ANGLE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lctrl" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_6" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_DIRECTION">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_DELETE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_backspace" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_delete" index="2" />
+
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_9" index="1" />
+        </actionBinding>
+
         <actionBinding action="MACHINE_TOGGLE_ACTIVE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_o" index="1" />
             <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_19" index="1" />
@@ -91,7 +118,7 @@
         <actionBinding action="MACHINE_SELECT_DISCHARGE_TEXTURE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_8" index="1" />
         </actionBinding>
-        <actionBinding action="MACHINE_SELECT_SURVEYOR">
+        <actionBinding action="MACHINE_SELECT_AREA">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_7" index="1" />
         </actionBinding>
         <actionBinding action="MACHINE_GLOBAL_SETTINGS">
@@ -99,11 +126,6 @@
         </actionBinding>
         <actionBinding action="MACHINE_TOGGLE_HUD">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_4" index="1" />
-        </actionBinding>
-
-        <actionBinding action="SURVEYOR_TOGGLE_FOLD">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_b" index="1" />
-            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5 BUTTON_1" index="1" />
         </actionBinding>
     </inputBinding>
 </modDesc>

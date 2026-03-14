@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomShader version="5">
+    <Parameters>
+        <Parameter name="circleRadius" target="circleRadius" type="float" group="base" defaultValue="0.95" />
+        <Parameter name="lineWidth" target="lineWidth" type="float" group="base" defaultValue="0.05" />
+        <Parameter name="lineColor" target="lineColor" type="float4" group="base" defaultValue="1.0 1.0 1.0 0.1" />
+        <Parameter name="emissionIntensity" target="emissionIntensity" type="float" group="base" defaultValue="0.1" minValue="0.0" maxValue="16.0" />
+        <Parameter name="dashLength" target="dashLength" type="float" group="base" defaultValue="0.2" />
+        <Parameter name="dashGap" target="dashGap" type="float" group="base" defaultValue="0.2" />
+        <Parameter name="animSpeed" target="animSpeed" type="float" group="base" defaultValue="0.1" />
+    </Parameters>
+
+    <UvUsages />
+    <Textures />
+    <VertexAttributes />
+
+    <LodLevel startDistance="0" alphaForceMode="use">
+        <CodeInjections>
+            <CodeInjection position="OBJECT_PARAMETERS">
+<![CDATA[
+            float  circleRadius;
+            float  lineWidth;
+            float4 lineColor;
+            float  emissionIntensity;
+            float  dashLength;
+            float  dashGap;
+            float  animSpeed;
+]]>
+            </CodeInjection>
+            <CodeInjection position="FS_GLOBALS">
+<![CDATA[
+            float  gMask;
+            float3 gColor;
+            float  gTerrainHeightMask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_END">
+<![CDATA[
+            Out.position.z = Out.position.w;
+]]>
+            </CodeInjection>
+            <CodeInjection position="START_FS">
+<![CDATA[
+            float3 worldPos = getWorldPosition(In);
+
+            globals.gTerrainHeightMask = getHeightAboveTerrain(worldPos, 0);
+
+            float2 uv = In.vs.defaultTexCoords;
+
+            float2 p = (In.vs.defaultTexCoords - 0.5) * 2;
+            float  r = length(p);
+
+            float inner = object.circleRadius - object.lineWidth * 0.5;
+            float outer = object.circleRadius + object.lineWidth * 0.5;
+
+            globals.gMask = step(inner, r) * (1.0 - step(outer, r));
+
+            if (globals.gMask > 0.0)
+            {
+                float angle = atan2(p.y, p.x);
+                float arc   = angle * object.circleRadius;
+
+                arc += cTime_s * object.animSpeed;
+
+                float cycle = object.dashLength + object.dashGap;
+                float m     = fmod(arc, cycle);
+
+                if (m < 0.0)
+                    m += cycle;
+
+                if (m > object.dashLength)
+                    globals.gMask = 0.0;
+            }
+
+            globals.gColor = object.lineColor.rgb;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_DIFFUSE_COLOR_FS">
+<![CDATA[
+            if (globals.gTerrainHeightMask < 0.0) {
+                diffuseColor.rgb = float3(1.0, 1.0, 1.0);
+            } else {
+                diffuseColor.rgb = float3(1.0, 0.3, 0.0);
+            }
+]]>
+            </CodeInjection>
+            <CodeInjection position="EMISSIVE_FS">
+<![CDATA[
+            emissiveColor = globals.gColor * object.emissionIntensity * globals.gMask;
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+            alpha = globals.gMask * object.lineColor.a;
+            reflectingLightingScale = alpha;
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

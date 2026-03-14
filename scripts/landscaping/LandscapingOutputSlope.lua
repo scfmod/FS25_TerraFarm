@@ -12,6 +12,9 @@ LandscapingOutputSlope = {}
 local LandscapingOutputSlope_mt = Class(LandscapingOutputSlope, LandscapingOutput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
+---@param fillTypeIndex number
+---@param litersToDrop number
 ---@param minY number
 ---@param maxY number
 ---@param nx number
@@ -19,12 +22,10 @@ local LandscapingOutputSlope_mt = Class(LandscapingOutputSlope, LandscapingOutpu
 ---@param nz number
 ---@param d number
 ---@param targetY number
----@param litersToDrop number
----@param fillTypeIndex number
 ---@return LandscapingOutputSlope
 ---@nodiscard
-function LandscapingOutputSlope.new(workArea, minY, maxY, nx, ny, nz, d, targetY, litersToDrop, fillTypeIndex)
-    local self = LandscapingOutput.new(LandscapingOperation.SLOPE, workArea, LandscapingOutputSlope_mt)
+function LandscapingOutputSlope.new(workArea, terrainLayerId, fillTypeIndex, litersToDrop, minY, maxY, nx, ny, nz, d, targetY)
+    local self = LandscapingOutput.new(LandscapingOperation.SLOPE, workArea, terrainLayerId, LandscapingOutputSlope_mt)
     ---@cast self LandscapingOutputSlope
 
     self.litersToDrop = litersToDrop
@@ -72,16 +73,16 @@ function LandscapingOutputSlope:apply()
 
     if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
         deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, nil)
-        MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
-        MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
+        LandscapingUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
+        LandscapingUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
 
         if paintDeformation ~= nil then
             paintDeformation:addSoftCircleBrush(position[1], position[3], paintRadius, 0.2, 0.5, self.terrainLayerId)
         end
     else
         deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, nil)
-        MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], densityRadius * 2)
-        MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], densityRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
 
         if paintDeformation ~= nil then
             paintDeformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, 0.2, 0.5, self.terrainLayerId)
@@ -93,14 +94,13 @@ function LandscapingOutputSlope:apply()
     deformation:setDynamicObjectCollisionMask(0)
     deformation:setDynamicObjectMaxDisplacement(0)
 
-    -- deformation:apply(false, 'onDeformationCallback', self)
     deformation:apply(true, 'onDeformationPreviewCallback', self)
 end
 
 ---@return TerrainDeformation
 ---@nodiscard
 function LandscapingOutputSlope:createTerrainDeformation()
-    self.deformation = MachineUtils.createTerrainDeformation()
+    self.deformation = TerrainDeformation.new(g_terrainNode)
 
     self.deformation:setAdditiveHeightChangeAmount(self.heightChangeAmount)
     self.deformation:setHeightTarget(self.minY, self.maxY, self.nx, self.ny, self.nz, self.d)

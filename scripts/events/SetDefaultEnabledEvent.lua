@@ -49,7 +49,7 @@ function SetDefaultEnabledEvent:run(connection)
 end
 
 ---@param defaultEnabled boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function SetDefaultEnabledEvent.sendEvent(defaultEnabled, noEventSend)
     if not noEventSend then
         local event = SetDefaultEnabledEvent.new(defaultEnabled)

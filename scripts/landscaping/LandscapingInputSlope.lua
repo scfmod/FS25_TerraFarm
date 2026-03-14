@@ -11,6 +11,8 @@ LandscapingInputSlope = {}
 local LandscapingInputSlope_mt = Class(LandscapingInputSlope, LandscapingInput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
+---@param fillTypeIndex? number
 ---@param minY number
 ---@param maxY number
 ---@param nx number
@@ -20,8 +22,8 @@ local LandscapingInputSlope_mt = Class(LandscapingInputSlope, LandscapingInput)
 ---@param targetY number
 ---@return LandscapingInputSlope
 ---@nodiscard
-function LandscapingInputSlope.new(workArea, minY, maxY, nx, ny, nz, d, targetY)
-    local self = LandscapingInput.new(LandscapingOperation.SLOPE, workArea, LandscapingInputSlope_mt)
+function LandscapingInputSlope.new(workArea, terrainLayerId, fillTypeIndex, minY, maxY, nx, ny, nz, d, targetY)
+    local self = LandscapingInput.new(LandscapingOperation.SLOPE, workArea, terrainLayerId, fillTypeIndex, LandscapingInputSlope_mt)
     ---@cast self LandscapingInputSlope
 
     self.minY = minY

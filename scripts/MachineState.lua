@@ -32,7 +32,6 @@ DrivingDirectionMode = {
 ---
 ---@field clearDecoArea boolean
 ---@field clearDensityMapHeightArea boolean
----@field eraseTireTracks boolean
 ---@field removeFieldArea boolean
 ---@field removeStoneArea boolean
 ---@field removeWeedArea boolean
@@ -40,6 +39,8 @@ DrivingDirectionMode = {
 --- EXPERIMENTAL
 ---@field allowGradingUp boolean
 ---@field forceNodes boolean
+---@field ignoreAreaMaterial boolean
+---@field ignoreAreaGroundTextures boolean
 MachineState = {}
 
 MachineState.SEND_NUM_BITS_DIRECTION_MODE = 3
@@ -69,7 +70,6 @@ function MachineState.registerSavegameXMLPaths(schema, key)
 
     schema:register(XMLValueType.BOOL, key .. '#clearDecoArea')
     schema:register(XMLValueType.BOOL, key .. '#clearDensityMapHeightArea')
-    schema:register(XMLValueType.BOOL, key .. '#eraseTireTracks')
     schema:register(XMLValueType.BOOL, key .. '#removeFieldArea')
     schema:register(XMLValueType.BOOL, key .. '#removeStoneArea')
     schema:register(XMLValueType.BOOL, key .. '#removeWeedArea')
@@ -77,10 +77,13 @@ function MachineState.registerSavegameXMLPaths(schema, key)
     schema:register(XMLValueType.FLOAT, key .. '#paintModifier')
     schema:register(XMLValueType.FLOAT, key .. '#densityModifier')
 
-    schema:register(XMLValueType.BOOL, key .. '#forceNodes')
-    schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
     schema:register(XMLValueType.BOOL, key .. '#autoDeactivate')
     schema:register(XMLValueType.INT, key .. '#drivingDirectionMode')
+
+    schema:register(XMLValueType.BOOL, key .. '#forceNodes')
+    schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
+    schema:register(XMLValueType.BOOL, key .. '#ignoreAreaMaterial')
+    schema:register(XMLValueType.BOOL, key .. '#ignoreAreaGroundTextures')
 end
 
 ---@return MachineState
@@ -93,7 +96,6 @@ function MachineState.new()
 
     self.clearDecoArea = true
     self.clearDensityMapHeightArea = false
-    self.eraseTireTracks = true
     self.removeFieldArea = true
     self.removeStoneArea = true
     self.removeWeedArea = true
@@ -117,10 +119,13 @@ function MachineState.new()
     self.paintModifier = 0.75
     self.densityModifier = 0.75
 
-    self.allowGradingUp = false
-    self.forceNodes = false
     self.autoDeactivate = true
     self.drivingDirectionMode = DrivingDirectionMode.FORWARDS
+
+    self.allowGradingUp = false
+    self.forceNodes = false
+    self.ignoreAreaMaterial = false
+    self.ignoreAreaGroundTextures = false
 
     return self
 end
@@ -175,7 +180,6 @@ function MachineState:saveToXMLFile(xmlFile, key)
 
     xmlFile:setValue(key .. '#clearDecoArea', self.clearDecoArea)
     xmlFile:setValue(key .. '#clearDensityMapHeightArea', self.clearDensityMapHeightArea)
-    xmlFile:setValue(key .. '#eraseTireTracks', self.eraseTireTracks)
     xmlFile:setValue(key .. '#removeFieldArea', self.removeFieldArea)
     xmlFile:setValue(key .. '#removeStoneArea', self.removeStoneArea)
     xmlFile:setValue(key .. '#removeWeedArea', self.removeWeedArea)
@@ -183,10 +187,14 @@ function MachineState:saveToXMLFile(xmlFile, key)
     xmlFile:setValue(key .. '#paintModifier', self.paintModifier)
     xmlFile:setValue(key .. '#densityModifier', self.densityModifier)
 
-    xmlFile:setValue(key .. '#allowGradingUp', self.allowGradingUp)
-    xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
     xmlFile:setValue(key .. '#autoDeactivate', self.autoDeactivate)
     xmlFile:setValue(key .. '#drivingDirectionMode', self.drivingDirectionMode)
+
+    xmlFile:setValue(key .. '#allowGradingUp', self.allowGradingUp)
+    xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
+
+    xmlFile:setValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
+    xmlFile:setValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
 end
 
 ---@param xmlFile XMLFile
@@ -212,7 +220,6 @@ function MachineState:loadFromXMLFile(xmlFile, key)
 
     self.clearDecoArea = xmlFile:getValue(key .. '#clearDecoArea', self.clearDecoArea)
     self.clearDensityMapHeightArea = xmlFile:getValue(key .. '#clearDensityMapHeightArea', self.clearDensityMapHeightArea)
-    self.eraseTireTracks = xmlFile:getValue(key .. '#eraseTireTracks', self.eraseTireTracks)
     self.removeFieldArea = xmlFile:getValue(key .. '#removeFieldArea', self.removeFieldArea)
     self.removeStoneArea = xmlFile:getValue(key .. '#removeStoneArea', self.removeStoneArea)
     self.removeWeedArea = xmlFile:getValue(key .. '#removeWeedArea', self.removeWeedArea)
@@ -220,10 +227,14 @@ function MachineState:loadFromXMLFile(xmlFile, key)
     self.paintModifier = xmlFile:getValue(key .. '#paintModifier', self.paintModifier)
     self.densityModifier = xmlFile:getValue(key .. '#densityModifier', self.densityModifier)
 
-    self.allowGradingUp = xmlFile:getValue(key .. '#allowGradingUp', self.allowGradingUp)
-    self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
     self.autoDeactivate = xmlFile:getValue(key .. '#autoDeactivate', self.autoDeactivate)
     self.drivingDirectionMode = xmlFile:getValue(key .. '#drivingDirectionMode', self.drivingDirectionMode)
+
+    self.allowGradingUp = xmlFile:getValue(key .. '#allowGradingUp', self.allowGradingUp)
+    self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
+
+    self.ignoreAreaMaterial = xmlFile:getValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
+    self.ignoreAreaGroundTextures = xmlFile:getValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
 end
 
 ---@return MachineState
@@ -251,7 +262,6 @@ function MachineState:clone()
 
     clone.clearDecoArea = self.clearDecoArea
     clone.clearDensityMapHeightArea = self.clearDensityMapHeightArea
-    clone.eraseTireTracks = self.eraseTireTracks
     clone.removeFieldArea = self.removeFieldArea
     clone.removeStoneArea = self.removeStoneArea
     clone.removeWeedArea = self.removeWeedArea
@@ -259,10 +269,14 @@ function MachineState:clone()
     clone.paintModifier = self.paintModifier
     clone.densityModifier = self.densityModifier
 
-    clone.allowGradingUp = self.allowGradingUp
-    clone.forceNodes = self.forceNodes
     clone.autoDeactivate = self.autoDeactivate
     clone.drivingDirectionMode = self.drivingDirectionMode
+
+    clone.allowGradingUp = self.allowGradingUp
+    clone.forceNodes = self.forceNodes
+
+    clone.ignoreAreaMaterial = self.ignoreAreaMaterial
+    clone.ignoreAreaGroundTextures = self.ignoreAreaGroundTextures
 
     return clone
 end
@@ -290,7 +304,6 @@ function MachineState:writeStream(streamId, connection)
 
     streamWriteBool(streamId, self.clearDecoArea)
     streamWriteBool(streamId, self.clearDensityMapHeightArea)
-    streamWriteBool(streamId, self.eraseTireTracks)
     streamWriteBool(streamId, self.removeFieldArea)
     streamWriteBool(streamId, self.removeStoneArea)
     streamWriteBool(streamId, self.removeWeedArea)
@@ -298,10 +311,14 @@ function MachineState:writeStream(streamId, connection)
     streamWriteFloat32(streamId, self.paintModifier)
     streamWriteFloat32(streamId, self.densityModifier)
 
-    streamWriteBool(streamId, self.allowGradingUp)
-    streamWriteBool(streamId, self.forceNodes)
     streamWriteBool(streamId, self.autoDeactivate)
     streamWriteUIntN(streamId, self.drivingDirectionMode, MachineState.SEND_NUM_BITS_DIRECTION_MODE)
+
+    streamWriteBool(streamId, self.allowGradingUp)
+    streamWriteBool(streamId, self.forceNodes)
+
+    streamWriteBool(streamId, self.ignoreAreaMaterial)
+    streamWriteBool(streamId, self.ignoreAreaGroundTextures)
 end
 
 ---@param streamId number
@@ -327,7 +344,6 @@ function MachineState:readStream(streamId, connection)
 
     self.clearDecoArea = streamReadBool(streamId)
     self.clearDensityMapHeightArea = streamReadBool(streamId)
-    self.eraseTireTracks = streamReadBool(streamId)
     self.removeFieldArea = streamReadBool(streamId)
     self.removeStoneArea = streamReadBool(streamId)
     self.removeWeedArea = streamReadBool(streamId)
@@ -335,8 +351,12 @@ function MachineState:readStream(streamId, connection)
     self.paintModifier = streamReadFloat32(streamId)
     self.densityModifier = streamReadFloat32(streamId)
 
-    self.allowGradingUp = streamReadBool(streamId)
-    self.forceNodes = streamReadBool(streamId)
     self.autoDeactivate = streamReadBool(streamId)
     self.drivingDirectionMode = streamReadUIntN(streamId, MachineState.SEND_NUM_BITS_DIRECTION_MODE)
+
+    self.allowGradingUp = streamReadBool(streamId)
+    self.forceNodes = streamReadBool(streamId)
+
+    self.ignoreAreaMaterial = streamReadBool(streamId)
+    self.ignoreAreaGroundTextures = streamReadBool(streamId)
 end

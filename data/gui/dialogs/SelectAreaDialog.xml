@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tfSelectMachine_dialogBg">
+        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
+        <ThreePartBitmap profile="tf_dialogBgBottom" />
+
+        <Text position="0 -32px" profile="tfSelectMachine_dialogTitle" text="$l10n_ui_areas" />
+
+        <Text id="listEmptyText" profile="tfDialog_listEmptyText" text="$l10n_ui_areasEmpty" />
+
+        <GuiElement profile="tfSelectMachine_dialogContent">
+            <SmoothList profile="tfSelectArea_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick">
+                <ListItem profile="tfSelectArea_listItem">
+                    <Bitmap name="image" profile="tfSelectArea_listItemImage" />
+                    <Text name="name" profile="tfSelectArea_listItemTitle" />
+                    <Text name="text" profile="tfSelectArea_listItemText" />
+                    <Text name="status" profile="tfSelectArea_listItemStatus" />
+                </ListItem>
+            </SmoothList>
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider dataElementId="list" profile="tf_listSlider" />
+            </ThreePartBitmap>
+
+            <Bitmap profile="tfSelectMachine_listShadowTop" />
+            <Bitmap profile="tfSelectMachine_listShadowBottom" />
+        </GuiElement>
+
+        <BoxLayout profile="tfSelectArea_dialogButtonbox" id="buttonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+            <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_select" />
+            <Button id="createAreaButton" onClick="onClickCreateArea" profile="buttonActivate" text="$l10n_ui_createArea" />
+            <Button id="editAreaButton" onClick="onClickEditArea" profile="buttonMenuSwitch" text="$l10n_ui_edit" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfSelectArea_dialogButtonbox" extends="tf_dialogButtonBox" with="anchorBottomCenter">
+            <height value="136px" />
+            <position value="0 -60px" />
+
+            <imageSliceId value="gui.colorPreset" />
+            <imageColor value="0 0 0 0.5" />
+
+            <numFlows value="3" />
+            <lateralFlowSize value="40px" />
+            <alignmentY value="top" />
+        </Profile>
+        <Profile name="tfSelectArea_list" extends="tfSelectMachine_list">
+            <listItemSpacing value="2px" />
+        </Profile>
+        <Profile name="tfSelectArea_listItem" extends="tfSelectMachine_listItem">
+            <imageSliceId value="gui.colorPreset" />
+            <imageSelectedSliceId value="gui.colorPreset" />
+            <imageColor value="1 1 1 0.005" />
+            <imageSelectedColor value="1 1 1 0.025" />
+        </Profile>
+        <Profile name="tfSelectArea_listItemTitle" extends="tfSelectMachine_listItemTitle">
+            <position value="72px 8px" />
+            <textBold value="false" />
+
+            <textColor value="0.89627 0.92158 0.81485 0.8" />
+            <textSelectedColor value="$preset_fs25_colorGreen" />
+        </Profile>
+        <Profile name="tfSelectArea_listItemText" extends="tfSelectMachine_listItemText">
+            <position value="72px -10px" />
+            <textSize value="12px" />
+
+            <textColor value="0.89627 0.92158 0.81485 0.4" />
+            <textSelectedColor value="$preset_fs25_colorGreen_40" />
+        </Profile>
+
+        <Profile name="tfSelectArea_listItemStatus" extends="tfSelectMachine_listItemText" with="anchorMiddleRight">
+            <position value="-16px 0" />
+            <textAlignment value="right" />
+        </Profile>
+
+        <Profile name="tfSelectArea_listItemImage" extends="tfSelectMachine_listItemImage" with="anchorMiddleLeft">
+            <size value="32px 32px" />
+            <position value="16px 0" />
+            <imageColor value="1 1 1 1" />
+            <imageSelectedColor value="$preset_fs25_colorGreen" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap id="dialogElement" profile="tfSelectAreaType_dialogBg">
+        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
+        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
+        <ThreePartBitmap profile="tf_dialogBgBottom" />
+
+        <Text position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_createArea" />
+
+        <GuiElement profile="tfSelectAreaType_dialogContent">
+            <SmoothList profile="tfSelectAreaType_list" id="list" focusInit="onOpen" onDoubleClick="onItemDoubleClick">
+                <ListItem profile="tfSelectAreaType_listItem">
+                    <Bitmap name="image" profile="tfSelectAreaType_listItemImage" />
+                    <Text name="title" profile="tfSelectAreaType_listItemTitle" />
+                    <Text name="text" profile="tfSelectAreaType_listItemText" />
+                </ListItem>
+            </SmoothList>
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider dataElementId="list" profile="tf_listSlider" />
+            </ThreePartBitmap>
+
+            <Bitmap profile="tfSelectAreaType_listShadowTop" />
+            <Bitmap profile="tfSelectAreaType_listShadowBottom" />
+        </GuiElement>
+
+        <BoxLayout profile="tf_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
+            <Bitmap profile="tf_dialogButtonBoxSeparator" />
+            <Button id="applyButton" onClick="onClickSelect" profile="buttonOK" text="$l10n_button_accept" />
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiProfiles>
+        <Profile name="tfSelectAreaType_dialogBg" extends="tfSelectMaterial_dialogBg">
+        </Profile>
+        <Profile name="tfSelectAreaType_dialogContent" extends="tfSelectMaterial_dialogContent"></Profile>
+        <Profile name="tfSelectAreaType_list" extends="tfSelectMaterial_list">
+            <listItemSpacing value="2px" />
+        </Profile>
+        <Profile name="tfSelectAreaType_listItem" extends="tfSelectMaterial_listItem">
+            <height value="128px" />
+            <imageSliceId value="gui.colorPreset" />
+            <imageSelectedSliceId value="gui.colorPreset" />
+            <imageColor value="1 1 1 0.005" />
+            <imageSelectedColor value="1 1 1 0.025" />
+        </Profile>
+        <Profile name="tfSelectAreaType_listItemImage" extends="tfSelectMaterial_listItemImage">
+            <size value="64px 64px" />
+            <position value="16px 0" />
+            <imageColor value="1 1 1 1" />
+            <imageSelectedColor value="$preset_fs25_colorGreen" />
+        </Profile>
+        <Profile name="tfSelectAreaType_listItemTitle" extends="tfSelectMaterial_listItemText">
+            <position value="112px 12px" />
+            <textBold value="false" />
+
+            <textColor value="0.89627 0.92158 0.81485 0.8" />
+            <textSelectedColor value="$preset_fs25_colorGreen" />
+        </Profile>
+        <Profile name="tfSelectAreaType_listItemText" extends="tfSelectMaterial_listItemText">
+            <size value="224px 40px" />
+            <position value="112px -24px" />
+            <textSize value="12px" />
+
+            <textVerticalAlignment value="top" />
+            <textAutoWidth value="false" />
+            <textMaxNumLines value="2" />
+            <textColor value="0.89627 0.92158 0.81485 0.4" />
+            <textSelectedColor value="0.89627 0.92158 0.81485 0.4" />
+        </Profile>
+        <Profile name="tfSelectAreaType_listShadowTop" extends="tfSelectMaterial_listShadowTop"></Profile>
+        <Profile name="tfSelectAreaType_listShadowBottom" extends="tfSelectMaterial_listShadowBottom"></Profile>
+    </GuiProfiles>
+</GUI>

@@ -13,10 +13,7 @@
 GlobalMaterialsDialog = {}
 
 GlobalMaterialsDialog.CLASS_NAME = 'GlobalMaterialsDialog'
-GlobalMaterialsDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/GlobalMaterialsDialog.xml'
-
-GlobalMaterialsDialog.L10N_ACTION_ENABLE = g_i18n:getText('ui_enable')
-GlobalMaterialsDialog.L10N_ACTION_DISABLE = g_i18n:getText('ui_disable')
+GlobalMaterialsDialog.XML_FILENAME = g_modDirectory .. 'data/gui/dialogs/GlobalMaterialsDialog.xml'
 
 local GlobalMaterialsDialog_mt = Class(GlobalMaterialsDialog, MessageDialog)
 
@@ -105,7 +102,7 @@ function GlobalMaterialsDialog:updateItems()
     self.disabledItems = {}
 
     for _, index in ipairs(g_fillTypeManager:getFillTypesByCategoryNames('SHOVEL')) do
-        ---@type FillTypeObject | nil
+        ---@type FillTypeObject?
         local fillType = g_fillTypeManager:getFillTypeByIndex(index)
 
         if fillType ~= nil then
@@ -228,10 +225,10 @@ function GlobalMaterialsDialog:updateActionButtons()
     self.applyButton:setVisible(self.hasChanged)
 
     if focusedElement == self.enabledList then
-        self.actionButton:setText(GlobalMaterialsDialog.L10N_ACTION_DISABLE)
+        self.actionButton:setText(InGameMenuTerraFarmFrame.L10N_SYMBOL.ACTION_DISABLE)
         self.actionButton:setVisible(true)
     elseif focusedElement == self.disabledList then
-        self.actionButton:setText(GlobalMaterialsDialog.L10N_ACTION_ENABLE)
+        self.actionButton:setText(InGameMenuTerraFarmFrame.L10N_SYMBOL.ACTION_ENABLE)
         self.actionButton:setVisible(true)
     else
         self.actionButton:setVisible(false)

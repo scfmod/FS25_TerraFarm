@@ -10,7 +10,6 @@
         <text name="input_MACHINE_SELECT_MATERIAL" text="Otevřít dialog materiálu" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Otevřít dialog textury terénu" />
         <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Otevřít dialog textury výsypu" />
-        <text name="input_MACHINE_SELECT_SURVEYOR" text="Otevřít dialog zaměřovače" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Otevřít dialog globálních nastavení" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Přepnout viditelnost HUD" />
 
@@ -35,18 +34,12 @@
         <text name="ui_enableHud" text="Povolit HUD" />
         <text name="ui_machines" text="Stroje" />
         <text name="ui_machinesEmpty" text="Žádné dostupné stroje nenalezeny" />
-        <text name="ui_surveyors" text="Zaměřovače" />
-        <text name="ui_surveyorsEmpty" text="Žádné dostupné zaměřovače nenalezeny" />
-        <text name="ui_angleFormat" text="Úhel: %.2f" tag="format" />
         <text name="ui_distanceFormat" text="%.0f m" tag="format" />
         <text name="ui_copySettings" text="Kopírovat nastavení" />
         <text name="ui_copySettingsTooltip" text="Kopírovat nastavení stroje z jiného vozidla" />
         <text name="ui_areaModifiers" text="Modifikátory oblasti" />
         <text name="ui_postDeformation" text="Po deformaci" />
         <text name="ui_operator" text="Operátor" />
-        <text name="ui_angle" text="Úhel" />
-        <text name="ui_startOffset" text="Počáteční posun" />
-        <text name="ui_targetOffset" text="Cílový posun" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Nastavení stroje" />
@@ -73,26 +66,6 @@
         <text name="ui_mapResourcesNotAvailable" text="Funkce pro tuto mapu není dostupná." />
         <text name="ui_mapResourcesDescription" text="Dostupné pouze pro mapy s implementovanou funkcí. Pokud je povoleno, bude používat materiály a vrstvy barev v různých oblastech definovaných autorem mapy. Každý stroj může tuto funkci zapnout/vypnout, pokud je povolena." />
 
-        <!-- Surveyor texts -->
-        <text name="ui_selectSurveyor" text="Vybrat zaměřovač" />
-        <text name="ui_calibrate" text="Kalibrovat" />
-        <text name="ui_calibration" text="Kalibrace" />
-        <text name="ui_calibrationDescription" text="Kalibrace umožňuje ZAROVNÁVAT pomocí kalibrovaného úhlu ze zaměřovacího zařízení." />
-        <text name="ui_calibratedAngleFormat" text="Kalibrováno: %.2f°" tag="format" />
-        <text name="ui_calibrated" text="Kalibrováno" />
-        <text name="ui_calibratedFormat" text="Kalibrováno: %.2f°" tag="format" />
-        <text name="ui_calibrateCopy" text="Kopírovat ze stroje" />
-        <text name="ui_notCalibrated" text="Nekalibrováno" />
-        <text name="ui_setTarget" text="Nastavit cíl" />
-        <text name="ui_setAngle" text="Nastavit úhel" />
-        <text name="ui_setLevel" text="Nastavit úroveň" />
-        <text name="ui_useTerrain" text="Použít terén" />
-        <text name="ui_useTerrainTooltip" text="Povolit kalibraci na terénu" />
-        <text name="ui_notAvailable" text="Není dostupné" />
-        <text name="warning_unfoldSurveyor" text="Nejprve musíte rozložit nástroj!" />
-        <text name="foldSurveyor" text="Složit zaměřovač" />
-        <text name="unfoldSurveyor" text="Rozložit zaměřovač" />
-
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Povolit TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Povolit stroje ve výchozím nastavení" />
@@ -104,12 +77,7 @@
         <text name="ui_debugCalibration" text="Ladit kalibraci stroje" />
 
         <!-- Store items -->
-        <text name="storeItem_surveyor" text="PSV-2 Zaměřovač" />
-        <text name="typeDesc_surveyor" text="Zaměřovací zařízení" />
-        <text name="ui_steelStainless" text="Nerezová ocel" />
-        <text name="ui_steelGalvanized" text="Pozinkovaná ocel" />
         <text name="displayItem_machine" text="Stroj" />
-        <text name="displayItem_surveyor" text="Zaměřovač" />
 
         <!-- MachineState -->
         <text name="ui_stateEnableEffects" text="Povolit vizuální efekty" />
@@ -132,8 +100,6 @@
         <text name="ui_stateHardnessTooltip" text="" />
         <text name="ui_stateBrushShape" text="Tvar štětce deformace" />
         <text name="ui_stateBrushShapeTooltip" text="" />
-        <text name="ui_stateEraseTireTracks" text="Odstranit stopy pneumatik" />
-        <text name="ui_stateEraseTireTracksTooltip" text="Odstraňuje stopy pneumatik při terénních úpravách" />
         <text name="ui_stateRemoveFieldArea" text="Odstranit pole" />
         <text name="ui_stateRemoveFieldAreaTooltip" text="Odstraňuje masku pole při terénních úpravách" />
         <text name="ui_stateRemoveStoneArea" text="Odstranit kameny" />
@@ -160,5 +126,65 @@
         <text name="machineType_ripper" text="Hloubkový kypřič" />
         <text name="machineType_shovel" text="Lžíce" />
         <text name="machineType_trencher" text="Rýhovač" />
+
+        <!-- 1.3.0.0 UPDATE: New entries -->
+        <text name="input_MACHINE_SELECT_AREA" text="Open select area dialog" />
+
+        <text name="ui_landscapingAreas" text="Landscaping areas" />
+        <text name="ui_landscapingArea" text="Landscaping area" />
+        <text name="ui_waterPlanes" text="Water planes" />
+        <text name="ui_waterPlane" text="Water plane" />
+        <text name="ui_area" text="Area" />
+        <text name="ui_areas" text="Areas" />
+        <text name="ui_areasLimitWarning" text="Number of landscaping areas limit reached" />
+        <text name="ui_waterplanesLimitWarning" text="Number of water planes limit reached" />
+        <text name="ui_createArea" text="Create new area" />
+        <text name="ui_createWaterplane" text="Create new water plane" />
+        <text name="ui_areaPath" text="Path area" />
+        <text name="ui_areaPathText" text="Define an area using points to form a path with various positions." />
+        <text name="ui_areaPolygon" text="Polygon area" />
+        <text name="ui_areaPolygonText" text="Define an area using points and a target height." />
+
+        <text name="ui_editorSaveChanges" text="Save changes" />
+        <text name="ui_moveArea" text="Move area" />
+        <text name="ui_restrictArea" text="Restrict within area" />
+        <text name="ui_targetHeight" text="Target height" />
+        <text name="ui_setTargetHeight" text="Set target height" />
+        <text name="ui_moveHorizontal" text="Move horizontal" />
+        <text name="ui_moveVertical" text="Move vertical" />
+        <text name="ui_editMode" text="Edit mode" />
+        <text name="ui_exitEditMode" text="Exit edit mode" />
+        <text name="ui_movePoint" text="Move point" />
+        <text name="ui_setPosition" text="Set new position" />
+        <text name="ui_placePoint" text="Place new point" />
+        <text name="ui_createPoint" text="Create new point" />
+        <text name="ui_selectPoint" text="Select point" />
+        <text name="ui_keepDirection" text="Keep direction" />
+        <text name="ui_followAngle" text="Follow angle" />
+        <text name="ui_icon" text="Icon" />
+        <text name="ui_exit" text="Exit" />
+        <text name="ui_width" text="Width" />
+        <text name="ui_visible" text="Visible" />
+        <text name="ui_hidden" text="Hidden" />
+        <text name="ui_setVisible" text="Set visible" />
+        <text name="ui_setHidden" text="Set hidden" />
+        <text name="ui_notSet" text="Not set" />
+        <text name="ui_edit" text="Edit" />
+        <text name="ui_editorConfirmCloseText" text="Do you want to close editor? Unsaved changed will be discarded" />
+        <text name="ui_areaConfirmDeleteText" text="Do you want to delete the landscaping area?" />
+        <text name="ui_waterplaneConfirmDeleteText" text="Do you want to delete the water plane?" />
+
+        <text name="ui_enableAreaBorders" text="Show area borders" />
+        <text name="ui_areaBorderMode" text="Area border mode" />
+        <text name="ui_areaBorderModeNormal" text="Normal" />
+        <text name="ui_areaBorderModeDecal" text="Decal" />
+        <text name="ui_areaBorderModeMesh" text="Mesh" />
+        <text name="ui_areasEmpty" text="No available areas found" />
+        <text name="ui_selectArea" text="Select area" />
+        <text name="ui_machineCopy" text="Copy from machine" />
+        <text name="ui_ignoreAreaMaterial" text="Ignore material settings" />
+        <text name="ui_ignoreAreaMaterialTooltip" text="" />
+        <text name="ui_ignoreAreaGroundTextures" text="Ignore texture settings" />
+        <text name="ui_ignoreAreaGroundTexturesTooltip" text="" />
     </texts>
 </l10n>

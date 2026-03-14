@@ -4,10 +4,12 @@ LandscapingInputSmooth = {}
 local LandscapingInputSmooth_mt = Class(LandscapingInputSmooth, LandscapingInput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
+---@param fillTypeIndex? number
 ---@return LandscapingInputSmooth
 ---@nodiscard
-function LandscapingInputSmooth.new(workArea)
-    local self = LandscapingInput.new(LandscapingOperation.SMOOTH, workArea, LandscapingInputSmooth_mt)
+function LandscapingInputSmooth.new(workArea, terrainLayerId, fillTypeIndex)
+    local self = LandscapingInput.new(LandscapingOperation.SMOOTH, workArea, terrainLayerId, fillTypeIndex, LandscapingInputSmooth_mt)
     ---@cast self LandscapingInputSmooth
 
     self.heightChangeAmount = 0.05

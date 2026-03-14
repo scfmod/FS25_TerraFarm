@@ -1,22 +1,26 @@
 ---@class GlobalSettingsDialog : MessageDialog
 ---@field boxLayout ScrollingLayoutElement
----@field hudEnabledOption TFBinaryOptionElement
----@field enabledOption TFBinaryOptionElement
----@field defaultEnabledOption TFBinaryOptionElement
+---@field hudEnabledOption BinaryOptionElement
+---@field enabledOption BinaryOptionElement
+---@field defaultEnabledOption BinaryOptionElement
 ---@field settingsButton ButtonElement
----@field debugNodesOption TFBinaryOptionElement
----@field debugCalibrationOption TFBinaryOptionElement
----@field resourcesEnabledOption TFBinaryOptionElement
+---@field debugNodesOption BinaryOptionElement
+---@field debugCalibrationOption BinaryOptionElement
+---@field resourcesEnabledOption BinaryOptionElement
 ---@field resourcesEnabledOptionContainer BitmapElement
+---@field bordersEnabledOption BinaryOptionElement
+---@field borderModeOption MultiTextOptionElement
 ---@field extensionStatus TextElement
 ---@field superClass fun(): MessageDialog
 GlobalSettingsDialog = {}
 
 GlobalSettingsDialog.CLASS_NAME = 'GlobalSettingsDialog'
-GlobalSettingsDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/GlobalSettingsDialog.xml'
+GlobalSettingsDialog.XML_FILENAME = g_modDirectory .. 'data/gui/dialogs/GlobalSettingsDialog.xml'
 
-GlobalSettingsDialog.L10N_FEATURE_AVAILABLE = g_i18n:getText('ui_mapResourcesAvailable')
-GlobalSettingsDialog.L10N_FEATURE_NOT_AVAILABLE = g_i18n:getText('ui_mapResourcesNotAvailable')
+GlobalSettingsDialog.L10N_SYMBOL = {
+    FEATURE_AVAILABLE = g_i18n:getText('ui_mapResourcesAvailable'),
+    FEATURE_NOT_AVAILABLE = g_i18n:getText('ui_mapResourcesNotAvailable'),
+}
 
 local GlobalSettingsDialog_mt = Class(GlobalSettingsDialog, MessageDialog)
 
@@ -41,6 +45,16 @@ end
 
 function GlobalSettingsDialog:load()
     g_gui:loadGui(GlobalSettingsDialog.XML_FILENAME, GlobalSettingsDialog.CLASS_NAME, self)
+end
+
+function GlobalSettingsDialog:onGuiSetupFinished()
+    self:superClass().onGuiSetupFinished(self)
+
+    self.borderModeOption:setTexts({
+        g_i18n:getText('ui_areaBorderModeNormal'),
+        g_i18n:getText('ui_areaBorderModeDecal'),
+        g_i18n:getText('ui_areaBorderModeMesh'),
+    })
 end
 
 function GlobalSettingsDialog:show()
@@ -74,13 +88,16 @@ function GlobalSettingsDialog:onClose()
 end
 
 function GlobalSettingsDialog:updateSettings()
-    local canModifySettings = MachineUtils.getCanModifySettings()
+    local canModifySettings = ModUtils.getIsAdministrator()
 
     self.enabledOption:setIsChecked(g_modSettings:getIsEnabled(), true)
     self.enabledOption:setDisabled(not canModifySettings)
 
     self.defaultEnabledOption:setDisabled(not canModifySettings)
     self.defaultEnabledOption:setIsChecked(g_modSettings.defaultEnabled, true)
+
+    self.bordersEnabledOption:setIsChecked(g_landscapingManager.areaBordersVisible)
+    self.borderModeOption:setState(g_landscapingManager.borderMode)
 
     self.debugNodesOption:setIsChecked(g_modSettings:getDebugNodes(), true)
     self.debugCalibrationOption:setIsChecked(g_modSettings:getDebugCalibration(), true)
@@ -95,16 +112,16 @@ function GlobalSettingsDialog:updateSettings()
     self.hudEnabledOption:setIsChecked(g_modHud.display.isVisible, true)
 
     if resourcesAvailable then
-        self.extensionStatus:setText(g_i18n:getText('ui_mapResourcesAvailable'))
+        self.extensionStatus:setText(GlobalSettingsDialog.L10N_SYMBOL.FEATURE_AVAILABLE)
         self.extensionStatus:setDisabled(false)
     else
-        self.extensionStatus:setText(g_i18n:getText('ui_mapResourcesNotAvailable'))
+        self.extensionStatus:setText(GlobalSettingsDialog.L10N_SYMBOL.FEATURE_NOT_AVAILABLE)
         self.extensionStatus:setDisabled(true)
     end
 end
 
 function GlobalSettingsDialog:updateMenuButtons()
-    self.settingsButton:setVisible(MachineUtils.getCanModifySettings())
+    self.settingsButton:setVisible(ModUtils.getIsAdministrator())
 end
 
 function GlobalSettingsDialog:forceReload()
@@ -137,6 +154,14 @@ end
 ---@param state number
 function GlobalSettingsDialog:onClickDefaultEnabledOption(state)
     g_modSettings:setDefaultEnabled(state == CheckedOptionElement.STATE_CHECKED)
+end
+
+function GlobalSettingsDialog:onClickBordersEnabledOption(state)
+    g_landscapingManager:setAreaBordersVisible(state == CheckedOptionElement.STATE_CHECKED)
+end
+
+function GlobalSettingsDialog:onClickBorderModeOption(state)
+    g_landscapingManager:setAreaBorderMode(state)
 end
 
 function GlobalSettingsDialog:onClickMaterialSettings()

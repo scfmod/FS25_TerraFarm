@@ -9,7 +9,6 @@
         <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir o diálogo de material" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir o diálogo de textura do solo" />
         <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Abrir a caixa de diálogo de textura de solo de descarga" />
-        <text name="input_MACHINE_SELECT_SURVEYOR" text="Abrir o diálogo do agrimensor" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir o diálogo de configurações globais" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Alternar a visibilidade do HUD" />
 
@@ -34,18 +33,13 @@
         <text name="ui_enableHud" text="Habilitar HUD" />
         <text name="ui_machines" text="Máquinas" />
         <text name="ui_machinesEmpty" text="Nenhuma máquina disponível encontrada" />
-        <text name="ui_surveyors" text="Agrimensores" />
-        <text name="ui_surveyorsEmpty" text="Nenhum agrimensor disponível encontrado" />
-        <text name="ui_angleFormat" text="Ângulo: %.2f" tag="format" />
         <text name="ui_distanceFormat" text="Distância: %.0f m" tag="format" />
         <text name="ui_copySettings" text="Copiar configurações" />
         <text name="ui_copySettingsTooltip" text="Copiar configurações da máquina de outro veículo" />
         <text name="ui_areaModifiers" text="Modificadores de área" />
         <text name="ui_postDeformation" text="Pós-deformação" />
         <text name="ui_operator" text="Operador" />
-        <text name="ui_angle" text="Ângulo" />
-        <text name="ui_startOffset" text="Deslocamento inicial" />
-        <text name="ui_targetOffset" text="Deslocamento alvo" />
+        <text name="ui_notAvailable" text="Não disponível" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Configurações da máquina" />
@@ -72,26 +66,6 @@
         <text name="ui_mapResourcesNotAvailable" text="O recurso não está disponível para este mapa." />
         <text name="ui_mapResourcesDescription" text="Disponível apenas para mapas com recurso implementado. Se habilitado, ele usará materiais e camadas de tinta em diferentes áreas definidas pelo autor do mapa. Cada máquina pode ligar/desligar o recurso se habilitado." />
 
-        <!-- Surveyor texts -->
-        <text name="ui_selectSurveyor" text="Selecione o agrimensor" />
-        <text name="ui_calibrate" text="Calibrar" />
-        <text name="ui_calibration" text="Calibração" />
-        <text name="ui_calibrationDescription" text="A calibração permite que você CLASSIFIQUE usando um ângulo calibrado do equipamento do topógrafo." />
-        <text name="ui_calibratedAngleFormat" text="Calibrado em ângulo: %.2f°" tag="format" />
-        <text name="ui_calibrated" text="Calibrado" />
-        <text name="ui_calibratedFormat" text="Calibrado: %.2f°" tag="format" />
-        <text name="ui_calibrateCopy" text="Copiar da máquina" />
-        <text name="ui_notCalibrated" text="Não calibrado" />
-        <text name="ui_setTarget" text="Definir alvo" />
-        <text name="ui_setAngle" text="Definir ângulo" />
-        <text name="ui_setLevel" text="Definir nível" />
-        <text name="ui_useTerrain" text="Usar terreno" />
-        <text name="ui_useTerrainTooltip" text="Habilitar calibração no terreno" />
-        <text name="ui_notAvailable" text="Não disponível" />
-        <text name="warning_unfoldSurveyor" text="Primeiro você precisa desdobrar a ferramenta!" />
-        <text name="foldSurveyor" text="Dobrar o agrimensor" />
-        <text name="unfoldSurveyor" text="Desdobrar o agrimensor" />
-
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="Habilitar TerraFarm" />
         <text name="ui_globalDefaultEnabled" text="Habilitar máquinas por padrão" />
@@ -103,12 +77,7 @@
         <text name="ui_debugCalibration" text="Depuração da calibração da máquina" />
 
         <!-- Store items -->
-        <text name="storeItem_surveyor" text="Agrimensor PSV-2" />
-        <text name="typeDesc_surveyor" text="Equipamento de topografia" />
-        <text name="ui_steelStainless" text="Aço inoxidável" />
-        <text name="ui_steelGalvanized" text="Aço galvanizado" />
         <text name="displayItem_machine" text="Máquina" />
-        <text name="displayItem_surveyor" text="Agrimensor" />
 
         <!-- MachineState -->
         <text name="ui_stateEnableEffects" text="Habilitar efeitos visuais" />
@@ -131,8 +100,6 @@
         <text name="ui_stateHardnessTooltip" text="" />
         <text name="ui_stateBrushShape" text="Forma do pincel de deformação" />
         <text name="ui_stateBrushShapeTooltip" text="Alterna a forma do pincel de deformação" />
-        <text name="ui_stateEraseTireTracks" text="Remover marcas de pneus" />
-        <text name="ui_stateEraseTireTracksTooltip" text="Remove as marcas de pneus do solo durante a terraformação" />
         <text name="ui_stateRemoveFieldArea" text="Remover áreas do campo" />
         <text name="ui_stateRemoveFieldAreaTooltip" text="Remove as áreas dos campos durante a terraformação" />
         <text name="ui_stateRemoveStoneArea" text="Remover pedras" />
@@ -159,5 +126,65 @@
         <text name="machineType_ripper" text="Subsoladora" />
         <text name="machineType_shovel" text="Pá" />
         <text name="machineType_trencher" text="Trincheradora" />
+
+        <!-- 1.3.0.0 UPDATE: New entries -->
+        <text name="input_MACHINE_SELECT_AREA" text="Open select area dialog" />
+
+        <text name="ui_landscapingAreas" text="Landscaping areas" />
+        <text name="ui_landscapingArea" text="Landscaping area" />
+        <text name="ui_waterPlanes" text="Water planes" />
+        <text name="ui_waterPlane" text="Water plane" />
+        <text name="ui_area" text="Area" />
+        <text name="ui_areas" text="Areas" />
+        <text name="ui_areasLimitWarning" text="Number of landscaping areas limit reached" />
+        <text name="ui_waterplanesLimitWarning" text="Number of water planes limit reached" />
+        <text name="ui_createArea" text="Create new area" />
+        <text name="ui_createWaterplane" text="Create new water plane" />
+        <text name="ui_areaPath" text="Path area" />
+        <text name="ui_areaPathText" text="Define an area using points to form a path with various positions." />
+        <text name="ui_areaPolygon" text="Polygon area" />
+        <text name="ui_areaPolygonText" text="Define an area using points and a target height." />
+
+        <text name="ui_editorSaveChanges" text="Save changes" />
+        <text name="ui_moveArea" text="Move area" />
+        <text name="ui_restrictArea" text="Restrict within area" />
+        <text name="ui_targetHeight" text="Target height" />
+        <text name="ui_setTargetHeight" text="Set target height" />
+        <text name="ui_moveHorizontal" text="Move horizontal" />
+        <text name="ui_moveVertical" text="Move vertical" />
+        <text name="ui_editMode" text="Edit mode" />
+        <text name="ui_exitEditMode" text="Exit edit mode" />
+        <text name="ui_movePoint" text="Move point" />
+        <text name="ui_setPosition" text="Set new position" />
+        <text name="ui_placePoint" text="Place new point" />
+        <text name="ui_createPoint" text="Create new point" />
+        <text name="ui_selectPoint" text="Select point" />
+        <text name="ui_keepDirection" text="Keep direction" />
+        <text name="ui_followAngle" text="Follow angle" />
+        <text name="ui_icon" text="Icon" />
+        <text name="ui_exit" text="Exit" />
+        <text name="ui_width" text="Width" />
+        <text name="ui_visible" text="Visible" />
+        <text name="ui_hidden" text="Hidden" />
+        <text name="ui_setVisible" text="Set visible" />
+        <text name="ui_setHidden" text="Set hidden" />
+        <text name="ui_notSet" text="Not set" />
+        <text name="ui_edit" text="Edit" />
+        <text name="ui_editorConfirmCloseText" text="Do you want to close editor? Unsaved changed will be discarded" />
+        <text name="ui_areaConfirmDeleteText" text="Do you want to delete the landscaping area?" />
+        <text name="ui_waterplaneConfirmDeleteText" text="Do you want to delete the water plane?" />
+
+        <text name="ui_enableAreaBorders" text="Show area borders" />
+        <text name="ui_areaBorderMode" text="Area border mode" />
+        <text name="ui_areaBorderModeNormal" text="Normal" />
+        <text name="ui_areaBorderModeDecal" text="Decal" />
+        <text name="ui_areaBorderModeMesh" text="Mesh" />
+        <text name="ui_areasEmpty" text="No available areas found" />
+        <text name="ui_selectArea" text="Select area" />
+        <text name="ui_machineCopy" text="Copy from machine" />
+        <text name="ui_ignoreAreaMaterial" text="Ignore material settings" />
+        <text name="ui_ignoreAreaMaterialTooltip" text="" />
+        <text name="ui_ignoreAreaGroundTextures" text="Ignore texture settings" />
+        <text name="ui_ignoreAreaGroundTexturesTooltip" text="" />
     </texts>
 </l10n>

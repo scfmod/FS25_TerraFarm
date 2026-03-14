@@ -6,13 +6,14 @@ LandscapingOutputFlatten = {}
 local LandscapingOutputFlatten_mt = Class(LandscapingOutputFlatten, LandscapingOutput)
 
 ---@param workArea MachineWorkArea
----@param targetY number
----@param litersToDrop number
+---@param terrainLayerId? number
 ---@param fillTypeIndex number
+---@param litersToDrop number
+---@param targetY number
 ---@return LandscapingOutputFlatten
 ---@nodiscard
-function LandscapingOutputFlatten.new(workArea, targetY, litersToDrop, fillTypeIndex)
-    local self = LandscapingOutput.new(LandscapingOperation.FLATTEN, workArea, LandscapingOutputFlatten_mt)
+function LandscapingOutputFlatten.new(workArea, terrainLayerId, fillTypeIndex, litersToDrop, targetY)
+    local self = LandscapingOutput.new(LandscapingOperation.FLATTEN, workArea, terrainLayerId, LandscapingOutputFlatten_mt)
     ---@cast self LandscapingOutputFlatten
 
     self.targetY = targetY
@@ -45,20 +46,6 @@ function LandscapingOutputFlatten:apply()
         end
     end
 
-    -- if self.workArea.outputNode == nil or self.workArea.outputNodeTerrainY > self.targetY then
-    -- if self.workArea.outputNode == nil then
-    --     return
-    -- elseif #self.workArea.areaNodes > 1 then
-    --     local firstNode = self.workArea.areaNodes[1]
-    --     local lastNode = self.workArea.areaNodes[#self.workArea.areaNodes]
-
-    --     if self.workArea.areaNodeTerrainY[firstNode] > self.targetY and self.workArea.areaNodeTerrainY[lastNode] > self.targetY and self.workArea.outputNodeTerrainY > self.targetY then
-    --         return
-    --     end
-    -- elseif self.workArea.outputNodeTerrainY > self.targetY then
-    --     return
-    -- end
-
     local deformation = self:createTerrainDeformation()
     local paintDeformation = self:createPaintDeformation()
     local position = self.workArea.outputNodePosition
@@ -67,16 +54,16 @@ function LandscapingOutputFlatten:apply()
 
     if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
         deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, nil)
-        MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
-        MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
+        LandscapingUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
+        LandscapingUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
 
         if paintDeformation ~= nil then
             paintDeformation:addSoftCircleBrush(position[1], position[3], paintRadius, 0.2, 0.5, self.terrainLayerId)
         end
     else
         deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, nil)
-        MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], densityRadius * 2)
-        MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], densityRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
 
         if paintDeformation ~= nil then
             paintDeformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, 0.2, 0.5, self.terrainLayerId)

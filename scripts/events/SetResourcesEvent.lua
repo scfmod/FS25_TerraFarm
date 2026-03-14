@@ -55,7 +55,7 @@ end
 
 ---@param available boolean
 ---@param active boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function SetResourcesEvent.sendEvent(available, active, noEventSend)
     if not noEventSend then
         local event = SetResourcesEvent.new(available, active)

@@ -5,11 +5,13 @@ LandscapingInputFlatten = {}
 local LandscapingInputFlatten_mt = Class(LandscapingInputFlatten, LandscapingInput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
+---@param fillTypeIndex? number
 ---@param targetY number
 ---@return LandscapingInputFlatten
 ---@nodiscard
-function LandscapingInputFlatten.new(workArea, targetY)
-    local self = LandscapingInput.new(LandscapingOperation.FLATTEN, workArea, LandscapingInputFlatten_mt)
+function LandscapingInputFlatten.new(workArea, terrainLayerId, fillTypeIndex, targetY)
+    local self = LandscapingInput.new(LandscapingOperation.FLATTEN, workArea, terrainLayerId, fillTypeIndex, LandscapingInputFlatten_mt)
     ---@cast self LandscapingInputFlatten
 
     self.targetY = targetY
@@ -20,56 +22,119 @@ function LandscapingInputFlatten.new(workArea, targetY)
     return self
 end
 
+local OUTER_ANGLE = math.rad(75)
+
 function LandscapingInputFlatten:apply()
-    local deformation = self:createTerrainDeformation()
-    local paintDeformation = self:createPaintDeformation()
+    local deformation          = self:createTerrainDeformation()
+    local paintDeformation     = self:createPaintDeformation()
 
-    local densityRadius = self.radius * self.state.densityModifier
-    local paintRadius = self.radius * self.state.paintModifier
+    local state                = self.state
+    local allowGradingUp       = state.allowGradingUp
+    local forceNodes           = state.forceNodes
+    local densityModifier      = state.densityModifier
+    local paintModifier        = state.paintModifier
 
-    if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
-        for node, position in pairs(self.workArea.areaNodePosition) do
-            if self.state.forceNodes or self.workArea.areaNodeActive[node] then
-                if self.state.allowGradingUp or self.workArea.areaNodeTerrainY[node] >= self.targetY then
-                    deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, -1)
-                    MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
+    local radius               = self.radius
+    local densityRadius        = radius * densityModifier
+    local paintRadius          = radius * paintModifier
+
+    local squareSize           = radius * 2
+    local densitySquareSize    = densityRadius * 2
+    local paintSquareSize      = paintRadius * 2
+
+    local workArea             = self.workArea
+    local areaNodePosition     = workArea.areaNodePosition
+    local areaNodeActive       = workArea.areaNodeActive
+    local areaNodeTerrainY     = workArea.areaNodeTerrainY
+
+    local modifiedAreas        = self.modifiedAreas
+    local densityModifiedAreas = self.densityModifiedAreas
+
+    local targetY              = self.targetY
+    local hardness             = self.hardness
+    local strength             = self.strength
+    local terrainLayerId       = self.terrainLayerId
+
+    local isCircle             = (self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE)
+    local hasPaint             = (paintDeformation ~= nil)
+
+    if isCircle then
+        if hasPaint then
+            for node, position in next, areaNodePosition do
+                if forceNodes or areaNodeActive[node] then
+                    local px = position[1]
+                    local pz = position[3]
+
+                    if allowGradingUp or areaNodeTerrainY[node] >= targetY then
+                        deformation:addSoftCircleBrush(px, pz, radius, hardness, strength, -1)
+                        LandscapingUtils.addModifiedCircleArea(modifiedAreas, px, pz, radius)
+                    end
+
+                    LandscapingUtils.addModifiedCircleArea(densityModifiedAreas, px, pz, densityRadius)
+                    ---@diagnostic disable-next-line: need-check-nil
+                    paintDeformation:addSoftCircleBrush(px, pz, paintRadius, 0.2, 0.5, terrainLayerId)
                 end
+            end
+        else
+            for node, position in next, areaNodePosition do
+                if forceNodes or areaNodeActive[node] then
+                    local px = position[1]
+                    local pz = position[3]
 
-                MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
+                    if allowGradingUp or areaNodeTerrainY[node] >= targetY then
+                        deformation:addSoftCircleBrush(px, pz, radius, hardness, strength, -1)
+                        LandscapingUtils.addModifiedCircleArea(modifiedAreas, px, pz, radius)
+                    end
 
-                if paintDeformation ~= nil then
-                    paintDeformation:addSoftCircleBrush(position[1], position[3], paintRadius, 0.2, 0.5, self.terrainLayerId)
+                    LandscapingUtils.addModifiedCircleArea(densityModifiedAreas, px, pz, densityRadius)
                 end
             end
         end
     else
-        for node, position in pairs(self.workArea.areaNodePosition) do
-            if self.state.forceNodes or self.workArea.areaNodeActive[node] then
-                if self.state.allowGradingUp or self.workArea.areaNodeTerrainY[node] >= self.targetY then
-                    deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, -1)
-                    MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], self.radius * 2)
+        if hasPaint then
+            for node, position in next, areaNodePosition do
+                if forceNodes or areaNodeActive[node] then
+                    local px = position[1]
+                    local pz = position[3]
+
+                    if allowGradingUp or areaNodeTerrainY[node] >= targetY then
+                        deformation:addSoftSquareBrush(px, pz, squareSize, hardness, strength, -1)
+                        LandscapingUtils.addModifiedSquareArea(modifiedAreas, px, pz, squareSize)
+                    end
+
+                    LandscapingUtils.addModifiedSquareArea(densityModifiedAreas, px, pz, densitySquareSize)
+                    ---@diagnostic disable-next-line: need-check-nil
+                    paintDeformation:addSoftSquareBrush(px, pz, paintSquareSize, 0.2, 0.5, terrainLayerId)
                 end
+            end
+        else
+            for node, position in next, areaNodePosition do
+                if forceNodes or areaNodeActive[node] then
+                    local px = position[1]
+                    local pz = position[3]
 
-                MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
+                    if allowGradingUp or areaNodeTerrainY[node] >= targetY then
+                        deformation:addSoftSquareBrush(px, pz, squareSize, hardness, strength, -1)
+                        LandscapingUtils.addModifiedSquareArea(modifiedAreas, px, pz, squareSize)
+                    end
 
-                if paintDeformation ~= nil then
-                    paintDeformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, 0.2, 0.5, self.terrainLayerId)
+                    LandscapingUtils.addModifiedSquareArea(densityModifiedAreas, px, pz, densitySquareSize)
                 end
             end
         end
     end
 
-    if #self.modifiedAreas == 0 then
+    if #modifiedAreas == 0 then
         deformation:cancel()
         return
     end
 
-    deformation:setOutsideAreaConstraints(0, math.rad(75), math.rad(75))
+    deformation:setOutsideAreaConstraints(0, OUTER_ANGLE, OUTER_ANGLE)
     deformation:setBlockedAreaMaxDisplacement(0.01)
     deformation:setDynamicObjectCollisionMask(0)
     deformation:setDynamicObjectMaxDisplacement(0.01)
 
-    deformation:apply(false, 'onDeformationCallback', self)
+    deformation:apply(false, "onDeformationCallback", self)
 end
 
 ---@return TerrainDeformation

@@ -2,8 +2,8 @@
 ---@field addFunction fun(name: string, params: InteractiveFunctionsParams)
 
 ---@class InteractiveFunctionsParams
----@field posFunc fun(target: Machine, data: any, noEventSend: boolean | nil)
----@field negFunc? fun(target: Machine, data: any, noEventSend: boolean | nil)
+---@field posFunc fun(target: Machine, data: any, noEventSend: boolean?)
+---@field negFunc? fun(target: Machine, data: any, noEventSend: boolean?)
 ---@field updateFunc? fun(target: Machine): boolean?
 ---@field isBlockedFunc? fun(target: Machine): boolean?
 
@@ -18,6 +18,8 @@ function InteractiveControlExtension.new()
     ---@type InteractiveControlExtension
     local self = setmetatable({}, InteractiveControlExtension_mt)
 
+    g_modController:subscribe(ModEvent.onModsLoaded, self.onModsLoaded, self)
+
     return self
 end
 
@@ -26,11 +28,11 @@ function InteractiveControlExtension:onModsLoaded()
 
     if g_modIsLoaded[modName] then
         local modEnv = _G[modName]
-        ---@type InteractiveFunctions | nil
+        ---@type InteractiveFunctions?
         local InteractiveFunctions = modEnv['InteractiveFunctions']
 
         if InteractiveFunctions ~= nil then
-            g_modDebug:debug('"FS25_interactiveControl" mod is active, adding new functions')
+            g_modController:debug('"FS25_interactiveControl" mod is active, adding new functions')
 
             self:registerToggleEnabledFunction(InteractiveFunctions)
             self:registerToggleActiveFunction(InteractiveFunctions)
@@ -41,7 +43,6 @@ function InteractiveControlExtension:onModsLoaded()
             self:registerMaterialFunction(InteractiveFunctions)
             self:registerTextureFunction(InteractiveFunctions)
             self:registerDischargeTextureFunction(InteractiveFunctions)
-            self:registerSelectSurveyorFunction(InteractiveFunctions)
         end
     end
 end
@@ -83,12 +84,12 @@ function InteractiveControlExtension:registerToggleEnabledFunction(icf)
                     local vehicle = g_machineManager.activeVehicle or target
 
                     if vehicle.getMachineEnabled ~= nil then
-                        return MachineUtils.getPlayerHasPermission('manageRights')
+                        return ModUtils.getPlayerHasPermission('manageRights')
                     end
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_TOGGLE_ENABLED"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_TOGGLE_ENABLED"')
     end
 end
 
@@ -134,7 +135,7 @@ function InteractiveControlExtension:registerToggleActiveFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_TOGGLE_ACTIVE"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_TOGGLE_ACTIVE"')
     end
 end
 
@@ -157,7 +158,7 @@ function InteractiveControlExtension:registerToggleHudFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_TOGGLE_HUD"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_TOGGLE_HUD"')
     end
 end
 
@@ -185,7 +186,7 @@ function InteractiveControlExtension:registerToggleInputFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_TOGGLE_INPUT"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_TOGGLE_INPUT"')
     end
 end
 
@@ -213,7 +214,7 @@ function InteractiveControlExtension:registerToggleOutputFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_TOGGLE_OUTPUT"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_TOGGLE_OUTPUT"')
     end
 end
 
@@ -241,7 +242,7 @@ function InteractiveControlExtension:registerSettingsFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_SETTINGS"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_SETTINGS"')
     end
 end
 
@@ -269,7 +270,7 @@ function InteractiveControlExtension:registerMaterialFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_MATERIAL"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_SELECT_MATERIAL"')
     end
 end
 
@@ -297,7 +298,7 @@ function InteractiveControlExtension:registerTextureFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_TEXTURE"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_SELECT_TEXTURE"')
     end
 end
 
@@ -325,35 +326,33 @@ function InteractiveControlExtension:registerDischargeTextureFunction(icf)
                 end
             }
         ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_DISCHARGE_TEXTURE"')
+        g_modController:debug('Registered interactiveControl function "MACHINE_SELECT_DISCHARGE_TEXTURE"')
     end
 end
 
 ---@param icf InteractiveFunctions
-function InteractiveControlExtension:registerSelectSurveyorFunction(icf)
-    if icf.addFunction('MACHINE_SELECT_SURVEYOR',
-            {
-                posFunc = function (target, data, noEventSend)
-                    if noEventSend then
-                        return
-                    end
-
-                    local vehicle = g_machineManager.activeVehicle or target
-
-                    if vehicle.getCanAccessMachine ~= nil then
-                        Machine.actionEventSelectSurveyor(vehicle)
-                    end
-                end,
-                isBlockedFunc = function (target)
-                    local vehicle = g_machineManager.activeVehicle or target
-
-                    if vehicle.getCanAccessMachine ~= nil and vehicle:getCanAccessMachine() then
-                        return MachineUtils.getHasInputMode(vehicle, Machine.MODE.FLATTEN) or MachineUtils.getHasOutputMode(vehicle, Machine.MODE.FLATTEN)
-                    end
+function InteractiveControlExtension:registerSelectAreaFunction(icf)
+    if icf.addFunction('MACHINE_SELECT_AREA', {
+            posFunc = function (target, data, noEventSend)
+                if noEventSend then
+                    return
                 end
-            }
-        ) then
-        g_modDebug:debug('Registered interactiveControl function "MACHINE_SELECT_SURVEYOR"')
+
+                local vehicle = g_machineManager.activeVehicle or target
+
+                if vehicle.getCanAccessMachine ~= nil then
+                    Machine.actionEventSelectArea(vehicle)
+                end
+            end,
+            isBlockedFunc = function (target)
+                local vehicle = g_machineManager.activeVehicle or target
+
+                if vehicle.getCanAccessMachine ~= nil and vehicle:getCanAccessMachine() then
+                    return true
+                end
+            end
+        }) then
+        g_modController:debug('Registered interactiveControl function "MACHINE_SELECT_AREA"')
     end
 end
 

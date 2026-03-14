@@ -4,10 +4,12 @@ LandscapingInputLower = {}
 local LandscapingInputLower_mt = Class(LandscapingInputLower, LandscapingInput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
+---@param fillTypeIndex? number
 ---@return LandscapingInputLower
 ---@nodiscard
-function LandscapingInputLower.new(workArea)
-    local self = LandscapingInput.new(LandscapingOperation.LOWER, workArea, LandscapingInputLower_mt)
+function LandscapingInputLower.new(workArea, terrainLayerId, fillTypeIndex)
+    local self = LandscapingInput.new(LandscapingOperation.LOWER, workArea, terrainLayerId, fillTypeIndex, LandscapingInputLower_mt)
     ---@cast self LandscapingInputLower
 
     self.heightChangeAmount = 0.05

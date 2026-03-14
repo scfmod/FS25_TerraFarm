@@ -6,7 +6,7 @@
 SelectMaterialDialog = {}
 
 SelectMaterialDialog.CLASS_NAME = 'SelectMaterialDialog'
-SelectMaterialDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectMaterialDialog.xml'
+SelectMaterialDialog.XML_FILENAME = g_modDirectory .. 'data/gui/dialogs/SelectMaterialDialog.xml'
 
 local SelectMaterialDialog_mt = Class(SelectMaterialDialog, MessageDialog)
 
@@ -41,14 +41,14 @@ function SelectMaterialDialog:onGuiSetupFinished()
     self.list:setDataSource(self)
 end
 
----@param fn function | nil
+---@param fn function?
 ---@param target any
 function SelectMaterialDialog:setSelectCallback(fn, target)
     self.selectCallbackFunction = fn
     self.selectCallbackTarget = target
 end
 
----@param selectFillTypeIndex number | nil
+---@param selectFillTypeIndex number?
 function SelectMaterialDialog:show(selectFillTypeIndex)
     g_gui:showDialog(SelectMaterialDialog.CLASS_NAME)
 
@@ -75,7 +75,7 @@ function SelectMaterialDialog:updateItems()
     self.items = {}
 
     for _, fillTypeName in ipairs(g_modSettings.materials) do
-        ---@type FillTypeObject | nil
+        ---@type FillTypeObject?
         local fillType = g_fillTypeManager:getFillTypeByName(fillTypeName)
 
         if fillType ~= nil then
@@ -91,10 +91,10 @@ function SelectMaterialDialog:updateItems()
 end
 
 function SelectMaterialDialog:updateMenuButtons()
-    self.settingsButton:setVisible(MachineUtils.getCanModifySettings())
+    self.settingsButton:setVisible(ModUtils.getIsAdministrator())
 end
 
----@param fillTypeIndex number | nil
+---@param fillTypeIndex number?
 function SelectMaterialDialog:setSelectedItem(fillTypeIndex)
     if fillTypeIndex ~= nil then
         for index, fillType in ipairs(self.items) do
@@ -141,7 +141,7 @@ function SelectMaterialDialog:onClickMaterialSettings()
     g_globalMaterialsDialog:show()
 end
 
----@param index number | nil
+---@param index number?
 function SelectMaterialDialog:sendCallback(index)
     local item = self.items[index]
 

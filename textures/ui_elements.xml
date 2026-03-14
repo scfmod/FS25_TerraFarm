@@ -4,6 +4,9 @@
         <size width="2048" height="1024" />
     </meta>
 
+    <!-- x: 0, 256, 512, 768, 1024, 1280, 1536, 1792, 2048 -->
+    <!-- y: 0, 256, 512, 768, 1024 -->
+
     <slices>
         <slice id="mode_material" uvs="0px 0px 128px 128px" />
         <slice id="mode_raise" uvs="256px 0px 128px 128px" />
@@ -12,16 +15,21 @@
         <slice id="mode_grade" uvs="1024px 0px 128px 128px" />
         <slice id="mode_paint" uvs="1280px 0px 128px 128px" />
 
-        <slice id="surveyor_angle" uvs="0px 128px 128px 128px" />
-        <slice id="surveyor_offset" uvs="128px 128px 128px 128px" />
-        <slice id="surveyor_terrain" uvs="256px 128px 128px 128px" />
-        <slice id="surveyor_map" uvs="384px 128px 128px 128px" />
-		
-		<slice id="icon_input" uvs="512px 128px 128px 128px" />
-		<slice id="icon_output" uvs="640px 128px 128px 128px" />
+        <slice id="icon_excavator" uvs="0px 128px 128px 128px" />
+        <slice id="icon_path" uvs="128px 128px 128px 128px" />
+        <slice id="icon_polygon" uvs="256px 128px 128px 128px" />
+        <slice id="icon_waterplane" uvs="384px 128px 128px 128px" />
+        <slice id="icon_input" uvs="512px 128px 128px 128px" />
+        <slice id="icon_output" uvs="640px 128px 128px 128px" />
+        <slice id="icon_list" uvs="768px 128px 128px 128px" />
 
-        <slice id="icon_excavator" uvs="0px 256px 128px 128px" />
-        <slice id="icon_surveyor" uvs="128px 256px 128px 128px" />
+        <slice id="icon_area" uvs="0px 256px 128px 128px" />
+        <slice id="icon_bulldozer" uvs="128px 256px 128px 128px" />
+        <slice id="icon_factory" uvs="256px 256px 128px 128px" />
+        <slice id="icon_garage" uvs="384px 256px 128px 128px" />
+        <slice id="icon_house" uvs="512px 256px 128px 128px" />
+        <slice id="icon_warehouse" uvs="640px 256px 128px 128px" />
+        <slice id="icon_road" uvs="0px 384px 128px 128px" />
 
         <slice id="shadow" uvs="0px 936px 1024px 56px" />
         <slice id="list_shadow" uvs="82px 936px 860px 56px" />

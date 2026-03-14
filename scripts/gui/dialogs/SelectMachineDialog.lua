@@ -8,12 +8,12 @@
 ---@field list SmoothListElement
 ---@field listEmptyText TextElement
 ---@field items MachineListItem[]
----@field vehicle Vehicle | nil
+---@field vehicle Vehicle?
 ---@field superClass fun(): MessageDialog
 SelectMachineDialog = {}
 
 SelectMachineDialog.CLASS_NAME = 'SelectMachineDialog'
-SelectMachineDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectMachineDialog.xml'
+SelectMachineDialog.XML_FILENAME = g_modDirectory .. 'data/gui/dialogs/SelectMachineDialog.xml'
 
 local SelectMachineDialog_mt = Class(SelectMachineDialog, MessageDialog)
 
@@ -48,14 +48,14 @@ function SelectMachineDialog:onGuiSetupFinished()
     self.list:setDataSource(self)
 end
 
----@param fn function | nil
+---@param fn function?
 ---@param target any
 function SelectMachineDialog:setSelectCallback(fn, target)
     self.selectCallbackFunction = fn
     self.selectCallbackTarget = target
 end
 
----@param vehicle Vehicle | nil
+---@param vehicle Vehicle?
 function SelectMachineDialog:show(vehicle)
     self.vehicle = vehicle
     g_gui:showDialog(SelectMachineDialog.CLASS_NAME)
@@ -66,8 +66,8 @@ function SelectMachineDialog:onOpen()
 
     self:updateItems()
 
-    g_messageCenter:subscribe(MessageType.MACHINE_ADDED, self.forceReload, self)
-    g_messageCenter:subscribe(MessageType.MACHINE_REMOVED, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_ADDED, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVED, self.forceReload, self)
 end
 
 function SelectMachineDialog:onClose()
@@ -155,7 +155,7 @@ function SelectMachineDialog:onClickApply()
     self:sendCallback(self.list:getSelectedIndexInSection())
 end
 
----@param index number | nil
+---@param index number?
 function SelectMachineDialog:sendCallback(index)
     local item = self.items[index]
 

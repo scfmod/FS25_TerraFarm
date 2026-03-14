@@ -3,11 +3,11 @@ source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineEnable
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineFillTypeEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputModeEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineLandscapingAreaEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputModeEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineResourcesEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineStateEvent.lua')
-source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineSurveyorEvent.lua')
 
 ---@class Machine : Vehicle, FillUnit, FillVolume, TurnOnVehicle, Cylindered, Enterable, Dischargeable, Shovel
 ---@field spec_attachable AttachableSpecialization
@@ -22,10 +22,7 @@ Machine = {}
 Machine.MOD_NAME = g_currentModName
 Machine.SPEC_NAME = string.format('spec_%s.machine', g_currentModName)
 Machine.DEFAULT_FILLTYPE = 'STONE'
-Machine.DEFAULT_TERRAIN_LAYERS = {
-    'DIRT',
-    'GRAVEL'
-}
+
 ---@enum MachineMode
 Machine.MODE = {
     MATERIAL = 0,
@@ -57,9 +54,9 @@ Machine.L10N_ACTION_MACHINE_SETTINGS = g_i18n:getText('ui_machineSettings')
 Machine.L10N_ACTION_SELECT_MATERIAL = g_i18n:getText('ui_changeMaterial')
 Machine.L10N_ACTION_SELECT_GROUND_TEXTURE = g_i18n:getText('ui_changeTexture')
 Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE = g_i18n:getText('ui_changeDischargeTexture')
-Machine.L10N_ACTION_SELECT_SURVEYOR = g_i18n:getText('ui_selectSurveyor')
 Machine.L10N_ACTION_GLOBAL_SETTINGS = g_i18n:getText('ui_globalSettings')
 Machine.L10N_ACTION_TOGGLE_HUD = g_i18n:getText('ui_toggleHud')
+Machine.L10N_ACTION_SELECT_AREA = g_i18n:getText('input_MACHINE_SELECT_AREA')
 
 Machine.ACTION_TOGGLE_ACTIVE = 'MACHINE_TOGGLE_ACTIVE'
 Machine.ACTION_TOGGLE_INPUT = 'MACHINE_TOGGLE_INPUT'
@@ -68,9 +65,9 @@ Machine.ACTION_SETTINGS = 'MACHINE_SETTINGS'
 Machine.ACTION_SELECT_MATERIAL = 'MACHINE_SELECT_MATERIAL'
 Machine.ACTION_SELECT_TEXTURE = 'MACHINE_SELECT_TEXTURE'
 Machine.ACTION_SELECT_DISCHARGE_TEXTURE = 'MACHINE_SELECT_DISCHARGE_TEXTURE'
-Machine.ACTION_SELECT_SURVEYOR = 'MACHINE_SELECT_SURVEYOR'
 Machine.ACTION_GLOBAL_SETTINGS = 'MACHINE_GLOBAL_SETTINGS'
 Machine.ACTION_TOGGLE_HUD = 'MACHINE_TOGGLE_HUD'
+Machine.ACTION_SELECT_AREA = 'MACHINE_SELECT_AREA'
 
 ---@type table<MachineMode, string>
 Machine.MODE_ICON_SLICE_ID = {
@@ -93,7 +90,7 @@ Machine.L10N_MODE = {
 }
 
 ---@type table<MachineMode, string>
-Machine.STR_MODE = {
+Machine.MODE_NAME = {
     [Machine.MODE.MATERIAL] = 'MATERIAL',
     [Machine.MODE.RAISE] = 'RAISE',
     [Machine.MODE.LOWER] = 'LOWER',
@@ -142,12 +139,12 @@ function Machine.registerSavegameXMLPaths(schema, key)
 
     schema:register(XMLValueType.BOOL, key .. '#enabled')
     schema:register(XMLValueType.BOOL, key .. '#resourcesEnabled')
-    schema:register(XMLValueType.STRING, key .. '#surveyorId')
     schema:register(XMLValueType.STRING, key .. '#fillType')
     schema:register(XMLValueType.STRING, key .. '#terrainLayer')
     schema:register(XMLValueType.STRING, key .. '#dischargeTerrainLayer')
     schema:register(XMLValueType.STRING, key .. '#inputMode')
     schema:register(XMLValueType.STRING, key .. '#outputMode')
+    schema:register(XMLValueType.STRING, key .. '#landscapingAreaId')
 
     MachineState.registerSavegameXMLPaths(schema, key .. '.state')
 
@@ -209,10 +206,8 @@ function Machine.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, 'handleDeformationInput', Machine.handleDeformationInput)
     SpecializationUtil.registerFunction(vehicleType, 'setResourcesEnabled', Machine.setResourcesEnabled)
 
-    SpecializationUtil.registerFunction(vehicleType, 'setSurveyorId', Machine.setSurveyorId)
-    SpecializationUtil.registerFunction(vehicleType, 'getSurveyorId', Machine.getSurveyorId)
-    SpecializationUtil.registerFunction(vehicleType, 'getSurveyor', Machine.getSurveyor)
-    SpecializationUtil.registerFunction(vehicleType, 'getSurveyorCalibration', Machine.getSurveyorCalibration)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineLandscapingArea', Machine.getMachineLandscapingArea)
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineLandscapingArea', Machine.setMachineLandscapingArea)
 end
 
 function Machine.initSpecialization()
@@ -223,7 +218,7 @@ function Machine.initSpecialization()
 end
 
 ---@param xmlFile XMLFile
----@param customEnvironment string | nil
+---@param customEnvironment string?
 ---@param baseDir string
 function Machine.loadSpecValue(xmlFile, customEnvironment, baseDir)
     local rootName = xmlFile:getRootName()
@@ -249,10 +244,10 @@ end
 ---@param saleItem any
 ---@param returnValues any
 ---@param returnRange any
----@return string | nil
+---@return string?
 function Machine.getSpecValue(storeItem, realItem, configurations, saleItem, returnValues, returnRange)
     if storeItem ~= nil and storeItem.specs ~= nil and storeItem.specs.machine ~= nil then
-        ---@type MachineType | nil
+        ---@type MachineType?
         local machineType = storeItem.specs.machine.machineType
 
         if machineType ~= nil then
@@ -274,7 +269,7 @@ function Machine:onLoad()
         if xmlFileExternal ~= nil then
             xmlFile = xmlFileExternal
         else
-            Logging.error('Failed to load machine configuration file: %s', tostring(spec.xmlFilenameConfig))
+            Logging.error('Machine:onLoad() Failed to load machine configuration file: %s', tostring(spec.xmlFilenameConfig))
             return false
         end
     else
@@ -288,7 +283,7 @@ function Machine:onLoad()
     spec.machineType = g_machineManager:getMachineTypeById(spec.machineTypeId)
 
     if spec.machineType == nil then
-        Logging.error('Invalid machine type name: %s', tostring(spec.machineTypeId))
+        Logging.xmlError(xmlFile, 'Machine:onLoad() Invalid machine type name: %s', tostring(spec.machineTypeId))
 
         if spec.isExternal then
             xmlFile:delete()
@@ -297,7 +292,6 @@ function Machine:onLoad()
         return false
     end
 
-    spec.surveyorId = nil
     spec.enabled = g_modSettings:getDefaultEnabled()
     spec.resourcesEnabled = true
     spec.active = false
@@ -308,9 +302,9 @@ function Machine:onLoad()
     spec.inputMode = Machine.MODE.MATERIAL
     spec.outputMode = Machine.MODE.MATERIAL
 
-    spec.inputTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
-    spec.outputTerrainLayerId = g_resourceManager:getDefaultTerrainLayerId()
-    spec.fillTypeIndex = g_resourceManager:getDefaultFillTypeIndex()
+    spec.inputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
+    spec.outputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
+    spec.fillTypeIndex = g_landscapingManager:getDefaultFillTypeIndex()
 
     spec.hasAttachable = SpecializationUtil.hasSpecialization(Attachable, self.specializations)
     spec.hasDischargeable = SpecializationUtil.hasSpecialization(Dischargeable, self.specializations)
@@ -408,7 +402,7 @@ function Machine:onLoad()
         table.insert(spec.modesOutput, Machine.MODE.SMOOTH)
         table.insert(spec.modesOutput, Machine.MODE.PAINT)
 
-        if MachineUtils.getIsShovel(self) and not MachineUtils.getHasInputMode(self, Machine.MODE.MATERIAL) then
+        if (spec.machineTypeId == 'shovel' or spec.machineTypeId == 'excavatorShovel') and not MachineUtils.getHasInputMode(self, Machine.MODE.MATERIAL) then
             table.insert(spec.modesInput, Machine.MODE.MATERIAL)
         end
     end
@@ -498,7 +492,7 @@ function Machine:onLoad()
     end
 end
 
----@param savegame SavegameObject | nil
+---@param savegame SavegameObject?
 function Machine:onPostLoad(savegame)
     local spec = self.spec_machine
 
@@ -524,7 +518,6 @@ function Machine:onPostLoad(savegame)
 
     if self.propertyState ~= 5 then
         g_machineManager:registerVehicle(self)
-        g_messageCenter:subscribe(MessageType.SURVEYOR_REMOVED, Machine.onSurveyorRemoved, self)
         g_messageCenter:subscribe(MessageType.MASTERUSER_ADDED, Machine.onMasterUserAdded, self)
         g_messageCenter:subscribe(PlayerPermissionsEvent, Machine.onPlayerPermissionsChanged, self)
     end
@@ -557,14 +550,14 @@ function Machine:saveToXMLFile(xmlFile, key)
 
     xmlFile:setValue(key .. '#enabled', spec.enabled)
     xmlFile:setValue(key .. '#resourcesEnabled', spec.resourcesEnabled)
-    xmlFile:setValue(key .. '#inputMode', Machine.STR_MODE[spec.inputMode])
-    xmlFile:setValue(key .. '#outputMode', Machine.STR_MODE[spec.outputMode])
+    xmlFile:setValue(key .. '#inputMode', Machine.MODE_NAME[spec.inputMode])
+    xmlFile:setValue(key .. '#outputMode', Machine.MODE_NAME[spec.outputMode])
 
-    if self:getSurveyor() ~= nil then
-        xmlFile:setValue(key .. '#surveyorId', spec.surveyorId)
+    if spec.landscapingAreaId ~= nil then
+        xmlFile:setValue(key .. '#landscapingAreaId', spec.landscapingAreaId)
     end
 
-    ---@type FillTypeObject | nil
+    ---@type FillTypeObject?
     local fillType = g_fillTypeManager:getFillTypeByIndex(spec.fillTypeIndex)
 
     if fillType ~= nil then
@@ -595,7 +588,6 @@ end
 function Machine:loadFromXMLFile(xmlFile, key)
     local spec = self.spec_machine
 
-    self:setSurveyorId(xmlFile:getValue(key .. '#surveyorId', spec.surveyorId), true)
     self:setMachineEnabled(xmlFile:getValue(key .. '#enabled', spec.enabled), true)
     self:setResourcesEnabled(xmlFile:getValue(key .. '#resourcesEnabled', spec.resourcesEnabled), true)
 
@@ -611,10 +603,12 @@ function Machine:loadFromXMLFile(xmlFile, key)
         self:setOutputMode(Machine.MODE[outputModeStr], true)
     end
 
+    spec.landscapingAreaId = xmlFile:getValue(key .. '#landscapingAreaId', nil)
+
     local fillTypeName = xmlFile:getValue(key .. '#fillType')
 
     if fillTypeName ~= nil then
-        ---@type FillTypeObject | nil
+        ---@type FillTypeObject?
         local fillType = g_fillTypeManager:getFillTypeByName(fillTypeName)
 
         if fillType ~= nil then
@@ -625,7 +619,7 @@ function Machine:loadFromXMLFile(xmlFile, key)
     local terrainLayerName = xmlFile:getValue(key .. '#terrainLayer')
 
     if terrainLayerName ~= nil then
-        local layer = g_resourceManager:getTerrainLayerByName(terrainLayerName)
+        local layer = g_landscapingManager:getTerrainLayerByName(terrainLayerName)
 
         if layer ~= nil then
             self:setMachineInputLayerId(layer.id, true)
@@ -635,7 +629,7 @@ function Machine:loadFromXMLFile(xmlFile, key)
     local dischargeTerrainLayerName = xmlFile:getValue(key .. '#dischargeTerrainLayer')
 
     if dischargeTerrainLayerName ~= nil then
-        local layer = g_resourceManager:getTerrainLayerByName(dischargeTerrainLayerName)
+        local layer = g_landscapingManager:getTerrainLayerByName(dischargeTerrainLayerName)
 
         if layer ~= nil then
             self:setMachineOutputLayerId(layer.id, true)
@@ -646,7 +640,7 @@ function Machine:loadFromXMLFile(xmlFile, key)
 end
 
 ---@param enabled boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setMachineEnabled(enabled, noEventSend)
     local spec = self.spec_machine
 
@@ -670,7 +664,7 @@ function Machine:getMachineEnabled()
 end
 
 ---@param active boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setMachineActive(active, noEventSend)
     local spec = self.spec_machine
 
@@ -717,8 +711,30 @@ function Machine:getMachineState()
     return self.spec_machine.state
 end
 
+---@return LandscapingArea?
+---@nodiscard
+function Machine:getMachineLandscapingArea()
+    local spec = self.spec_machine
+
+    return g_landscapingManager:getAreaByUniqueId(spec.landscapingAreaId)
+end
+
+---@param uniqueId? string
+---@param noEventSend? boolean
+function Machine:setMachineLandscapingArea(uniqueId, noEventSend)
+    local spec = self.spec_machine
+
+    if spec.landscapingAreaId ~= uniqueId then
+        SetMachineLandscapingAreaEvent.sendEvent(self, uniqueId)
+
+        spec.landscapingAreaId = uniqueId
+
+        g_messageCenter:publish(SetMachineLandscapingAreaEvent, self, uniqueId)
+    end
+end
+
 ---@param enabled boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setResourcesEnabled(enabled, noEventSend)
     local spec = self.spec_machine
 
@@ -732,7 +748,7 @@ function Machine:setResourcesEnabled(enabled, noEventSend)
 end
 
 ---@param mode MachineMode
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setInputMode(mode, noEventSend)
     local spec = self.spec_machine
 
@@ -752,7 +768,7 @@ function Machine:getInputMode()
 end
 
 ---@param mode MachineMode
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setOutputMode(mode, noEventSend)
     local spec = self.spec_machine
 
@@ -772,7 +788,7 @@ function Machine:getOutputMode()
 end
 
 ---@param fillTypeIndex number
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setMachineFillTypeIndex(fillTypeIndex, noEventSend)
     local spec = self.spec_machine
 
@@ -798,7 +814,7 @@ function Machine:getMachineFillTypeIndex()
 end
 
 ---@param terrainLayerId number
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setMachineInputLayerId(terrainLayerId, noEventSend)
     local spec = self.spec_machine
 
@@ -818,7 +834,7 @@ function Machine:getMachineInputLayerId()
 end
 
 ---@param terrainLayerId number
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function Machine:setMachineOutputLayerId(terrainLayerId, noEventSend)
     local spec = self.spec_machine
 
@@ -838,8 +854,8 @@ function Machine:getMachineOutputLayerId()
 end
 
 ---@param isActive boolean
----@param force boolean | nil
----@param noEventSend boolean | nil
+---@param force boolean?
+---@param noEventSend boolean?
 function Machine:setMachineEffectActive(isActive, force, noEventSend)
     local spec = self.spec_machine
 
@@ -1009,7 +1025,7 @@ end
 ---@return boolean
 ---@nodiscard
 function Machine:getCanAccessMachine()
-    return MachineUtils.getPlayerHasPermission('landscaping')
+    return ModUtils.getPlayerHasPermission('landscaping')
 end
 
 ---@return boolean
@@ -1086,7 +1102,7 @@ function Machine:getDrivingDirection()
 
     if spec.machineType.useDrivingDirection then
         if spec.hasAttachable then
-            ---@type DrivableVehicle | nil
+            ---@type DrivableVehicle?
             ---@diagnostic disable-next-line: assign-type-mismatch
             local rootVehicle = self:findRootVehicle()
 
@@ -1173,10 +1189,6 @@ function Machine:onWriteStream(streamId, connection)
     if not connection:getIsServer() then
         streamWriteBool(streamId, spec.isEffectActiveSent)
 
-        if streamWriteBool(streamId, spec.surveyorId ~= nil) then
-            streamWriteString(streamId, spec.surveyorId)
-        end
-
         streamWriteBool(streamId, spec.enabled)
         streamWriteBool(streamId, spec.resourcesEnabled)
         streamWriteBool(streamId, spec.active)
@@ -1185,6 +1197,10 @@ function Machine:onWriteStream(streamId, connection)
         streamWriteUIntN(streamId, spec.fillTypeIndex or 0, FillTypeManager.SEND_NUM_BITS)
         streamWriteUIntN(streamId, spec.inputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
         streamWriteUIntN(streamId, spec.outputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
+
+        if streamWriteBool(streamId, spec.landscapingAreaId ~= nil) then
+            streamWriteString(streamId, spec.landscapingAreaId)
+        end
 
         spec.state:writeStream(streamId, connection)
     end
@@ -1198,12 +1214,6 @@ function Machine:onReadStream(streamId, connection)
     if connection:getIsServer() then
         self:setMachineEffectActive(streamReadBool(streamId), true, true)
 
-        if streamReadBool(streamId) then
-            self:setSurveyorId(streamReadString(streamId), true)
-        else
-            self:setSurveyorId(nil, true)
-        end
-
         self:setMachineEnabled(streamReadBool(streamId), true)
         self:setResourcesEnabled(streamReadBool(streamId), true)
         self:setMachineActive(streamReadBool(streamId), true)
@@ -1212,6 +1222,12 @@ function Machine:onReadStream(streamId, connection)
         self:setMachineFillTypeIndex(streamReadUIntN(streamId, FillTypeManager.SEND_NUM_BITS), true)
         self:setMachineInputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
         self:setMachineOutputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
+
+        if streamReadBool(streamId) then
+            spec.landscapingAreaId = streamReadString(streamId)
+        else
+            spec.landscapingAreaId = nil
+        end
 
         spec.state:readStream(streamId, connection)
     end
@@ -1327,12 +1343,12 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
         end
 
-        action = InputAction[Machine.ACTION_SELECT_SURVEYOR]
+        action = InputAction[Machine.ACTION_SELECT_AREA]
 
-        if action ~= nil and (MachineUtils.getHasInputMode(self, Machine.MODE.FLATTEN) or MachineUtils.getHasOutputMode(self, Machine.MODE.FLATTEN)) then
-            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectSurveyor, false, true, false, true)
+        if action ~= nil then
+            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectArea, false, true, false, true)
 
-            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_SURVEYOR)
+            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_AREA)
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
         end
 
@@ -1445,16 +1461,6 @@ function Machine:updateActionEvents()
             end
         end
 
-        action = InputAction[Machine.ACTION_SELECT_SURVEYOR]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
-            end
-        end
-
         action = InputAction[Machine.ACTION_GLOBAL_SETTINGS]
 
         if action ~= nil then
@@ -1522,7 +1528,7 @@ function Machine:actionEventSelectMaterial()
     g_selectMaterialDialog:show(spec.fillTypeIndex)
 end
 
----@param fillTypeIndex number | nil
+---@param fillTypeIndex number?
 function Machine:selectMaterialCallback(fillTypeIndex)
     if fillTypeIndex ~= nil then
         self:setMachineFillTypeIndex(fillTypeIndex)
@@ -1536,7 +1542,7 @@ function Machine:actionEventSelectTerrainLayer()
     g_selectTerrainLayerDialog:show(spec.inputTerrainLayerId)
 end
 
----@param terrainLayerId number | nil
+---@param terrainLayerId number?
 function Machine:selectTerrainLayerCallback(terrainLayerId)
     if terrainLayerId ~= nil then
         self:setMachineInputLayerId(terrainLayerId)
@@ -1550,27 +1556,27 @@ function Machine:actionEventSelectDischargeTerrainLayer()
     g_selectTerrainLayerDialog:show(spec.outputTerrainLayerId, g_i18n:getText('ui_changeDischargeTexture'))
 end
 
----@param terrainLayerId number | nil
+---@param terrainLayerId number?
 function Machine:selectDischargeTerrainLayerCallback(terrainLayerId)
     if terrainLayerId ~= nil then
         self:setMachineOutputLayerId(terrainLayerId)
     end
 end
 
-function Machine:actionEventSelectSurveyor()
-    g_selectSurveyorDialog:setSelectCallback(Machine.selectSurveyorCallback, self)
-    g_selectSurveyorDialog:show(self)
+function Machine:actionEventSelectArea()
+    g_selectAreaDialog:setSelectCallback(Machine.selectAreaCallback, self)
+    g_selectAreaDialog:show(self)
+end
+
+---@param area? LandscapingArea
+function Machine:selectAreaCallback(area)
+    if area ~= nil and area.uniqueId ~= nil then
+        self:setMachineLandscapingArea(area.uniqueId)
+    end
 end
 
 function Machine:actionEventGlobalSettings()
     g_globalSettingsDialog:show()
-end
-
----@param vehicle Surveyor
-function Machine:selectSurveyorCallback(vehicle)
-    if vehicle ~= nil and vehicle.getSurveyorId ~= nil then
-        self:setSurveyorId(vehicle:getSurveyorId())
-    end
 end
 
 ---@param dischargeNode DischargeNode
@@ -1612,64 +1618,6 @@ function Machine:discharge(superFunc, dischargeNode, emptyLiters)
     end
 
     return superFunc(self, dischargeNode, emptyLiters)
-end
-
----@param id string | nil
----@param noEventSend boolean | nil
-function Machine:setSurveyorId(id, noEventSend)
-    local spec = self.spec_machine
-
-    if spec.surveyorId ~= id then
-        SetMachineSurveyorEvent.sendEvent(self, id, noEventSend)
-
-        spec.surveyorId = id
-
-        g_messageCenter:publish(SetMachineSurveyorEvent, self, id)
-    end
-end
-
----@return string|nil
----@nodiscard
-function Machine:getSurveyorId()
-    return self.spec_machine.surveyorId
-end
-
----@return Surveyor | nil
----@nodiscard
-function Machine:getSurveyor()
-    local spec = self.spec_machine
-
-    return g_machineManager:getSurveyorById(spec.surveyorId)
-end
-
----@return number startPosX
----@return number startPosX
----@return number startPosX
----@return number endPosX
----@return number endPosY
----@return number endPosX
----@return boolean isLinked
-function Machine:getSurveyorCalibration()
-    local surveyor = self:getSurveyor()
-
-    if surveyor ~= nil then
-        local spec = surveyor.spec_surveyor
-
-        return spec.startPosX, spec.startPosY, spec.startPosZ, spec.endPosX, spec.endPosY, spec.endPosZ, true
-    end
-
-    return 0, math.huge, 0, 0, math.huge, 0, false
-end
-
----@param vehicle Surveyor
-function Machine:onSurveyorRemoved(vehicle)
-    if self.isServer and vehicle ~= nil then
-        local surveyorId = vehicle.spec_surveyor.surveyorId
-
-        if surveyorId ~= nil and self:getSurveyorId() == surveyorId then
-            self:setSurveyorId(nil)
-        end
-    end
 end
 
 ---@param user User

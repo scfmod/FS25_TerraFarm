@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <Bitmap profile="tfEditor_menu" id="menuBox">
+        <BoxLayout profile="tfEditor_menuHeader">
+            <Bitmap profile="tfEditor_menuHeaderIconPolygon" />
+            <Text profile="tfEditor_menuHeaderText" text="$l10n_ui_areaPolygon" />
+        </BoxLayout>
+
+        <BoxLayout profile="tfEditor_actionPanel" id="actionPanel">
+            <Button profile="tfEditor_actionPanelButton" id="saveButton" onClick="onClickSave" text="$l10n_ui_editorSaveChanges">
+            </Button>
+            <Button profile="tfEditor_actionPanelButton" id="setTargetButton" onClick="onClickSetTargetHeight" text="$l10n_ui_moveArea">
+            </Button>
+            <Button profile="tfEditor_actionPanelButton" id="exitButton" onClick="onButtonMenuBack" text="$l10n_ui_exit">
+            </Button>
+        </BoxLayout>
+
+        <BoxLayout profile="tfEditor_optionsPanel" id="optionsPanel">
+            <Bitmap profile="tfEditor_optionSegment">
+                <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_name" />
+                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedNameInput" id="nameInput" profile="tfEditor_textInputName">
+                    <Bitmap profile="tfEditor_textInputBg" />
+                    <Bitmap profile="fs25_textInputIconBox">
+                        <Bitmap profile="fs25_textInputIcon" />
+                    </Bitmap>
+                </TextInput>
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegment">
+                <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_icon" />
+                <TFIconOption id="iconOption" onClick="onClickIconOption" profile="tfEditor_iconOption">
+                    <Bitmap name="icon" profile="tfEditor_iconOptionImage" />
+                </TFIconOption>
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegment">
+                <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_restrictArea" />
+                <BinaryOption profile="tfEditor_binaryOption" onClick="onClickRestrictAreaOption" id="restrictAreaOption" />
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegment">
+                <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_targetHeight" />
+                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedHeightInput" id="heightInput" profile="tfEditor_textInput">
+                    <Bitmap profile="tfEditor_textInputBg" />
+                    <Bitmap profile="fs25_textInputIconBox">
+                        <Bitmap profile="fs25_textInputIcon" />
+                    </Bitmap>
+                </TextInput>
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegmentLarge">
+                <Text profile="tfEditor_optionSegmentLargeTitle" text="$l10n_ui_material" />
+                <Text profile="tfEditor_optionSegmentLargeText" text="..." id="fillTypeText" />
+                <GuiElement profile="tfEditor_optionSegmentLargeImageWrapper">
+                    <Bitmap profile="tfEditor_optionSegmentLargeImage" id="fillTypeImage" />
+                </GuiElement>
+                <Button profile="tfEditor_optionSegmentIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" name="fillType" onClick="onClickSelectOption" id="selectOptionButtons[1]" />
+                <Button profile="tfEditor_optionSegmentIconButton" iconSliceId="gui.crossSmall" name="fillType" onClick="onClickResetOption" id="resetOptionButtons[1]" />
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegmentLarge">
+                <Text profile="tfEditor_optionSegmentLargeTitle" text="$l10n_ui_texture" />
+                <Text profile="tfEditor_optionSegmentLargeText" text="..." id="inputTerrainLayerText" />
+                <GuiElement profile="tfEditor_optionSegmentLargeImageWrapper">
+                    <TerrainLayer profile="tfEditor_optionSegmentLargeImage" id="inputTerrainLayer" />
+                </GuiElement>
+                <Button profile="tfEditor_optionSegmentIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" name="inputTerrainLayer" onClick="onClickSelectOption" id="selectOptionButtons[2]" />
+                <Button profile="tfEditor_optionSegmentIconButton" iconSliceId="gui.crossSmall" name="inputTerrainLayer" onClick="onClickResetOption" id="resetOptionButtons[2]" />
+            </Bitmap>
+
+            <Bitmap profile="tfEditor_optionSegmentLarge">
+                <Text profile="tfEditor_optionSegmentLargeTitle" text="$l10n_ui_dischargeTexture" />
+                <Text profile="tfEditor_optionSegmentLargeText" text="..." id="outputTerrainLayerText" />
+                <GuiElement profile="tfEditor_optionSegmentLargeImageWrapper">
+                    <TerrainLayer profile="tfEditor_optionSegmentLargeImage" id="outputTerrainLayer" />
+                </GuiElement>
+                <Button profile="tfEditor_optionSegmentIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" name="outputTerrainLayer" onClick="onClickSelectOption" id="selectOptionButtons[3]" />
+                <Button profile="tfEditor_optionSegmentIconButton" iconSliceId="gui.crossSmall" name="outputTerrainLayer" onClick="onClickResetOption" id="resetOptionButtons[3]" />
+            </Bitmap>
+        </BoxLayout>
+    </Bitmap>
+
+    <GuiElement profile="tfEditor_helpDisplay" id="helpDisplay" />
+
+    <GuiProfiles>
+        <Profile name="tfEditor_menu" extends="baseReference" with="anchorStretchingYLeft">
+            <width value="448px" />
+            <imageColor value="0.018 0.018 0.018 1" />
+        </Profile>
+
+        <Profile name="tfEditor_menuHeader" with="anchorTopStretchingX">
+            <height value="72px" />
+
+            <autoValidateLayout value="true" />
+            <alignmentX value="center" />
+            <alignmentY value="middle" />
+            <elementSpacing value="16px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="0dp 0dp 0dp 2dp" />
+            <frameBottomColor value="0.33716 0.55834 0.0003 0.05" />
+        </Profile>
+
+        <Profile name="tfEditor_menuHeaderIcon" extends="baseReference" with="anchorMiddleLeft">
+            <size value="56px 56px" />
+
+            <imageColor value="0.33716 0.55834 0.0003 0.25" />
+        </Profile>
+
+        <Profile name="tfEditor_menuHeaderIconPolygon" extends="tfEditor_menuHeaderIcon">
+            <imageSliceId value="terraFarm.icon_polygon" />
+        </Profile>
+        <Profile name="tfEditor_menuHeaderIconPath" extends="tfEditor_menuHeaderIcon">
+            <imageSliceId value="terraFarm.icon_path" />
+        </Profile>
+        <Profile name="tfEditor_menuHeaderIconWaterplane" extends="tfEditor_menuHeaderIcon">
+            <imageSliceId value="terraFarm.icon_waterplane" />
+        </Profile>
+
+        <Profile name="tfEditor_menuHeaderText" extends="textDefault" with="anchorMiddleLeft">
+            <size value="100% 32px" />
+
+            <!-- <textColor value="1 1 1 0.05" /> -->
+            <textColor value="0.33716 0.55834 0.0003 0.25" />
+            <textSize value="16px" />
+            <textBold value="true" />
+            <textAlignment value="left" />
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfEditor_actionPanel" extends="baseReference" with="anchorBottomStretchingX">
+            <position value="0 760px" />
+            <height value="128px" />
+
+            <imageColor value="0 0 0 0" />
+            <elementSpacing value="16px" />
+            <fitFlowToElements value="true" />
+            <flowDirection value="vertical" />
+            <alignmentX value="center" />
+        </Profile>
+
+        <Profile name="tfEditor_actionPanelButton" extends="baseReference">
+            <size value="200px 42px" />
+            <iconSize value="0 0" />
+            <iconTextOffset value="4px 0" />
+            <textSize value="14px" />
+            <textUpperCase value="true" />
+
+            <imageColor value="0.042 0.042 0.042 1" />
+            <imageDisabledColor value="0.042 0.042 0.042 0.25" />
+            <imageHighlightedColor value="0.392 0.468 0.093 1" />
+            <imageFocusedColor value="0.27 0.323 0.067 1" />
+
+            <textColor value="1 1 1 1" />
+            <textDisabledColor value="1 1 1 0.2" />
+            <textHighlightedColor value="$preset_fs25_colorMainDark" />
+            <textFocusedColor value="$preset_fs25_colorMainDark" />
+        </Profile>
+
+        <Profile name="tfEditor_optionsPanel" extends="baseReference" with="anchorBottomStretchingX">
+            <height value="600px" />
+            <imageColor value="0 0 0 0" />
+            <elementSpacing value="4px" />
+            <fitFlowToElements value="true" />
+            <flowDirection value="vertical" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegment" extends="baseReference">
+            <size value="100% 64px" />
+            <imageColor value="0.022 0.022 0.022 1" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentLarge" extends="tfEditor_optionSegment">
+            <size value="100% 104px" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentTitle" extends="textDefault" with="anchorMiddleLeft">
+            <position value="16px 0" />
+            <textAutoWidth value="true" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentLargeTitle" extends="tfEditor_optionSegmentTitle" with="anchorTopLeft">
+            <position value="16px -24px" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentLargeText" extends="textDefault" with="anchorBottomLeft">
+            <position value="72px 26px" />
+            <textAutoWidth value="true" />
+            <textColor value="1 1 1 0.75" />
+            <textDisabledColor value="1 1 1 0.1" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentLargeImage" extends="baseReference" with="anchorStretchingYStretchingX">
+            <imageColor value="1 1 1 1" />
+            <imageSliceId value="noSlice" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentLargeImageWrapper" with="anchorBottomLeft">
+            <position value="16px 16px" />
+            <size value="32px 32px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="1dp 1dp 1dp 1dp" />
+            <frameTopColor value="1 1 1 0.025" />
+            <frameRightColor value="1 1 1 0.025" />
+            <frameBottomColor value="1 1 1 0.025" />
+            <frameLeftColor value="1 1 1 0.025" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentButton" extends="tfEditor_actionPanelButton" with="anchorMiddleRight">
+            <position value="-16px 0" />
+            <size value="48px 48px" />
+        </Profile>
+
+        <Profile name="tfEditor_optionSegmentIconButton" extends="tfEditor_optionSegmentButton">
+            <iconColor value="1 1 1 1" />
+            <iconDisabledColor value="1 1 1 0.05" />
+            <iconSize value="20px 20px" />
+            <iconTextOffset value="-2px -2px" />
+        </Profile>
+
+        <Profile name="tfEditor_textInput" extends="tfMenuFrame_textInput" with="anchorMiddleRight">
+            <position value="-48px 0" />
+            <applyProfanityFilter value="false" />
+            <maxCharacters value="8" />
+        </Profile>
+
+        <Profile name="tfEditor_textInputName" extends="tfEditor_textInput">
+            <size value="240px 40px" />
+            <maxCharacters value="32" />
+            <textAlignment value="center" />
+            <maxInputTextWidth value="220px" />
+        </Profile>
+
+        <Profile name="tfEditor_textInputBg" extends="baseReference" with="anchorMiddleLeft">
+            <imageColor value="0.018 0.018 0.018 1" />
+            <height value="32px" />
+        </Profile>
+
+        <Profile name="tfEditor_iconOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
+            <size value="120px 42px" />
+            <position value="-16px 0" />
+        </Profile>
+
+        <Profile name="tfEditor_iconOptionImage" extends="baseReference" with="anchorMiddleCenter">
+            <size value="32px 32px" />
+            <imageDisabledColor value="1 1 1 0.25" />
+        </Profile>
+
+        <Profile name="tfEditor_binaryOption" extends="tfMenuFrame_binaryOption" with="anchorMiddleRight">
+            <position value="-16px 0" />
+        </Profile>
+
+        <Profile name="tfEditor_multiTextOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
+            <position value="-16px 0" />
+        </Profile>
+
+        <Profile name="tfEditor_helpDisplay" extends="emptyPanel" with="anchorTopLeft">
+            <position value="480px 0" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

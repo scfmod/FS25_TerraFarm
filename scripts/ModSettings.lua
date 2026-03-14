@@ -38,10 +38,9 @@ local defaultExcludeFillTypes = {
 }
 
 ---@class ModSettings
----@field materials Array<string>
+---@field materials string[]
 ---@field defaultEnabled boolean
 ---@field enabled boolean
----@field conversionModifier number
 ---@field hudEnabled boolean
 ---@field debugMachineNodes boolean
 ---@field debugMachineCalibration boolean
@@ -60,20 +59,19 @@ function ModSettings.new()
     self.materials = {}
     self.defaultEnabled = true
     self.enabled = true
-    self.conversionModifier = 1
     self.hudEnabled = true
     self.debugMachineNodes = true
     self.debugMachineCalibration = true
 
-    if g_client ~= nil then
-        addConsoleCommand('tfSetConversionModifier', '', 'consoleSetConversionModifier', self)
-    end
+    g_modController:subscribe(ModEvent.onMapLoaded, self.onMapLoaded, self)
+    g_modController:subscribe(ModEvent.onTerrainInit, self.onInitTerrain, self)
+    g_modController:subscribe(ModEvent.onSendInitialClientState, self.onSendInitialClientState, self)
 
     return self
 end
 
 ---@param defaultEnabled boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function ModSettings:setDefaultEnabled(defaultEnabled, noEventSend)
     if self.defaultEnabled ~= defaultEnabled then
         SetDefaultEnabledEvent.sendEvent(defaultEnabled, noEventSend)
@@ -106,7 +104,7 @@ function ModSettings:getIsEnabled()
     return self.enabled
 end
 
----@param materials Array<string>
+---@param materials string[]
 ---@param noEventSend? boolean
 function ModSettings:setMaterials(materials, noEventSend)
     if self.materials ~= materials then
@@ -136,8 +134,6 @@ function ModSettings:setDebugCalibration(enabled)
     self.debugMachineCalibration = enabled
 
     self:saveUserSettings()
-
-    g_modDebug:updateCalibration()
 end
 
 ---@return boolean
@@ -150,7 +146,7 @@ function ModSettings:getHUDIsVisible()
     return g_modHud.display.isVisible
 end
 
----@return Array<string>
+---@return string[]
 ---@nodiscard
 function ModSettings:getMaterials()
     return self.materials
@@ -165,28 +161,21 @@ end
 
 ---@private
 function ModSettings:loadSettings()
-    local savegameDirectory = self:getSavegameDirectory()
-
     if g_server ~= nil then
-        if savegameDirectory ~= nil then
-            ---@type XMLFile | nil
-            local xmlFile = XMLFile.loadIfExists('modSettings', savegameDirectory .. '/terraFarmSettings.xml')
+        local xmlFile = ModUtils.loadSavegameDirectoryXMLFile('modSettings', 'terraFarmSettings.xml')
 
-            if xmlFile ~= nil then
-                self.enabled = xmlFile:getBool('settings.enabled', self.enabled)
-                self.defaultEnabled = xmlFile:getBool('settings.defaultEnabled', self.defaultEnabled)
+        if xmlFile ~= nil then
+            self.enabled = xmlFile:getBool('settings.enabled', self.enabled)
+            self.defaultEnabled = xmlFile:getBool('settings.defaultEnabled', self.defaultEnabled)
 
-                g_resourceManager.active = xmlFile:getBool('settings.resourcesActive', g_resourceManager.active)
+            g_resourceManager.active = xmlFile:getBool('settings.resourcesActive', g_resourceManager.active)
 
-                self:loadMaterialSettings(xmlFile)
+            self:loadMaterialSettings(xmlFile)
 
-                xmlFile:delete()
-
-                return
-            end
+            xmlFile:delete()
+        else
+            self:setDefaultMaterials()
         end
-
-        self:setDefaultMaterials()
     end
 end
 
@@ -196,20 +185,20 @@ function ModSettings:loadMaterialSettings(xmlFile)
     if xmlFile:hasProperty('settings.materials.material(0)') then
         self.materials = {}
 
-        xmlFile:iterate('settings.materials.material', function (_, key)
+        for _, key in xmlFile:iterator('settings.materials.material') do
             local fillTypeName = xmlFile:getString(key .. '#fillType')
 
             if fillTypeName ~= nil then
-                ---@type FillTypeObject | nil
+                ---@type FillTypeObject?
                 local fillType = g_fillTypeManager:getFillTypeByName(fillTypeName)
 
                 if fillType ~= nil then
                     table.insert(self.materials, fillType.name)
                 else
-                    -- g_modDebug:debug('loadMaterials() fillType "%s" not found, skipping', fillTypeName)
+                    g_modController:debug('ModSettings:loadMaterialSettings() fillType "%s" not found, skipping', fillTypeName)
                 end
             end
-        end)
+        end
     else
         self:setDefaultMaterials()
     end
@@ -231,7 +220,7 @@ function ModSettings:setDefaultMaterials()
     self.materials = {}
 
     for _, index in ipairs(g_fillTypeManager:getFillTypesByCategoryNames('SHOVEL')) do
-        ---@type string | nil
+        ---@type string?
         local fillTypeName = g_fillTypeManager:getFillTypeNameByIndex(index)
 
         if fillTypeName ~= nil and defaultExcludeFillTypes[fillTypeName] ~= true then
@@ -241,11 +230,8 @@ function ModSettings:setDefaultMaterials()
 end
 
 function ModSettings:saveSettings()
-    local savegameDirectory = self:getSavegameDirectory()
-
-    if g_server ~= nil and savegameDirectory ~= nil then
-        ---@type XMLFile | nil
-        local xmlFile = XMLFile.create('modSettings', savegameDirectory .. '/terraFarmSettings.xml', 'settings')
+    if g_server ~= nil then
+        local xmlFile = ModUtils.createSavegameDirectoryXMLFile('modSettings', 'terraFarmSettings.xml', 'settings')
 
         if xmlFile ~= nil then
             xmlFile:setBool('settings.enabled', self.enabled)
@@ -262,13 +248,16 @@ end
 
 function ModSettings:loadUserSettings()
     if g_client ~= nil then
-        ---@type XMLFile | nil
+        ---@type XMLFile?
         local xmlFile = XMLFile.loadIfExists('userSettings', ModSettings.XML_FILENAME_USER_SETTINGS)
 
         if xmlFile ~= nil then
             self.debugMachineNodes = xmlFile:getBool('userSettings.debugNodes', self.debugMachineNodes)
             self.debugMachineCalibration = xmlFile:getBool('userSettings.debugCalibration', self.debugMachineCalibration)
             self.hudEnabled = xmlFile:getBool('userSettings.hudEnabled', true)
+
+            g_landscapingManager:setAreaBordersVisible(xmlFile:getBool('userSettings.areaBorderVisible', g_landscapingManager.areaBordersVisible), true)
+            g_landscapingManager:setAreaBorderMode(xmlFile:getInt('userSettings.areaBorderMode', g_landscapingManager.borderMode), true)
 
             xmlFile:delete()
         end
@@ -279,13 +268,16 @@ function ModSettings:saveUserSettings()
     if g_client ~= nil then
         createFolder(g_modDirectorySettings)
 
-        ---@type XMLFile | nil
+        ---@type XMLFile?
         local xmlFile = XMLFile.create('userSettings', ModSettings.XML_FILENAME_USER_SETTINGS, 'userSettings')
 
         if xmlFile ~= nil then
             xmlFile:setBool('userSettings.debugNodes', self.debugMachineNodes)
             xmlFile:setBool('userSettings.debugCalibration', self.debugMachineCalibration)
             xmlFile:setBool('userSettings.hudEnabled', self:getHUDIsVisible())
+
+            xmlFile:setBool('userSettings.areaBorderVisible', g_landscapingManager.areaBordersVisible)
+            xmlFile:setInt('userSettings.areaBorderMode', g_landscapingManager.borderMode)
 
             xmlFile:save()
             xmlFile:delete()
@@ -307,22 +299,6 @@ end
 function ModSettings:onInitTerrain()
     if g_server ~= nil then
         self.conversionModifier = g_currentMission.terrainSize / g_currentMission.terrainDetailHeightMapSize * 1.85
-    end
-end
-
-function ModSettings:consoleSetConversionModifier(modifier)
-    if g_server ~= nil and not g_currentMission.missionDynamicInfo.isMultiplayer then
-        if modifier ~= nil then
-            local value = tonumber(modifier)
-
-            if value ~= nil then
-                self.conversionModifier = math.min(math.max(value, 0.1), 5)
-            end
-        end
-
-        return 'conversionModifier: ' .. tostring(self.conversionModifier)
-    else
-        return 'Only available in single player'
     end
 end
 

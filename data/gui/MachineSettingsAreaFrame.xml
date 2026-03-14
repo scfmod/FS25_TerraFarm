@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI name="machineSettingsArea">
+    <GuiElement profile="tfMenuFrame_contentContainer">
+        <Bitmap profile="tfMenuFrame_content" id="settingsContainer">
+            <Bitmap profile="tfMenuFrame_contentHeader">
+                <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_landscapingArea" />
+            </Bitmap>
+
+            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+                <Bitmap profile="tfMenuFrame_infoBox" id="infoBox">
+                    <BoxLayout handleFocus="false" profile="tfMenuFrame_infoBoxLayout" id="statusLayout">
+                        <Text profile="tfMenuFrame_infoTitle" id="areaTitle" />
+                        <Text profile="tfMenuFrame_infoText" id="areaText" />
+                    </BoxLayout>
+
+                    <Bitmap profile="tfMenuFrame_infoBoxImage" id="areaImage" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_selectArea" />
+                    <Button id="selectAreaButton" onClick="onClickSelectArea" profile="tfMenuFrame_button" text="$l10n_ui_selectArea">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_machineCopy" />
+
+                    <Button id="selectMachineButton" onClick="onClickSelectMachine" profile="tfMenuFrame_button" text="$l10n_ui_machines">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Button id="resetButton" onClick="onClickReset" profile="tfMenuFrame_button" text="$l10n_button_reset">
+                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                    </Button>
+                </Bitmap>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_inGameMenuModeSettings" />
+                </GuiElement>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_ignoreAreaMaterial" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" id="ignoreAreaMaterialOption" name="ignoreAreaMaterial" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_ignoreAreaMaterialTooltip" />
+                </Bitmap>
+
+                <Bitmap profile="tfMenuFrame_optionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_ignoreAreaGroundTextures" />
+                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" id="ignoreAreaGroundTexturesOption" name="ignoreAreaGroundTextures" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_ignoreAreaGroundTexturesTooltip" />
+                </Bitmap>
+
+            </ScrollingLayout>
+
+            <Bitmap profile="tfMenuFrame_contentShadowTop" />
+            <Bitmap profile="tfMenuFrame_contentShadowBottom" />
+
+            <ThreePartBitmap profile="tf_listSliderBox">
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+            </ThreePartBitmap>
+        </Bitmap>
+    </GuiElement>
+
+    <GuiProfiles>
+        <Profile name="tfMenuFrame_contentDescriptionText" extends="textDefault">
+            <size value="100% 64px" />
+
+            <textOffset value="8px 0" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBox" extends="baseReference">
+            <size value="1000px 96px" />
+            <margin value="0px 64px 0px 0px" />
+
+            <imageColor value="0.33716 0.55834 0.0003 1" />
+            <imageDisabledColor value="0 0 0 0.5" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBoxLayout" extends="baseReference" with="anchorMiddleCenter">
+            <size value="100% 94px" />
+
+            <imageColor value="0.01 0.01 0.01 1" />
+            <alignmentY value="middle" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoBoxImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="64px 64px" />
+            <position value="16px 0" />
+
+            <imageColor value="1 1 1 1" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoTitle" extends="textDefault" with="anchorTopLeft">
+            <size value="500px 20px" />
+            <margin value="112px 0 0 0" />
+
+            <textSize value="20px" />
+            <textBold value="false" />
+            <textDisabledColor value="1 1 1 0.1" />
+        </Profile>
+
+        <Profile name="tfMenuFrame_infoText" extends="textDefault" with="anchorTopLeft">
+            <size value="240px 20px" />
+            <margin value="96px 0 0 0" />
+
+            <textAlignment value="right" />
+            <textColor value="1 1 1 1" />
+            <textSize value="14px" />
+            <textDisabledColor value="0.4 0.4 0.4 1" />
+        </Profile>
+    </GuiProfiles>
+</GUI>

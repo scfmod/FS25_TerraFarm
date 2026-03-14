@@ -57,7 +57,7 @@ function SetMaterialsEvent:run(connection)
 end
 
 ---@param materials string[]
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function SetMaterialsEvent.sendEvent(materials, noEventSend)
     if not noEventSend then
         local event = SetMaterialsEvent.new(materials)

@@ -48,7 +48,7 @@ function SetEnabledEvent:run(connection)
 end
 
 ---@param enabled boolean
----@param noEventSend boolean | nil
+---@param noEventSend boolean?
 function SetEnabledEvent.sendEvent(enabled, noEventSend)
     if not noEventSend then
         local event = SetEnabledEvent.new(enabled)

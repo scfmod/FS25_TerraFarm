@@ -10,7 +10,7 @@
 SelectTerrainLayerDialog = {}
 
 SelectTerrainLayerDialog.CLASS_NAME = 'SelectTerrainLayerDialog'
-SelectTerrainLayerDialog.XML_FILENAME = g_modDirectory .. 'xml/gui/dialogs/SelectTerrainLayerDialog.xml'
+SelectTerrainLayerDialog.XML_FILENAME = g_modDirectory .. 'data/gui/dialogs/SelectTerrainLayerDialog.xml'
 
 local SelectTerrainLayerDialog_mt = Class(SelectTerrainLayerDialog, MessageDialog)
 
@@ -43,7 +43,7 @@ function SelectTerrainLayerDialog:onGuiSetupFinished()
     self.list:setDataSource(self)
 end
 
----@param fn function | nil
+---@param fn function?
 ---@param target any
 function SelectTerrainLayerDialog:setSelectCallback(fn, target)
     self.selectCallbackFunction = fn
@@ -55,7 +55,7 @@ function SelectTerrainLayerDialog:setTitle(title)
     self.title:setText(title or g_i18n:getText('ui_changeTexture'))
 end
 
----@param selectTerrainLayerId number | nil
+---@param selectTerrainLayerId number?
 ---@param title? string
 function SelectTerrainLayerDialog:show(selectTerrainLayerId, title)
     self:setTitle(title)
@@ -71,10 +71,12 @@ function SelectTerrainLayerDialog:onOpen()
     self.list:reloadData()
 end
 
----@param terrainLayerId number | nil
+---@param terrainLayerId number?
 function SelectTerrainLayerDialog:setSelectedItem(terrainLayerId)
     if terrainLayerId ~= nil then
-        for index, item in ipairs(g_resourceManager.terrainLayers) do
+        local terrainLayers = g_landscapingManager:getTerrainLayers()
+
+        for index, item in ipairs(terrainLayers) do
             if item.id == terrainLayerId then
                 self.list:setSelectedIndex(index)
                 return
@@ -86,7 +88,7 @@ function SelectTerrainLayerDialog:setSelectedItem(terrainLayerId)
 end
 
 function SelectTerrainLayerDialog:getNumberOfItemsInSection()
-    return #g_resourceManager.terrainLayers
+    return #g_landscapingManager:getTerrainLayers()
 end
 
 ---@param list SmoothListElement
@@ -94,7 +96,7 @@ end
 ---@param index number
 ---@param cell ListItemElement
 function SelectTerrainLayerDialog:populateCellForItemInSection(list, section, index, cell)
-    local item = g_resourceManager.terrainLayers[index]
+    local item = g_landscapingManager:getTerrainLayers()[index]
 
     if item ~= nil then
         cell:getAttribute('image'):setTerrainLayer(g_terrainNode, item.id)
@@ -106,7 +108,7 @@ end
 ---@param section number
 ---@param index number
 function SelectTerrainLayerDialog:onListSelectionChanged(list, section, index)
-    local item = g_resourceManager.terrainLayers[index]
+    local item = g_landscapingManager:getTerrainLayers()[index]
 
     if item ~= nil then
         self.previewImage:setTerrainLayer(g_terrainNode, item.id)
@@ -125,9 +127,9 @@ function SelectTerrainLayerDialog:onClickApply()
     self:sendCallback(self.list:getSelectedIndexInSection())
 end
 
----@param index number | nil
+---@param index number?
 function SelectTerrainLayerDialog:sendCallback(index)
-    local item = g_resourceManager.terrainLayers[index]
+    local item = g_landscapingManager:getTerrainLayers()[index]
 
     self:close()
 

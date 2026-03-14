@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomShader version="5">
+    <Parameters>
+        <Parameter name="intensitySize" target="intensitySize" perShapeInstance="true" type="float4" group="base" defaultValue="0.0 1.0 1.0 1.0" minValue="0.0 0.0 0.0 0.0" maxValue="10 10 10 100" />
+        <Parameter name="diffuseColor" target="diffuseColor" perShapeInstance="true" type="float4" group="base" defaultValue="0 1 0 1" minValue="0 0 0 0" maxValue="1 1 1 1" />
+        <Parameter name="decalColor" target="decalColor" perShapeInstance="true" type="float4" group="base" defaultValue="0 1 0 1" minValue="0 0 0 0" maxValue="1 1 1 1" />
+        <Parameter name="dashNumLength" target="dashNumLength" perShapeInstance="true" type="float2" group="base" defaultValue="0 1" minValue="0 0" maxValue="1000 1" />
+        <Parameter name="meshScaleZ" target="meshScaleZ" perShapeInstance="true" type="float" group="base" defaultValue="0" minValue="0" maxValue="500" />
+    </Parameters>
+
+    <UvUsages />
+    <Textures />
+
+    <VertexAttributes>
+        <VertexAttribute name="uv1" group="base" />
+    </VertexAttributes>
+
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="VS_OUTPUT">
+<![CDATA[
+            float2 projPositionZW     : TEXCOORDn;
+            float2 texCoord1          : TEXCOORDn;
+]]>
+            </CodeInjection>
+            <CodeInjection position="VS_END">
+<![CDATA[
+            Out.projPositionZW = Out.position.zw;
+            Out.position.z = Out.position.w;
+            Out.texCoord1 = convertDefaultTexCoords(In, object, In.texCoords1.xy);
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_SET_TEXCOORDS_VS">
+<![CDATA[
+            Out.defaultTexCoords.x = (Out.defaultTexCoords.x - 0.5) / instance.intensitySize.z + 0.5;
+            Out.defaultTexCoords.y /= instance.intensitySize.z;
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_LIGHTING_FS">
+<![CDATA[
+            lighting = 0;
+
+#if defined(RENDER_TO_TILE_DECAL)
+            if (instance.decalColor.a < 0.01)
+                clip(-1);
+#else
+            if (instance.diffuseColor.a < 0.01)
+                clip(-1);
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="POST_DIFFUSE_COLOR_FS">
+<![CDATA[
+#if defined(RENDER_TO_TILE_DECAL)
+            diffuseColor.rgb = instance.decalColor.rgb;
+#else
+            diffuseColor.rgb = instance.diffuseColor.rgb;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="EMISSIVE_FS">
+<![CDATA[
+#if !defined(RENDER_TO_TILE_DECAL)
+            if (instance.diffuseColor.a > 0.01)
+                emissiveColor.rgb = instance.diffuseColor.rgb * instance.intensitySize.x * alpha;
+#endif
+]]>
+            </CodeInjection>
+            <CodeInjection position="ALPHA_FS">
+<![CDATA[
+            alpha *= (In.vs.texCoord1.y > instance.intensitySize.y) ? 0.0 : 1.0;
+
+            if (instance.dashNumLength.x > 0) {
+                float meshScaleZ = instance.meshScaleZ.x;
+                float dashVisibility = sin(
+                    In.vs.texCoord1.y / instance.intensitySize.y * instance.intensitySize.w * 3.14159265359 * instance.dashNumLength.x * meshScaleZ
+                    + 1.57079632679
+                );
+                alpha *= (max(dashVisibility, 0) > (1 - instance.dashNumLength.y)) ? 1.0 : 0.0;
+            }
+
+            clip((alpha < 0.01) ? -1.0 : 1.0);
+
+#if defined(RENDER_TO_TILE_DECAL)
+            alpha *= instance.decalColor.a;
+#else
+            alpha *= instance.diffuseColor.a;
+#endif
+]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>

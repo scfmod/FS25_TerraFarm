@@ -1,16 +1,18 @@
----@class LandscapingInput : MachineLandscaping
+---@class LandscapingInput : LandscapingBase
 ---@field yield number
 LandscapingInput = {}
 
-local LandscapingInput_mt = Class(LandscapingInput, MachineLandscaping)
+local LandscapingInput_mt = Class(LandscapingInput, LandscapingBase)
 
 ---@param operation LandscapingOperation
 ---@param workArea MachineWorkArea
----@param mt table
+---@param terrainLayerId? number
+---@param fillTypeIndex? number
+---@param customMt table
 ---@return LandscapingInput
 ---@nodiscard
-function LandscapingInput.new(operation, workArea, mt)
-    local self = MachineLandscaping.new(operation, workArea, mt)
+function LandscapingInput.new(operation, workArea, terrainLayerId, fillTypeIndex, customMt)
+    local self = LandscapingBase.new(operation, workArea, fillTypeIndex, customMt)
     ---@cast self LandscapingInput
 
     self.radius = self.state.inputRadius
@@ -18,7 +20,7 @@ function LandscapingInput.new(operation, workArea, mt)
     self.hardness = self.state.inputHardness
     self.brushShape = self.state.inputBrushShape
 
-    self.terrainLayerId = self.vehicle:getMachineInputLayerId()
+    self.terrainLayerId = terrainLayerId or self.vehicle:getMachineInputLayerId()
     self.yield = self.state.inputRatio
 
     return self
@@ -35,8 +37,8 @@ function LandscapingInput:apply()
         for node, position in pairs(self.workArea.areaNodePosition) do
             if self.workArea.areaNodeActive[node] then
                 deformation:addSoftCircleBrush(position[1], position[3], self.radius, self.hardness, self.strength, -1)
-                MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
-                MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
+                LandscapingUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], self.radius)
+                LandscapingUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
 
                 if paintDeformation ~= nil then
                     paintDeformation:addSoftCircleBrush(position[1], position[3], paintRadius, 0.2, 0.5, self.terrainLayerId)
@@ -47,8 +49,8 @@ function LandscapingInput:apply()
         for node, position in pairs(self.workArea.areaNodePosition) do
             if self.workArea.areaNodeActive[node] then
                 deformation:addSoftSquareBrush(position[1], position[3], self.radius * 2, self.hardness, self.strength, -1)
-                MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], self.radius * 2)
-                MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
+                LandscapingUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], self.radius * 2)
+                LandscapingUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
 
                 if paintDeformation ~= nil then
                     paintDeformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, 0.2, 0.5, self.terrainLayerId)
@@ -92,7 +94,7 @@ function LandscapingInput:onDeformationSuccess(volume)
     self:applyDeformationChanges()
 
     if self.state.enableInputMaterial and self.fillType ~= nil and volume > 0 then
-        local liters = MachineUtils.volumeToFillTypeLiters(volume, self.fillType.index)
+        local liters = LandscapingUtils.volumeToFillTypeLiters(volume, self.fillType.index)
         self.vehicle:handleDeformationInput(liters, self.fillType.index)
     end
 end

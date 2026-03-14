@@ -4,10 +4,11 @@ LandscapingOutputPaint = {}
 local LandscapingOutputPaint_mt = Class(LandscapingOutputPaint, LandscapingOutput)
 
 ---@param workArea MachineWorkArea
+---@param terrainLayerId? number
 ---@return LandscapingOutputPaint
 ---@nodiscard
-function LandscapingOutputPaint.new(workArea)
-    local self = LandscapingOutput.new(LandscapingOperation.PAINT, workArea, LandscapingOutputPaint_mt)
+function LandscapingOutputPaint.new(workArea, terrainLayerId)
+    local self = LandscapingOutput.new(LandscapingOperation.PAINT, workArea, terrainLayerId, LandscapingOutputPaint_mt)
     ---@cast self LandscapingOutputPaint
 
     self.createTerrainDeformation = LandscapingInputPaint.createTerrainDeformation
@@ -21,7 +22,7 @@ function LandscapingOutputPaint:applyMapResources()
 end
 
 function LandscapingOutputPaint:apply()
-    if self.workArea.outputNode == nil or not self.workArea.outputNodeActive then
+    if self.workArea.outputNode == nil then
         return
     end
 
@@ -32,12 +33,12 @@ function LandscapingOutputPaint:apply()
 
     if self.brushShape == Landscaping.BRUSH_SHAPE.CIRCLE then
         deformation:addSoftCircleBrush(position[1], position[3], paintRadius, self.hardness, self.strength, self.terrainLayerId)
-        MachineUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], paintRadius)
-        MachineUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
+        LandscapingUtils.addModifiedCircleArea(self.modifiedAreas, position[1], position[3], paintRadius)
+        LandscapingUtils.addModifiedCircleArea(self.densityModifiedAreas, position[1], position[3], densityRadius)
     else
         deformation:addSoftSquareBrush(position[1], position[3], paintRadius * 2, self.hardness, self.strength, self.terrainLayerId)
-        MachineUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], paintRadius * 2)
-        MachineUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.modifiedAreas, position[1], position[3], paintRadius * 2)
+        LandscapingUtils.addModifiedSquareArea(self.densityModifiedAreas, position[1], position[3], densityRadius * 2)
     end
 
     deformation:apply(false, 'onDeformationCallback', self)

@@ -1,7 +1,5 @@
-source(g_modDirectory .. 'scripts/gui/dialogs/input/FloatInputDialog.lua')
-source(g_modDirectory .. 'scripts/gui/dialogs/input/NameInputDialog.lua')
-
-source(g_modDirectory .. 'scripts/gui/dialogs/SelectSurveyorDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectAreaDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SelectAreaTypeDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMachineDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMaterialDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
@@ -9,28 +7,21 @@ source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
 
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsCalibrationFrame.lua')
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsLandscapingFrame.lua')
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsInputFrame.lua')
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsOutputFrame.lua')
-source(g_modDirectory .. 'scripts/gui/frames/MachineSettingsFrame.lua')
-source(g_modDirectory .. 'scripts/gui/screens/MachineScreen.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFIconOptionElement.lua')
 
-source(g_modDirectory .. 'scripts/gui/screens/SurveyorCamera.lua')
-source(g_modDirectory .. 'scripts/gui/screens/SurveyorCursor.lua')
-source(g_modDirectory .. 'scripts/gui/screens/SurveyorScreen.lua')
+source(g_modDirectory .. 'scripts/gui/InGameMenuTerraFarmFrame.lua')
 
-source(g_modDirectory .. 'scripts/gui/elements/TFBinaryOptionElement.lua')
-source(g_modDirectory .. 'scripts/gui/elements/TFButtonElement.lua')
-source(g_modDirectory .. 'scripts/gui/elements/TFTextInputElement.lua')
-source(g_modDirectory .. 'scripts/gui/elements/TFThreePartBitmapElement.lua')
-
-source(g_modDirectory .. 'scripts/gui/frames/InGameMenuTerraFarmFrame.lua')
+source(g_modDirectory .. 'scripts/gui/MachineScreen.lua')
+source(g_modDirectory .. 'scripts/gui/MachineSettingsAreaFrame.lua')
+source(g_modDirectory .. 'scripts/gui/MachineSettingsLandscapingFrame.lua')
+source(g_modDirectory .. 'scripts/gui/MachineSettingsInputFrame.lua')
+source(g_modDirectory .. 'scripts/gui/MachineSettingsOutputFrame.lua')
+source(g_modDirectory .. 'scripts/gui/MachineSettingsFrame.lua')
 
 ---@class ModGui
 ModGui = {}
 
-ModGui.PROFILES_FILENAME = g_modDirectory .. 'xml/gui/guiProfiles.xml'
+ModGui.PROFILES_FILENAME = g_modDirectory .. 'data/gui/guiProfiles.xml'
 ModGui.TEXTURE_CONFIG_FILENAME = g_modDirectory .. 'textures/ui_elements.xml'
 
 local ModGui_mt = Class(ModGui)
@@ -45,6 +36,8 @@ function ModGui.new()
         addConsoleCommand('tfReloadGui', '', 'consoleReloadGui', self)
         addConsoleCommand('tfGuiReloadMenuFrame', '', 'consoleReloadFrames', self)
     end
+
+    g_modController:subscribe(ModEvent.onMapLoaded, self.onMapLoaded, self)
 
     return self
 end
@@ -74,32 +67,28 @@ function ModGui:delete()
         g_selectMachineDialog:close()
     end
 
-    if g_selectSurveyorDialog.isOpen then
-        g_selectSurveyorDialog:close()
+    if g_selectAreaTypeDialog.isOpen then
+        g_selectAreaTypeDialog:close()
     end
 
-    if g_nameInputDialog.isOpen then
-        g_nameInputDialog:close()
-    end
-
-    if g_floatInputDialog.isOpen then
-        g_floatInputDialog:close()
+    if g_selectAreaDialog.isOpen then
+        g_selectAreaDialog:close()
     end
 
     g_gui:showGui(nil)
 
-    g_surveyorScreen:delete()
     g_machineScreen:delete()
+    g_editorAreaPolygon:delete()
+    g_editorAreaPath:delete()
+    g_editorWaterplane:delete()
 
     g_selectMaterialDialog:delete()
     g_selectTerrainLayerDialog:delete()
     g_selectMachineDialog:delete()
-    g_selectSurveyorDialog:delete()
     g_globalMaterialsDialog:delete()
     g_globalSettingsDialog:delete()
-
-    g_nameInputDialog:delete()
-    g_floatInputDialog:delete()
+    g_selectAreaTypeDialog:delete()
+    g_selectAreaDialog:delete()
 end
 
 function ModGui:load()
@@ -133,24 +122,20 @@ function ModGui:loadDialogs()
     g_selectMachineDialog:load()
 
     ---@diagnostic disable-next-line: lowercase-global
-    g_selectSurveyorDialog = SelectSurveyorDialog.new()
-    g_selectSurveyorDialog:load()
-
-    ---@diagnostic disable-next-line: lowercase-global
-    g_nameInputDialog = NameInputDialog.new()
-    g_nameInputDialog:load()
-
-    ---@diagnostic disable-next-line: lowercase-global
-    g_floatInputDialog = FloatInputDialog.new()
-    g_floatInputDialog:load()
-
-    ---@diagnostic disable-next-line: lowercase-global
     g_globalSettingsDialog = GlobalSettingsDialog.new()
     g_globalSettingsDialog:load()
 
     ---@diagnostic disable-next-line: lowercase-global
     g_globalMaterialsDialog = GlobalMaterialsDialog.new()
     g_globalMaterialsDialog:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_selectAreaTypeDialog = SelectAreaTypeDialog.new()
+    g_selectAreaTypeDialog:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_selectAreaDialog = SelectAreaDialog.new()
+    g_selectAreaDialog:load()
 end
 
 function ModGui:loadFrames()
@@ -171,7 +156,7 @@ function ModGui:loadMenuFrame(class)
         return false
     end
 
-    g_gui:loadGui(class.XML_FILENAME, class.CLASS_NAME, pageController, true)
+    g_gui:loadGui(class.XML_FILENAME, class.MENU_PAGE_NAME, pageController, true)
 
     g_inGameMenu[pageName] = pageController
     g_inGameMenu.pagingElement:addElement(pageController)
@@ -229,12 +214,20 @@ end
 
 function ModGui:loadScreens()
     ---@diagnostic disable-next-line: lowercase-global
-    g_surveyorScreen = SurveyorScreen.new()
-    g_surveyorScreen:load()
-
-    ---@diagnostic disable-next-line: lowercase-global
     g_machineScreen = MachineScreen.new()
     g_machineScreen:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_editorAreaPolygon = EditorAreaPolygon.new()
+    g_editorAreaPolygon:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_editorAreaPath = EditorAreaPath.new()
+    g_editorAreaPath:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_editorWaterplane = EditorWaterplane.new()
+    g_editorWaterplane:load()
 end
 
 function ModGui:reload()
@@ -243,6 +236,7 @@ function ModGui:reload()
     local machineScreenIsOpen = g_machineScreen.isOpen
     local globalSettingsDialogIsOpen = g_globalSettingsDialog.isOpen
     local globalMaterialsDialogIsOpen = g_globalMaterialsDialog.isOpen
+    local selectTypeDialogIsOpen = g_selectAreaTypeDialog.isOpen
 
     local selectedVehicle
 
@@ -255,10 +249,6 @@ function ModGui:reload()
 
     g_modHud:reload()
 
-    -- if currentGuiName ~= SurveyorScreen.CLASS_NAME then
-    --     g_gui:showGui(currentGuiName)
-    -- end
-
     if machineScreenIsOpen and selectedVehicle ~= nil then
         g_machineScreen:show(selectedVehicle)
     end
@@ -269,6 +259,10 @@ function ModGui:reload()
 
     if globalMaterialsDialogIsOpen then
         g_globalMaterialsDialog:show()
+    end
+
+    if selectTypeDialogIsOpen then
+        g_selectAreaTypeDialog:show()
     end
 end
 

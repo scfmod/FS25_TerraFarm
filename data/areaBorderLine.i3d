@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="areaBorderLine.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.11" />
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="$data/shared/ai/fieldCourseLine_diffuse.png" />
+    <File fileId="3" filename="shaders/areaBorderShader.xml" />
+  </Files>
+
+
+  <Materials>
+    <Material name="test_mat" materialId="5" specularColor="0.501961 1 0.501961" alphaBlending="true" customShaderId="3">
+      <Texture fileId="1" />
+    </Material>
+  </Materials>
+
+
+  <PerInstanceMaterialParameters>
+    <PerInstanceMaterialParameter nodeId="8">
+      <CustomParameter materialIndex="0" name="intensitySize" value="2 1 0.5 1 " />
+      <CustomParameter materialIndex="0" name="dashNumLength" value="16 1 " />
+    </PerInstanceMaterialParameter>
+  </PerInstanceMaterialParameters>
+
+
+  <Shapes externalShapesFile="areaBorderLine.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="segment01" shapeId="1" clipDistance="150" nodeId="8" castsShadows="true" receiveShadows="true" doubleSided="true" materialIds="5" />
+  </Scene>
+
+</i3D>

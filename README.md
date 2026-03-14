@@ -23,7 +23,8 @@ IT TO LEARN, FORK AND SPREAD THE KNOWLEDGE.
 - [Materials](#materials)
 - [Supported equipment](#supported-equipment)
   - [Base game](#base-game)
-- [Surveyor](#surveyor)
+- [Landscaping areas](#landscaping-areas)
+- [Water planes](#water-planes)
 - [Documentation](#documentation)
 - [Map resources extension](#map-resources-extension)
 - [How to report bugs](#how-to-report-bugs)
@@ -68,7 +69,6 @@ TerraFarm supports vehicle specialization for modders to integrate configuration
 ### Base game
 ```
 - Albutt front loader bucket
-- Holaras MES 400 leveler
 - Magsi telehandler bucket
 - Magsi wheel loader bucket
 - mcCormack overtipping bucket
@@ -82,13 +82,13 @@ TerraFarm supports vehicle specialization for modders to integrate configuration
 - Volvo L180H rock bucket
 ```
 
-## Surveyor
+## Landscaping areas
 
-A feature in TerraFarm is the option to use surveyor equipment to calibrate your machine(s). This allows you to level at a specific height or grade at a certain angle following the calibrated line.
+TODO
 
-![5](./docs/images/surveyor_1.webp)
+## Water planes
 
-If you want to create your own surveyor equipment, read more [here](./docs/SURVEYOR.md).
+TODO
 
 ## Documentation
 
@@ -137,9 +137,7 @@ If anyone is interested in adding more translations to the mod, [create a new is
 
 # Credits
 
-Huge thanks to PeteyJ for creating the PSV2 Surveyor shipped with this mod.
-
-Also a big thanks to the fellow modders from **Jeremy Brown Modeling and Simulation** and **WZL Modding** discord servers for all the testing and feedback on the FS22 version.
+A big thanks to the fellow modders from **Jeremy Brown Modeling and Simulation** and **WZL Modding** discord servers for all the testing and feedback on the FS22 version.
 
 [![oma](https://avatars.githubusercontent.com/u/159189143?s=200&v=4)](https://github.com/open-modding-alliance)
 
@@ -154,6 +152,7 @@ Machine settings
 ![Machine settings](./docs/images/machine_settings.webp)
 ![Input](./docs/images/machine_input.webp)
 ![Output](./docs/images/machine_output.webp)
+![Area](./docs/images/machine_area.webp)
 
 Global settings
 ![Global settings](./docs/images/global_settings.webp)

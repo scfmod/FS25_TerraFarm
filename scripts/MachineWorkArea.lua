@@ -4,20 +4,20 @@
 ---@field referenceNode number
 ---@field rootNode number
 ---@field width number
----@field offset Position
----@field rotation Position
+---@field offset number[]
+---@field rotation number[]
 ---
 ---@field areaNodes number[]
 ---@field areaNodeActive table<number, boolean>
----@field areaNodePosition table<number, Position>
+---@field areaNodePosition table<number, number[]>
 ---@field areaNodeTerrainY table<number, number>
 ---@field isAreaNodeActive boolean
 ---
 ---@field outputNode number?
 ---@field outputNodeActive boolean
----@field outputNodePosition Position
+---@field outputNodePosition number[]
 ---@field outputNodeTerrainY number
----@field outputOffset Position
+---@field outputOffset number[]
 ---
 ---@field density number
 ---@field raycastHitTerrain boolean
@@ -172,7 +172,7 @@ function MachineWorkArea:initialize()
     end
 
     if self.referenceNode == nil then
-        Logging.error('No referenceNode found ...')
+        Logging.error('MachineWorkArea:initialize() No referenceNode found ...')
         return false
     end
 
@@ -232,17 +232,37 @@ end
 
 ---@param mode MachineMode
 function MachineWorkArea:input(mode)
+    local area = self.vehicle:getMachineLandscapingArea()
+
+    if mode == Machine.MODE.FLATTEN then
+        return self:flatten(area)
+    end
+
+    local terrainLayerId, fillTypeIndex
+
+    if area ~= nil then
+        local state = self.vehicle:getMachineState()
+        local x, y, z = self:getPosition()
+        local isInsideArea = area:getIsInsideArea(x, y, z)
+
+        if not state.ignoreAreaGroundTextures and isInsideArea or not area.restrictArea then
+            terrainLayerId = area.forceInputLayer
+        end
+
+        if not state.ignoreAreaMaterial and isInsideArea or not area.restrictArea then
+            fillTypeIndex = area.forceFillTypeIndex
+        end
+    end
+
     if mode == Machine.MODE.PAINT then
-        local op = LandscapingInputPaint.new(self)
+        local op = LandscapingInputPaint.new(self, terrainLayerId)
         op:apply()
     elseif mode == Machine.MODE.LOWER then
-        local op = LandscapingInputLower.new(self)
+        local op = LandscapingInputLower.new(self, terrainLayerId, fillTypeIndex)
         op:apply()
     elseif mode == Machine.MODE.SMOOTH then
-        local op = LandscapingInputSmooth.new(self)
+        local op = LandscapingInputSmooth.new(self, terrainLayerId, fillTypeIndex)
         op:apply()
-    elseif mode == Machine.MODE.FLATTEN then
-        self:flatten()
     end
 end
 
@@ -252,129 +272,155 @@ end
 ---@return number litersDropped
 ---@nodiscard
 function MachineWorkArea:output(mode, liters, fillTypeIndex)
+    local area = self.vehicle:getMachineLandscapingArea()
+    local terrainLayerId
+
+    if mode == Machine.MODE.FLATTEN then
+        return self:flattenDischarge(area, fillTypeIndex, liters)
+    end
+
+    if area ~= nil then
+        local state = self.vehicle:getMachineState()
+        local x, y, z = self:getPosition()
+        local isInsideArea = area:getIsInsideArea(x, y, z)
+
+        if not state.ignoreAreaGroundTextures and isInsideArea or not area.restrictArea then
+            terrainLayerId = area.forceOutputLayer
+        end
+    end
+
     if mode == Machine.MODE.PAINT then
-        local op = LandscapingOutputPaint.new(self)
+        local op = LandscapingOutputPaint.new(self, terrainLayerId)
         op:apply()
         return op.outputLiters
     elseif mode == Machine.MODE.RAISE then
-        local op = LandscapingOutputRaise.new(self, liters, fillTypeIndex)
+        local op = LandscapingOutputRaise.new(self, terrainLayerId, fillTypeIndex, liters)
         op:apply()
         return op.outputLiters
     elseif mode == Machine.MODE.SMOOTH then
-        local op = LandscapingOutputSmooth.new(self, liters, fillTypeIndex)
+        local op = LandscapingOutputSmooth.new(self, terrainLayerId, fillTypeIndex, liters)
         op:apply()
         return op.outputLiters
-    elseif mode == Machine.MODE.FLATTEN then
-        return self:flattenDischarge(liters, fillTypeIndex)
     end
 
     return 0
 end
 
-function MachineWorkArea:flatten()
-    local surveyor = self.vehicle:getSurveyor()
-    local targetWorldY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+---@param area? LandscapingArea
+function MachineWorkArea:flatten(area)
+    if area ~= nil then
+        local x, y, z = self:getPosition()
+        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
 
-    if surveyor ~= nil and surveyor:getIsCalibrated() then
-        local x1, y1, z1, x2, y2, z2 = surveyor:getCalibrationWithOffset()
+        if valid then
+            local terrainLayerId, fillTypeIndex
+            local state = self.vehicle:getMachineState()
 
-        if y2 ~= math.huge then
-            local x, y, z = self:getPosition()
-            local nx, ny, nz, d, slopeAngle = MachineUtils.getSlopeParams(x1, y1, z1, x2, y2, z2)
+            if not state.ignoreAreaGroundTextures then
+                terrainLayerId = area.forceInputLayer
+            end
 
-            if slopeAngle ~= 0 then
-                local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
-                local op = LandscapingInputSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY)
+            if not state.ignoreAreaMaterial then
+                fillTypeIndex = area.forceFillTypeIndex
+            end
+
+            if minY == maxY then
+                local op = LandscapingInputFlatten.new(self, terrainLayerId, fillTypeIndex, targetY)
                 op:apply()
-                return
+            else
+                local op = LandscapingInputSlope.new(self, terrainLayerId, fillTypeIndex, minY, maxY, nx, ny, nz, direction, targetY)
+                op:apply()
             end
         end
+    else
+        local targetWorldPosY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+        local op = LandscapingInputFlatten.new(self, nil, nil, targetWorldPosY)
 
-        targetWorldY = y1
+        op:apply()
     end
-
-    local op = LandscapingInputFlatten.new(self, targetWorldY)
-
-    op:apply()
 end
 
+---@return number
+---@nodiscard
+function MachineWorkArea:getOutputTargetHeight()
+    local area = self.vehicle:getMachineLandscapingArea()
+
+    if area ~= nil then
+        local x, y, z = self:getOutputPosition()
+        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
+
+        if valid then
+            return targetY
+        end
+    end
+
+    return MachineUtils.getVehicleTargetHeight(self.vehicle)
+end
+
+---@param area? LandscapingArea
 ---@param litersToDrop number
 ---@param fillTypeIndex number
 ---@return number
 ---@nodiscard
-function MachineWorkArea:flattenDischarge(litersToDrop, fillTypeIndex)
-    local surveyor = self.vehicle:getSurveyor()
-    local targetWorldY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+function MachineWorkArea:flattenDischarge(area, fillTypeIndex, litersToDrop)
+    if area ~= nil then
+        local x, y, z = self:getOutputPosition()
+        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
 
-    if surveyor ~= nil and surveyor:getIsCalibrated() then
-        local x1, y1, z1, x2, y2, z2 = surveyor:getCalibrationWithOffset()
+        if valid then
+            local terrainLayerId
 
-        if y2 ~= math.huge then
-            local x, y, z = self:getPosition()
-            local nx, ny, nz, d, slopeAngle = MachineUtils.getSlopeParams(x1, y1, z1, x2, y2, z2)
+            local state = self.vehicle:getMachineState()
 
-            if slopeAngle ~= 0 then
-                local _, targetY, _, _ = MachineUtils.getClosestPointOnLine(x1, y1, z1, x2, y2, z2, x, y, z)
-                local op = LandscapingOutputSlope.new(self, -math.huge, math.huge, nx, ny, nz, d, targetY, litersToDrop, fillTypeIndex)
+            if not state.ignoreAreaGroundTextures then
+                terrainLayerId = area.forceOutputLayer
+            end
+
+            if minY == maxY then
+                local op = LandscapingOutputFlatten.new(self, terrainLayerId, fillTypeIndex, litersToDrop, targetY)
+                op:apply()
+                return op.outputLiters
+            else
+                local op = LandscapingOutputSlope.new(self, terrainLayerId, fillTypeIndex, litersToDrop, minY, maxY, nx, ny, nz, direction, targetY)
                 op:apply()
                 return op.outputLiters
             end
         end
+    else
+        local targetWorldPosY = MachineUtils.getVehicleTargetHeight(self.vehicle)
+        local op = LandscapingOutputFlatten.new(self, nil, fillTypeIndex, litersToDrop, targetWorldPosY)
 
-        targetWorldY = y1
-    end
+        op:apply()
 
-    local op = LandscapingOutputFlatten.new(self, targetWorldY, litersToDrop, fillTypeIndex)
-
-    op:apply()
-
-    return op.outputLiters
-end
-
--- Get current calibration angle
----@return number
----@nodiscard
-function MachineWorkArea:getCalibrationAngle()
-    local surveyor = self.vehicle:getSurveyor()
-
-    if surveyor ~= nil then
-        local startPosX, startPosY, startPosZ, endPosX, endPosY, endPosZ = surveyor:getCalibration()
-
-        return MachineUtils.getAngleBetweenPoints(
-            startPosX, startPosY, startPosZ,
-            endPosX, endPosY, endPosZ
-        )
+        return op.outputLiters
     end
 
     return 0
-end
-
----@return number
----@nodiscard
-function MachineWorkArea:getTargetTerrainHeight()
-    local surveyor = self.vehicle:getSurveyor()
-
-    if surveyor ~= nil and surveyor:getIsCalibrated() then
-        local startPosX, startPosY, startPosZ, endPosX, endPosY, endPosZ = surveyor:getCalibration()
-        local startOffset, endOffset = surveyor:getCalibrationOffset()
-
-        if endPosY ~= math.huge then
-            local nodePosX, nodePosY, nodePosZ = self:getPosition()
-            local _, linePosY, _, _ = MachineUtils.getClosestPointOnLine(startPosX, startPosY + startOffset, startPosZ, endPosX, endPosY + endOffset, endPosZ, nodePosX, nodePosY, nodePosZ)
-
-            return linePosY
-        end
-
-        return startPosY + startOffset
-    end
-
-    return MachineUtils.getVehicleTargetHeight(self.vehicle)
 end
 
 ---@return number worldPosX
 ---@return number worldPosY
 ---@return number worldPosZ
 function MachineWorkArea:getPosition()
+    return getWorldTranslation(self.rootNode)
+end
+
+---@return number rotationY
+---@nodiscard
+function MachineWorkArea:getRotationY()
+    local _, rotY, _ = getWorldRotation(self.rootNode)
+
+    return rotY
+end
+
+---@return number worldPosX
+---@return number worldPosY
+---@return number worldPosZ
+function MachineWorkArea:getOutputPosition()
+    if self.outputNode ~= nil then
+        return getWorldTranslation(self.outputNode)
+    end
+
     return getWorldTranslation(self.rootNode)
 end
 

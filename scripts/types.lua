@@ -1,20 +1,5 @@
 ---@meta
 
-g_modName = ''
-g_modDirectory = ''
-g_modDirectorySettings = ''
-g_previewMaskFilename = ''
-g_gameVersion = 0
-
----@class Array<T>: { [integer]: T }
-
----@class Theme
----@field id string
----@field name string
----@field xmlFilename string
-
----@alias Position number[]
-
 ---@class DrivableVehicle : Vehicle, Drivable
 
 ---@class FillUnitVehicle : Vehicle, FillUnit
@@ -45,13 +30,13 @@ g_gameVersion = 0
 ---@field machineTypeId string
 ---@field machineType MachineType
 ---@field isExternal boolean
----@field xmlFilenameConfig string | nil -- Only used if isExternal is true
+---@field xmlFilenameConfig string? -- Only used if isExternal is true
 ---@field state MachineState
----@field surveyorId string | nil
+---@field landscapingAreaId? string
 ---@field inputTerrainLayerId number
 ---@field outputTerrainLayerId number
----@field fillUnitIndex number | nil
----@field fillUnit FillUnitObject | nil
+---@field fillUnitIndex number?
+---@field fillUnit FillUnitObject?
 ---@field fillTypeIndex number
 ---@field fillType FillTypeObject
 ---@field fillUnitSource FillUnitSourceType
@@ -76,19 +61,19 @@ g_gameVersion = 0
 ---@field modesOutput MachineMode[]
 ---@field effectAnimationNodes table
 ---@field effects Effect[]
----@field sample SampleObject | nil
+---@field sample SampleObject?
 ---@field playSound boolean
----@field turnOffSoundTimer number | nil
+---@field turnOffSoundTimer number?
 ---@field isEffectActive boolean
 ---@field isEffectActiveSent boolean
----@field lastEffect Effect | nil
----@field stopEffectTime number | nil
+---@field lastEffect Effect?
+---@field stopEffectTime number?
 ---@field effectTurnOffThreshold number
----@field stateObjectChanges table | nil
+---@field stateObjectChanges table?
 ---
----@field dischargeNode DischargeNode | nil
----@field levelerNode LevelerNode | nil
----@field shovelNode ShovelNode | nil
+---@field dischargeNode DischargeNode?
+---@field levelerNode LevelerNode?
+---@field shovelNode ShovelNode?
 ---@field workArea MachineWorkArea
 ---@field updateInterval number
 ---@field lastIntervalUpdate number
@@ -121,7 +106,7 @@ g_gameVersion = 0
 
 ---@class DischargeableSpecialization
 ---@field currentDischargeState number
----@field currentDischargeNode DischargeNode | nil
+---@field currentDischargeNode DischargeNode?
 ---@field dischargeNodes DischargeNode[]
 ---@field fillUnitDischargeNodeMapping table<number, DischargeNode>
 ---@field dischargNodeMapping table<number, DischargeNode>
@@ -153,24 +138,24 @@ g_gameVersion = 0
 ---@field maxDistance number
 ---@field dischargeObject any
 ---@field dischargeHitObject any
----@field dischargeHitObjectUnitIndex number | nil
+---@field dischargeHitObjectUnitIndex number?
 ---@field dischargeHitTerrain boolean
----@field dischargeShape number | nil
+---@field dischargeShape number?
 ---@field dischargeDistance number
 ---@field dischargeDistanceSent number
 ---@field dischargeFillUnitIndex number
 ---@field dischargeHit boolean
 ---@field trigger DischargeNodeTrigger
 ---@field activationTrigger DischargeNodeActivationTrigger
----@field fillTypeConverter table | nil
----@field distanceObjectChanges table | nil
----@field stateObjectChanges table | nil
----@field nodeActiveObjectChanges table | nil
+---@field fillTypeConverter table?
+---@field distanceObjectChanges table?
+---@field stateObjectChanges table?
+---@field nodeActiveObjectChanges table?
 ---@field effects table
 ---@field sentHitDistance number
 ---@field isEffectActive boolean
 ---@field isEffectActiveSent boolean
----@field lastEffect table | nil
+---@field lastEffect table?
 
 ---@class DischargeNodeInfo
 ---@field node number
@@ -182,17 +167,17 @@ g_gameVersion = 0
 ---@field useRaycastHitPosition boolean
 
 ---@class DischargeNodeRaycast
----@field node number | nil
+---@field node number?
 ---@field useWorldNegYDirection boolean
 ---@field yOffset number
 
 ---@class DischargeNodeTrigger
----@field node number | nil
+---@field node number?
 ---@field objects table
 ---@field numObjects number
 
 ---@class DischargeNodeActivationTrigger
----@field node number | nil
+---@field node number?
 ---@field objects table
 ---@field numObjects number
 
@@ -208,7 +193,7 @@ g_gameVersion = 0
 
 ---@class ShovelDischargeInfo
 ---@field dischargeNodeIndex number
----@field node number | nil
+---@field node number?
 ---@field minSpeedAngle number -- nil if node is nil
 ---@field maxSpeedAngle number -- nil if node is nil
 
@@ -223,7 +208,7 @@ g_gameVersion = 0
 ---@field needsMovement boolean
 ---@field lastPosition number[]
 ---@field fillLitersPerSecond number
----@field maxPickupAngle number | nil
+---@field maxPickupAngle number?
 ---@field needsAttacherVehicle boolean
 ---@field resetFillLevel boolean
 ---@field ignoreFillLevel boolean
@@ -235,7 +220,7 @@ g_gameVersion = 0
 ---@class LevelerSpecialization
 ---@field pickUpDirection number
 ---@field maxFillLevelPerMS number
----@field fillUnitIndex number | nil
+---@field fillUnitIndex number?
 ---@field nodes LevelerNode[]
 ---@field litersToPickup number
 ---@field smoothAccumulation number
@@ -245,8 +230,8 @@ g_gameVersion = 0
 ---@field lastFillLevelMovedBuffer number
 ---@field lastFillLevelMovedBufferTime number
 ---@field lastFillLevelMovedBufferTimer number
----@field forceNode number | nil
----@field forceDirNode number | nil
+---@field forceNode number?
+---@field forceDirNode number?
 ---@field maxForce number
 ---@field lastForce number
 ---@field forceDir number
@@ -273,8 +258,8 @@ g_gameVersion = 0
 ---@field smoothGroundRadius number
 ---@field smoothOverlap number
 ---@field smoothDirection number
----@field lineOffsetPickUp number | nil
----@field lineOffsetDrop number | nil
+---@field lineOffsetPickUp number?
+---@field lineOffsetDrop number?
 ---@field lastPickUp number
 ---@field lastDrop number
 ---@field lastDrop2 number
@@ -290,7 +275,7 @@ g_gameVersion = 0
 ---@field hasExactFillRootNodes boolean
 ---@field activeAlarmTriggers table
 ---@field fillTrigger FillUnitTrigger
----@field unloading FillUnitUnloading[] | nil
+---@field unloading FillUnitUnloading[]?
 ---@field isInfoDirty boolean
 ---@field fillUnitInfos table
 ---@field dirtyFlag number
@@ -310,8 +295,8 @@ g_gameVersion = 0
 ---@field triggers table
 ---@field activatable FillActivatable
 ---@field isFilling boolean
----@field currentTrigger number | nil
----@field selectedTrigger number | nil
+---@field currentTrigger number?
+---@field selectedTrigger number?
 ---@field litersPerSecond number
 ---@field consumePtoPower boolean
 
@@ -333,7 +318,7 @@ g_gameVersion = 0
 ---@field fillLevelDependentTipSides boolean
 ---@field tipSideCount number
 ---@field preferedTipSideIndex number
----@field currentTipSideIndex number | nil
+---@field currentTipSideIndex number?
 ---@field tipState number
 ---@field remainingFillDelta number
 ---@field tipSides TipSide[]
@@ -347,17 +332,3 @@ g_gameVersion = 0
 ---@field manualDoorToggle boolean
 ---@field currentEmptyFactor number
 ---@field fillLevel table
-
----@class TipSideFillLevel
----@field fillUnitIndex number | nil
----@field minFillLevelPct number
----@field maxFillLevelPct number
-
-
----@class Calibration
----@field terrainHeight number
----@field heightDiff number
----@field heightWithOffset number
----@field x number
----@field y number
----@field z number
