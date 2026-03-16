@@ -5,7 +5,7 @@
 LandscapingAreaPath = {}
 LandscapingAreaPath.CLASS_NAME = 'LandscapingAreaPath'
 LandscapingAreaPath.TYPE_NAME = g_i18n:getText('ui_areaPath')
-LandscapingAreaPath.SEND_NUM_BITS_POINTS = 5
+LandscapingAreaPath.SEND_NUM_BITS_POINTS = 6
 LandscapingAreaPath.MAX_NUM_POINTS = 2 ^ LandscapingAreaPath.SEND_NUM_BITS_POINTS - 1
 
 local LandscapingAreaPath_mt = Class(LandscapingAreaPath, LandscapingArea)

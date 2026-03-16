@@ -5,7 +5,7 @@
 LandscapingAreaPolygon = {}
 LandscapingAreaPolygon.CLASS_NAME = 'LandscapingAreaPolygon'
 LandscapingAreaPolygon.TYPE_NAME = g_i18n:getText('ui_areaPolygon')
-LandscapingAreaPolygon.SEND_NUM_BITS_POINTS = 5
+LandscapingAreaPolygon.SEND_NUM_BITS_POINTS = 6
 LandscapingAreaPolygon.MAX_NUM_POINTS = 2 ^ LandscapingAreaPolygon.SEND_NUM_BITS_POINTS - 1
 
 local LandscapingAreaPolygon_mt = Class(LandscapingAreaPolygon, LandscapingArea)
