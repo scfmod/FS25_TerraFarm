@@ -16,7 +16,7 @@ LandscapingArea.TYPE_NAME = ''
 
 ---@type XMLSchema
 LandscapingArea.XML_SCHEMA = nil
-LandscapingArea.SEND_NUM_BITS_AREAS = 2 ^ 5
+LandscapingArea.SEND_NUM_BITS_AREAS = 2 ^ 6
 LandscapingArea.MAX_NUM_AREAS = LandscapingArea.SEND_NUM_BITS_AREAS - 1
 
 ---@param schema XMLSchema
