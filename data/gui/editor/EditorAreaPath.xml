@@ -6,18 +6,23 @@
             <Text profile="tfEditor_menuHeaderText" text="$l10n_ui_areaPath" />
         </BoxLayout>
 
-        <BoxLayout profile="tfEditor_positionPanel" id="positionPanel">
-            <GuiElement profile="tfEditor_positionPanelSegment">
-                <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveLeft" iconRotation="180" />
-            </GuiElement>
-            <GuiElement profile="tfEditor_positionPanelSegment">
-                <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveDown" position="0 -28px" iconRotation="-90" />
-                <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveUp" position="0 28px" iconRotation="90" />
-            </GuiElement>
-            <GuiElement profile="tfEditor_positionPanelSegment">
-                <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveRight" />
-            </GuiElement>
-        </BoxLayout>
+        <Bitmap profile="tfEditor_positionPanelWrapper">
+            <BoxLayout profile="tfEditor_positionPanel" id="positionPanel">
+                <GuiElement profile="tfEditor_positionPanelSegment">
+                    <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveLeft" iconRotation="180" />
+                </GuiElement>
+                <GuiElement profile="tfEditor_positionPanelSegment">
+                    <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveDown" position="0 -28px" iconRotation="-90" />
+                    <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveUp" position="0 28px" iconRotation="90" />
+                </GuiElement>
+                <GuiElement profile="tfEditor_positionPanelSegment">
+                    <Button profile="tfEditor_positionPanelButton" onClick="onClickMoveRight" />
+                </GuiElement>
+                <GuiElement profile="tfEditor_positionPanelSegment">
+                    <Button profile="tfEditor_positionPanelButtonEdit" onClick="onClickSetPosition" />
+                </GuiElement>
+            </BoxLayout>
+        </Bitmap>
 
         <BoxLayout profile="tfEditor_actionPanel" id="actionPanel" position="0 630px">
             <Button profile="tfEditor_actionPanelButton" id="saveButton" onClick="onClickSave" text="$l10n_ui_editorSaveChanges">
@@ -100,14 +105,17 @@
     </BoxLayout>
 
     <GuiProfiles>
+        <Profile name="tfEditor_positionPanelWrapper" extends="baseReference" with="anchorTopStretchingX">
+            <height value="264px" />
+
+            <imageColor value="0 0 0 0.25" />
+        </Profile>
         <Profile name="tfEditor_positionPanel" extends="baseReference" with="anchorTopStretchingX">
-            <height value="192px" />
-            <position value="0 -72px" />
+            <position value="32px -72px" />
 
             <alignmentX value="center" />
             <elementSpacing value="8px" />
-
-            <imageColor value="0 0 0 0.25" />
+            <imageColor value="0 0 0 0" />
         </Profile>
 
         <Profile name="tfEditor_positionPanelSegment" extends="baseReference" with="anchorTopLeft">
@@ -125,6 +133,11 @@
             <iconSize value="24px 24px" />
             <iconColor value="1 1 1 0.9" />
             <iconDisabledColor value="1 1 1 0.1" />
+        </Profile>
+
+        <Profile name="tfEditor_positionPanelButtonEdit" extends="tfEditor_positionPanelButton" with="anchorBottomRight">
+            <position value="72px 8px" />
+            <iconSliceId value="gui.crosshairThrow" />
         </Profile>
 
         <Profile name="tfEditor_infoDisplay" with="anchorBottomLeft">

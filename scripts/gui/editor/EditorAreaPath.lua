@@ -521,6 +521,33 @@ function EditorAreaPath:onClickMoveRight()
     self:moveSelectedPointX(-0.25)
 end
 
+function EditorAreaPath:onClickSetPosition()
+    local points = self:getPoints()
+    local point = points[self.selectedIndex]
+
+    if point ~= nil then
+        g_setPositionDialog:setCallback(self.setPositionCallback, self)
+        g_setPositionDialog:show(point[1], point[2], point[3])
+    end
+end
+
+---@param x number
+---@param y number
+---@param z number
+function EditorAreaPath:setPositionCallback(x, y, z)
+    local points = self:getPoints()
+    local point = points[self.selectedIndex]
+
+    if point ~= nil then
+        point[1] = x
+        point[2] = y
+        point[3] = z
+
+        self:updateAreaBorder()
+        self:setHasChanged(true)
+    end
+end
+
 function EditorAreaPath:onDirectionButtonStateChanged(action, value)
     self.directionButtonIsDown = value == 1
 end

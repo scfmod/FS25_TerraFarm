@@ -3,6 +3,7 @@ source(g_modDirectory .. 'scripts/gui/dialogs/SelectAreaTypeDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMachineDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMaterialDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SetPositionDialog.lua')
 
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
@@ -75,6 +76,10 @@ function ModGui:delete()
         g_selectAreaDialog:close()
     end
 
+    if g_setPositionDialog.isOpen then
+        g_setPositionDialog:close()
+    end
+
     g_gui:showGui(nil)
 
     g_machineScreen:delete()
@@ -89,6 +94,7 @@ function ModGui:delete()
     g_globalSettingsDialog:delete()
     g_selectAreaTypeDialog:delete()
     g_selectAreaDialog:delete()
+    g_setPositionDialog:delete()
 end
 
 function ModGui:load()
@@ -136,6 +142,10 @@ function ModGui:loadDialogs()
     ---@diagnostic disable-next-line: lowercase-global
     g_selectAreaDialog = SelectAreaDialog.new()
     g_selectAreaDialog:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_setPositionDialog = SetPositionDialog.new()
+    g_setPositionDialog:load()
 end
 
 function ModGui:loadFrames()
