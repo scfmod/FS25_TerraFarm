@@ -159,6 +159,7 @@ function EditorAreaPath:selectPoint(index)
         self.selectedIndex = index
 
         self:updateMenuActionEvents()
+        self:updatePanels()
     end
 end
 
