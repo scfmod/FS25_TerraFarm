@@ -160,14 +160,15 @@ function ModGui:loadMenuFrame(class)
 
     g_inGameMenu[pageName] = pageController
     g_inGameMenu.pagingElement:addElement(pageController)
+    g_inGameMenu.pagingElement:updateAbsolutePosition()
+    g_inGameMenu.pagingElement:updatePageMapping()
+
     g_inGameMenu:registerPage(pageController, nil, predicateFunction)
     g_inGameMenu:addPageTab(pageController, nil, nil, class.MENU_ICON_SLICE_ID)
-
     self[pageName] = pageController
 
     pageController:updateAbsolutePosition()
-
-    g_inGameMenu.pagingTabList:reloadData()
+    g_inGameMenu:rebuildTabList()
 
     return true
 end
@@ -268,12 +269,6 @@ end
 
 function ModGui:onMapLoaded()
     if g_client ~= nil then
-        -- Make sure we apply a fix for InGameMenu
-        -- (it's especially a problem in multiplayer)
-        -- SmoothListElement.ALIGN_MIDDLE is of course causing issues
-        -- in this specific case when you have "too many" tab items.
-        g_inGameMenu.pagingTabList.listItemAlignment = SmoothListElement.ALIGN_START
-
         self:loadFrames()
     end
 end
