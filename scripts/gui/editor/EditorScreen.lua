@@ -6,6 +6,7 @@
 ---@field openMenuAfterClose boolean
 ---@field area? LandscapingArea
 ---
+---@field positionText TextElement
 ---@field positionPanel GuiElement
 ---@field optionsPanel BoxLayoutElement
 ---@field actionPanel BoxLayoutElement

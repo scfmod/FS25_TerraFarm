@@ -82,7 +82,16 @@
 
     <GuiElement profile="tfEditor_helpDisplay" id="helpDisplay" />
 
+    <Text profile="tfEditor_positionText" id="positionText" />
+
     <GuiProfiles>
+        <Profile name="tfEditor_positionText" extends="textDefault" with="anchorBottomRight">
+            <size value="400px 32px" />
+            <position value="-32px 16px" />
+            <textSize value="16px" />
+            <textAlignment value="right" />
+            <handleFocus value="false" />
+        </Profile>
         <Profile name="tfEditor_menu" extends="baseReference" with="anchorStretchingYLeft">
             <width value="448px" />
             <imageColor value="0.018 0.018 0.018 1" />

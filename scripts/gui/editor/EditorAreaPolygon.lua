@@ -76,6 +76,7 @@ function EditorAreaPolygon:setMode(mode)
 
     self:registerMenuActionEvents(self.mode == EditorAreaPolygon.MODE.NONE)
     self:updatePanels()
+    self:updatePositionText()
 end
 
 ---@return boolean
@@ -101,6 +102,7 @@ function EditorAreaPolygon:addPoint()
         table.insert(points, index, point)
 
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
 
         self.selectedIndex = index
@@ -134,6 +136,8 @@ function EditorAreaPolygon:deletePoint()
             self.selectedIndex = numPoints
         end
 
+        self:updatePositionText()
+
         return true
     end
 
@@ -152,6 +156,7 @@ function EditorAreaPolygon:movePoint()
 
             self:setMode(EditorAreaPolygon.MODE.SELECT)
             self:updateAreaBorder()
+            self:updatePositionText()
             self:setHasChanged(true)
 
             return true
@@ -167,6 +172,7 @@ function EditorAreaPolygon:selectPoint(index)
         self.selectedIndex = index
 
         self:updateMenuActionEvents()
+        self:updatePositionText()
     end
 end
 
@@ -266,6 +272,7 @@ function EditorAreaPolygon:setTargetHeight()
 
         self:updateHeightInput()
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
 
         return true
@@ -283,6 +290,7 @@ end
 ---@param value number
 function EditorAreaPolygon:setTargetY(value)
     self.area.targetY = value
+    self:updatePositionText()
 end
 
 ---@return number[][]
@@ -317,6 +325,7 @@ function EditorAreaPolygon:moveSelectedPointY(value)
         self:updateAreaBorder()
         self:setHasChanged(true)
         self:updateHeightInput()
+        self:updatePositionText()
 
         return true
     end
@@ -340,6 +349,7 @@ function EditorAreaPolygon:moveSelectedPointX(value)
         end
 
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
 
         return true
@@ -387,6 +397,24 @@ function EditorAreaPolygon:onReleaseLeftRight(action, _, _, _, _, _, binding)
         else
             self:onClickMoveRight()
         end
+    end
+end
+
+---@return number[]?
+---@nodiscard
+function EditorAreaPolygon:getSelectedPoint()
+    local points = self:getPoints()
+    return points[self.selectedIndex]
+end
+
+function EditorAreaPolygon:updatePositionText()
+    local point = self:getSelectedPoint()
+
+    if self.mode ~= EditorAreaPolygon.MODE.NONE and self.mode ~= EditorAreaPolygon.MODE.SET_POSITION and point ~= nil then
+        self.positionText:setVisible(true)
+        self.positionText:setText(string.format('x: %.2f  y: %.2f  z: %.2f', point[1], self.area.targetY, point[2]))
+    else
+        self.positionText:setVisible(false)
     end
 end
 

@@ -98,6 +98,8 @@
 
     <GuiElement profile="tfEditor_helpDisplay" id="helpDisplay" />
 
+    <Text profile="tfEditor_positionText" id="positionText" />
+
     <BoxLayout profile="tfEditor_infoDisplay" id="infoDisplay">
         <Button profile="tfEditor_infoDisplayButton" text="$l10n_ui_keepDirection" inputAction="AREA_EDITOR_DIRECTION" />
         <Button profile="tfEditor_infoDisplayButton" text="$l10n_ui_followAngle" inputAction="AREA_EDITOR_ANGLE" />
@@ -111,7 +113,7 @@
             <imageColor value="0 0 0 0.25" />
         </Profile>
         <Profile name="tfEditor_positionPanel" extends="baseReference" with="anchorTopStretchingX">
-            <position value="32px -72px" />
+            <position value="28px -72px" />
 
             <alignmentX value="center" />
             <elementSpacing value="8px" />

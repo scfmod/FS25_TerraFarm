@@ -89,6 +89,7 @@ function EditorAreaPath:setMode(mode)
 
     self:registerMenuActionEvents(self.mode == EditorAreaPath.MODE.NONE)
     self:updatePanels()
+    self:updatePositionText()
 end
 
 function EditorAreaPath:addPoint()
@@ -112,6 +113,7 @@ function EditorAreaPath:addPoint()
 
         self:updateMenuActionEvents()
         self:updatePanels()
+        self:updatePositionText()
     end
 end
 
@@ -135,6 +137,7 @@ function EditorAreaPath:deletePoint()
         end
 
         self:updatePanels()
+        self:updatePositionText()
     end
 end
 
@@ -148,6 +151,7 @@ function EditorAreaPath:movePoint()
 
             self:setMode(EditorAreaPath.MODE.SELECT)
             self:updateAreaBorder()
+            self:updatePositionText()
             self:setHasChanged(true)
         end
     end
@@ -160,6 +164,7 @@ function EditorAreaPath:selectPoint(index)
 
         self:updateMenuActionEvents()
         self:updatePanels()
+        self:updatePositionText()
     end
 end
 
@@ -265,6 +270,24 @@ function EditorAreaPath:onButtonSecondary()
         else
             self:onPressCancel()
         end
+    end
+end
+
+---@return number[]?
+---@nodiscard
+function EditorAreaPath:getSelectedPoint()
+    local points = self:getPoints()
+    return points[self.selectedIndex]
+end
+
+function EditorAreaPath:updatePositionText()
+    local point = self:getSelectedPoint()
+
+    if self.mode ~= EditorAreaPath.MODE.NONE and point ~= nil then
+        self.positionText:setVisible(true)
+        self.positionText:setText(string.format('x: %.2f  y: %.2f  z: %.2f', point[1], point[2], point[3]))
+    else
+        self.positionText:setVisible(false)
     end
 end
 
@@ -485,6 +508,7 @@ function EditorAreaPath:moveSelectedPointY(value)
         point[2] = point[2] + value
 
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
     end
 end
@@ -502,6 +526,7 @@ function EditorAreaPath:moveSelectedPointX(value)
         point[3] = point[3] + rightZ * value
 
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
     end
 end
@@ -545,6 +570,7 @@ function EditorAreaPath:setPositionCallback(x, y, z)
         point[3] = z
 
         self:updateAreaBorder()
+        self:updatePositionText()
         self:setHasChanged(true)
     end
 end
