@@ -34,7 +34,7 @@
         <BoxLayout profile="tfEditor_optionsPanel" id="optionsPanel">
             <Bitmap profile="tfEditor_optionSegment">
                 <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_name" />
-                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedNameInput" id="nameInput" profile="tfEditor_textInputName">
+                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedNameInput" onEscPressed="onEnterPressedNameInput" id="nameInput" profile="tfEditor_textInputName">
                     <Bitmap profile="tfEditor_textInputBg" />
                     <Bitmap profile="fs25_textInputIconBox">
                         <Bitmap profile="fs25_textInputIcon" />
@@ -56,7 +56,7 @@
 
             <Bitmap profile="tfEditor_optionSegment">
                 <Text profile="tfEditor_optionSegmentTitle" text="$l10n_ui_width" />
-                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedWidthInput" id="widthInput" profile="tfEditor_textInput">
+                <TextInput focusOnHighlight="true" onEnterPressed="onEnterPressedWidthInput" onEscPressed="onEnterPressedWidthInput" id="widthInput" profile="tfEditor_textInput">
                     <Bitmap profile="tfEditor_textInputBg" />
                     <Bitmap profile="fs25_textInputIconBox">
                         <Bitmap profile="fs25_textInputIcon" />
