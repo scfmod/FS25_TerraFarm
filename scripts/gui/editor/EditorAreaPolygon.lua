@@ -411,8 +411,10 @@ function EditorAreaPolygon:updatePositionText()
     local point = self:getSelectedPoint()
 
     if self.mode ~= EditorAreaPolygon.MODE.NONE and self.mode ~= EditorAreaPolygon.MODE.SET_POSITION and point ~= nil then
+        local targetY = self:getTargetY()
+
         self.positionText:setVisible(true)
-        self.positionText:setText(string.format('x: %.2f  y: %.2f  z: %.2f', point[1], self.area.targetY, point[2]))
+        self.positionText:setText(string.format('x: %.2f  y: %.2f  z: %.2f', point[1], targetY, point[2]))
     else
         self.positionText:setVisible(false)
     end
