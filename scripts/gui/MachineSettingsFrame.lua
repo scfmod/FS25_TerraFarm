@@ -11,6 +11,8 @@
 ---@field forceNodesOption BinaryOptionElement
 ---@field autoDeactivateOption BinaryOptionElement
 ---@field drivingDirectionModeOption MultiTextOptionElement
+---@field updateCollisionsOption BinaryOptionElement
+---@field updateCollisionsOptionWrapper BitmapElement
 ---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsFrame = {}
@@ -117,6 +119,14 @@ function MachineSettingsFrame:updateState(vehicle)
             self.enableEffectsOption.parent.elements[3]:setText(g_i18n:getText('ui_notAvailable'))
         else
             self.enableEffectsOption.parent.elements[3]:setText(g_i18n:getText('ui_stateEnableEffectsTooltip'))
+        end
+
+        if spec.collisionNodes ~= nil then
+            self.updateCollisionsOptionWrapper:setDisabled(false)
+            self.updateCollisionsOption:setIsChecked(spec.state.updateCollisions)
+        else
+            self.updateCollisionsOptionWrapper:setDisabled(true)
+            self.updateCollisionsOption:setIsChecked(false)
         end
     end
 end

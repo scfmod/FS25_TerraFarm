@@ -41,6 +41,7 @@ DrivingDirectionMode = {
 ---@field forceNodes boolean
 ---@field ignoreAreaMaterial boolean
 ---@field ignoreAreaGroundTextures boolean
+---@field updateCollisions boolean
 MachineState = {}
 
 MachineState.SEND_NUM_BITS_DIRECTION_MODE = 3
@@ -84,6 +85,7 @@ function MachineState.registerSavegameXMLPaths(schema, key)
     schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
     schema:register(XMLValueType.BOOL, key .. '#ignoreAreaMaterial')
     schema:register(XMLValueType.BOOL, key .. '#ignoreAreaGroundTextures')
+    schema:register(XMLValueType.BOOL, key .. '#updateCollisions')
 end
 
 ---@return MachineState
@@ -126,6 +128,7 @@ function MachineState.new()
     self.forceNodes = false
     self.ignoreAreaMaterial = false
     self.ignoreAreaGroundTextures = false
+    self.updateCollisions = true
 
     return self
 end
@@ -195,6 +198,7 @@ function MachineState:saveToXMLFile(xmlFile, key)
 
     xmlFile:setValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
     xmlFile:setValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
+    xmlFile:setValue(key .. '#updateCollisions', self.updateCollisions)
 end
 
 ---@param xmlFile XMLFile
@@ -235,6 +239,7 @@ function MachineState:loadFromXMLFile(xmlFile, key)
 
     self.ignoreAreaMaterial = xmlFile:getValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
     self.ignoreAreaGroundTextures = xmlFile:getValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
+    self.updateCollisions = xmlFile:getValue(key .. '#updateCollisions', self.updateCollisions)
 end
 
 ---@return MachineState
@@ -277,6 +282,7 @@ function MachineState:clone()
 
     clone.ignoreAreaMaterial = self.ignoreAreaMaterial
     clone.ignoreAreaGroundTextures = self.ignoreAreaGroundTextures
+    clone.updateCollisions = self.updateCollisions
 
     return clone
 end
@@ -319,6 +325,8 @@ function MachineState:writeStream(streamId, connection)
 
     streamWriteBool(streamId, self.ignoreAreaMaterial)
     streamWriteBool(streamId, self.ignoreAreaGroundTextures)
+
+    streamWriteBool(streamId, self.updateCollisions)
 end
 
 ---@param streamId number
@@ -359,4 +367,6 @@ function MachineState:readStream(streamId, connection)
 
     self.ignoreAreaMaterial = streamReadBool(streamId)
     self.ignoreAreaGroundTextures = streamReadBool(streamId)
+
+    self.updateCollisions = streamReadBool(streamId)
 end

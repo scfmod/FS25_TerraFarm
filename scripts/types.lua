@@ -32,6 +32,7 @@
 ---@field isExternal boolean
 ---@field xmlFilenameConfig string? -- Only used if isExternal is true
 ---@field state MachineState
+---@field collisionNodes? number[]
 ---@field landscapingAreaId? string
 ---@field inputTerrainLayerId number
 ---@field outputTerrainLayerId number

@@ -191,6 +191,26 @@ function MachineUtils.loadMachineModesFromXML(xmlFile, key)
     return modes
 end
 
+---@param xmlFile XMLFile
+---@param key string
+---@param vehicle Vehicle
+---@return number[]?
+function MachineUtils.loadUpdateCollisionNodesFromXML(xmlFile, key, vehicle)
+    local nodes = {}
+
+    xmlFile:iterate(key, function (_, itemKey)
+        local node = xmlFile:getValue(itemKey .. '#node', nil, vehicle.components, vehicle.i3dMappings)
+
+        if node ~= nil then
+            table.insert(nodes, node)
+        end
+    end)
+
+    if #nodes > 0 then
+        return nodes
+    end
+end
+
 ---@param sVehicle Vehicle
 ---@param tVehicle Vehicle
 ---@return number
