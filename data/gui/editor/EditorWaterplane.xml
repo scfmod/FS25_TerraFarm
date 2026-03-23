@@ -50,6 +50,8 @@
 
     <GuiElement profile="tfEditor_helpDisplay" id="helpDisplay" />
 
+    <Text profile="tfEditor_positionText" id="positionText" />
+
     <GuiProfiles>
     </GuiProfiles>
 </GUI>
