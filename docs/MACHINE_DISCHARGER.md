@@ -6,6 +6,7 @@ Suitable for generic vehicles with discharge only such as trailers and trucks.
 - [Machine](#machine)
 - [Work area](#work-area)
 - [State object changes](#state-object-changes)
+- [Collision handling](#collision-handling)
 
 ## Prerequisites
 
@@ -82,3 +83,23 @@ Apply state object changes whether machine is active or not.
     </machine>
 </vehicle>
 ```
+
+## Collision handling
+
+Automatic collision handling for machines. When machine is active the given nodes are scaled to 0 in all axes, and when the machine is inactive the nodes are scaled back to 1 in all axes.
+
+```xml
+<vehicle>
+    <machine type="discharger">
+        ...
+        <updateCollisionNodes>
+            <updateNode node="collisionGroup" />
+            ...
+        </updateCollisionNodes>
+    </machine>
+</vehicle>
+```
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| node | node | Yes      |         | Vehicle node |

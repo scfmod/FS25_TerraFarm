@@ -10,6 +10,7 @@ Suitable for vehicle with fixed levelers and attachable levelers.
 - [Animations](#animations)
 - [Sounds](#sounds)
 - [State object changes](#state-object-changes)
+- [Collision handling](#collision-handling)
 
 ## Prerequisites
 
@@ -182,3 +183,23 @@ Apply state object changes whether machine is active or not.
     </machine>
 </vehicle>
 ```
+
+## Collision handling
+
+Automatic collision handling for machines. When machine is active the given nodes are scaled to 0 in all axes, and when the machine is inactive the nodes are scaled back to 1 in all axes.
+
+```xml
+<vehicle>
+    <machine type="leveler">
+        ...
+        <updateCollisionNodes>
+            <updateNode node="collisionGroup" />
+            ...
+        </updateCollisionNodes>
+    </machine>
+</vehicle>
+```
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| node | node | Yes      |         | Vehicle node |
