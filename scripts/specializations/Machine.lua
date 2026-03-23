@@ -57,6 +57,7 @@ Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE = g_i18n:getText('ui_changeD
 Machine.L10N_ACTION_GLOBAL_SETTINGS = g_i18n:getText('ui_globalSettings')
 Machine.L10N_ACTION_TOGGLE_HUD = g_i18n:getText('ui_toggleHud')
 Machine.L10N_ACTION_SELECT_AREA = g_i18n:getText('input_MACHINE_SELECT_AREA')
+Machine.L10N_ACTION_TOGGLE_GLOBAL_BORDER = g_i18n:getText('input_MACHINE_GLOBAL_TOGGLE_BORDER')
 
 Machine.ACTION_TOGGLE_ACTIVE = 'MACHINE_TOGGLE_ACTIVE'
 Machine.ACTION_TOGGLE_INPUT = 'MACHINE_TOGGLE_INPUT'
@@ -68,6 +69,7 @@ Machine.ACTION_SELECT_DISCHARGE_TEXTURE = 'MACHINE_SELECT_DISCHARGE_TEXTURE'
 Machine.ACTION_GLOBAL_SETTINGS = 'MACHINE_GLOBAL_SETTINGS'
 Machine.ACTION_TOGGLE_HUD = 'MACHINE_TOGGLE_HUD'
 Machine.ACTION_SELECT_AREA = 'MACHINE_SELECT_AREA'
+Machine.ACTION_GLOBAL_TOGGLE_BORDER = 'MACHINE_GLOBAL_TOGGLE_BORDER'
 
 ---@type table<MachineMode, string>
 Machine.MODE_ICON_SLICE_ID = {
@@ -1395,6 +1397,15 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
         end
 
+        action = InputAction[Machine.ACTION_GLOBAL_TOGGLE_BORDER]
+
+        if action ~= nil then
+            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventToggleGlobalBorder, false, true, false, true)
+
+            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_TOGGLE_GLOBAL_BORDER)
+            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+        end
+
         Machine.updateActionEvents(self)
     end
 end
@@ -1512,6 +1523,10 @@ function Machine:actionEventToggleHUD()
     g_modHud.display:setVisible(not g_modHud.display.isVisible, true)
 
     g_modSettings:saveUserSettings()
+end
+
+function Machine:actionEventToggleGlobalBorder()
+    g_landscapingManager:setAreaBordersVisible(not g_landscapingManager.areaBordersVisible)
 end
 
 function Machine:actionEventToggleActive()

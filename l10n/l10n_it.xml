@@ -201,5 +201,7 @@
 
         <text name="ui_stateUpdateCollisions" text="Update vehicle collisions" />
         <text name="ui_stateUpdateCollisionsTooltip" text="Toggle vehicle collisions when active/inactive" />
+
+        <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Toggle global area borders visibility" />
     </texts>
 </l10n>

@@ -45,6 +45,7 @@
         <action name="MACHINE_GLOBAL_SETTINGS" />
         <action name="MACHINE_TOGGLE_HUD" />
         <action name="MACHINE_SELECT_AREA" />
+        <action name="MACHINE_GLOBAL_TOGGLE_BORDER" />
 
         <action name="AREA_EDITOR_MENU_PREV" locked="true" />
         <action name="AREA_EDITOR_MENU_NEXT" locked="true" />
@@ -127,5 +128,6 @@
         <actionBinding action="MACHINE_TOGGLE_HUD">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_4" index="1" />
         </actionBinding>
+        <actionBinding action="MACHINE_GLOBAL_TOGGLE_BORDER" />
     </inputBinding>
 </modDesc>
