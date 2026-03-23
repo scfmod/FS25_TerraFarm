@@ -82,6 +82,13 @@
                     <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_settingsAdvanced" />
                 </GuiElement>
 
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="updateCollisionsOptionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateUpdateCollisions" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateUpdateCollisionsTooltip" />
+
+                    <BinaryOption id="updateCollisionsOption" name="updateCollisions" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
                 <Bitmap profile="tfMenuFrame_optionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateAllowGradingUp" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateAllowGradingUpTooltip" />

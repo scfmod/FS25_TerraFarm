@@ -2,7 +2,10 @@
 <vehicle>
     <machine type="shovel">
         <input modes="FLATTEN SMOOTH LOWER PAINT" />
-
         <workArea offset="0 -0.15 0.5" />
+
+        <updateCollisionNodes>
+            <updateNode node="0>0|1|0|7" />
+        </updateCollisionNodes>
     </machine>
 </vehicle>

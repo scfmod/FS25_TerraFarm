@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <vehicle>
     <machine type="shovel">
-        <workArea offset="0 -0.15 0.45" />
         <input modes="FLATTEN SMOOTH LOWER PAINT" />
+        <workArea offset="0 -0.15 0.45" />
+
+        <updateCollisionNodes>
+            <updateNode node="0>1" />
+            <updateNode node="0>2" />
+        </updateCollisionNodes>
     </machine>
 </vehicle>
