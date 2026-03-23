@@ -106,6 +106,7 @@ function EditorWaterplane:setMode(mode)
     setVisibility(self.planeRootNode, self.mode == EditorAreaPolygon.MODE.NONE)
     self:registerMenuActionEvents(self.mode == EditorAreaPolygon.MODE.NONE)
     self:updatePanels()
+    self:updatePositionText()
 end
 
 function EditorWaterplane:addPoint()
@@ -234,6 +235,7 @@ end
 ---@param value number
 function EditorWaterplane:setTargetY(value)
     self.waterplane.targetY = value
+    self:updatePositionText()
 end
 
 ---@param value string
