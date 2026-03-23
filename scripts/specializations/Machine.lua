@@ -129,6 +129,8 @@ function Machine.registerXMLPaths(schema, key)
     EffectManager.registerEffectXMLPaths(schema, key .. '.effects')
     AnimationManager.registerAnimationNodesXMLPaths(schema, key .. '.effectAnimations')
 
+    schema:register(XMLValueType.NODE_INDEX, key .. '.updateCollisionNodes.updateNode(?)#node')
+
     schema:setXMLSpecializationType()
 end
 
@@ -305,6 +307,7 @@ function Machine:onLoad()
     spec.inputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
     spec.outputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
     spec.fillTypeIndex = g_landscapingManager:getDefaultFillTypeIndex()
+    spec.collisionNodes = MachineUtils.loadUpdateCollisionNodesFromXML(xmlFile, 'vehicle.machine.updateCollisionNodes.updateNode', self)
 
     spec.hasAttachable = SpecializationUtil.hasSpecialization(Attachable, self.specializations)
     spec.hasDischargeable = SpecializationUtil.hasSpecialization(Dischargeable, self.specializations)
@@ -681,6 +684,8 @@ function Machine:setMachineActive(active, noEventSend)
             ObjectChangeUtil.setObjectChanges(spec.stateObjectChanges, active)
         end
 
+        Machine.updateCollisionNodes(self)
+
         self:requestActionEventUpdate()
 
         g_messageCenter:publish(SetMachineActiveEvent, self, active)
@@ -693,6 +698,22 @@ function Machine:getMachineActive()
     return self.spec_machine.active
 end
 
+function Machine:updateCollisionNodes()
+    local spec = self.spec_machine
+
+    if spec.collisionNodes ~= nil then
+        local scale = spec.active and 0 or 1
+
+        if not spec.state.updateCollisions then
+            scale = 1
+        end
+
+        for _, node in ipairs(spec.collisionNodes) do
+            setScale(node, scale, scale, scale)
+        end
+    end
+end
+
 function Machine:setMachineState(state, noEventSend)
     local spec = self.spec_machine
 
@@ -700,6 +721,8 @@ function Machine:setMachineState(state, noEventSend)
         SetMachineStateEvent.sendEvent(self, state, noEventSend)
 
         spec.state = state
+
+        Machine.updateCollisionNodes(self)
 
         g_messageCenter:publish(SetMachineStateEvent, self, state)
     end
@@ -1230,6 +1253,8 @@ function Machine:onReadStream(streamId, connection)
         end
 
         spec.state:readStream(streamId, connection)
+
+        Machine.updateCollisionNodes(self)
     end
 end
 
