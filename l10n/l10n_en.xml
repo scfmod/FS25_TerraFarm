@@ -197,5 +197,8 @@
         <text name="ui_ignoreAreaMaterialTooltip" text="" />
         <text name="ui_ignoreAreaGroundTextures" text="Ignore texture settings" />
         <text name="ui_ignoreAreaGroundTexturesTooltip" text="" />
+
+        <text name="ui_stateUpdateCollisions" text="Update vehicle collisions" />
+        <text name="ui_stateUpdateCollisionsTooltip" text="Toggle vehicle collisions when active/inactive" />
     </texts>
 </l10n>
