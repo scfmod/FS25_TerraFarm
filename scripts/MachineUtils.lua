@@ -47,34 +47,6 @@ function MachineUtils.getActiveVehicle(targetVehicle)
     return nil
 end
 
----@param targetVehicle Machine
----@return Machine[]
----@nodiscard
-function MachineUtils.getAvailableVehicles(targetVehicle)
-    ---@type Machine[]
-    local result = {}
-
-    ---@type Machine
-    ---@diagnostic disable-next-line: assign-type-mismatch
-    local rootVehicle = targetVehicle:findRootVehicle()
-
-    if rootVehicle.spec_machine ~= nil then
-        table.insert(result, targetVehicle)
-    end
-
-    ---@type Machine[]
-    local childVehicles = rootVehicle:getChildVehicles()
-
-    for _, vehicle in ipairs(childVehicles) do
-        if vehicle.spec_machine ~= nil then
-            table.insert(result, vehicle)
-        end
-    end
-
-
-    return result
-end
-
 ---@param vehicle Machine
 ---@return number
 ---@nodiscard
@@ -89,24 +61,6 @@ function MachineUtils.getVehicleTargetHeight(vehicle)
     local x, _, z = getWorldTranslation(vehicle.rootNode)
 
     return getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
-end
-
----@return number worldPosX
----@return number worldPosY
----@return number worldPosZ
----@return number terrainHeight
-function MachineUtils.getVehicleTargetWorldTerrainPosition(vehicle)
-    local spec = vehicle.spec_machine
-
-    if spec.hasAttachable then
-        ---@diagnostic disable-next-line: cast-local-type
-        vehicle = vehicle:findRootVehicle()
-    end
-
-    local x, y, z = getWorldTranslation(vehicle.rootNode)
-    local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
-
-    return x, y, z, terrainHeight
 end
 
 ---@param vehicle Vehicle
@@ -149,22 +103,6 @@ function MachineUtils.getStoreItemModFilename(storeItem)
             return storeItem.xmlFilename:sub(g_modsDirectory:len() + 1)
         end
     end
-end
-
----@param vehicle Vehicle
----@param defaultText string?
----@return string
----@nodiscard
-function MachineUtils.getVehicleFarmName(vehicle, defaultText)
-    if vehicle ~= nil then
-        local farm = g_farmManager:getFarmById(vehicle:getOwnerFarmId())
-
-        if farm ~= nil then
-            return farm.name
-        end
-    end
-
-    return defaultText or 'Unknown'
 end
 
 ---@param xmlFile XMLFile
@@ -220,17 +158,6 @@ function MachineUtils.getVehiclesDistance(sVehicle, tVehicle)
     local tx, ty, tz = getWorldTranslation(tVehicle.rootNode)
 
     return ModUtils.getPointsDistance(sx, sy, sz, tx, ty, tz)
-end
-
----@param vehicle Vehicle
----@return number worldPosX
----@return number worldPosY
----@return number worldPosZ
-function MachineUtils.getVehicleTerrainHeight(vehicle)
-    local worldPosX, _, worldPosZ = getWorldTranslation(vehicle.rootNode)
-    local worldPosY = LandscapingUtils.getTerrainHeightAt(worldPosX, worldPosZ)
-
-    return worldPosX, worldPosY, worldPosZ
 end
 
 ---@param vehicle Machine

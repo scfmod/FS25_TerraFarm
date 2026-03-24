@@ -185,30 +185,6 @@ function ModUtils.readCompressedXYZPos(streamId)
     return x, y, z
 end
 
----@param streamId number
----@param worldPosX number
----@param worldPosY number
----@param worldPosZ number
-function ModUtils.writeCompressedPosition(streamId, worldPosX, worldPosY, worldPosZ)
-    if streamWriteBool(streamId, worldPosY ~= math.huge) then
-        ModUtils.writeCompressedXYZPos(streamId, worldPosX, worldPosY, worldPosZ)
-    end
-end
-
----@param streamId number
----@return number worldPosX
----@return number worldPosY
----@return number worldPosZ
-function ModUtils.readCompressedPosition(streamId)
-    local x, y, z = 0, math.huge, 0
-
-    if streamReadBool(streamId) then
-        x, y, z = ModUtils.readCompressedXYZPos(streamId)
-    end
-
-    return x, y, z
-end
-
 ---@param x1 number
 ---@param y1 number
 ---@param z1 number

@@ -348,30 +348,6 @@ function LandscapingUtils.getIsPointInsidePolygon(px, pz, points)
     return (count % 2 == 1)
 end
 
----@param sx number
----@param sy number
----@param sz number
----@param ex number
----@param ey number
----@param ez number
----@return number
----@nodiscard
-function LandscapingUtils.getAngleBetweenPoints(sx, sy, sz, ex, ey, ez)
-    if sy ~= math.huge and ey ~= math.huge then
-        local dy = ey - sy
-        if dy ~= 0 then
-            local dx = ex - sx
-            local dz = ez - sz
-            local adjSq = dx * dx + dz * dz
-            if adjSq ~= 0 then
-                return math.deg(math.atan2(dy, math.sqrt(adjSq)))
-            end
-        end
-    end
-
-    return 0
-end
-
 ---@param node number
 function LandscapingUtils.updateAreaBorderShaderNode(node)
     local borderIntensity = g_landscapingManager.borderIntensity
