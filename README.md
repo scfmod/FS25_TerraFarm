@@ -6,6 +6,14 @@ Tired of using the landscaping tool to carve out your land? Not satisfied with u
 
 # TerraFarm
 
+## Video - Mod update 1.3.0.0 and newer versions
+
+[![Argsy Gaming - Mastering TERRAFARM](https://img.youtube.com/vi/RNowvimnJOs/0.jpg)](https://www.youtube.com/watch?v=RNowvimnJOs)
+
+Surveyor was removed in version 1.3.0.0 and is now replaced with Landscaping area feature. [Argsy Gaming](https://www.youtube.com/@ArgsyGaming) has released a video covering the new features in TerraFarm. [Click here to watch the video](https://www.youtube.com/watch?v=RNowvimnJOs) or click on the image.
+
+---
+
 ```
 author: scfmod
 url:    https://github.com/scfmod/FS25_TerraFarm
