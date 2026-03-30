@@ -167,7 +167,7 @@ end
 
 function ResourceManager:onInitTerrain()
     if g_server ~= nil then
-        local xmlFile = ModUtils.loadMapDirectoryXMLFile('mapGroundResources', 'mapGroundResources.xml')
+        local xmlFile = ModUtils.loadMapDirectoryXMLFile('mapGroundResources', 'mapGroundResources.xml', ResourceManager.xmlSchema)
 
         if xmlFile ~= nil then
             if xmlFile:hasProperty('groundResources.layers(0)') then
