@@ -141,7 +141,7 @@ function MachineManager:loadConfigurationsFromXMLFile(xmlFilename, modEnv)
                     self:registerConfiguration(modXMLFilename, vehicleFile)
                     numEntries = numEntries + 1
                 else
-                    Logging.xmlWarning(xmlFile, 'MachineManager:loadConfigurationsFromXMLFile() Machine configuration file not found')
+                    Logging.xmlWarning(xmlFile, 'Machine configuration entry file not found: "%s"', modXMLFilename)
                 end
             end
         end
