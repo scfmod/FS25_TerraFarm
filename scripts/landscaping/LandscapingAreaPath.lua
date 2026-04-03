@@ -1,5 +1,5 @@
 ---@class LandscapingAreaPath : LandscapingArea
----@field points number[]
+---@field points number[][]
 ---@field width number
 ---@field superClass fun(): LandscapingArea
 LandscapingAreaPath = {}
