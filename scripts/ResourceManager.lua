@@ -19,10 +19,6 @@
 ---@field numChannels number
 ---@field width number
 ---@field height number
----
----@field terrainLayers TerrainLayer[]
----@field nameToTerrainLayer table<string, TerrainLayer>
----@field idToTerrainLayer table<number, TerrainLayer>
 ResourceManager = {}
 
 ResourceManager.xmlSchema = (function ()
@@ -56,10 +52,6 @@ function ResourceManager.new()
     self.numChannels = 0
     self.width = 0
     self.height = 0
-
-    self.terrainLayers = {}
-    self.nameToTerrainLayer = {}
-    self.idToTerrainLayer = {}
 
     g_modController:subscribe(ModEvent.onTerrainInit, self.onInitTerrain, self)
     g_modController:subscribe(ModEvent.onSendInitialClientState, self.onSendInitialClientState, self)
@@ -104,10 +96,10 @@ end
 ---@nodiscard
 function ResourceManager:getResourcePaintLayerId(layer, isOutput)
     if isOutput then
-        return self.nameToTerrainLayer[layer.layerOutputName].id
+        return g_landscapingManager.nameToTerrainLayer[layer.layerOutputName].id
     end
 
-    return self.nameToTerrainLayer[layer.layerInputName].id
+    return g_landscapingManager.nameToTerrainLayer[layer.layerInputName].id
 end
 
 ---@param worldPosX number
