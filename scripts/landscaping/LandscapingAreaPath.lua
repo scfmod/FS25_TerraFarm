@@ -426,16 +426,18 @@ end
 ---@return boolean
 ---@nodiscard
 function LandscapingAreaPath:saveToXMLFile(xmlFile, key)
-    self:superClass().saveToXMLFile(self, xmlFile, key)
+    if self:superClass().saveToXMLFile(self, xmlFile, key) then
+        xmlFile:setValue(key .. '#width', self.width)
 
-    xmlFile:setValue(key .. '#width', self.width)
+        for i, point in ipairs(self.points) do
+            local itemKey = string.format('%s.points.point(%i)', key, i - 1)
+            xmlFile:setValue(itemKey .. '#position', point[1], point[2], point[3])
+        end
 
-    for i, point in ipairs(self.points) do
-        local itemKey = string.format('%s.points.point(%i)', key, i - 1)
-        xmlFile:setValue(itemKey .. '#position', point[1], point[2], point[3])
+        return true
     end
 
-    return true
+    return false
 end
 
 ---@param streamId number

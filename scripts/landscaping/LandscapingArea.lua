@@ -106,10 +106,15 @@ end
 
 ---@param xmlFile XMLFile
 ---@param key string
+---@return boolean
+---@nodiscard
 function LandscapingArea:saveToXMLFile(xmlFile, key)
-    if self.uniqueId ~= nil then
-        xmlFile:setValue(key .. '#uniqueId', self.uniqueId)
+    if self.uniqueId == nil then
+        Logging.error('LandscapingArea:saveToXMLFile() uniqueId is nil')
+        return false
     end
+
+    xmlFile:setValue(key .. '#uniqueId', self.uniqueId)
     xmlFile:setValue(key .. '#className', self.className)
     xmlFile:setValue(key .. '#name', self.name)
     xmlFile:setValue(key .. '#restrictArea', self.restrictArea)
@@ -139,6 +144,8 @@ function LandscapingArea:saveToXMLFile(xmlFile, key)
             xmlFile:setValue(key .. '#forceOutputLayer', layerName)
         end
     end
+
+    return true
 end
 
 ---@return string

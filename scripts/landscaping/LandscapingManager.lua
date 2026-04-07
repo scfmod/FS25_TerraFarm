@@ -586,9 +586,9 @@ function LandscapingManager:saveAreasToXML()
         for _, area in pairs(self.areas) do
             local key = string.format('areas.landscaping.area(%i)', i)
 
-            area:saveToXMLFile(xmlFile, key)
-
-            i = i + 1
+            if area:saveToXMLFile(xmlFile, key) then
+                i = i + 1
+            end
         end
 
         i = 0
@@ -596,9 +596,9 @@ function LandscapingManager:saveAreasToXML()
         for _, waterplane in pairs(self.waterplanes) do
             local key = string.format('areas.waterplanes.area(%i)', i)
 
-            local _ = waterplane:saveToXMLFile(xmlFile, key)
-
-            i = i + 1
+            if waterplane:saveToXMLFile(xmlFile, key) then
+                i = i + 1
+            end
         end
 
         xmlFile:save()

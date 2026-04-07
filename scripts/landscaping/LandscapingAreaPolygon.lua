@@ -154,21 +154,23 @@ end
 ---@return boolean
 ---@nodiscard
 function LandscapingAreaPolygon:saveToXMLFile(xmlFile, key)
-    self:superClass().saveToXMLFile(self, xmlFile, key)
+    if self:superClass().saveToXMLFile(self, xmlFile, key) then
+        if self.targetY == math.huge then
+            Logging.error('LandscapingAreaPolygon:saveToXMLFile() Invalid targetY value')
+            return false
+        end
 
-    if self.targetY == math.huge then
-        Logging.error('LandscapingAreaPolygon:saveToXMLFile() Invalid targetY value')
-        return false
+        xmlFile:setValue(key .. '#targetY', self.targetY)
+
+        for i, point in ipairs(self.points) do
+            local itemKey = string.format('%s.points.point(%i)', key, i - 1)
+            xmlFile:setValue(itemKey .. '#position', point[1], 0, point[3])
+        end
+
+        return true
     end
 
-    xmlFile:setValue(key .. '#targetY', self.targetY)
-
-    for i, point in ipairs(self.points) do
-        local itemKey = string.format('%s.points.point(%i)', key, i - 1)
-        xmlFile:setValue(itemKey .. '#position', point[1], 0, point[3])
-    end
-
-    return true
+    return false
 end
 
 ---@param streamId number
