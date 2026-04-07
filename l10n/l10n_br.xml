@@ -176,11 +176,12 @@
         <text name="ui_setHidden" text="Set hidden" />
         <text name="ui_notSet" text="Not set" />
         <text name="ui_edit" text="Edit" />
+        <text name="ui_activeOnly" text="Active only" />
         <text name="ui_editorConfirmCloseText" text="Do you want to close editor? Unsaved changed will be discarded" />
         <text name="ui_areaConfirmDeleteText" text="Do you want to delete the landscaping area?" />
         <text name="ui_waterplaneConfirmDeleteText" text="Do you want to delete the water plane?" />
 
-        <text name="ui_enableAreaBorders" text="Show area borders" />
+        <text name="ui_areaBorderVisibility" text="Area border visibility" />
         <text name="ui_areaBorderMode" text="Area border mode" />
         <text name="ui_areaBorderModeNormal" text="Normal" />
         <text name="ui_areaBorderModeDecal" text="Decal" />

@@ -188,11 +188,12 @@
         <text name="ui_setHidden" text="Imposta come nascosto" />
         <text name="ui_notSet" text="Non impostato" />
         <text name="ui_edit" text="Modificare" />
+        <text name="ui_activeOnly" text="Active only" />
         <text name="ui_editorConfirmCloseText" text="Vuoi chiudere l'editor? Le modifiche non salvate verranno scartate." />
         <text name="ui_areaConfirmDeleteText" text="Desideri eliminare l'area di progettazione?" />
         <text name="ui_waterplaneConfirmDeleteText" text="Vuoi eliminare il piano d'acqua?" />
 
-        <text name="ui_enableAreaBorders" text="Mostra i confini dell'area" />
+        <text name="ui_areaBorderVisibility" text="Area border visibility" />
         <text name="ui_areaBorderMode" text="Modalita' confine area" />
         <text name="ui_areaBorderModeNormal" text="Normale" />
         <text name="ui_areaBorderModeDecal" text="Decal" />
