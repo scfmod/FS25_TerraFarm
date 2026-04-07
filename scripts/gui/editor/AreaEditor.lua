@@ -131,6 +131,7 @@ end
 
 function AreaEditor:updateData()
     self.iconOptionElement:setState(self.area.icon)
+    self.colorOptionElement:setState(self.area.color)
     self.restrictOptionElement:setIsChecked(self.area.restrictArea, true)
 
     self:updateFillTypeInput(self.area.forceFillTypeIndex, self.materialImageElement, self.materialTextElement, self.materialResetButtonElement)
