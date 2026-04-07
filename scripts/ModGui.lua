@@ -296,6 +296,10 @@ end
 
 function ModGui:onMapLoaded()
     if g_client ~= nil then
+        if g_currentMission.missionDynamicInfo.isMultiplayer then
+            g_inGameMenu.pagingTabList.listItemAlignment = SmoothListElement.ALIGN_START
+        end
+
         self:loadFrames()
     end
 end
