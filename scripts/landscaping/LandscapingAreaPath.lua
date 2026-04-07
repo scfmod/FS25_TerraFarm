@@ -1,7 +1,7 @@
 ---@class LandscapingAreaPath : LandscapingArea
----@field points number[][]
----@field width number
 ---@field superClass fun(): LandscapingArea
+---@field width number
+---@field points number[][]
 LandscapingAreaPath = {}
 LandscapingAreaPath.CLASS_NAME = 'LandscapingAreaPath'
 LandscapingAreaPath.TYPE_NAME = g_i18n:getText('ui_areaPath')
@@ -259,8 +259,6 @@ function LandscapingAreaPath:buildParallelLines()
     local sqrt = math.sqrt
     local abs = math.abs
 
-    local segTx = table.create(numPoints - 1, 0)
-    local segTz = table.create(numPoints - 1, 0)
     local segNx = table.create(numPoints - 1, 0)
     local segNz = table.create(numPoints - 1, 0)
 
@@ -274,13 +272,12 @@ function LandscapingAreaPath:buildParallelLines()
         local L = dx * dx + dz * dz
         if L > EPS then
             L = sqrt(L)
-            dx /= L; dz /= L
+            dx /= L
+            dz /= L
         else
             dx, dz = 0, 0
         end
 
-        segTx[i] = dx
-        segTz[i] = dz
         segNx[i] = -dz
         segNz[i] = dx
     end
@@ -316,7 +313,8 @@ function LandscapingAreaPath:buildParallelLines()
                 offZ[i] = n1z * half
             else
                 mlen = sqrt(mlen)
-                mx /= mlen; mz /= mlen
+                mx /= mlen
+                mz /= mlen
 
                 local dot_m_n1 = mx * n1x + mz * n1z
                 if abs(dot_m_n1) < EPS then
@@ -425,6 +423,8 @@ end
 
 ---@param xmlFile XMLFile
 ---@param key string
+---@return boolean
+---@nodiscard
 function LandscapingAreaPath:saveToXMLFile(xmlFile, key)
     self:superClass().saveToXMLFile(self, xmlFile, key)
 
@@ -434,6 +434,8 @@ function LandscapingAreaPath:saveToXMLFile(xmlFile, key)
         local itemKey = string.format('%s.points.point(%i)', key, i - 1)
         xmlFile:setValue(itemKey .. '#position', point[1], point[2], point[3])
     end
+
+    return true
 end
 
 ---@param streamId number

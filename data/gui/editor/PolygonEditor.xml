@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <Bitmap profile="ingameEditor_menu" id="menuElement">
+        <BoxLayout profile="ingameEditor_menuHeader">
+            <Bitmap profile="ingameEditor_menuHeaderIconPolygon" />
+            <Text profile="ingameEditor_menuHeaderText" text="$l10n_ui_areaPolygon" />
+        </BoxLayout>
+
+        <BoxLayout profile="ingameEditor_controlPanel" id="controlPanelElement">
+            <Button profile="ingameEditor_controlPanelButton" id="saveButtonElement" onClick="onClickSave" text="$l10n_ui_editorSaveChanges" />
+            <Button profile="ingameEditor_controlPanelButton" id="moveButtonElement" onClick="onClickMove" text="$l10n_ui_moveArea" />
+            <Button profile="ingameEditor_controlPanelButton" id="exitButtonElement" onClick="onInputEventBack" text="$l10n_ui_exit" />
+        </BoxLayout>
+
+        <BoxLayout profile="ingameEditor_dataPanel" id="dataPanelElement">
+            <Bitmap profile="ingameEditor_dataPanelItem">
+                <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_ui_name" />
+                <TextInput focusOnHighlight="true" onEnterPressed="onTextInputPressed" onEscPressed="onTextInputPressed" id="nameInputElement" profile="ingameEditor_textInputName">
+                    <Bitmap profile="ingameEditor_textInputBg" />
+                    <Bitmap profile="fs25_textInputIconBox">
+                        <Bitmap profile="fs25_textInputIcon" />
+                    </Bitmap>
+                </TextInput>
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItem">
+                <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_ui_icon" />
+                <TFIconOption id="iconOptionElement" onClick="onPressedOption" profile="ingameEditor_dataPanelItemIconOption">
+                    <Bitmap name="icon" profile="ingameEditor_dataPanelItemIconOptionImage" />
+                </TFIconOption>
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItem">
+                <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_ui_restrictArea" />
+                <BinaryOption profile="ingameEditor_binaryOption" onClick="onPressedOption" id="restrictOptionElement" />
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItem">
+                <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_ui_targetHeight" />
+                <TextInput focusOnHighlight="true" onEnterPressed="onTextInputPressed" onEscPressed="onTextInputPressed" id="targetInputElement" profile="ingameEditor_textInput">
+                    <Bitmap profile="ingameEditor_textInputBg" />
+                    <Bitmap profile="fs25_textInputIconBox">
+                        <Bitmap profile="fs25_textInputIcon" />
+                    </Bitmap>
+                </TextInput>
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItemLg">
+                <Text profile="ingameEditor_dataPanelItemLgTitle" text="$l10n_ui_material" />
+                <Text profile="ingameEditor_dataPanelItemLgText" text="..." id="materialTextElement" />
+                <GuiElement profile="ingameEditor_dataPanelItemLgImageWrapper">
+                    <Bitmap profile="ingameEditor_dataPanelItemLgImage" id="materialImageElement" />
+                </GuiElement>
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" onClick="onPressedDataButton" id="materialButtonElement" />
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSliceId="gui.crossSmall" name="fillType" onClick="onPressedDataResetButton" id="materialResetButtonElement" />
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItemLg">
+                <Text profile="ingameEditor_dataPanelItemLgTitle" text="$l10n_ui_texture" />
+                <Text profile="ingameEditor_dataPanelItemLgText" text="..." id="inputLayerTextElement" />
+                <GuiElement profile="ingameEditor_dataPanelItemLgImageWrapper">
+                    <TerrainLayer profile="ingameEditor_dataPanelItemLgImage" id="inputLayerImageElement" />
+                </GuiElement>
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" onClick="onPressedDataButton" id="inputLayerButtonElement" />
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSliceId="gui.crossSmall" name="inputTerrainLayer" onClick="onPressedDataResetButton" id="inputLayerResetButtonElement" />
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItemLg">
+                <Text profile="ingameEditor_dataPanelItemLgTitle" text="$l10n_ui_dischargeTexture" />
+                <Text profile="ingameEditor_dataPanelItemLgText" text="..." id="outputLayerTextElement" />
+                <GuiElement profile="ingameEditor_dataPanelItemLgImageWrapper">
+                    <TerrainLayer profile="ingameEditor_dataPanelItemLgImage" id="outputLayerImageElement" />
+                </GuiElement>
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSize="32px 32px" iconSliceId="terraFarm.icon_list" position="-72px 0" onClick="onPressedDataButton" id="outputLayerButtonElement" />
+                <Button profile="ingameEditor_dataPanelItemIconButton" iconSliceId="gui.crossSmall" name="outputTerrainLayer" onClick="onPressedDataResetButton" id="outputLayerResetButtonElement" />
+            </Bitmap>
+        </BoxLayout>
+
+        <BoxLayout profile="ingameEditor_positionPanel" id="positionPanelElement">
+            <Text profile="ingameEditor_optionPanelSectionTitle" text="$l10n_ui_point" />
+
+            <BoxLayout profile="ingameEditor_optionPanelItem" height="48px">
+                <Button profile="ingameEditor_optionPanelButtonArrow" name="left" onClick="onClickMoveSelectedPoint" iconRotation="180" />
+                <Button profile="ingameEditor_optionPanelButtonAxis" id="setPointPositionButton" onClick="onClickSetPointPosition" iconSize="32px 32px" />
+                <Button profile="ingameEditor_optionPanelButtonArrow" name="right" onClick="onClickMoveSelectedPoint" iconRotation="0" />
+            </BoxLayout>
+        </BoxLayout>
+
+        <BoxLayout profile="ingameEditor_optionPanel" id="optionPanelElement">
+            <Text profile="ingameEditor_optionPanelSectionTitle" text="$l10n_ui_segment" margin="0 36px 0 8px">
+                <Button profile="ingameEditor_optionPanelButtonHelp" onClick="onClickHelp" />
+            </Text>
+
+            <BoxLayout profile="ingameEditor_optionPanelItem">
+                <Button profile="ingameEditor_optionPanelButtonSplitSegment" id="splitSegmentButton" onClick="onClickSegmentSplit" />
+            </BoxLayout>
+
+            <BoxLayout profile="ingameEditor_optionPanelItem">
+                <Button profile="ingameEditor_optionPanelButtonRotateYCenterLeft" id="segmentRotationNegYButton" onClick="onClickSegmentRotationY" />
+                <Button profile="ingameEditor_optionPanelButtonRotateYCenterRight" id="segmentRotationPosYButton" onClick="onClickSegmentRotationY" />
+            </BoxLayout>
+        </BoxLayout>
+
+    </Bitmap>
+
+    <GuiElement profile="ingameEditor_helpDisplay" id="helpDisplayElement" />
+
+    <Text profile="ingameEditor_infoDisplayText" id="infoDisplayTextElement" text="" />
+
+    <Bitmap profile="ingameEditor_compassDisplay">
+        <Bitmap profile="ingameEditor_compassDisplayImage" id="compassImageElement" />
+        <Bitmap profile="ingameEditor_compassDisplayPoint" />
+    </Bitmap>
+</GUI>

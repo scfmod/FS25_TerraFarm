@@ -1,7 +1,7 @@
 ---@class LandscapingAreaPolygon : LandscapingArea
----@field targetY number
----@field points [number, number][]
 ---@field superClass fun(): LandscapingArea
+---@field targetY number
+---@field points number[][]
 LandscapingAreaPolygon = {}
 LandscapingAreaPolygon.CLASS_NAME = 'LandscapingAreaPolygon'
 LandscapingAreaPolygon.TYPE_NAME = g_i18n:getText('ui_areaPolygon')
@@ -98,8 +98,8 @@ function LandscapingAreaPolygon:getCameraFocusWorldPositionXZ()
     local area, cx, cy = 0, 0, 0
 
     for i = 1, numPoints do
-        local x1, y1 = points[i][1], points[i][2]
-        local x2, y2 = points[(i % numPoints) + 1][1], points[(i % numPoints) + 1][2]
+        local x1, y1 = points[i][1], points[i][3]
+        local x2, y2 = points[(i % numPoints) + 1][1], points[(i % numPoints) + 1][3]
         local cross = x1 * y2 - x2 * y1
         area += cross
         cx += (x1 + x2) * cross
@@ -111,7 +111,7 @@ function LandscapingAreaPolygon:getCameraFocusWorldPositionXZ()
         local ax, ay = 0, 0
         for i = 1, numPoints do
             ax += points[i][1]
-            ay += points[i][2]
+            ay += points[i][3]
         end
         return ax / numPoints, ay / numPoints
     end
@@ -126,14 +126,21 @@ end
 ---@nodiscard
 function LandscapingAreaPolygon:loadFromXMLFile(xmlFile, key)
     if self:superClass().loadFromXMLFile(self, xmlFile, key) then
-        self.targetY = xmlFile:getValue(key .. '#targetY', self.targetY)
+        self.targetY = xmlFile:getValue(key .. '#targetY')
+
+        if self.targetY == nil then
+            Logging.xmlError(xmlFile, 'LandscapingAreaPolygon:loadFromXMLFile() Invalid targetY value ("%s")', key .. '#targetY')
+            return false
+        end
 
         self.points = {}
+
+        local y = self.targetY
 
         for _, itemKey in xmlFile:iterator(key .. '.points.point') do
             local x, _, z = xmlFile:getValue(itemKey .. '#position')
 
-            table.insert(self.points, { x, z })
+            table.insert(self.points, { x, y, z })
         end
 
         return true
@@ -144,17 +151,24 @@ end
 
 ---@param xmlFile XMLFile
 ---@param key string
+---@return boolean
+---@nodiscard
 function LandscapingAreaPolygon:saveToXMLFile(xmlFile, key)
     self:superClass().saveToXMLFile(self, xmlFile, key)
 
-    if self.targetY ~= math.huge then
-        xmlFile:setValue(key .. '#targetY', self.targetY)
+    if self.targetY == math.huge then
+        Logging.error('LandscapingAreaPolygon:saveToXMLFile() Invalid targetY value')
+        return false
     end
+
+    xmlFile:setValue(key .. '#targetY', self.targetY)
 
     for i, point in ipairs(self.points) do
         local itemKey = string.format('%s.points.point(%i)', key, i - 1)
-        xmlFile:setValue(itemKey .. '#position', point[1], 0, point[2])
+        xmlFile:setValue(itemKey .. '#position', point[1], 0, point[3])
     end
+
+    return true
 end
 
 ---@param streamId number
@@ -162,14 +176,12 @@ end
 function LandscapingAreaPolygon:writeStream(streamId, connection)
     self:superClass().writeStream(self, streamId, connection)
 
-    if streamWriteBool(streamId, self.targetY ~= math.huge) then
-        streamWriteFloat32(streamId, self.targetY)
-    end
+    streamWriteFloat32(streamId, self.targetY)
 
     streamWriteUIntN(streamId, #self.points, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
 
     for _, point in ipairs(self.points) do
-        ModUtils.writeCompressedXYZPos(streamId, point[1], 0, point[2])
+        ModUtils.writeCompressedXYZPos(streamId, point[1], point[2], point[3])
     end
 end
 
@@ -178,17 +190,15 @@ end
 function LandscapingAreaPolygon:readStream(streamId, connection)
     self:superClass().readStream(self, streamId, connection)
 
-    if streamReadBool(streamId) then
-        self.targetY = streamReadFloat32(streamId)
-    end
+    self.targetY = streamReadFloat32(streamId)
 
     local numPoints = streamReadUIntN(streamId, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
 
     self.points = {}
 
     for _ = 1, numPoints do
-        local x, _, z = ModUtils.readCompressedXYZPos(streamId)
-        table.insert(self.points, { x, z })
+        local x, y, z = ModUtils.readCompressedXYZPos(streamId)
+        table.insert(self.points, { x, y, z })
     end
 end
 
@@ -196,17 +206,18 @@ end
 ---@param rootNode number
 ---@param childNodes number[]
 function LandscapingAreaPolygon:updateAreaBorder(shapeNode, rootNode, childNodes)
-    local numPoints = #self.points
+    local points = self.points
+    local numPoints = #points
 
     for i = 1, numPoints do
-        local point = self.points[i]
-        local nextPoint = self.points[i + 1]
+        local point = points[i]
+        local nextPoint = points[i + 1]
 
         if nextPoint ~= nil then
             LandscapingUtils.setAreaSegmentTransform(
                 shapeNode, rootNode, childNodes, i,
-                point[1], self.targetY, point[2],
-                nextPoint[1], self.targetY, nextPoint[2]
+                point[1], point[2], point[3],
+                nextPoint[1], nextPoint[2], nextPoint[3]
             )
         end
     end
@@ -217,8 +228,8 @@ function LandscapingAreaPolygon:updateAreaBorder(shapeNode, rootNode, childNodes
 
         LandscapingUtils.setAreaSegmentTransform(
             shapeNode, rootNode, childNodes, numPoints,
-            lastPoint[1], self.targetY, lastPoint[2],
-            firstPoint[1], self.targetY, firstPoint[2]
+            lastPoint[1], lastPoint[2], lastPoint[3],
+            firstPoint[1], firstPoint[2], firstPoint[3]
         )
         for index, node in ipairs(childNodes) do
             setVisibility(node, index <= numPoints)

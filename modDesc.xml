@@ -47,24 +47,65 @@
         <action name="MACHINE_SELECT_AREA" />
         <action name="MACHINE_GLOBAL_TOGGLE_BORDER" />
 
-        <action name="AREA_EDITOR_MENU_PREV" locked="true" />
-        <action name="AREA_EDITOR_MENU_NEXT" locked="true" />
+        <action name="AREA_EDITOR_ENTER" locked="true" />
+        <action name="AREA_EDITOR_EXIT" locked="true" />
+        <action name="AREA_EDITOR_PRIMARY" locked="true" />
+        <action name="AREA_EDITOR_CANCEL" locked="true" />
         <action name="AREA_EDITOR_MOVE" locked="true" />
         <action name="AREA_EDITOR_DELETE" locked="true" />
+
+        <action name="AREA_EDITOR_LEFT_RIGHT" locked="true" />
+        <action name="AREA_EDITOR_UP_DOWN" locked="true" />
+        <action name="AREA_EDITOR_PREV_NEXT" locked="true" />
+
         <action name="AREA_EDITOR_ANGLE" locked="true" />
         <action name="AREA_EDITOR_DIRECTION" locked="true" />
         <action name="AREA_EDITOR_LEVEL" locked="true" />
     </actions>
 
     <inputBinding>
-        <actionBinding action="AREA_EDITOR_MENU_PREV">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_q" index="1" />
-            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_20" index="1" />
+        <actionBinding action="AREA_EDITOR_ENTER">
+            <binding device="KB_MOUSE_DEFAULT" input="MOUSE_BUTTON_RIGHT" index="3" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_1" index="1" />
         </actionBinding>
 
-        <actionBinding action="AREA_EDITOR_MENU_NEXT">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_e" index="1" />
-            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_18" index="1" />
+        <actionBinding action="AREA_EDITOR_EXIT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_esc" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="MOUSE_BUTTON_RIGHT" index="3" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_1" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_3" index="2" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_PRIMARY">
+            <binding device="KB_MOUSE_DEFAULT" input="MOUSE_BUTTON_LEFT" index="3" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_2" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_CANCEL">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_esc" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="MOUSE_BUTTON_RIGHT" index="3" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_3" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_LEFT_RIGHT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_left" axisComponent="-" neutralInput="0" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_right" axisComponent="+" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_20" axisComponent="-" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_18" axisComponent="+" neutralInput="0" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_UP_DOWN">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_up" axisComponent="+" neutralInput="0" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_down" axisComponent="-" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_17" axisComponent="+" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_19" axisComponent="-" neutralInput="0" index="1" />
+        </actionBinding>
+
+        <actionBinding action="AREA_EDITOR_PREV_NEXT">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_q" axisComponent="-" neutralInput="0" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_e" axisComponent="+" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_20" axisComponent="-" neutralInput="0" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_18" axisComponent="+" neutralInput="0" index="1" />
         </actionBinding>
 
         <actionBinding action="AREA_EDITOR_MOVE">
@@ -72,9 +113,10 @@
             <binding device="0_XINPUT_GAMEPAD" input="BUTTON_4" index="1" />
         </actionBinding>
 
-        <actionBinding action="AREA_EDITOR_LEVEL">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt" index="1" />
-            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_11" index="1" />
+        <actionBinding action="AREA_EDITOR_DELETE">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_backspace" index="1" />
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_delete" index="2" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_9" index="1" />
         </actionBinding>
 
         <actionBinding action="AREA_EDITOR_ANGLE">
@@ -87,11 +129,9 @@
             <binding device="0_XINPUT_GAMEPAD" input="BUTTON_5" index="1" />
         </actionBinding>
 
-        <actionBinding action="AREA_EDITOR_DELETE">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_backspace" index="1" />
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_delete" index="2" />
-
-            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_9" index="1" />
+        <actionBinding action="AREA_EDITOR_LEVEL">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_lalt" index="1" />
+            <binding device="0_XINPUT_GAMEPAD" input="BUTTON_11" index="1" />
         </actionBinding>
 
         <actionBinding action="MACHINE_TOGGLE_ACTIVE">

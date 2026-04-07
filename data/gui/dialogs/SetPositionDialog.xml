@@ -7,11 +7,10 @@
         <ThreePartBitmap profile="fs25_dialogBgTopSmall" />
         <ThreePartBitmap profile="fs25_dialogBgBottom" />
         <GuiElement profile="fs25_dialogContentContainer">
-            <Text id="dialogTextElement" profile="fs25_textInputDialogText" text="" />
+            <Text id="dialogTextElement" profile="fs25_textInputDialogText" text="$l10n_ui_setPosition" />
 
             <BoxLayout profile="tfSetPosition_dialogLayout">
-
-                <TextInput focusInit="onOpen" maxCharacters="8" enterWhenClickOutside="false" id="inputElements[1]" onEnterPressed="onEnterPressedInput" onEscPressed="onEscPressed" profile="fs25_dialogTextInput">
+                <TextInput focusInit="onOpen" maxCharacters="8" id="inputElements[1]" onEnterPressed="onEnterPressedInput" onEscPressed="onEnterPressedInput" profile="fs25_dialogTextInput">
                     <ThreePartBitmap profile="fs25_textInputBg" />
                     <Bitmap profile="fs25_dialogTextInputIconBox">
                         <Bitmap profile="fs25_dialogTextInputIcon" />
@@ -19,7 +18,7 @@
                     <Text profile="tfSetPosition_inputTitle" text="X" />
                 </TextInput>
 
-                <TextInput maxCharacters="8" enterWhenClickOutside="false" id="inputElements[2]" onEnterPressed="onEnterPressedInput" onEscPressed="onEscPressed" profile="fs25_dialogTextInput">
+                <TextInput maxCharacters="8" id="inputElements[2]" onEnterPressed="onEnterPressedInput" onEscPressed="onEnterPressedInput" profile="fs25_dialogTextInput">
                     <ThreePartBitmap profile="fs25_textInputBg" />
                     <Bitmap profile="fs25_dialogTextInputIconBox">
                         <Bitmap profile="fs25_dialogTextInputIcon" />
@@ -27,7 +26,7 @@
                     <Text profile="tfSetPosition_inputTitle" text="Y" />
                 </TextInput>
 
-                <TextInput maxCharacters="8" enterWhenClickOutside="false" id="inputElements[3]" onEnterPressed="onEnterPressedInput" onEscPressed="onEscPressed" profile="fs25_dialogTextInput">
+                <TextInput maxCharacters="8" id="inputElements[3]" onEnterPressed="onEnterPressedInput" onEscPressed="onEnterPressedInput" profile="fs25_dialogTextInput">
                     <ThreePartBitmap profile="fs25_textInputBg" />
                     <Bitmap profile="fs25_dialogTextInputIconBox">
                         <Bitmap profile="fs25_dialogTextInputIcon" />

@@ -1,5 +1,5 @@
 ---@class EditorCamera : GuiTopDownCamera
----@field target EditorScreen
+---@field target Editor
 EditorCamera = {}
 EditorCamera.CAMERA_ZOOM_FACTOR = 0.05
 EditorCamera.CAMERA_ZOOM_FACTOR_MIN = 0.05
@@ -8,7 +8,7 @@ EditorCamera.INPUT_MOVE_FACTOR_MOUSE = 0.2
 
 local EditorCamera_mt = Class(EditorCamera, GuiTopDownCamera)
 
----@param target EditorScreen
+---@param target any
 ---@return EditorCamera
 ---@nodiscard
 function EditorCamera.new(target)
@@ -21,6 +21,23 @@ function EditorCamera.new(target)
     setNearClip(self.camera, 0.05)
 
     return self
+end
+
+---@param x number
+---@param z number
+---@param rotY number Y rotation in radians
+function EditorCamera:setCameraPositionWithRotationY(x, z, rotY)
+    rotY = MathUtil.getValidLimit(rotY + math.pi / 2)
+
+    self.cameraX = x
+    self.cameraZ = z
+    self.targetCameraX = x
+    self.targetCameraZ = z
+
+    self.cameraRotY = rotY
+    self.targetRotation = rotY
+
+    self:updatePosition()
 end
 
 function EditorCamera:registerActionEvents()

@@ -103,7 +103,7 @@ end
 ---@param text string
 ---@param textSize number
 ---@param textOffset number?
----@param color table?
+---@param color number[]?
 ---@param bold boolean?
 function ModUtils.renderTextAtWorldPosition(x, y, z, text, textSize, textOffset, color, bold)
     local sx, sy, sz = project(x, y, z)

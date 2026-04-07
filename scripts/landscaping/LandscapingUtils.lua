@@ -176,9 +176,9 @@ end
 ---@param fromMenu? boolean
 function LandscapingUtils.openAreaInEditor(area, fromMenu)
     if area.className == LandscapingAreaPolygon.CLASS_NAME then
-        g_editorAreaPolygon:show(area:clone(), fromMenu)
+        g_polygonEditor:show(area:clone(), fromMenu)
     elseif area.className == LandscapingAreaPath.CLASS_NAME then
-        g_editorAreaPath:show(area:clone(), fromMenu)
+        g_pathEditor:show(area:clone(), fromMenu)
     end
 end
 
@@ -312,7 +312,7 @@ function LandscapingUtils.getIsPointInsidePolygon(px, pz, points)
 
     local v1 = points[1]
     local x1 = v1[1]
-    local z1 = v1[2]
+    local z1 = v1[3]
 
     for i = 1, n do
         local j = i + 1
@@ -320,7 +320,7 @@ function LandscapingUtils.getIsPointInsidePolygon(px, pz, points)
 
         local v2 = points[j]
         local x2 = v2[1]
-        local z2 = v2[2]
+        local z2 = v2[3]
 
         local tz = pz
         if tz == z1 or tz == z2 then
@@ -372,9 +372,9 @@ end
 ---@param rootNode number
 function LandscapingUtils.updateAreaBorderShaders(rootNode)
     if rootNode ~= nil then
-        local num = getNumOfChildren(rootNode)
+        local numChildren = getNumOfChildren(rootNode)
 
-        for i = 0, num - 1 do
+        for i = 0, numChildren - 1 do
             local node = getChildAt(rootNode, i)
             LandscapingUtils.updateAreaBorderShaderNode(node)
         end
@@ -382,6 +382,32 @@ function LandscapingUtils.updateAreaBorderShaders(rootNode)
         setVisibility(rootNode, false)
         setVisibility(rootNode, true)
     end
+end
+
+---@param rootNode number
+---@param diffuseColor number[]
+---@param diffuseAlpha? number
+---@param decalColor number[]
+---@param decalAlpha? number
+function LandscapingUtils.setAreaBorderColor(rootNode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+    if rootNode ~= nil then
+        local numChildren = getNumOfChildren(rootNode)
+
+        for i = 0, numChildren - 1 do
+            local node = getChildAt(rootNode, i)
+            LandscapingUtils.setAreaBorderShaderColor(node, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+        end
+    end
+end
+
+---@param node number
+---@param diffuseColor number[]
+---@param diffuseAlpha? number
+---@param decalColor number[]
+---@param decalAlpha? number
+function LandscapingUtils.setAreaBorderShaderColor(node, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+    setShaderParameter(node, 'diffuseColor', diffuseColor[1], diffuseColor[2], diffuseColor[3], diffuseAlpha or diffuseColor[4], false)
+    setShaderParameter(node, 'decalColor', decalColor[1], decalColor[2], decalColor[3], decalAlpha or decalColor[4], false)
 end
 
 ---@param x1 number

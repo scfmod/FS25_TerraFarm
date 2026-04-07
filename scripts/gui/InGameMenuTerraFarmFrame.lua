@@ -120,7 +120,7 @@ function InGameMenuTerraFarmFrame:initialize()
 
     self.createAreaButtonInfo = {
         inputAction = InputAction.MENU_EXTRA_1,
-        text = EditorScreen.L10N_SYMBOL.CREATE_AREA,
+        text = Editor.L10N_SYMBOL.CREATE_AREA,
         callback = function ()
             self:onClickCreateArea()
         end
@@ -128,7 +128,7 @@ function InGameMenuTerraFarmFrame:initialize()
 
     self.editAreaButtonInfo = {
         inputAction = InputAction.MENU_ACCEPT,
-        text = EditorScreen.L10N_SYMBOL.EDIT,
+        text = Editor.L10N_SYMBOL.EDIT,
         callback = function ()
             self:onClickEditArea()
         end
@@ -136,7 +136,7 @@ function InGameMenuTerraFarmFrame:initialize()
 
     self.toggleActiveButtonInfo = {
         inputAction = InputAction.MENU_ACTIVATE,
-        text = EditorScreen.L10N_SYMBOL.SET_VISIBLE,
+        text = Editor.L10N_SYMBOL.SET_VISIBLE,
         callback = function ()
             self:onClickToggleActive()
         end
@@ -144,7 +144,7 @@ function InGameMenuTerraFarmFrame:initialize()
 
     self.deleteAreaButtonInfo = {
         inputAction = InputAction.MENU_CANCEL,
-        text = EditorScreen.L10N_SYMBOL.DELETE,
+        text = Editor.L10N_SYMBOL.DELETE,
         callback = function ()
             self:onClickDeleteArea()
         end
@@ -300,14 +300,14 @@ function InGameMenuTerraFarmFrame:populateCellForItemInSection(list, section, in
             cell:getAttribute('name'):setText(area:getName())
             -- cell:getAttribute('id'):setText(area.uniqueId)
             cell:getAttribute('type'):setText(area:getTypeName())
-            cell:getAttribute('status'):setText(area.isActive and EditorScreen.L10N_SYMBOL.VISIBLE or EditorScreen.L10N_SYMBOL.HIDDEN)
+            cell:getAttribute('status'):setText(area.isActive and Editor.L10N_SYMBOL.VISIBLE or Editor.L10N_SYMBOL.HIDDEN)
         end
     elseif list == self.waterplanesList then
         local waterplane = self.waterplanes[index]
 
         if waterplane ~= nil then
             cell:getAttribute('name'):setText(waterplane:getName())
-            cell:getAttribute('status'):setText(waterplane.visible and EditorScreen.L10N_SYMBOL.VISIBLE or EditorScreen.L10N_SYMBOL.HIDDEN)
+            cell:getAttribute('status'):setText(waterplane.visible and Editor.L10N_SYMBOL.VISIBLE or Editor.L10N_SYMBOL.HIDDEN)
         end
     elseif list == self.machinesList then
         local vehicle = self.vehicles[index]
@@ -388,46 +388,46 @@ function InGameMenuTerraFarmFrame:updateMenuButtons()
     elseif subCategoryIndex == 2 then
         if ModUtils.getPlayerHasPermission('landscaping') then
             table.insert(self.menuButtonInfo, self.createAreaButtonInfo)
-            self.createAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.CREATE_AREA
+            self.createAreaButtonInfo.text = Editor.L10N_SYMBOL.CREATE_AREA
         end
 
         local area = self:getSelectedArea()
 
         if area ~= nil then
             if area.isActive then
-                self.toggleActiveButtonInfo.text = EditorScreen.L10N_SYMBOL.SET_HIDDEN
+                self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_HIDDEN
             else
-                self.toggleActiveButtonInfo.text = EditorScreen.L10N_SYMBOL.SET_VISIBLE
+                self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_VISIBLE
             end
 
             table.insert(self.menuButtonInfo, self.toggleActiveButtonInfo)
 
             if ModUtils.getPlayerHasPermission('landscaping') then
                 table.insert(self.menuButtonInfo, self.deleteAreaButtonInfo)
-                self.deleteAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.DELETE
+                self.deleteAreaButtonInfo.text = Editor.L10N_SYMBOL.DELETE
                 table.insert(self.menuButtonInfo, self.editAreaButtonInfo)
-                self.editAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.EDIT
+                self.editAreaButtonInfo.text = Editor.L10N_SYMBOL.EDIT
             end
         end
     elseif subCategoryIndex == 3 then
         if ModUtils.getPlayerHasPermission('landscaping') then
             table.insert(self.menuButtonInfo, self.createAreaButtonInfo)
-            self.createAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.CREATE_WATERPLANE
+            self.createAreaButtonInfo.text = Editor.L10N_SYMBOL.CREATE_WATERPLANE
 
             local waterplane = self:getSelectedWaterplane()
 
             if waterplane ~= nil then
                 if waterplane.visible then
-                    self.toggleActiveButtonInfo.text = EditorScreen.L10N_SYMBOL.SET_HIDDEN
+                    self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_HIDDEN
                 else
-                    self.toggleActiveButtonInfo.text = EditorScreen.L10N_SYMBOL.SET_VISIBLE
+                    self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_VISIBLE
                 end
 
                 table.insert(self.menuButtonInfo, self.toggleActiveButtonInfo)
                 table.insert(self.menuButtonInfo, self.deleteAreaButtonInfo)
-                self.deleteAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.DELETE
+                self.deleteAreaButtonInfo.text = Editor.L10N_SYMBOL.DELETE
                 table.insert(self.menuButtonInfo, self.editAreaButtonInfo)
-                self.editAreaButtonInfo.text = EditorScreen.L10N_SYMBOL.EDIT
+                self.editAreaButtonInfo.text = Editor.L10N_SYMBOL.EDIT
             end
         end
     end
@@ -517,7 +517,7 @@ function InGameMenuTerraFarmFrame:onClickEditArea()
         local waterplane = self:getSelectedWaterplane()
 
         if waterplane ~= nil then
-            g_editorWaterplane:show(waterplane:clone(), true)
+            g_waterplaneEditor:show(waterplane:clone(), true)
         end
     end
 end
@@ -534,7 +534,7 @@ function InGameMenuTerraFarmFrame:onClickCreateArea()
     elseif subCategoryIndex == 3 then
         if g_landscapingManager:getCanCreateWaterplane() then
             local waterplane = LandscapingWaterplane.new()
-            g_editorWaterplane:show(waterplane, true)
+            g_waterplaneEditor:show(waterplane, true)
         else
             InfoDialog.show(g_i18n:getText('ui_waterplanesLimitWarning'), nil, nil, DialogElement.TYPE_WARNING)
         end

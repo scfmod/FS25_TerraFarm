@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <GuiElement profile="newLayer" />
+    <Bitmap profile="ingameEditorGuide_dialogFullscreenBg" id="dialogBg" />
+    <GuiElement profile="ingameEditorGuide_menuAreaBg" />
+    <Bitmap profile="ingameEditorGuide_dialogBg" id="dialogElement">
+        <ScrollingLayout profile="ingameEditorGuide_layout" id="imageListElement">
+            <Bitmap profile="ingameEditorGuide_image1" id="guideImages[1]" />
+            <Bitmap profile="ingameEditorGuide_image2" id="guideImages[2]" />
+            <Bitmap profile="ingameEditorGuide_image3" id="guideImages[3]" />
+        </ScrollingLayout>
+
+        <ThreePartBitmap profile="fs25_sliderDockedBg">
+            <ThreePartBitmap profile="fs25_sliderDockedBox">
+                <Slider profile="fs25_sliderDocked" dataElementId="imageListElement" handleFocus="true" focusInit="onOpen" />
+            </ThreePartBitmap>
+        </ThreePartBitmap>
+
+        <BoxLayout profile="ingameEditorGuide_dialogButtonBox">
+            <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_close" />
+        </BoxLayout>
+    </Bitmap>
+
+
+    <GUIProfiles>
+        <Profile name="ingameEditorGuide_dialogFullscreenBg" extends="dialogFullscreenBg">
+            <position value="448px 0" />
+        </Profile>
+        <Profile name="ingameEditorGuide_menuAreaBg" with="anchorStretchingYLeft">
+            <width value="448px" />
+            <hasFrame value="true" />
+            <frameThickness value="8dp 8dp 8dp 8dp" />
+            <frameTopColor value="0.33716 0.55834 0.0003 0.5" />
+            <frameBottomColor value="0.33716 0.55834 0.0003 0.5" />
+            <frameLeftColor value="0.33716 0.55834 0.0003 0.5" />
+            <frameRightColor value="0.33716 0.55834 0.0003 0.5" />
+        </Profile>
+        <Profile name="ingameEditorGuide_dialogButtonBox" extends="fs25_dialogButtonBox">
+            <width value="1056px" />
+            <height value="64px" />
+            <position value="0 -32px" />
+
+            <useFullVisibility value="true" />
+            <imageSliceId value="gui.colorPreset" />
+            <imageColor value="0.03 0.03 0.03 1" />
+        </Profile>
+        <Profile name="ingameEditorGuide_dialogBg" extends="fs25_dialogBg" with="anchorMiddleLeft">
+            <position value="448px 0" />
+            <size value="1056px 832px" />
+            <imageColor value="0.03 0.03 0.03 1" />
+        </Profile>
+        <Profile name="ingameEditorGuide_layout" with="anchorMiddleCenter">
+            <size value="1024px 800px" />
+
+            <imageColor value="0 0 0 0" />
+            <flowDirection value="vertical" />
+        </Profile>
+        <Profile name="ingameEditorGuide_image" extends="baseReference">
+            <size value="1024px 1024px" />
+
+            <imageColor value="1 1 1 1" />
+            <imageSliceId value="noSlice" />
+        </Profile>
+        <Profile name="ingameEditorGuide_image1" extends="ingameEditorGuide_image">
+            <imageFilename value="g_tfEditorGuide_1" />
+        </Profile>
+        <Profile name="ingameEditorGuide_image2" extends="ingameEditorGuide_image">
+            <imageFilename value="g_tfEditorGuide_2" />
+        </Profile>
+        <Profile name="ingameEditorGuide_image3" extends="ingameEditorGuide_image">
+            <imageFilename value="g_tfEditorGuide_3" />
+        </Profile>
+    </GUIProfiles>
+</GUI>

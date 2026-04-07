@@ -7,8 +7,7 @@
 ---@field forceFillTypeIndex? number
 ---@field forceInputLayer? number
 ---@field forceOutputLayer? number
----
---- CLIENT SIDE ONLY PROPERTIES
+---@field points number[][]
 ---@field isActive boolean
 LandscapingArea = {}
 LandscapingArea.CLASS_NAME = ''

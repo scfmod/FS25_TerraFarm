@@ -23,6 +23,28 @@
         <slice id="icon_output" uvs="640px 128px 128px 128px" />
         <slice id="icon_list" uvs="768px 128px 128px 128px" />
 
+        <slice id="icon_camera_start" uvs="896px 128px 128px 128px" />
+        <slice id="icon_camera_middle" uvs="1024px 128px 128px 128px" />
+        <slice id="icon_camera_end" uvs="1024px 128px -128px 128px" />
+
+        <slice id="icon_segment_split" uvs="1152px 128px 128px 128px" />
+
+        <slice id="icon_segment_rotate_x" uvs="1280px 128px 128px 128px" />
+        <slice id="icon_segment_rotate_x_move" uvs="1408px 128px 128px 128px" />
+        <slice id="icon_segment_rotate_x_follow" uvs="1536px 128px 128px 128px" />
+
+        <slice id="icon_segment_rotate_x_neg" uvs="1280px 256px 128px 128px" />
+        <slice id="icon_segment_rotate_x_move_neg" uvs="1408px 256px 128px 128px" />
+        <slice id="icon_segment_rotate_x_follow_neg" uvs="1536px 256px 128px 128px" />
+
+        <slice id="icon_rotate_y" uvs="1664px 128px 128px 128px" />
+        <slice id="icon_rotate_y_move" uvs="1792px 128px 128px 128px" />
+
+        <slice id="icon_rotate_y_neg" uvs="1664px 256px 128px 128px" />
+        <slice id="icon_rotate_y_move_neg" uvs="1792px 256px 128px 128px" />
+
+        <slice id="icon_point_axes" uvs="1920px 128px 128px 128px" />
+
         <slice id="icon_area" uvs="0px 256px 128px 128px" />
         <slice id="icon_bulldozer" uvs="128px 256px 128px 128px" />
         <slice id="icon_factory" uvs="256px 256px 128px 128px" />
@@ -35,6 +57,8 @@
         <slice id="list_shadow" uvs="82px 936px 860px 56px" />
         <slice id="bar" uvs="0px 992px 1024px 28px" />
         <slice id="bar_small" uvs="0px 992px 200px 32px" />
+
+        <slice id="compass_overlay" uvs="640px 512px 256px 256px" />
 
         <slice id="mask_overlay" uvs="1536px 769px 256px 256px" />
         <slice id="mask_overlay_shadow" uvs="1792px 769px 256px 256px" />

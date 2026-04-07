@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<GuiProfiles>
+    <Profile name="ingameEditor_menuHeader" with="anchorTopStretchingX">
+        <height value="72px" />
+
+        <autoValidateLayout value="true" />
+        <alignmentX value="center" />
+        <alignmentY value="middle" />
+        <elementSpacing value="16px" />
+
+        <hasFrame value="true" />
+        <frameThickness value="0dp 0dp 0dp 2dp" />
+        <frameBottomColor value="0.33716 0.55834 0.0003 0.05" />
+    </Profile>
+
+    <Profile name="ingameEditor_menuHeaderIcon" extends="baseReference" with="anchorMiddleLeft">
+        <size value="56px 56px" />
+
+        <imageColor value="0.33716 0.55834 0.0003 0.25" />
+    </Profile>
+
+    <Profile name="ingameEditor_menuHeaderIconPolygon" extends="ingameEditor_menuHeaderIcon">
+        <imageSliceId value="terraFarm.icon_polygon" />
+    </Profile>
+
+    <Profile name="ingameEditor_menuHeaderIconPath" extends="ingameEditor_menuHeaderIcon">
+        <imageSliceId value="terraFarm.icon_path" />
+    </Profile>
+
+    <Profile name="ingameEditor_menuHeaderIconWaterplane" extends="ingameEditor_menuHeaderIcon">
+        <imageSliceId value="terraFarm.icon_waterplane" />
+    </Profile>
+
+    <Profile name="ingameEditor_menuHeaderText" extends="textDefault" with="anchorMiddleLeft">
+        <size value="100% 32px" />
+
+        <textColor value="0.33716 0.55834 0.0003 0.25" />
+        <textSize value="16px" />
+        <textBold value="true" />
+        <textAlignment value="left" />
+        <textAutoWidth value="true" />
+    </Profile>
+
+    <Profile name="ingameEditor_infoDisplayText" extends="textDefault" with="anchorBottomRight">
+        <position value="-160px 16px" />
+        <height value="32px" />
+
+        <textSize value="16px" />
+        <text2Size value="16px" />
+        <text2Color value="0 0 0 1" />
+        <text2Offset value="2px -2px" />
+        <textAutoWidth value="true" />
+        <textAlignment value="right" />
+    </Profile>
+    <Profile name="ingameEditor_compassDisplay" extends="baseReference" with="anchorBottomRight">
+        <size value="128px 128px" />
+        <position value="-16px 16px" />
+        <imageColor value="0 0 0 0" />
+    </Profile>
+    <Profile name="ingameEditor_compassDisplayPoint" extends="baseReference" with="anchorTopCenter">
+        <size value="8dp 16dp" />
+        <position value="0 4px" />
+        <imageColor value="0 1 0 1" />
+    </Profile>
+    <Profile name="ingameEditor_compassDisplayImage" extends="baseReference" with="anchorStretchingYStretchingX">
+        <imageSliceId value="terraFarm.compass_overlay" />
+    </Profile>
+
+    <Profile name="ingameEditor_button" extends="baseReference">
+        <size value="200px 42px" />
+        <iconSize value="0 0" />
+        <iconTextOffset value="4px 0" />
+        <textSize value="14px" />
+        <textUpperCase value="true" />
+
+        <imageColor value="0.042 0.042 0.042 1" />
+        <imageDisabledColor value="0.042 0.042 0.042 0.25" />
+        <imageHighlightedColor value="0.392 0.468 0.093 1" />
+        <imageFocusedColor value="0.27 0.323 0.067 1" />
+
+        <textColor value="1 1 1 1" />
+        <textDisabledColor value="1 1 1 0.2" />
+        <textHighlightedColor value="$preset_fs25_colorMainDark" />
+        <textFocusedColor value="$preset_fs25_colorMainDark" />
+    </Profile>
+
+    <Profile name="ingameEditor_iconButton" extends="ingameEditor_button"></Profile>
+
+    <Profile name="ingameEditor_helpDisplay" extends="emptyPanel" with="anchorTopLeft">
+        <position value="480px 0" />
+    </Profile>
+
+    <Profile name="ingameEditor_menu" extends="baseReference" with="anchorStretchingYLeft">
+        <width value="448px" />
+        <imageColor value="0.018 0.018 0.018 1" />
+    </Profile>
+
+    <Profile name="ingameEditor_controlPanel" extends="baseReference" with="anchorTopStretchingX">
+        <position value="0 -128px" />
+        <height value="128px" />
+
+        <imageColor value="0 0 0 0" />
+        <elementSpacing value="16px" />
+        <fitFlowToElements value="true" />
+        <flowDirection value="vertical" />
+        <alignmentX value="center" />
+    </Profile>
+
+    <Profile name="ingameEditor_controlPanelButton" extends="baseReference">
+        <size value="200px 42px" />
+        <iconSize value="0 0" />
+        <iconTextOffset value="4px 0" />
+        <textSize value="14px" />
+        <textUpperCase value="true" />
+
+        <imageColor value="0.042 0.042 0.042 1" />
+        <imageDisabledColor value="0.042 0.042 0.042 0.25" />
+        <imageHighlightedColor value="0.392 0.468 0.093 1" />
+        <imageFocusedColor value="0.27 0.323 0.067 1" />
+
+        <textColor value="1 1 1 1" />
+        <textDisabledColor value="1 1 1 0.2" />
+        <textHighlightedColor value="$preset_fs25_colorMainDark" />
+        <textFocusedColor value="$preset_fs25_colorMainDark" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanel" extends="baseReference" with="anchorBottomStretchingX">
+        <height value="600px" />
+        <imageColor value="0 0 0 0" />
+        <elementSpacing value="4px" />
+        <fitFlowToElements value="true" />
+        <flowDirection value="vertical" />
+        <alignmentY value="bottom" />
+    </Profile>
+
+    <Profile name="ingameEditor_binaryOption" extends="tfMenuFrame_binaryOption" with="anchorMiddleRight">
+        <position value="-16px 0" />
+    </Profile>
+
+    <Profile name="ingameEditor_textInput" extends="tfMenuFrame_textInput" with="anchorMiddleRight">
+        <position value="-48px 0" />
+        <applyProfanityFilter value="false" />
+        <maxCharacters value="8" />
+    </Profile>
+
+    <Profile name="ingameEditor_textInputName" extends="ingameEditor_textInput">
+        <size value="240px 40px" />
+        <maxCharacters value="32" />
+        <textAlignment value="center" />
+        <maxInputTextWidth value="220px" />
+    </Profile>
+
+    <Profile name="ingameEditor_textInputBg" extends="baseReference" with="anchorMiddleLeft">
+        <imageColor value="0.018 0.018 0.018 1" />
+        <height value="32px" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelTextInputBg" extends="ingameEditor_textInputBg">
+        <imageColor value="0.05 0.05 0.05 0.25" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItem" extends="baseReference">
+        <size value="100% 64px" />
+        <imageColor value="0.022 0.022 0.022 1" />
+        <imageDisabledColor value="0.022 0.022 0.022 0.5" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemLg" extends="ingameEditor_dataPanelItem">
+        <size value="100% 104px" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemTitle" extends="textDefault" with="anchorMiddleLeft">
+        <position value="16px 0" />
+        <textAutoWidth value="true" />
+        <textDisabledColor value="1 1 1 0.5" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemLgTitle" extends="ingameEditor_dataPanelItemTitle" with="anchorTopLeft">
+        <position value="16px -24px" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemText"></Profile>
+
+    <Profile name="ingameEditor_dataPanelItemLgText" extends="textDefault" with="anchorBottomLeft">
+        <position value="72px 26px" />
+        <textAutoWidth value="true" />
+        <textColor value="1 1 1 0.75" />
+        <textDisabledColor value="1 1 1 0.1" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemLgImage" extends="baseReference" with="anchorStretchingYStretchingX">
+        <imageColor value="1 1 1 1" />
+        <imageSliceId value="noSlice" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemLgImageWrapper" with="anchorBottomLeft">
+        <position value="16px 16px" />
+        <size value="32px 32px" />
+
+        <hasFrame value="true" />
+        <frameThickness value="1dp 1dp 1dp 1dp" />
+        <frameTopColor value="1 1 1 0.025" />
+        <frameRightColor value="1 1 1 0.025" />
+        <frameBottomColor value="1 1 1 0.025" />
+        <frameLeftColor value="1 1 1 0.025" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemIconOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
+        <size value="120px 42px" />
+        <position value="-16px 0" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemIconOptionImage" extends="baseReference" with="anchorMiddleCenter">
+        <size value="32px 32px" />
+        <imageDisabledColor value="1 1 1 0.25" />
+    </Profile>
+
+    <Profile name="ingameEditor_dataPanelItemIconButton" extends="ingameEditor_controlPanelButton" with="anchorMiddleRight">
+        <position value="-16px 0" />
+        <size value="48px 48px" />
+
+        <iconColor value="1 1 1 1" />
+        <iconDisabledColor value="1 1 1 0.05" />
+        <iconSize value="20px 20px" />
+        <iconTextOffset value="-1px -1px" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanel" extends="baseReference" with="anchorBottomStretchingX">
+        <height value="760px" />
+
+        <imageColor value="0 0 0 0" />
+        <elementSpacing value="8px" />
+        <fitFlowToElements value="true" />
+        <flowDirection value="vertical" />
+        <alignmentX value="center" />
+        <alignmentY value="top" />
+    </Profile>
+
+    <Profile name="ingameEditor_positionPanel" extends="ingameEditor_optionPanel" with="anchorTopStretchingX">
+        <height value="320px" />
+        <alignmentY value="bottom" />
+    </Profile>
+
+    <!-- <Profile name="ingameEditor_optionPanelItem" extends="baseReference">
+            <size value="256px 128px" />
+
+            <imageColor value="0.022 0.022 0.022 1" />
+            <imageDisabledColor value="0.022 0.022 0.022 0.5" />
+        </Profile> -->
+
+    <Profile name="ingameEditor_optionPanelItem" extends="baseReference">
+        <size value="100% 56px" />
+
+        <imageColor value="0 0 0 0" />
+        <imageDisabledColor value="0 0 0 0" />
+        <!-- <imageColor value="0.022 0.022 0.022 1" />
+            <imageDisabledColor value="0.022 0.022 0.022 0.5" /> -->
+
+        <flowDirection value="horizontal" />
+        <elementSpacing value="8px" />
+        <alignmentY value="top" />
+        <alignmentX value="center" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelSectionTitle" extends="textDefault" with="anchorTopLeft">
+        <size value="100% 32px" />
+        <margin value="0 24px 0 8px" />
+        <textSize value="16px" />
+        <textAlignment value="center" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelButton" extends="ingameEditor_controlPanelButton" with="anchorTopLeft">
+        <size value="56px 56px" />
+        <handleFocus value="false" />
+
+        <!-- <position value="0 0" /> -->
+        <iconSize value="40px 40px" />
+        <iconSliceId value="gui.play" />
+        <iconColor value="1 1 1 0.9" />
+        <iconDisabledColor value="1 1 1 0.1" />
+        <iconTextOffset value="-1px -1px" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelButtonArrow" extends="ingameEditor_optionPanelButton">
+        <size value="48px 48px" />
+        <iconSize value="24px 24px" />
+        <iconSliceId value="gui.play" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAxis" extends="ingameEditor_optionPanelButton">
+        <size value="48px 48px" />
+        <iconSize value="24px 24px" />
+        <iconSliceId value="terraFarm.icon_point_axes" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonHelp" extends="ingameEditor_optionPanelButton" with="anchorMiddleRight">
+        <size value="42px 42px" />
+        <position value="-32px 0" />
+        <iconSize value="32px 32px" />
+        <iconSliceId value="gui.icon_options_help2" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonSplitSegment" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_split" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonRotateYLeft" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_rotate_y_move_neg" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonRotateYCenterLeft" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_rotate_y_neg" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonRotateYCenterRight" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_rotate_y" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonRotateYRight" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_rotate_y_move" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleMoveLeft" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x_move_neg" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleLeft" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x_follow_neg" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleCenterRight" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleCenterLeft" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x_neg" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleRight" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x_follow" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonAngleMoveRight" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_segment_rotate_x_move" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonCameraStart" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_camera_start" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonCameraMiddle" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_camera_middle" />
+    </Profile>
+    <Profile name="ingameEditor_optionPanelButtonCameraEnd" extends="ingameEditor_optionPanelButton">
+        <iconSliceId value="terraFarm.icon_camera_end" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelItemTextInput" extends="tfMenuFrame_textInput" with="anchorTopLeft">
+        <margin value="0 0 28px 0" />
+        <applyProfanityFilter value="false" />
+        <maxCharacters value="8" />
+    </Profile>
+
+    <Profile name="ingameEditor_optionPanelItemOption" extends="tf_binaryOption" with="anchorMiddleRight">
+        <size value="180px 32px" />
+        <position value="-16px 0" />
+    </Profile>
+
+    <Profile name="ingameEditor_multiTextOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
+        <position value="-12px 0" />
+    </Profile>
+</GuiProfiles>

@@ -7,7 +7,7 @@
 ---@field dz number
 
 ---@class EditorCursor : GuiTopDownCursor
----@field target EditorScreen
+---@field target Editor
 ---@field currentHitTerrain boolean
 ---@field rayMaxDistance number
 ---

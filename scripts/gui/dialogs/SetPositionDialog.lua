@@ -1,9 +1,10 @@
 ---@class InputOption
 ---@field min number
 ---@field max number
----@field defaultValue number
+---@field default number
 
 ---@class SetPositionDialog : YesNoDialog
+---@field precision number
 ---@field inputElements TextInputElement[]
 ---@field callbackFunc function
 ---@field callbackTarget any
@@ -26,6 +27,7 @@ function SetPositionDialog.new()
     local self = YesNoDialog.new(nil, SetPositionDialog_mt)
 
     self.options = {}
+    self.precision = 2
 
     return self
 end
@@ -49,17 +51,17 @@ function SetPositionDialog:onGuiSetupFinished()
         [self.inputElements[1]] = {
             min = -16384,
             max = 16384,
-            defaultValue = 0,
+            default = 0,
         },
         [self.inputElements[2]] = {
             min = 0,
             max = 512,
-            defaultValue = 0,
+            default = 0,
         },
         [self.inputElements[3]] = {
             min = -16384,
             max = 16384,
-            defaultValue = 0,
+            default = 0,
         }
     }
 end
@@ -72,11 +74,17 @@ function SetPositionDialog:setCallback(callbackFunc, callbackTarget)
 end
 
 ---@param x number
----@param y number
+---@param y number?
 ---@param z number
 function SetPositionDialog:show(x, y, z)
     self:setInitialInputValue(self.inputElements[1], x)
-    self:setInitialInputValue(self.inputElements[2], y)
+
+    if y ~= nil then
+        self.inputElements[2]:setVisible(true)
+        self:setInitialInputValue(self.inputElements[2], y)
+    else
+        self.inputElements[2]:setVisible(false)
+    end
     self:setInitialInputValue(self.inputElements[3], z)
 
     g_gui:showDialog(SetPositionDialog.CLASS_NAME)
@@ -100,8 +108,8 @@ end
 ---@param element TextInputElement
 ---@param value number
 function SetPositionDialog:setInitialInputValue(element, value)
-    self.options[element].defaultValue = value
-    element:setText(string.format('%.2f', value))
+    self.options[element].default = value
+    EditorUtils.setTextInputNumber(element, value, self.precision)
 end
 
 ---@param element TextInputElement
@@ -109,33 +117,15 @@ end
 ---@nodiscard
 function SetPositionDialog:getInputValue(element)
     local options = self.options[element]
-    local str = element.text
 
-    if str ~= nil then
-        local filteredText = str:match('%-?[%d%.]+')
-
-        if filteredText ~= nil then
-            local value = tonumber(filteredText)
-
-            if value ~= nil then
-                if value < options.min then
-                    return options.min
-                elseif value > options.max then
-                    return options.max
-                end
-
-                return value
-            end
-        end
-    end
-
-    return options.defaultValue
+    ---@diagnostic disable-next-line: return-type-mismatch
+    return EditorUtils.getTextInputNumber(element, self.precision, options.default, options.min, options.max)
 end
 
 function SetPositionDialog:updateInputs()
     for _, element in pairs(self.inputElements) do
         local value = self:getInputValue(element)
-        element:setText(string.format('%.2f', value))
+        EditorUtils.setTextInputNumber(element, value, self.precision)
     end
 end
 

@@ -1,9 +1,12 @@
 source(g_modDirectory .. 'scripts/gui/editor/EditorCamera.lua')
 source(g_modDirectory .. 'scripts/gui/editor/EditorCursor.lua')
-source(g_modDirectory .. 'scripts/gui/editor/EditorScreen.lua')
-source(g_modDirectory .. 'scripts/gui/editor/EditorAreaPath.lua')
-source(g_modDirectory .. 'scripts/gui/editor/EditorAreaPolygon.lua')
-source(g_modDirectory .. 'scripts/gui/editor/EditorWaterplane.lua')
+
+source(g_modDirectory .. 'scripts/gui/editor/EditorUtils.lua')
+source(g_modDirectory .. 'scripts/gui/editor/Editor.lua')
+source(g_modDirectory .. 'scripts/gui/editor/AreaEditor.lua')
+source(g_modDirectory .. 'scripts/gui/editor/PathEditor.lua')
+source(g_modDirectory .. 'scripts/gui/editor/PolygonEditor.lua')
+source(g_modDirectory .. 'scripts/gui/editor/WaterplaneEditor.lua')
 
 source(g_modDirectory .. 'scripts/landscaping/events/AreaDeleteEvent.lua')
 source(g_modDirectory .. 'scripts/landscaping/events/AreaRegisterEvent.lua')

@@ -1,8 +1,10 @@
+source(g_modDirectory .. 'scripts/gui/dialogs/EditorGuideDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectAreaDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectAreaTypeDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMachineDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectMaterialDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SelectTerrainLayerDialog.lua')
+source(g_modDirectory .. 'scripts/gui/dialogs/SetNumberDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/SetPositionDialog.lua')
 
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
@@ -21,9 +23,6 @@ source(g_modDirectory .. 'scripts/gui/MachineSettingsFrame.lua')
 
 ---@class ModGui
 ModGui = {}
-
-ModGui.PROFILES_FILENAME = g_modDirectory .. 'data/gui/guiProfiles.xml'
-ModGui.TEXTURE_CONFIG_FILENAME = g_modDirectory .. 'textures/ui_elements.xml'
 
 local ModGui_mt = Class(ModGui)
 
@@ -80,12 +79,21 @@ function ModGui:delete()
         g_setPositionDialog:close()
     end
 
+    if g_setNumberDialog.isOpen then
+        g_setNumberDialog:close()
+    end
+
+    if g_editorGuide.isOpen then
+        g_editorGuide:close()
+    end
+
     g_gui:showGui(nil)
 
     g_machineScreen:delete()
-    g_editorAreaPolygon:delete()
-    g_editorAreaPath:delete()
-    g_editorWaterplane:delete()
+
+    g_pathEditor:delete()
+    g_polygonEditor:delete()
+    g_waterplaneEditor:delete()
 
     g_selectMaterialDialog:delete()
     g_selectTerrainLayerDialog:delete()
@@ -95,13 +103,15 @@ function ModGui:delete()
     g_selectAreaTypeDialog:delete()
     g_selectAreaDialog:delete()
     g_setPositionDialog:delete()
+    g_setNumberDialog:delete()
+    g_editorGuide:delete()
 end
 
 function ModGui:load()
     g_gui.currentlyReloading = true
 
     g_overlayManager.textureConfigs['terraFarm'] = nil
-    g_overlayManager:addTextureConfigFile(ModGui.TEXTURE_CONFIG_FILENAME, 'terraFarm')
+    g_overlayManager:addTextureConfigFile(g_modDirectory .. 'data/textures/ui_elements.xml', 'terraFarm')
 
     self:loadProfiles()
     self:loadDialogs()
@@ -111,7 +121,8 @@ function ModGui:load()
 end
 
 function ModGui:loadProfiles()
-    g_gui:loadProfiles(ModGui.PROFILES_FILENAME)
+    g_gui:loadProfiles(g_modDirectory .. 'data/gui/guiProfiles.xml')
+    g_gui:loadProfiles(g_modDirectory .. 'data/gui/guiProfiles.editor.xml')
 end
 
 function ModGui:loadDialogs()
@@ -146,6 +157,14 @@ function ModGui:loadDialogs()
     ---@diagnostic disable-next-line: lowercase-global
     g_setPositionDialog = SetPositionDialog.new()
     g_setPositionDialog:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_setNumberDialog = SetNumberDialog.new()
+    g_setNumberDialog:load()
+
+    ---@diagnostic disable-next-line: lowercase-global
+    g_editorGuide = EditorGuideDialog.new()
+    g_editorGuide:load()
 end
 
 function ModGui:loadFrames()
@@ -229,21 +248,19 @@ function ModGui:loadScreens()
     g_machineScreen:load()
 
     ---@diagnostic disable-next-line: lowercase-global
-    g_editorAreaPolygon = EditorAreaPolygon.new()
-    g_editorAreaPolygon:load()
+    g_pathEditor = PathEditor.new()
+    g_pathEditor:load()
 
     ---@diagnostic disable-next-line: lowercase-global
-    g_editorAreaPath = EditorAreaPath.new()
-    g_editorAreaPath:load()
+    g_polygonEditor = PolygonEditor.new()
+    g_polygonEditor:load()
 
     ---@diagnostic disable-next-line: lowercase-global
-    g_editorWaterplane = EditorWaterplane.new()
-    g_editorWaterplane:load()
+    g_waterplaneEditor = WaterplaneEditor.new()
+    g_waterplaneEditor:load()
 end
 
 function ModGui:reload()
-    -- local currentGuiName = g_gui.currentGuiName
-
     local machineScreenIsOpen = g_machineScreen.isOpen
     local globalSettingsDialogIsOpen = g_globalSettingsDialog.isOpen
     local globalMaterialsDialogIsOpen = g_globalMaterialsDialog.isOpen

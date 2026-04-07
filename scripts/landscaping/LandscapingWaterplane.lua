@@ -9,7 +9,7 @@
 ---@field targetY number
 ---@field color WaterplaneColor
 ---@field visible boolean
----@field points [number, number][]
+---@field points number[][]
 LandscapingWaterplane = {}
 LandscapingWaterplane.SEND_NUM_BITS_PLANES = 2 ^ 5
 LandscapingWaterplane.MAX_NUM_PLANES = LandscapingWaterplane.SEND_NUM_BITS_PLANES - 1
@@ -128,7 +128,7 @@ function LandscapingWaterplane:getVertices()
 
     for _, pos in ipairs(self.points) do
         table.insert(result, pos[1])
-        table.insert(result, pos[2])
+        table.insert(result, pos[3])
     end
 
     return result
@@ -149,14 +149,21 @@ function LandscapingWaterplane:loadFromXMLFile(xmlFile, key)
     self.name = xmlFile:getValue(key .. '#name', self.uniqueId)
     self.visible = xmlFile:getValue(key .. '#visible', self.visible)
     self.color = xmlFile:getValue(key .. '#color', self.color)
-    self.targetY = xmlFile:getValue(key .. '#targetY', self.targetY)
+    self.targetY = xmlFile:getValue(key .. '#targetY')
+
+    if self.targetY == nil then
+        Logging.xmlError(xmlFile, 'LandscapingWaterplane:loadFromXMLFile() Invalid targetY value ("%s")', key .. '#targetY')
+        return false
+    end
 
     self.points = {}
+
+    local y = self.targetY
 
     for _, itemKey in xmlFile:iterator(key .. '.points.point') do
         local x, _, z = xmlFile:getValue(itemKey .. '#position')
 
-        table.insert(self.points, { x, z })
+        table.insert(self.points, { x, y, z })
     end
 
     return true
@@ -172,18 +179,21 @@ function LandscapingWaterplane:saveToXMLFile(xmlFile, key)
         return false
     end
 
+    if self.targetY == math.huge then
+        Logging.error('LandscapingWaterplane:saveToXMLFile() Invalid targetY value')
+        return false
+    end
+
     xmlFile:setValue(key .. '#uniqueId', self.uniqueId)
     xmlFile:setValue(key .. '#name', self.name)
     xmlFile:setValue(key .. '#visible', self.visible)
     xmlFile:setValue(key .. '#color', self.color)
 
-    if self.targetY ~= math.huge then
-        xmlFile:setValue(key .. '#targetY', self.targetY)
-    end
+    xmlFile:setValue(key .. '#targetY', self.targetY)
 
     for i, point in ipairs(self.points) do
         local itemKey = string.format('%s.points.point(%i)', key, i - 1)
-        xmlFile:setValue(itemKey .. '#position', point[1], 0, point[2])
+        xmlFile:setValue(itemKey .. '#position', point[1], 0, point[3])
     end
 
     return true
@@ -195,15 +205,12 @@ function LandscapingWaterplane:writeStream(streamId, connection)
     streamWriteString(streamId, self.name)
     streamWriteBool(streamId, self.visible)
     streamWriteUInt8(streamId, self.color)
-
-    if streamWriteBool(streamId, self.targetY ~= math.huge) then
-        streamWriteFloat32(streamId, self.targetY)
-    end
+    streamWriteFloat32(streamId, self.targetY)
 
     streamWriteUIntN(streamId, #self.points, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
 
     for _, point in ipairs(self.points) do
-        ModUtils.writeCompressedXYZPos(streamId, point[1], 0, point[2])
+        ModUtils.writeCompressedXYZPos(streamId, point[1], point[2], point[3])
     end
 end
 
@@ -213,18 +220,15 @@ function LandscapingWaterplane:readStream(streamId, connection)
     self.name = streamReadString(streamId)
     self.visible = streamReadBool(streamId)
     self.color = streamReadUInt8(streamId)
-
-    if streamReadBool(streamId) then
-        self.targetY = streamReadFloat32(streamId)
-    end
+    self.targetY = streamReadFloat32(streamId)
 
     local numPoints = streamReadUIntN(streamId, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
 
     self.points = {}
 
     for _ = 1, numPoints do
-        local x, _, z = ModUtils.readCompressedXYZPos(streamId)
-        table.insert(self.points, { x, z })
+        local x, y, z = ModUtils.readCompressedXYZPos(streamId)
+        table.insert(self.points, { x, y, z })
     end
 end
 

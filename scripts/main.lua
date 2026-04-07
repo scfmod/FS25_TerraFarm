@@ -8,8 +8,8 @@ end
 g_modName = g_currentModName
 g_modDirectory = g_currentModDirectory
 g_modDirectorySettings = g_currentModSettingsDirectory
-g_previewMaskFilename = g_modDirectory .. 'textures/preview_mask.png'
-g_overlayManager:addTextureConfigFile(g_modDirectory .. 'textures/ui_elements.xml', 'terraFarm', nil)
+g_previewMaskFilename = g_modDirectory .. 'data/textures/preview_mask.png'
+g_overlayManager:addTextureConfigFile(g_modDirectory .. 'data/textures/ui_elements.xml', 'terraFarm', nil)
 
 ---@class ModMessageType
 ModMessageType = {}
@@ -40,6 +40,7 @@ source(g_modDirectory .. 'scripts/landscaping/LandscapingManager.lua')
 
 source(g_modDirectory .. 'scripts/extensions/GuiOverlayExtension.lua')
 source(g_modDirectory .. 'scripts/extensions/InGameMenuExtension.lua')
+source(g_modDirectory .. 'scripts/extensions/InputBindingExtension.lua')
 source(g_modDirectory .. 'scripts/extensions/InteractiveControlExtension.lua')
 source(g_modDirectory .. 'scripts/extensions/SavegameControllerExtension.lua')
 source(g_modDirectory .. 'scripts/extensions/ShopControllerExtension.lua')
