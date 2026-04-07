@@ -244,11 +244,14 @@ function AreaEditor:onPressedDataResetButton(element)
     if element == self.materialResetButtonElement then
         self.area.forceFillTypeIndex = nil
         self:updateFillTypeInput(nil, self.materialImageElement, self.materialTextElement, self.materialResetButtonElement)
+        self:setHasChanged(true)
     elseif element == self.inputLayerResetButtonElement then
         self.area.forceInputLayer = nil
         self:updateTerrainLayerInput(nil, self.inputLayerImageElement, self.inputLayerTextElement, self.inputLayerResetButtonElement)
+        self:setHasChanged(true)
     elseif element == self.outputLayerResetButtonElement then
         self.area.forceOutputLayer = nil
         self:updateTerrainLayerInput(nil, self.outputLayerImageElement, self.outputLayerTextElement, self.outputLayerResetButtonElement)
+        self:setHasChanged(true)
     end
 end
