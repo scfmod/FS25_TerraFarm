@@ -16,6 +16,7 @@ ModMessageType = {}
 ModMessageType.MACHINE_ADDED = nextMessageTypeId()
 ModMessageType.MACHINE_REMOVED = nextMessageTypeId()
 ModMessageType.ACTIVE_MACHINE_CHANGED = nextMessageTypeId()
+ModMessageType.ACTIVE_AREA_CHANGED = nextMessageTypeId()
 ModMessageType.LANDSCAPING_AREA_REGISTERED = nextMessageTypeId()
 ModMessageType.LANDSCAPING_AREA_UPDATED = nextMessageTypeId()
 ModMessageType.LANDSCAPING_AREA_DELETED = nextMessageTypeId()

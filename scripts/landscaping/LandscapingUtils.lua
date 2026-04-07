@@ -1,6 +1,7 @@
 ---@class LandscapingUtils
 LandscapingUtils = {}
 
+---@type string[]
 LandscapingUtils.AREA_ICON_SLICE_IDS = {
     'gui.icon_ingameMenu_map',
     'gui.icon_ingameMenu_productionChains',
@@ -15,11 +16,102 @@ LandscapingUtils.AREA_ICON_SLICE_IDS = {
     'terraFarm.icon_road',
 }
 
+---@type LandscapingAreaColor[]
+LandscapingUtils.AREA_COLORS = {
+    {
+        name = 'Orange',
+        diffuseColor = { 1, 0.1, 0, 1 },
+        decalColor = { 1, 0.2, 0, 1 }
+    },
+    {
+        name = 'Red',
+        diffuseColor = { 0.3, 0, 0, 1 },
+        decalColor = { 1, 0.075, 0.075, 1 }
+    },
+    {
+        name = 'Yellow',
+        diffuseColor = { 0.5, 0.5, 0, 1 },
+        decalColor = { 0.5, 0.5, 0, 1 }
+    },
+    {
+        name = 'Bright green',
+        diffuseColor = { 0, 0.8, 0, 1 },
+        decalColor = { 0, 1, 0, 1 }
+    },
+    {
+        name = 'Green',
+        diffuseColor = { 0, 0.2, 0, 1 },
+        decalColor = { 0, 0.2, 0, 1 }
+    },
+    {
+        name = 'Teal',
+        diffuseColor = { 0, 0.2, 0.2, 1 },
+        decalColor = { 0, 0.25, 0.25, 1 }
+    },
+    {
+        name = 'Blue',
+        diffuseColor = { 0, 0.25, 0.8, 1 },
+        decalColor = { 0, 0.25, 0.8, 0.75 }
+    },
+    {
+        name = 'Pink',
+        diffuseColor = { 1, 0, 1, 1 },
+        decalColor = { 1, 0, 1, 1 }
+    },
+    {
+        name = 'Purple',
+        diffuseColor = { 0.1, 0, 1, 1 },
+        decalColor = { 0.1, 0, 1, 1 }
+    },
+    {
+        name = 'White',
+        diffuseColor = { 1, 1, 1, 1 },
+        decalColor = { 1, 1, 1, 1 }
+    }
+}
+
+
+---@type string[]
+LandscapingUtils.AREA_COLOR_NAMES = (function ()
+    local names = {}
+
+    for _, item in ipairs(LandscapingUtils.AREA_COLORS) do
+        table.insert(names, item.name)
+    end
+
+    return names
+end)()
+
 ---@param n number
 ---@return string
 ---@nodiscard
 function LandscapingUtils.getAreaIconSliceId(n)
     return LandscapingUtils.AREA_ICON_SLICE_IDS[n] or LandscapingUtils.AREA_ICON_SLICE_IDS[1]
+end
+
+---@param index number
+---@return number[] diffuseColor
+---@return number[] decalColor
+---@nodiscard
+function LandscapingUtils.getAreaColorByIndex(index)
+    local item = LandscapingUtils.AREA_COLORS[index] or LandscapingUtils.AREA_COLORS[1]
+    return item.diffuseColor, item.decalColor
+end
+
+---@param str string
+---@return number[] diffuseColor
+---@return number[] decalColor
+---@nodiscard
+function LandscapingUtils.getAreaColorByName(str)
+    for index, name in ipairs(LandscapingUtils.AREA_COLOR_NAMES) do
+        if name:upper() == str:upper() then
+            return LandscapingUtils.getAreaColorByIndex(index)
+        end
+    end
+
+    local item = LandscapingUtils.AREA_COLORS[1]
+
+    return item.diffuseColor, item.decalColor
 end
 
 ---@param x1 number
@@ -354,12 +446,12 @@ function LandscapingUtils.updateAreaBorderShaderNode(node)
     local borderDash = g_landscapingManager.borderDash
 
     local borderColor = g_landscapingManager.borderColor
-    local borderAlpha = g_landscapingManager.borderMode == LandscapingManager.BORDER_MODE.DECAL and 0 or borderColor[4]
+    local borderAlpha = g_landscapingManager.borderMode == BorderMode.DECAL and 0 or borderColor[4]
 
     local borderDecalColor = g_landscapingManager.borderDecalColor or borderColor
-    local borderDecalAlpha = g_landscapingManager.borderMode == LandscapingManager.BORDER_MODE.MESH and 0 or borderDecalColor[4]
+    local borderDecalAlpha = g_landscapingManager.borderMode == BorderMode.MESH and 0 or borderDecalColor[4]
 
-    local isTerrainDecal = g_landscapingManager.borderMode ~= LandscapingManager.BORDER_MODE.MESH
+    local isTerrainDecal = g_landscapingManager.borderMode ~= BorderMode.MESH
 
     setIsTerrainDecal(node, isTerrainDecal)
     setShaderParameter(node, 'diffuseColor', borderColor[1], borderColor[2], borderColor[3], borderAlpha, false)

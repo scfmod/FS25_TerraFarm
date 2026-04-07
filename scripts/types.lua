@@ -13,6 +13,11 @@
 ---@field useLeveler boolean
 ---@field useShovel boolean
 
+---@class LandscapingAreaColor
+---@field name string
+---@field diffuseColor number[]
+---@field decalColor number[]
+
 ---@class SavegameObject
 ---@field key string
 ---@field xmlFile XMLFile

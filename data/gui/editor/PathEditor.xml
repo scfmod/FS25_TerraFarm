@@ -33,6 +33,11 @@
             </Bitmap>
 
             <Bitmap profile="ingameEditor_dataPanelItem">
+                <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_configuration_color" />
+                <MultiTextOption id="colorOptionElement" onClick="onClickColorOption" profile="ingameEditor_multiTextOption" />
+            </Bitmap>
+
+            <Bitmap profile="ingameEditor_dataPanelItem">
                 <Text profile="ingameEditor_dataPanelItemTitle" text="$l10n_ui_restrictArea" />
                 <BinaryOption profile="ingameEditor_binaryOption" onClick="onPressedOption" id="restrictOptionElement" />
             </Bitmap>

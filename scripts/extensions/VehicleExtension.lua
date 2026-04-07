@@ -53,6 +53,7 @@ local function registerMachineFunctions(vehicle)
     vehicle['handleDeformationInput'] = Machine.handleDeformationInput
     vehicle['setResourcesEnabled'] = Machine.setResourcesEnabled
 
+    vehicle['getMachineLandscapingAreaId'] = Machine.getMachineLandscapingAreaId
     vehicle['getMachineLandscapingArea'] = Machine.getMachineLandscapingArea
     vehicle['setMachineLandscapingArea'] = Machine.setMachineLandscapingArea
 end

@@ -8,8 +8,8 @@
 ---@field debugCalibrationOption BinaryOptionElement
 ---@field resourcesEnabledOption BinaryOptionElement
 ---@field resourcesEnabledOptionContainer BitmapElement
----@field bordersEnabledOption BinaryOptionElement
 ---@field borderModeOption MultiTextOptionElement
+---@field borderVisibilityOption MultiTextOptionElement
 ---@field extensionStatus TextElement
 ---@field superClass fun(): MessageDialog
 GlobalSettingsDialog = {}
@@ -55,6 +55,12 @@ function GlobalSettingsDialog:onGuiSetupFinished()
         g_i18n:getText('ui_areaBorderModeDecal'),
         g_i18n:getText('ui_areaBorderModeMesh'),
     })
+
+    self.borderVisibilityOption:setTexts({
+        g_i18n:getText('ui_visible'),
+        g_i18n:getText('ui_activeOnly'),
+        g_i18n:getText('ui_hidden'),
+    })
 end
 
 function GlobalSettingsDialog:show()
@@ -96,7 +102,7 @@ function GlobalSettingsDialog:updateSettings()
     self.defaultEnabledOption:setDisabled(not canModifySettings)
     self.defaultEnabledOption:setIsChecked(g_modSettings.defaultEnabled, true)
 
-    self.bordersEnabledOption:setIsChecked(g_landscapingManager.areaBordersVisible)
+    self.borderVisibilityOption:setState(g_landscapingManager.borderVisibilityMode)
     self.borderModeOption:setState(g_landscapingManager.borderMode)
 
     self.debugNodesOption:setIsChecked(g_modSettings:getDebugNodes(), true)
@@ -156,12 +162,14 @@ function GlobalSettingsDialog:onClickDefaultEnabledOption(state)
     g_modSettings:setDefaultEnabled(state == CheckedOptionElement.STATE_CHECKED)
 end
 
-function GlobalSettingsDialog:onClickBordersEnabledOption(state)
-    g_landscapingManager:setAreaBordersVisible(state == CheckedOptionElement.STATE_CHECKED)
+---@param state number
+function GlobalSettingsDialog:onClickBorderVisibilityOption(state)
+    g_landscapingManager:setBorderVisibilityMode(state)
 end
 
+---@param state number
 function GlobalSettingsDialog:onClickBorderModeOption(state)
-    g_landscapingManager:setAreaBorderMode(state)
+    g_landscapingManager:setBorderMode(state)
 end
 
 function GlobalSettingsDialog:onClickMaterialSettings()

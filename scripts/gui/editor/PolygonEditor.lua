@@ -28,19 +28,6 @@ function PolygonEditor.new()
     return self
 end
 
-function PolygonEditor:updateBorderColor()
-    setVisibility(self.borderRootNode, false)
-    if self.mode == EditorMode.NONE then
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.borderColor, nil, self.borderDecalColor, nil)
-        LandscapingUtils.setAreaBorderShaderColor(self.borderShape, self.borderColor, nil, self.borderDecalColor, nil)
-    else
-        local editBorderColor = { 1, 1, 1, 0 }
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, editBorderColor, nil, self.editborderDecalColor, nil)
-        LandscapingUtils.setAreaBorderShaderColor(self.borderShape, editBorderColor, nil, self.editborderDecalColor, nil)
-    end
-    setVisibility(self.borderRootNode, true)
-end
-
 ---@param direction EditorDirection
 ---@return number[]?
 ---@return number[]?

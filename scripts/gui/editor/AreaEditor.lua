@@ -3,6 +3,7 @@
 ---
 ---@field area LandscapingArea
 ---@field iconOptionElement TFIconOptionElement
+---@field colorOptionElement MultiTextOptionElement
 ---@field restrictOptionElement BinaryOptionElement
 ---@field materialImageElement BitmapElement
 ---@field materialTextElement TextElement
@@ -34,6 +35,7 @@ function AreaEditor:onGuiSetupFinished()
     AreaEditor:superClass().onGuiSetupFinished(self)
 
     self.iconOptionElement:setIcons(table.clone(LandscapingUtils.AREA_ICON_SLICE_IDS))
+    self.colorOptionElement:setTexts(table.clone(LandscapingUtils.AREA_COLOR_NAMES))
 end
 
 ---@param area LandscapingArea
@@ -180,6 +182,26 @@ function AreaEditor:onPressedOption(state, element)
     else
         AreaEditor:superClass().onPressedOption(self, state, element)
     end
+end
+
+---@param state number
+function AreaEditor:onClickColorOption(state)
+    self.area.color = state
+    self:setHasChanged(true)
+    self:updateBorderColor()
+end
+
+function AreaEditor:updateBorderColor()
+    setVisibility(self.borderRootNode, false)
+
+    if self.mode == EditorMode.NONE then
+        local diffuseColor, decalColor = self.area:getBorderColor()
+        LandscapingUtils.setAreaBorderColor(self.borderRootNode, diffuseColor, nil, decalColor, nil)
+    else
+        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.editBorderColor, nil, self.editBorderDecalColor, nil)
+    end
+
+    setVisibility(self.borderRootNode, true)
 end
 
 function AreaEditor:onClickSave()

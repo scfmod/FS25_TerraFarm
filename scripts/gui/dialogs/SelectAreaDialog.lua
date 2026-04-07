@@ -111,7 +111,7 @@ function SelectAreaDialog:populateCellForItemInSection(list, section, index, cel
         cell:getAttribute('image'):setImageSlice(nil, area:getIconSliceId())
         cell:getAttribute('name'):setText(area:getName())
         cell:getAttribute('text'):setText(area:getTypeName())
-        cell:getAttribute('status'):setText(area.isActive and g_i18n:getText('ui_visible') or g_i18n:getText('ui_hidden'))
+        cell:getAttribute('status'):setText(area.visible and g_i18n:getText('ui_visible') or g_i18n:getText('ui_hidden'))
     end
 end
 

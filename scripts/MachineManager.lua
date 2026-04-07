@@ -51,6 +51,14 @@ function MachineManager:checkDisplayWarning()
     end
 end
 
+---@param vehicle any
+---@param uniqueId? string
+function MachineManager:onSetMachineLandscapingArea(vehicle, uniqueId)
+    if vehicle ~= nil and self.activeVehicle == vehicle then
+        g_messageCenter:publish(ModMessageType.ACTIVE_AREA_CHANGED, uniqueId, vehicle)
+    end
+end
+
 ---@param vehicle Machine?
 function MachineManager:setActiveVehicle(vehicle)
     if self.activeVehicle ~= vehicle then
@@ -183,6 +191,8 @@ function MachineManager:loadModsConfigurations()
 end
 
 function MachineManager:onModsLoaded()
+    g_messageCenter:subscribe(SetMachineLandscapingAreaEvent, self.onSetMachineLandscapingArea, self)
+
     self:loadInternalConfigurations()
     self:loadModsConfigurations()
 

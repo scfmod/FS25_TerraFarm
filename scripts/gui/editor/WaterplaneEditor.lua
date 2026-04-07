@@ -12,6 +12,9 @@
 ---@field segmentRotationNegXButton ButtonElement
 ---@field alignWorldAxesOptionElement BinaryOptionElement
 ---@field useAlignWorldAxes boolean
+---
+---@field borderColor number[]
+---@field borderDecalColor number[]
 WaterplaneEditor = {}
 
 WaterplaneEditor.CLASS_NAME = 'WaterplaneEditor'
@@ -31,14 +34,10 @@ function WaterplaneEditor.new()
     self.planeRootNode = createTransformGroup('editor_waterplane_root')
     link(getRootNode(), self.planeRootNode)
 
-    return self
-end
-
-function WaterplaneEditor:loadShapes()
-    self.borderDecalColor = { 0, 0.25, 0.8, 0.75 }
     self.borderColor = { 0, 0.25, 0.8, 1 }
+    self.borderDecalColor = { 0, 0.25, 0.8, 0.75 }
 
-    WaterplaneEditor:superClass().loadShapes(self)
+    return self
 end
 
 ---@param forceUpdate? boolean
@@ -253,11 +252,13 @@ function WaterplaneEditor:onClickSave()
     end
 end
 
+---@param state number
 function WaterplaneEditor:onClickVisibleOption(state)
     self.waterplane.visible = state == CheckedOptionElement.STATE_CHECKED
     self:setHasChanged(true)
 end
 
+---@param state number
 function WaterplaneEditor:onClickColorOption(state)
     self.waterplane.color = state
     self:updateShapes(true)
@@ -265,8 +266,15 @@ function WaterplaneEditor:onClickColorOption(state)
 end
 
 function WaterplaneEditor:updateBorderColor()
-    ---@diagnostic disable-next-line: param-type-mismatch
-    PolygonEditor.updateBorderColor(self)
+    setVisibility(self.borderRootNode, false)
+
+    if self.mode == EditorMode.NONE then
+        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.borderColor, nil, self.borderDecalColor, nil)
+    else
+        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.editBorderColor, nil, self.editBorderDecalColor, nil)
+    end
+
+    setVisibility(self.borderRootNode, true)
 end
 
 ---@param direction EditorDirection

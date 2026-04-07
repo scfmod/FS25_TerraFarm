@@ -300,7 +300,7 @@ function InGameMenuTerraFarmFrame:populateCellForItemInSection(list, section, in
             cell:getAttribute('name'):setText(area:getName())
             -- cell:getAttribute('id'):setText(area.uniqueId)
             cell:getAttribute('type'):setText(area:getTypeName())
-            cell:getAttribute('status'):setText(area.isActive and Editor.L10N_SYMBOL.VISIBLE or Editor.L10N_SYMBOL.HIDDEN)
+            cell:getAttribute('status'):setText(area.visible and Editor.L10N_SYMBOL.VISIBLE or Editor.L10N_SYMBOL.HIDDEN)
         end
     elseif list == self.waterplanesList then
         local waterplane = self.waterplanes[index]
@@ -394,7 +394,7 @@ function InGameMenuTerraFarmFrame:updateMenuButtons()
         local area = self:getSelectedArea()
 
         if area ~= nil then
-            if area.isActive then
+            if area.visible then
                 self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_HIDDEN
             else
                 self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_VISIBLE
@@ -588,7 +588,7 @@ function InGameMenuTerraFarmFrame:onClickToggleActive()
         local area = self:getSelectedArea()
 
         if area ~= nil then
-            area:setIsActive(not area.isActive)
+            area:setIsVisible(not area.visible)
             self:updateAreas()
         end
     elseif subCategoryIndex == 3 then

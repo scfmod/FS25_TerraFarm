@@ -256,8 +256,15 @@ function ModSettings:loadUserSettings()
             self.debugMachineCalibration = xmlFile:getBool('userSettings.debugCalibration', self.debugMachineCalibration)
             self.hudEnabled = xmlFile:getBool('userSettings.hudEnabled', true)
 
-            g_landscapingManager:setAreaBordersVisible(xmlFile:getBool('userSettings.areaBorderVisible', g_landscapingManager.areaBordersVisible), true)
-            g_landscapingManager:setAreaBorderMode(xmlFile:getInt('userSettings.areaBorderMode', g_landscapingManager.borderMode), true)
+            if xmlFile:getBool('userSettings.areaBorderVisible') == false then
+                g_landscapingManager:setBorderVisibilityMode(BorderVisibilityMode.ACTIVE_ONLY, true)
+            else
+                g_landscapingManager:setBorderVisibilityMode(xmlFile:getInt('userSettings.borderVisibilityMode', g_landscapingManager.borderVisibilityMode), true)
+            end
+
+            local borderBode = xmlFile:getInt('userSettings.areaBorderMode', xmlFile:getInt('userSettings.borderMode', g_landscapingManager.borderMode))
+
+            g_landscapingManager:setBorderMode(borderBode, true)
 
             xmlFile:delete()
         end
@@ -276,8 +283,8 @@ function ModSettings:saveUserSettings()
             xmlFile:setBool('userSettings.debugCalibration', self.debugMachineCalibration)
             xmlFile:setBool('userSettings.hudEnabled', self:getHUDIsVisible())
 
-            xmlFile:setBool('userSettings.areaBorderVisible', g_landscapingManager.areaBordersVisible)
-            xmlFile:setInt('userSettings.areaBorderMode', g_landscapingManager.borderMode)
+            xmlFile:setInt('userSettings.borderVisibilityMode', g_landscapingManager.borderVisibilityMode)
+            xmlFile:setInt('userSettings.borderMode', g_landscapingManager.borderMode)
 
             xmlFile:save()
             xmlFile:delete()

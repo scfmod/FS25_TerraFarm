@@ -210,6 +210,7 @@ function Machine.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, 'handleDeformationInput', Machine.handleDeformationInput)
     SpecializationUtil.registerFunction(vehicleType, 'setResourcesEnabled', Machine.setResourcesEnabled)
 
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineLandscapingAreaId', Machine.getMachineLandscapingAreaId)
     SpecializationUtil.registerFunction(vehicleType, 'getMachineLandscapingArea', Machine.getMachineLandscapingArea)
     SpecializationUtil.registerFunction(vehicleType, 'setMachineLandscapingArea', Machine.setMachineLandscapingArea)
 end
@@ -734,6 +735,12 @@ end
 ---@nodiscard
 function Machine:getMachineState()
     return self.spec_machine.state
+end
+
+---@return string?
+---@nodiscard
+function Machine:getMachineLandscapingAreaId()
+    return self.spec_machine.landscapingAreaId
 end
 
 ---@return LandscapingArea?
@@ -1526,7 +1533,15 @@ function Machine:actionEventToggleHUD()
 end
 
 function Machine:actionEventToggleGlobalBorder()
-    g_landscapingManager:setAreaBordersVisible(not g_landscapingManager.areaBordersVisible)
+    local visibilityMode = g_landscapingManager.borderVisibilityMode
+
+    if visibilityMode == BorderVisibilityMode.ALL then
+        g_landscapingManager:setBorderVisibilityMode(BorderVisibilityMode.ACTIVE_ONLY)
+    elseif visibilityMode == BorderVisibilityMode.ACTIVE_ONLY then
+        g_landscapingManager:setBorderVisibilityMode(BorderVisibilityMode.NONE)
+    else
+        g_landscapingManager:setBorderVisibilityMode(BorderVisibilityMode.ALL)
+    end
 end
 
 function Machine:actionEventToggleActive()

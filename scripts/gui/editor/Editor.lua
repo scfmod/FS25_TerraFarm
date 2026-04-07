@@ -57,12 +57,9 @@
 ---@field borderShape number
 ---@field borderRootNode number
 ---@field borderChildNodes number[]
----@field borderIntensity number[]
----@field borderDash number[]
----@field borderColor number[]
----@field borderDecalColor number[]
+---
 ---@field editBorderColor number[]
----@field editborderDecalColor number[]
+---@field editBorderDecalColor number[]
 Editor = {}
 
 Editor.CLASS_NAME = ''
@@ -189,12 +186,8 @@ function Editor.new(customMt)
     link(getRootNode(), self.borderRootNode)
     setVisibility(self.borderRootNode, false)
 
-    self.borderIntensity = { 1, 1, 4, 1 }
-    self.borderDash = { 16, 1, 0, 0 }
-    self.borderColor = { 1, 0.765, 0, 1 }
-    self.borderDecalColor = { 1, 0.865, 0, 1 }
     self.editBorderColor = { 1, 1, 1, 1 }
-    self.editborderDecalColor = { 1, 0.865, 0, 1 }
+    self.editBorderDecalColor = { 1, 0.865, 0, 1 }
 
     self:loadShapes()
 
@@ -228,17 +221,17 @@ function Editor:loadShapes()
 
         self.borderShape = node
 
-        local borderIntensity = self.borderIntensity
-        local borderDash = self.borderDash
-        local borderColor = self.borderColor
-        local borderDecalColor = self.borderDecalColor
+        local borderIntensity = g_landscapingManager.borderIntensity
+        local borderDash = g_landscapingManager.borderDash
+        local borderColor = self.editBorderColor
+        local decalColor = self.editBorderDecalColor
 
         link(self.borderRootNode, node)
         delete(i3dNode)
 
         setIsTerrainDecal(node, true)
         setShaderParameter(node, 'diffuseColor', borderColor[1], borderColor[2], borderColor[3], borderColor[4], false)
-        setShaderParameter(node, 'decalColor', borderDecalColor[1], borderDecalColor[2], borderDecalColor[3], borderDecalColor[4], false)
+        setShaderParameter(node, 'decalColor', decalColor[1], decalColor[2], decalColor[3], decalColor[4], false)
 
         setShaderParameter(node, 'intensitySize', borderIntensity[1], borderIntensity[2], borderIntensity[3], borderIntensity[4], false)
         setShaderParameter(node, 'dashNumLength', borderDash[1], borderDash[2], borderDash[3], borderDash[4], true)
@@ -360,15 +353,7 @@ function Editor:updateBorder()
 end
 
 function Editor:updateBorderColor()
-    setVisibility(self.borderRootNode, false)
-    if self.mode == EditorMode.NONE then
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.borderColor, nil, self.borderDecalColor, nil)
-        LandscapingUtils.setAreaBorderShaderColor(self.borderShape, self.borderColor, nil, self.borderDecalColor, nil)
-    else
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.editBorderColor, nil, self.editborderDecalColor, nil)
-        LandscapingUtils.setAreaBorderShaderColor(self.borderShape, self.editBorderColor, nil, self.editborderDecalColor, nil)
-    end
-    setVisibility(self.borderRootNode, true)
+    -- implemented by inherited class
 end
 
 ---@return boolean

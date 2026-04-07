@@ -28,8 +28,8 @@
                 </Bitmap>
 
                 <Bitmap profile="tf_globalSettingsOptionContainer">
-                    <BinaryOption id="bordersEnabledOption" onClick="onClickBordersEnabledOption" profile="tf_globalSettingsBinaryOption" />
-                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_enableAreaBorders" />
+                    <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_areaBorderVisibility" />
+                    <MultiTextOption id="borderVisibilityOption" onClick="onClickBorderVisibilityOption" profile="tf_globalSettingsMultiTextOption" />
                 </Bitmap>
 
                 <Bitmap profile="tf_globalSettingsOptionContainer">

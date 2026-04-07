@@ -3,12 +3,13 @@
 ---@field uniqueId string
 ---@field name? string
 ---@field icon number
+---@field color number
 ---@field restrictArea boolean
 ---@field forceFillTypeIndex? number
 ---@field forceInputLayer? number
 ---@field forceOutputLayer? number
 ---@field points number[][]
----@field isActive boolean
+---@field visible boolean
 LandscapingArea = {}
 LandscapingArea.CLASS_NAME = ''
 LandscapingArea.TYPE_NAME = ''
@@ -25,6 +26,7 @@ function LandscapingArea.registerXMLPaths(schema, key)
     schema:register(XMLValueType.STRING, key .. '#uniqueId')
     schema:register(XMLValueType.STRING, key .. '#name')
     schema:register(XMLValueType.INT, key .. '#icon')
+    schema:register(XMLValueType.INT, key .. '#color')
     schema:register(XMLValueType.BOOL, key .. '#restrictArea')
     schema:register(XMLValueType.STRING, key .. '#forceFillType')
     schema:register(XMLValueType.STRING, key .. '#forceInputLayer')
@@ -58,7 +60,8 @@ function LandscapingArea.new(uniqueId, className, customMt)
     self.name = self.uniqueId
     self.restrictArea = true
     self.icon = 1
-    self.isActive = true
+    self.color = 1
+    self.visible = true
 
     return self
 end
@@ -78,6 +81,7 @@ function LandscapingArea:loadFromXMLFile(xmlFile, key)
     self.name = xmlFile:getValue(key .. '#name', self.uniqueId)
     self.restrictArea = xmlFile:getValue(key .. '#restrictArea', self.restrictArea)
     self.icon = xmlFile:getValue(key .. '#icon', self.icon)
+    self.color = xmlFile:getValue(key .. '#color', self.color)
 
     local forceFillTypeName = xmlFile:getValue(key .. '#forceFillType')
 
@@ -110,6 +114,7 @@ function LandscapingArea:saveToXMLFile(xmlFile, key)
     xmlFile:setValue(key .. '#name', self.name)
     xmlFile:setValue(key .. '#restrictArea', self.restrictArea)
     xmlFile:setValue(key .. '#icon', self.icon)
+    xmlFile:setValue(key .. '#color', self.color)
 
     if self.forceFillTypeIndex ~= nil then
         local fillType = g_fillTypeManager:getFillTypeByIndex(self.forceFillTypeIndex)
@@ -173,13 +178,14 @@ function LandscapingArea:copyInto(area)
     area.uniqueId = self.uniqueId
     area.name = self.name
     area.icon = self.icon
+    area.color = self.color
     area.restrictArea = self.restrictArea
     area.forceFillTypeIndex = self.forceFillTypeIndex
     area.forceInputLayer = self.forceInputLayer
     area.forceOutputLayer = self.forceOutputLayer
 
     -- Client side only
-    area.isActive = self.isActive
+    area.visible = self.visible
 end
 
 ---@param shape number
@@ -210,10 +216,10 @@ function LandscapingArea:getCanAddPoint()
     return false
 end
 
----@param active boolean
-function LandscapingArea:setIsActive(active)
-    if self.isActive ~= active then
-        self.isActive = active
+---@param visible boolean
+function LandscapingArea:setIsVisible(visible)
+    if self.visible ~= visible then
+        self.visible = visible
 
         g_landscapingManager:updateAreaBorderVisibility(self)
     end
@@ -246,6 +252,7 @@ end
 function LandscapingArea:writeStream(streamId, connection)
     streamWriteBool(streamId, self.restrictArea)
     streamWriteUIntN(streamId, self.icon, 4)
+    streamWriteUIntN(streamId, self.color, 4)
 
     if streamWriteBool(streamId, self.name ~= nil) then
         streamWriteString(streamId, self.name)
@@ -269,6 +276,7 @@ end
 function LandscapingArea:readStream(streamId, connection)
     self.restrictArea = streamReadBool(streamId)
     self.icon = streamReadUIntN(streamId, 4)
+    self.color = streamReadUIntN(streamId, 4)
 
     if streamReadBool(streamId) then
         self.name = streamReadString(streamId)
@@ -293,4 +301,11 @@ function LandscapingArea:readStream(streamId, connection)
     else
         self.forceOutputLayer = nil
     end
+end
+
+---@return number[] diffuseColor
+---@return number[] decalColor
+---@nodiscard
+function LandscapingArea:getBorderColor()
+    return LandscapingUtils.getAreaColorByIndex(self.color)
 end
