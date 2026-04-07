@@ -155,12 +155,18 @@
         <text name="ui_editMode" text="Edit mode" />
         <text name="ui_exitEditMode" text="Exit edit mode" />
         <text name="ui_movePoint" text="Move point" />
-        <text name="ui_setPosition" text="Set new position" />
+        <text name="ui_setNewPosition" text="Set new position" />
         <text name="ui_placePoint" text="Place new point" />
         <text name="ui_createPoint" text="Create new point" />
         <text name="ui_selectPoint" text="Select point" />
+        <text name="ui_setAngle" text="Set angle" />
+        <text name="ui_setPosition" text="Set position" />
         <text name="ui_keepDirection" text="Keep direction" />
         <text name="ui_followAngle" text="Follow angle" />
+        <text name="ui_alignWorldAxes" text="Align to world axes" />
+        <text name="ui_forceAngle" text="Force angle" />
+        <text name="ui_point" text="Point" />
+        <text name="ui_segment" text="Segment" />
         <text name="ui_icon" text="Icon" />
         <text name="ui_exit" text="Exit" />
         <text name="ui_width" text="Width" />
