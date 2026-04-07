@@ -25,8 +25,8 @@ LandscapingUtils.AREA_COLORS = {
     },
     {
         name = 'Red',
-        diffuseColor = { 0.3, 0, 0, 1 },
-        decalColor = { 1, 0.075, 0.075, 1 }
+        diffuseColor = { 0.7, 0, 0, 1 },
+        decalColor = { 1, 0, 0, 1 }
     },
     {
         name = 'Yellow',
@@ -51,7 +51,7 @@ LandscapingUtils.AREA_COLORS = {
     {
         name = 'Blue',
         diffuseColor = { 0, 0.25, 0.8, 1 },
-        decalColor = { 0, 0.25, 0.8, 0.75 }
+        decalColor = { 0, 0.25, 0.8, 1 }
     },
     {
         name = 'Pink',
@@ -60,8 +60,8 @@ LandscapingUtils.AREA_COLORS = {
     },
     {
         name = 'Purple',
-        diffuseColor = { 0.1, 0, 1, 1 },
-        decalColor = { 0.1, 0, 1, 1 }
+        diffuseColor = { 0.1, 0.05, 1, 1 },
+        decalColor = { 0.2, 0.05, 1, 1 }
     },
     {
         name = 'White',
