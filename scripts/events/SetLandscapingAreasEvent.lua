@@ -48,8 +48,6 @@ function SetLandscapingAreasEvent:readStream(streamId, connection)
         if area ~= nil then
             area:readStream(streamId, connection)
 
-            area.isActive = false
-
             table.insert(self.areas, area)
         end
     end

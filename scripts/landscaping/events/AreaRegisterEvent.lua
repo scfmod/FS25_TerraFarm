@@ -53,8 +53,6 @@ function AreaRegisterEvent:run(connection)
         g_server:broadcastEvent(self, nil, connection)
     end
 
-    self.area.isActive = false
-
     g_landscapingManager:registerArea(self.area, true)
 end
 
