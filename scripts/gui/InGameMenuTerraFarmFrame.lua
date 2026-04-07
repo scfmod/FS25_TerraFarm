@@ -243,9 +243,13 @@ end
 function InGameMenuTerraFarmFrame:updateVehicles()
     self.vehicles = g_machineManager:getAccessibleVehicles()
 
-    table.sort(self.vehicles, function (a, b)
-        return a:getName() < b:getName()
-    end)
+    ---@param a Machine
+    ---@param b Machine
+    local function sortFn(a, b)
+        return a:getFullName():upper() < b:getFullName():upper()
+    end
+
+    table.sort(self.vehicles, sortFn)
 
     self.machinesList:reloadData()
 
@@ -258,15 +262,30 @@ end
 function InGameMenuTerraFarmFrame:updateAreas()
     self.areas = g_landscapingManager:getAreas()
 
+    ---@param a LandscapingArea
+    ---@param b LandscapingArea
+    local function sortFn(a, b)
+        return a:getName():upper() < b:getName():upper()
+    end
+
+    table.sort(self.areas, sortFn)
+
     self.areasList:reloadData()
-
     self:updateMenuButtons()
-
     self.lastUpdate = 0
 end
 
 function InGameMenuTerraFarmFrame:updateWaterplanes()
     self.waterplanes = g_landscapingManager:getWaterplanes()
+
+    ---@param a LandscapingWaterplane
+    ---@param b LandscapingWaterplane
+    local function sortFn(a, b)
+        return a:getName():upper() < b:getName():upper()
+    end
+
+    table.sort(self.waterplanes, sortFn)
+
     self.waterplanesList:reloadData()
     self:updateMenuButtons()
     self.lastUpdate = 0

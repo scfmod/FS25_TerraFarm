@@ -348,7 +348,7 @@ function LandscapingManager:getAreas()
         table.insert(result, area)
     end
 
-    return table.clone(result)
+    return result
 end
 
 ---@return LandscapingWaterplane[]
@@ -360,7 +360,7 @@ function LandscapingManager:getWaterplanes()
         table.insert(result, waterplane)
     end
 
-    return table.clone(result)
+    return result
 end
 
 ---@param area LandscapingArea
