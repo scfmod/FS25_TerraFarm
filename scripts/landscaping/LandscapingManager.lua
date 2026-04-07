@@ -278,8 +278,8 @@ function LandscapingManager:setBorderVisibilityMode(mode, noUpdateSettings)
         if mode == BorderVisibilityMode.NONE then
             setVisibility(self.borderRootNode, false)
         else
-            self:updateActiveAreaBorder()
-            self:updateInactiveBorders()
+            self:updateAllAreaBordersShader()
+
             setVisibility(self.borderRootNode, true)
         end
 
@@ -316,54 +316,6 @@ function LandscapingManager:getAreaBorderAlpha()
     end
 
     return diffuseAlpha, decalAlpha
-end
-
-function LandscapingManager:updateActiveAreaBorder()
-    local diffuseAlpha, decalAlpha = self:getAreaBorderAlpha()
-    local lastActiveAreaId = self.lastActiveAreaId
-
-    if lastActiveAreaId ~= nil then
-        local lastArea = self.areas[lastActiveAreaId]
-        local rootNode = self.areaBorderRootNode[lastActiveAreaId]
-
-        if rootNode ~= nil and lastArea ~= nil then
-            local visible = self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY and lastArea.visible
-
-            setVisibility(rootNode, false)
-            LandscapingUtils.setAreaBorderColor(rootNode, LandscapingManager.BORDER_COLOR, diffuseAlpha, LandscapingManager.BORDER_DECAL_COLOR, decalAlpha)
-            setVisibility(rootNode, visible)
-        end
-
-        self.lastActiveAreaId = nil
-    end
-
-    local activeAreaId = self.activeAreaId
-    local activeArea = self.areas[activeAreaId]
-
-    if activeAreaId ~= nil and activeArea ~= nil then
-        local rootNode = self.areaBorderRootNode[activeAreaId]
-
-        if rootNode ~= nil and activeArea ~= nil then
-            local diffuseColor, decalColor = activeArea:getBorderColor()
-
-            setVisibility(rootNode, false)
-            LandscapingUtils.setAreaBorderColor(rootNode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
-            setVisibility(rootNode, true)
-        end
-    end
-end
-
-function LandscapingManager:updateInactiveBorders()
-    local activeBorderId = self.activeAreaId
-    local visible = self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY
-
-    for id, rootNode in pairs(self.areaBorderRootNode) do
-        if id ~= activeBorderId then
-            setVisibility(rootNode, false)
-            LandscapingUtils.setAreaBorderColor(rootNode, LandscapingManager.BORDER_COLOR, nil, LandscapingManager.BORDER_DECAL_COLOR, nil)
-            setVisibility(rootNode, visible)
-        end
-    end
 end
 
 function LandscapingManager:setWaterplanesVisible(visible)
@@ -486,7 +438,8 @@ function LandscapingManager:registerArea(area, noEventSend)
             self.areaBorderNodes[uniqueId] = {}
 
             self:updateAreaBorderVisibility(area)
-            self:updateAreaBorder(area)
+            self:updateAreaBorderMeshes(area)
+            self:updateAreaBorderShader(area)
         end
 
         g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_REGISTERED, area)
@@ -523,11 +476,8 @@ function LandscapingManager:updateArea(area, noEventSend)
 
         if g_client ~= nil then
             self:updateAreaBorderVisibility(area)
-            self:updateAreaBorder(area)
-
-            if self.activeAreaId == area.uniqueId then
-                self:updateActiveAreaBorder()
-            end
+            self:updateAreaBorderMeshes(area)
+            self:updateAreaBorderShader(area)
         end
 
         g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_UPDATED, area)
@@ -537,9 +487,54 @@ function LandscapingManager:updateArea(area, noEventSend)
 end
 
 ---@param area LandscapingArea
-function LandscapingManager:updateAreaBorder(area)
+function LandscapingManager:updateAreaBorderMeshes(area)
     if self.areaBorderRootNode[area.uniqueId] ~= nil then
         area:updateAreaBorder(self.areaBorderShape, self.areaBorderRootNode[area.uniqueId], self.areaBorderNodes[area.uniqueId])
+    end
+end
+
+---@param area LandscapingArea
+function LandscapingManager:updateAreaBorderShader(area)
+    local id = area.uniqueId
+    local rootNode = self.areaBorderRootNode[id]
+
+    if rootNode ~= nil then
+        local isActive = id == self.activeAreaId
+        local visible = isActive or (self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY and area.visible)
+        local diffuseAlpha, decalAlpha = self:getAreaBorderAlpha()
+
+        setVisibility(rootNode, false)
+
+        if isActive then
+            local diffuseColor, decalColor = area:getBorderColor()
+            LandscapingUtils.setAreaBorderColor(rootNode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+        else
+            LandscapingUtils.setAreaBorderColor(rootNode, LandscapingManager.BORDER_COLOR, diffuseAlpha, LandscapingManager.BORDER_DECAL_COLOR, decalAlpha)
+        end
+
+        setVisibility(rootNode, visible)
+    end
+end
+
+function LandscapingManager:updateAllAreaBordersShader()
+    for _, area in pairs(self.areas) do
+        self:updateAreaBorderShader(area)
+    end
+end
+
+function LandscapingManager:updateActiveAreaBorder()
+    local lastArea = self.areas[self.lastActiveAreaId]
+
+    if lastArea ~= nil then
+        self:updateAreaBorderShader(lastArea)
+    end
+
+    self.lastActiveAreaId = nil
+
+    local activeArea = self.areas[self.activeAreaId]
+
+    if activeArea ~= nil then
+        self:updateAreaBorderShader(activeArea)
     end
 end
 
@@ -549,8 +544,7 @@ function LandscapingManager:setBorderMode(mode, noUpdateSettings)
     if self.borderMode ~= mode then
         self.borderMode = mode
 
-        self:updateActiveAreaBorder()
-        self:updateInactiveBorders()
+        self:updateAllAreaBordersShader()
 
         if not noUpdateSettings then
             g_modSettings:saveUserSettings()
