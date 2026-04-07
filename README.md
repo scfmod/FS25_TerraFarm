@@ -145,7 +145,7 @@ If anyone is interested in adding more translations to the mod, [create a new is
 
 # Credits
 
-A big thanks to the fellow modders from **Jeremy Brown Modeling and Simulation** and **WZL Modding** discord servers for all the testing and feedback on the FS22 version.
+A big thanks to the fellow modders from **Jeremy Brown Modeling and Simulation** and **WZL Modding** discord servers for all the testing and feedback.
 
 [![oma](https://avatars.githubusercontent.com/u/159189143?s=200&v=4)](https://github.com/open-modding-alliance)
 
