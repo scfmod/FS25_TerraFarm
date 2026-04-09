@@ -291,19 +291,6 @@ function LandscapingUtils.createAreaInEditor(fromMenu)
     g_selectAreaTypeDialog:show()
 end
 
----@param fromMenu? boolean
-function LandscapingUtils.selectAreaInEditor(fromMenu)
-    ---@param area? LandscapingArea
-    local function selectCallback(area)
-        if area ~= nil then
-            LandscapingUtils.openAreaInEditor(area, fromMenu)
-        end
-    end
-
-    g_selectAreaDialog:setSelectCallback(selectCallback)
-    g_selectAreaDialog:show()
-end
-
 ---@param terrainLayerName string
 ---@return string
 ---@nodiscard
@@ -440,66 +427,33 @@ function LandscapingUtils.getIsPointInsidePolygon(px, pz, points)
     return (count % 2 == 1)
 end
 
----@param node number
-function LandscapingUtils.updateAreaBorderShaderNode(node)
-    local borderIntensity = g_landscapingManager.borderIntensity
-    local borderDash = g_landscapingManager.borderDash
-
-    local borderColor = g_landscapingManager.borderColor
-    local borderAlpha = g_landscapingManager.borderMode == BorderMode.DECAL and 0 or borderColor[4]
-
-    local borderDecalColor = g_landscapingManager.borderDecalColor or borderColor
-    local borderDecalAlpha = g_landscapingManager.borderMode == BorderMode.MESH and 0 or borderDecalColor[4]
-
-    local isTerrainDecal = g_landscapingManager.borderMode ~= BorderMode.MESH
-
-    setIsTerrainDecal(node, isTerrainDecal)
-    setShaderParameter(node, 'diffuseColor', borderColor[1], borderColor[2], borderColor[3], borderAlpha, false)
-    setShaderParameter(node, 'decalColor', borderDecalColor[1], borderDecalColor[2], borderDecalColor[3], borderDecalAlpha, false)
-
-    setShaderParameter(node, 'intensitySize', borderIntensity[1], borderIntensity[2], borderIntensity[3], borderIntensity[4], false)
-    setShaderParameter(node, 'dashNumLength', borderDash[1], borderDash[2], borderDash[3], borderDash[4], true)
-end
-
 ---@param rootNode number
-function LandscapingUtils.updateAreaBorderShaders(rootNode)
+---@param borderMode BorderMode
+---@param diffuseColor number[]
+---@param diffuseAlpha? number
+---@param decalColor number[]
+---@param decalAlpha? number
+function LandscapingUtils.setAreaBorderParameters(rootNode, borderMode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
     if rootNode ~= nil then
         local numChildren = getNumOfChildren(rootNode)
 
         for i = 0, numChildren - 1 do
             local node = getChildAt(rootNode, i)
-            LandscapingUtils.updateAreaBorderShaderNode(node)
-        end
-
-        setVisibility(rootNode, false)
-        setVisibility(rootNode, true)
-    end
-end
-
----@param rootNode number
----@param diffuseColor number[]
----@param diffuseAlpha? number
----@param decalColor number[]
----@param decalAlpha? number
-function LandscapingUtils.setAreaBorderColor(rootNode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
-    if rootNode ~= nil then
-        local numChildren = getNumOfChildren(rootNode)
-
-        for i = 0, numChildren - 1 do
-            local node = getChildAt(rootNode, i)
-            LandscapingUtils.setAreaBorderShaderColor(node, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+            LandscapingUtils.setAreaBorderShaderParameters(node, borderMode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
         end
     end
 end
 
 ---@param node number
+---@param borderMode BorderMode
 ---@param diffuseColor number[]
 ---@param diffuseAlpha? number
 ---@param decalColor number[]
 ---@param decalAlpha? number
-function LandscapingUtils.setAreaBorderShaderColor(node, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+function LandscapingUtils.setAreaBorderShaderParameters(node, borderMode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
     setShaderParameter(node, 'diffuseColor', diffuseColor[1], diffuseColor[2], diffuseColor[3], diffuseAlpha or diffuseColor[4], false)
     setShaderParameter(node, 'decalColor', decalColor[1], decalColor[2], decalColor[3], decalAlpha or decalColor[4], false)
+    setShaderParameter(node, 'mode', borderMode, nil, nil, nil, false)
 end
 
 ---@param x1 number

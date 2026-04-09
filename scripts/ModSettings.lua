@@ -256,15 +256,24 @@ function ModSettings:loadUserSettings()
             self.debugMachineCalibration = xmlFile:getBool('userSettings.debugCalibration', self.debugMachineCalibration)
             self.hudEnabled = xmlFile:getBool('userSettings.hudEnabled', true)
 
+            ---@type BorderVisibilityMode
+            local visibilityMode = g_landscapingManager.borderVisibilityMode
+
             if xmlFile:getBool('userSettings.areaBorderVisible') == false then
-                g_landscapingManager:setBorderVisibilityMode(BorderVisibilityMode.ACTIVE_ONLY, true)
+                visibilityMode = BorderVisibilityMode.ACTIVE_ONLY
             else
-                g_landscapingManager:setBorderVisibilityMode(xmlFile:getInt('userSettings.borderVisibilityMode', g_landscapingManager.borderVisibilityMode), true)
+                ---@type string?
+                local visibilityModeStr = xmlFile:getString('userSettings.borderVisibilityMode')
+                visibilityMode = BorderVisibilityMode[visibilityModeStr] or visibilityMode
             end
 
-            local borderBode = xmlFile:getInt('userSettings.areaBorderMode', xmlFile:getInt('userSettings.borderMode', g_landscapingManager.borderMode))
+            g_landscapingManager:setBorderVisibilityMode(visibilityMode, true)
 
-            g_landscapingManager:setBorderMode(borderBode, true)
+            ---@type string?
+            local borderModeStr = xmlFile:getString('userSettings.borderMode')
+            local borderMode = BorderMode[borderModeStr] or g_landscapingManager.borderMode
+
+            g_landscapingManager:setBorderMode(borderMode, true)
 
             xmlFile:delete()
         end
@@ -283,8 +292,11 @@ function ModSettings:saveUserSettings()
             xmlFile:setBool('userSettings.debugCalibration', self.debugMachineCalibration)
             xmlFile:setBool('userSettings.hudEnabled', self:getHUDIsVisible())
 
-            xmlFile:setInt('userSettings.borderVisibilityMode', g_landscapingManager.borderVisibilityMode)
-            xmlFile:setInt('userSettings.borderMode', g_landscapingManager.borderMode)
+            local visibilityModeStr = LandscapingManager.VISIBILITY_MODE_STR[g_landscapingManager.borderVisibilityMode] or LandscapingManager.VISIBILITY_MODE_STR[BorderVisibilityMode.ALL]
+            xmlFile:setString('userSettings.borderVisibilityMode', visibilityModeStr)
+
+            local borderModeStr = LandscapingManager.BORDER_MODE_STR[g_landscapingManager.borderMode] or LandscapingManager.BORDER_MODE_STR[BorderMode.GROUND_MESH_XRAY]
+            xmlFile:setString('userSettings.borderMode', borderModeStr)
 
             xmlFile:save()
             xmlFile:delete()

@@ -34,7 +34,7 @@
 
                 <Bitmap profile="tf_globalSettingsOptionContainer">
                     <Text profile="tf_globalSettingsOptionTitle" text="$l10n_ui_areaBorderMode" />
-                    <MultiTextOption id="borderModeOption" onClick="onClickBorderModeOption" profile="tf_globalSettingsMultiTextOption" />
+                    <MultiTextOption id="borderModeOption" onClick="onClickBorderModeOption" profile="tf_globalSettingsMultiTextOption" width="300px" />
                 </Bitmap>
 
                 <Text name="sectionHeader" profile="tf_dialogSectionHeader" text="$l10n_ui_debug" />
@@ -136,7 +136,8 @@
         </Profile>
 
         <Profile name="tf_globalSettingsMultiTextOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
-            <position value="0 0" />
+            <position value="-10px 0" />
+            <width value="185px" />
         </Profile>
     </GuiProfiles>
 </GUI>

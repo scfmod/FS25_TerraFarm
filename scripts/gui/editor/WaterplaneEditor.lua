@@ -269,9 +269,9 @@ function WaterplaneEditor:updateBorderColor()
     setVisibility(self.borderRootNode, false)
 
     if self.mode == EditorMode.NONE then
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.borderColor, nil, self.borderDecalColor, nil)
+        LandscapingUtils.setAreaBorderParameters(self.borderRootNode, BorderMode.GROUND_MESH_XRAY, self.borderColor, nil, self.borderDecalColor, nil)
     else
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.editBorderColor, nil, self.editBorderDecalColor, nil)
+        LandscapingUtils.setAreaBorderParameters(self.borderRootNode, BorderMode.GROUND_MESH_XRAY, self.editBorderColor, nil, self.editBorderDecalColor, nil)
     end
 
     setVisibility(self.borderRootNode, true)

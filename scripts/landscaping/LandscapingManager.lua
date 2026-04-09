@@ -69,9 +69,20 @@ LandscapingManager.BORDER_SHAPE_FILENAME = g_modDirectory .. 'data/areaBorderLin
 
 ---@enum BorderMode
 BorderMode = {
-    NORMAL = 1,
-    DECAL = 2,
-    MESH = 3,
+    GROUND_MESH_XRAY = 1,
+    GROUND_MESH_NORMAL = 2,
+    GROUND_ONLY = 3,
+    MESH_ONLY_XRAY = 4,
+    MESH_ONLY_NORMAL = 5,
+}
+
+---@type table<BorderMode, string>
+LandscapingManager.BORDER_MODE_STR = {
+    [BorderMode.GROUND_MESH_XRAY] = 'GROUND_MESH_XRAY',
+    [BorderMode.GROUND_MESH_NORMAL] = 'GROUND_MESH_NORMAL',
+    [BorderMode.GROUND_ONLY] = 'GROUND_ONLY',
+    [BorderMode.MESH_ONLY_XRAY] = 'MESH_ONLY_XRAY',
+    [BorderMode.MESH_ONLY_NORMAL] = 'MESH_ONLY_NORMAL',
 }
 
 ---@enum BorderVisibilityMode
@@ -79,6 +90,13 @@ BorderVisibilityMode = {
     ALL = 1,
     ACTIVE_ONLY = 2,
     NONE = 3
+}
+
+---@type table<BorderVisibilityMode, string>
+LandscapingManager.VISIBILITY_MODE_STR = {
+    [BorderVisibilityMode.ALL] = 'ALL',
+    [BorderVisibilityMode.ACTIVE_ONLY] = 'ACTIVE_ONLY',
+    [BorderVisibilityMode.NONE] = 'NONE',
 }
 
 LandscapingManager.DEFAULT_FILLTYPE = 'STONE'
@@ -109,7 +127,7 @@ function LandscapingManager.new()
     self.areaBorderRootNode = {}
     self.areaBorderNodes = {}
     self.borderVisibilityMode = BorderVisibilityMode.ALL
-    self.borderMode = BorderMode.NORMAL
+    self.borderMode = BorderMode.GROUND_MESH_XRAY
     self.borderColor = LandscapingManager.BORDER_COLOR
     self.borderDecalColor = LandscapingManager.BORDER_DECAL_COLOR
     self.borderIntensity = { 1, 1, 4, 1 }
@@ -138,13 +156,21 @@ function LandscapingManager:loadShapes()
     local i3dNode = g_i3DManager:loadSharedI3DFile(LandscapingManager.BORDER_SHAPE_FILENAME, false, false)
 
     if i3dNode ~= 0 then
-        self.areaBorderShape = getChildAt(i3dNode, 0)
+        local node = getChildAt(i3dNode, 0)
 
-        link(self.borderRootNode, self.areaBorderShape)
+        self.areaBorderShape = node
+
+        link(self.borderRootNode, node)
         delete(i3dNode)
-        setVisibility(self.areaBorderShape, false)
 
-        LandscapingUtils.updateAreaBorderShaderNode(self.areaBorderShape)
+        local borderIntensity = self.borderIntensity
+        local borderDash = self.borderDash
+
+        setVisibility(node, false)
+        setIsTerrainDecal(node, true)
+
+        setShaderParameter(node, 'intensitySize', borderIntensity[1], borderIntensity[2], borderIntensity[3], borderIntensity[4], false)
+        setShaderParameter(node, 'dashNumLength', borderDash[1], borderDash[2], borderDash[3], borderDash[4], true)
     end
 end
 
@@ -301,21 +327,6 @@ function LandscapingManager:setActiveAreaId(id)
 
         self:updateActiveAreaBorder()
     end
-end
-
----@return number diffuseAlpha
----@return number decalAlpha
-function LandscapingManager:getAreaBorderAlpha()
-    local diffuseAlpha = 1
-    local decalAlpha = 1
-
-    if self.borderMode == BorderMode.DECAL then
-        diffuseAlpha = 0
-    elseif self.borderMode == BorderMode.MESH then
-        decalAlpha = 0
-    end
-
-    return diffuseAlpha, decalAlpha
 end
 
 function LandscapingManager:setWaterplanesVisible(visible)
@@ -501,15 +512,14 @@ function LandscapingManager:updateAreaBorderShader(area)
     if rootNode ~= nil then
         local isActive = id == self.activeAreaId
         local visible = isActive or (self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY and area.visible)
-        local diffuseAlpha, decalAlpha = self:getAreaBorderAlpha()
 
         setVisibility(rootNode, false)
 
         if isActive then
             local diffuseColor, decalColor = area:getBorderColor()
-            LandscapingUtils.setAreaBorderColor(rootNode, diffuseColor, diffuseAlpha, decalColor, decalAlpha)
+            LandscapingUtils.setAreaBorderParameters(rootNode, self.borderMode, diffuseColor, nil, decalColor, nil)
         else
-            LandscapingUtils.setAreaBorderColor(rootNode, LandscapingManager.BORDER_COLOR, diffuseAlpha, LandscapingManager.BORDER_DECAL_COLOR, decalAlpha)
+            LandscapingUtils.setAreaBorderParameters(rootNode, self.borderMode, LandscapingManager.BORDER_COLOR, nil, LandscapingManager.BORDER_DECAL_COLOR, nil)
         end
 
         setVisibility(rootNode, visible)

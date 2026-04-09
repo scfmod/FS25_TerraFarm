@@ -51,15 +51,17 @@ function GlobalSettingsDialog:onGuiSetupFinished()
     self:superClass().onGuiSetupFinished(self)
 
     self.borderModeOption:setTexts({
-        g_i18n:getText('ui_areaBorderModeNormal'),
-        g_i18n:getText('ui_areaBorderModeDecal'),
-        g_i18n:getText('ui_areaBorderModeMesh'),
+        'GROUND_MESH_XRAY',
+        'GROUND_MESH_NORMAL',
+        'GROUND_ONLY',
+        'MESH_ONLY_XRAY',
+        'MESH_ONLY_NORMAL',
     })
 
     self.borderVisibilityOption:setTexts({
-        g_i18n:getText('ui_visible'),
-        g_i18n:getText('ui_activeOnly'),
-        g_i18n:getText('ui_hidden'),
+        'ALL',
+        'ACTIVE_ONLY',
+        'NONE'
     })
 end
 

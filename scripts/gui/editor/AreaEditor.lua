@@ -197,9 +197,9 @@ function AreaEditor:updateBorderColor()
 
     if self.mode == EditorMode.NONE then
         local diffuseColor, decalColor = self.area:getBorderColor()
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, diffuseColor, nil, decalColor, nil)
+        LandscapingUtils.setAreaBorderParameters(self.borderRootNode, BorderMode.GROUND_MESH_XRAY, diffuseColor, nil, decalColor, nil)
     else
-        LandscapingUtils.setAreaBorderColor(self.borderRootNode, self.editBorderColor, nil, self.editBorderDecalColor, nil)
+        LandscapingUtils.setAreaBorderParameters(self.borderRootNode, BorderMode.GROUND_MESH_XRAY, self.editBorderColor, nil, self.editBorderDecalColor, nil)
     end
 
     setVisibility(self.borderRootNode, true)

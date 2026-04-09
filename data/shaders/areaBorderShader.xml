@@ -6,6 +6,7 @@
         <Parameter name="decalColor" target="decalColor" perShapeInstance="true" type="float4" group="base" defaultValue="0 1 0 1" minValue="0 0 0 0" maxValue="1 1 1 1" />
         <Parameter name="dashNumLength" target="dashNumLength" perShapeInstance="true" type="float2" group="base" defaultValue="0 1" minValue="0 0" maxValue="1000 1" />
         <Parameter name="meshScaleZ" target="meshScaleZ" perShapeInstance="true" type="float" group="base" defaultValue="0" minValue="0" maxValue="500" />
+        <Parameter name="mode" target="mode" perShapeInstance="true" type="float" group="base" defaultValue="1" minValue="1" maxValue="5" />
     </Parameters>
 
     <UvUsages />
@@ -14,6 +15,15 @@
     <VertexAttributes>
         <VertexAttribute name="uv1" group="base" />
     </VertexAttributes>
+
+    <!--
+        - mode
+            GROUND_MESH_XRAY = 1,
+            GROUND_MESH_NORMAL = 2,
+            GROUND_ONLY = 3,
+            MESH_ONLY_XRAY = 4,
+            MESH_ONLY_NORMAL = 5,
+    -->
 
     <LodLevel startDistance="0">
         <CodeInjections>
@@ -26,7 +36,10 @@
             <CodeInjection position="VS_END">
 <![CDATA[
             Out.projPositionZW = Out.position.zw;
-            Out.position.z = Out.position.w;
+
+            if (instance.mode == 1 || instance.mode == 4)
+                Out.position.z = Out.position.w;
+
             Out.texCoord1 = convertDefaultTexCoords(In, object, In.texCoords1.xy);
 ]]>
             </CodeInjection>
@@ -41,10 +54,10 @@
             lighting = 0;
 
 #if defined(RENDER_TO_TILE_DECAL)
-            if (instance.decalColor.a < 0.01)
+            if (instance.mode == 4 || instance.mode == 5)
                 clip(-1);
 #else
-            if (instance.diffuseColor.a < 0.01)
+            if (instance.mode == 3)
                 clip(-1);
 #endif
 ]]>
@@ -61,7 +74,7 @@
             <CodeInjection position="EMISSIVE_FS">
 <![CDATA[
 #if !defined(RENDER_TO_TILE_DECAL)
-            if (instance.diffuseColor.a > 0.01)
+            if (instance.mode != 3)
                 emissiveColor.rgb = instance.diffuseColor.rgb * instance.intensitySize.x * alpha;
 #endif
 ]]>
@@ -82,7 +95,10 @@
             clip((alpha < 0.01) ? -1.0 : 1.0);
 
 #if defined(RENDER_TO_TILE_DECAL)
-            alpha *= instance.decalColor.a;
+            if (instance.mode == 4 || instance.mode == 5)
+                alpha = 0;
+            else
+                alpha *= instance.decalColor.a;
 #else
             alpha *= instance.diffuseColor.a;
 #endif
