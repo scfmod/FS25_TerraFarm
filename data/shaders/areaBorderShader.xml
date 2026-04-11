@@ -37,7 +37,9 @@
 <![CDATA[
             Out.projPositionZW = Out.position.zw;
 
+#if !defined(RENDER_TO_TILE_DECAL)
             if (instance.mode == 1 || instance.mode == 4)
+#endif
                 Out.position.z = Out.position.w;
 
             Out.texCoord1 = convertDefaultTexCoords(In, object, In.texCoords1.xy);
