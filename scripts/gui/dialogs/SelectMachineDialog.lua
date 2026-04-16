@@ -66,8 +66,8 @@ function SelectMachineDialog:onOpen()
 
     self:updateItems()
 
-    g_messageCenter:subscribe(ModMessageType.MACHINE_ADDED, self.forceReload, self)
-    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVED, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_ADD, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVE, self.forceReload, self)
 end
 
 function SelectMachineDialog:onClose()

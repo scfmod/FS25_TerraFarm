@@ -24,14 +24,12 @@ source(g_modDirectory .. 'scripts/landscaping/LandscapingWaterplane.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingBase.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingInput.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingInputFlatten.lua')
-source(g_modDirectory .. 'scripts/landscaping/LandscapingInputLower.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingInputPaint.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingInputSlope.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingInputSmooth.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingOutput.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingOutputFlatten.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingOutputPaint.lua')
-source(g_modDirectory .. 'scripts/landscaping/LandscapingOutputRaise.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingOutputSlope.lua')
 source(g_modDirectory .. 'scripts/landscaping/LandscapingOutputSmooth.lua')
 
@@ -62,8 +60,13 @@ LandscapingArea.createXMLSchema()
 ---@field nameToTerrainLayer table<string, TerrainLayerItem>
 ---@field idToTerrainLayer table<number, TerrainLayerItem>
 ---
----@field activeAreaId? string
----@field lastActiveAreaId? string
+---@field activeInputAreaId? string
+---@field activeInputAreaEnabled boolean
+---@field lastActiveInputAreaId? string
+---
+---@field activeOutputAreaId? string
+---@field activeOutputAreaEnabled boolean
+---@field lastActiveOutputAreaId? string
 LandscapingManager = {}
 LandscapingManager.BORDER_SHAPE_FILENAME = g_modDirectory .. 'data/areaBorderLine.i3d'
 
@@ -144,9 +147,12 @@ function LandscapingManager.new()
     g_modController:subscribe(ModEvent.onSendInitialClientState, self.onSendInitialClientState, self)
 
     if g_client ~= nil then
-        g_messageCenter:subscribe(ModMessageType.ACTIVE_AREA_CHANGED, self.onActiveAreaChanged, self)
-        g_messageCenter:subscribe(ModMessageType.ACTIVE_MACHINE_CHANGED, self.onActiveMachineChanged, self)
-        g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATED, self.onAreaUpdated, self)
+        g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_INPUT_AREA, self.onSetActiveInputArea, self)
+        g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_INPUT_AREA_STATE, self.onSetActiveInputAreaEnabled, self)
+        g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_OUTPUT_AREA, self.onSetActiveOutputArea, self)
+        g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_OUTPUT_AREA_STATE, self.onSetActiveOutputAreaEnabled, self)
+        g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_MACHINE, self.onSetActiveMachine, self)
+        g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATE, self.onAreaUpdated, self)
     end
 
     return self
@@ -271,26 +277,79 @@ function LandscapingManager:getDefaultFillTypeIndex()
 end
 
 ---@param vehicle? Machine
-function LandscapingManager:onActiveMachineChanged(vehicle)
-    ---@type string?
-    local id = nil
-
+function LandscapingManager:onSetActiveMachine(vehicle)
     if vehicle ~= nil then
-        id = vehicle:getMachineLandscapingAreaId()
+        local inputAreaId, inputEnabled = vehicle:getMachineInputAreaId()
+        local outputAreaId, outputEnabled = vehicle:getMachineOutputAreaId()
+
+        self.activeInputAreaEnabled = inputEnabled
+        self.activeOutputAreaEnabled = outputEnabled
+
+        self:setActiveInputAreaId(inputAreaId, true)
+        self:setActiveOutputAreaId(outputAreaId, true)
+    else
+        self:setActiveInputAreaId(nil, true)
+        self:setActiveOutputAreaId(nil, true)
     end
 
-    self:setActiveAreaId(id)
+    self:updateActiveAreaBorder()
 end
 
----@param uniqueId? string
+---@param id? string
 ---@param vehicle Machine
-function LandscapingManager:onActiveAreaChanged(uniqueId, vehicle)
-    self:setActiveAreaId(uniqueId)
+function LandscapingManager:onSetActiveInputArea(id, vehicle)
+    self.activeInputAreaEnabled = vehicle:getIsMachineInputAreaEnabled()
+
+    self:setActiveInputAreaId(id)
 end
 
----@param area LandscapingArea
-function LandscapingManager:onAreaUpdated(area)
-    if area.uniqueId == self.activeAreaId then
+---@param id? string
+---@param vehicle Machine
+function LandscapingManager:onSetActiveOutputArea(id, vehicle)
+    self.activeOutputAreaEnabled = vehicle:getIsMachineOutputAreaEnabled()
+
+    self:setActiveOutputAreaId(id)
+end
+
+---@param id string
+---@param enabled boolean
+---@param vehicle Machine
+function LandscapingManager:onSetActiveInputAreaEnabled(id, enabled, vehicle)
+    if id == self.activeInputAreaId then
+        self.activeInputAreaEnabled = enabled
+
+        self:updateActiveAreaBorder()
+    end
+end
+
+---@param id string
+---@param enabled boolean
+---@param vehicle Machine
+function LandscapingManager:onSetActiveOutputAreaEnabled(id, enabled, vehicle)
+    if id == self.activeOutputAreaId then
+        self.activeOutputAreaEnabled = enabled
+
+        self:updateActiveAreaBorder()
+    end
+end
+
+---@return LandscapingArea?
+---@return boolean isEnabled
+---@nodiscard
+function LandscapingManager:getActiveInputArea()
+    return self.areas[self.activeInputAreaId], self.activeInputAreaEnabled
+end
+
+---@return LandscapingArea?
+---@return boolean isEnabled
+---@nodiscard
+function LandscapingManager:getActiveOutputArea()
+    return self.areas[self.activeOutputAreaId], self.activeOutputAreaEnabled
+end
+
+---@param id string
+function LandscapingManager:onAreaUpdated(id)
+    if id == self.activeInputAreaId or id == self.activeOutputAreaId then
         self:updateActiveAreaBorder()
     end
 end
@@ -316,16 +375,36 @@ function LandscapingManager:setBorderVisibilityMode(mode, noUpdateSettings)
 end
 
 ---@param id? string
-function LandscapingManager:setActiveAreaId(id)
+---@param noUpdate? boolean
+function LandscapingManager:setActiveInputAreaId(id, noUpdate)
     if self.areas[id] == nil then
         id = nil
     end
 
-    if self.activeAreaId ~= id then
-        self.lastActiveAreaId = self.activeAreaId
-        self.activeAreaId = id
+    if self.activeInputAreaId ~= id then
+        self.lastActiveInputAreaId = self.activeInputAreaId
+        self.activeInputAreaId = id
 
-        self:updateActiveAreaBorder()
+        if not noUpdate then
+            self:updateActiveAreaBorder()
+        end
+    end
+end
+
+---@param id? string
+---@param noUpdate? boolean
+function LandscapingManager:setActiveOutputAreaId(id, noUpdate)
+    if self.areas[id] == nil then
+        id = nil
+    end
+
+    if self.activeOutputAreaId ~= id then
+        self.lastActiveOutputAreaId = self.activeOutputAreaId
+        self.activeOutputAreaId = id
+
+        if not noUpdate then
+            self:updateActiveAreaBorder()
+        end
     end
 end
 
@@ -336,13 +415,14 @@ end
 ---@param area LandscapingArea
 ---@param forceVisibility? boolean
 function LandscapingManager:updateAreaBorderVisibility(area, forceVisibility)
-    local rootNode = self.areaBorderRootNode[area.uniqueId]
+    local id = area.uniqueId
+    local rootNode = self.areaBorderRootNode[id]
 
     if rootNode ~= nil then
         if forceVisibility ~= nil then
             setVisibility(rootNode, forceVisibility)
         else
-            local isActive = self.activeAreaId == area.uniqueId
+            local isActive = id == self.activeInputAreaId or id == self.activeOutputAreaId
             local visible = area.visible and (self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY or isActive)
 
             setVisibility(rootNode, visible)
@@ -453,7 +533,7 @@ function LandscapingManager:registerArea(area, noEventSend)
             self:updateAreaBorderShader(area)
         end
 
-        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_REGISTERED, area)
+        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_REGISTER, area)
     else
         Logging.warning('LandscapingManager:registerArea() Trying to register duplicate uniqueId entry "%s"', area.uniqueId)
     end
@@ -471,7 +551,7 @@ function LandscapingManager:deleteAreaByUniqueId(uniqueId, noEventSend)
             self.areaBorderNodes[uniqueId] = nil
         end
 
-        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_DELETED, uniqueId)
+        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_DELETE, uniqueId)
     else
         Logging.warning('LandscapingManager:deleteAreaByUniqueId() Unknown uniqueId "%s"', uniqueId)
     end
@@ -491,7 +571,7 @@ function LandscapingManager:updateArea(area, noEventSend)
             self:updateAreaBorderShader(area)
         end
 
-        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_UPDATED, area)
+        g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_UPDATE, area.uniqueId)
     else
         Logging.error('LandscapingManager:updateArea() Unknown uniqueId "%s"', area.uniqueId)
     end
@@ -510,7 +590,15 @@ function LandscapingManager:updateAreaBorderShader(area)
     local rootNode = self.areaBorderRootNode[id]
 
     if rootNode ~= nil then
-        local isActive = id == self.activeAreaId
+        -- local isActive = id == self.activeInputAreaId or id == self.activeOutputAreaId
+        local isActive = false
+
+        if id == self.activeInputAreaId and self.activeInputAreaEnabled then
+            isActive = true
+        elseif id == self.activeOutputAreaId and self.activeOutputAreaEnabled then
+            isActive = true
+        end
+
         local visible = isActive or (self.borderVisibilityMode ~= BorderVisibilityMode.ACTIVE_ONLY and area.visible)
 
         setVisibility(rootNode, false)
@@ -533,18 +621,28 @@ function LandscapingManager:updateAllAreaBordersShader()
 end
 
 function LandscapingManager:updateActiveAreaBorder()
-    local lastArea = self.areas[self.lastActiveAreaId]
+    local areas = self.areas
 
-    if lastArea ~= nil then
-        self:updateAreaBorderShader(lastArea)
+    local lastInputArea = areas[self.lastActiveInputAreaId]
+    if lastInputArea ~= nil then
+        self:updateAreaBorderShader(lastInputArea)
+    end
+    self.lastActiveInputAreaId = nil
+
+    local lastOutputArea = areas[self.lastActiveOutputAreaId]
+    if lastOutputArea ~= nil then
+        self:updateAreaBorderShader(lastOutputArea)
+    end
+    self.lastActiveOutputAreaId = nil
+
+    local activeInputArea = areas[self.activeInputAreaId]
+    if activeInputArea ~= nil then
+        self:updateAreaBorderShader(activeInputArea)
     end
 
-    self.lastActiveAreaId = nil
-
-    local activeArea = self.areas[self.activeAreaId]
-
-    if activeArea ~= nil then
-        self:updateAreaBorderShader(activeArea)
+    local activeOutputArea = areas[self.activeOutputAreaId]
+    if activeOutputArea ~= nil then
+        self:updateAreaBorderShader(activeOutputArea)
     end
 end
 
@@ -655,7 +753,7 @@ function LandscapingManager:registerWaterplane(waterplane, noEventSend)
 
         self:updateWaterplaneShapes(waterplane)
 
-        g_messageCenter:publish(ModMessageType.WATERPLANE_REGISTERED, waterplane)
+        g_messageCenter:publish(ModMessageType.WATERPLANE_REGISTER, waterplane)
     else
         Logging.error('LandscapingManager:registerWaterplane() Trying to register a waterplane with duplicate uniqueId')
     end
@@ -677,7 +775,7 @@ function LandscapingManager:updateWaterplane(waterplane, noEventSend)
 
         self:updateWaterplaneShapes(waterplane)
 
-        g_messageCenter:publish(ModMessageType.WATERPLANE_UPDATED, waterplane)
+        g_messageCenter:publish(ModMessageType.WATERPLANE_UPDATE, waterplane)
     else
         Logging.error('LandscapingManager:updateWaterplane() Unknown uniqueId "%s"', waterplane.uniqueId)
     end
@@ -698,7 +796,7 @@ function LandscapingManager:deleteWaterplaneByUniqueId(uniqueId, noEventSend)
         delete(groupNode)
         self.waterplaneGroupNodes[uniqueId] = nil
 
-        g_messageCenter:publish(ModMessageType.WATERPLANE_DELETED, uniqueId)
+        g_messageCenter:publish(ModMessageType.WATERPLANE_DELETE, uniqueId)
     end
 end
 
@@ -722,7 +820,7 @@ function LandscapingManager:setWaterplaneVisible(uniqueId, visible, noEventSend)
         waterplane.visible = visible
         setVisibility(groupNode, visible)
 
-        g_messageCenter:publish(ModMessageType.WATERPLANE_UPDATED, waterplane)
+        g_messageCenter:publish(ModMessageType.WATERPLANE_UPDATE, waterplane)
     end
 end
 

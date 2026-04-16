@@ -3,10 +3,7 @@
 ---@field listEmptyText TextElement
 ---@field buttonBox BoxLayoutElement
 ---@field applyButton ButtonElement
----@field createAreaButton ButtonElement
----@field editAreaButton ButtonElement
 ---@field items LandscapingArea[]
----@field vehicle? Vehicle
 ---@field superClass fun(): MessageDialog
 SelectAreaDialog = {}
 
@@ -53,10 +50,14 @@ function SelectAreaDialog:setSelectCallback(fn, target)
     self.selectCallbackTarget = target
 end
 
----@param vehicle Vehicle?
-function SelectAreaDialog:show(vehicle)
-    self.vehicle = vehicle
+---@param selectId? string
+---@param dialogTitle string
+function SelectAreaDialog:show(selectId, dialogTitle)
+    self:setText(dialogTitle)
+
     g_gui:showDialog(SelectAreaDialog.CLASS_NAME)
+
+    self:setSelectedId(selectId)
 end
 
 function SelectAreaDialog:onOpen()
@@ -65,9 +66,9 @@ function SelectAreaDialog:onOpen()
     self:updateItems()
     self:updateMenuButtons()
 
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_REGISTERED, self.forceReload, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATED, self.forceReload, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETED, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_REGISTER, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATE, self.forceReload, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETE, self.forceReload, self)
 end
 
 function SelectAreaDialog:onClose()
@@ -89,11 +90,23 @@ function SelectAreaDialog:updateItems()
     self.items = g_landscapingManager:getAreas()
 
     table.sort(self.items, function (a, b)
-        return a.name < b.name
+        return a.name:upper() < b.name:upper()
     end)
 
     self.list:reloadData()
     self.listEmptyText:setVisible(#self.items == 0)
+end
+
+---@param id? string
+function SelectAreaDialog:setSelectedId(id)
+    if id ~= nil then
+        for index, area in ipairs(self.items) do
+            if area.uniqueId == id then
+                self.list:setSelectedIndex(index)
+                return
+            end
+        end
+    end
 end
 
 function SelectAreaDialog:getNumberOfItemsInSection()
@@ -108,10 +121,16 @@ function SelectAreaDialog:populateCellForItemInSection(list, section, index, cel
     local area = self.items[index]
 
     if area ~= nil then
-        cell:getAttribute('image'):setImageSlice(nil, area:getIconSliceId())
+        ---@type BitmapElement
+        local imageElement = cell:getAttribute('image')
+        local r, g, b = area:getDisplayColor()
+
+        imageElement:setImageColor(nil, r, g, b)
+        imageElement:setImageColor(GuiOverlay.STATE_SELECTED, r, g, b)
+        imageElement:setImageSlice(nil, area:getIconSliceId())
+
         cell:getAttribute('name'):setText(area:getName())
         cell:getAttribute('text'):setText(area:getTypeName())
-        cell:getAttribute('status'):setText(area.visible and g_i18n:getText('ui_visible') or g_i18n:getText('ui_hidden'))
     end
 end
 
@@ -134,37 +153,26 @@ end
 ---@param index number?
 function SelectAreaDialog:sendCallback(index)
     local item = self.items[index]
+    local id = item and item.uniqueId or nil
 
     self:close()
 
     if self.selectCallbackFunction ~= nil then
         if self.selectCallbackTarget ~= nil then
-            self.selectCallbackFunction(self.selectCallbackTarget, item)
+            self.selectCallbackFunction(self.selectCallbackTarget, id)
         else
-            self.selectCallbackFunction(item)
+            self.selectCallbackFunction(id)
         end
     end
 end
 
 function SelectAreaDialog:onClickBack(forceBack, usedMenuButton)
     if (self.isCloseAllowed or forceBack) and not usedMenuButton then
-        self:sendCallback(nil)
+        self:close()
 
         return false
     else
         return true
-    end
-end
-
-function SelectAreaDialog:onClickCreateArea()
-    LandscapingUtils.createAreaInEditor(false)
-end
-
-function SelectAreaDialog:onClickEditArea()
-    local selectedItem = self:getSelectedItem()
-
-    if selectedItem ~= nil then
-        LandscapingUtils.openAreaInEditor(selectedItem, false)
     end
 end
 
@@ -175,10 +183,7 @@ end
 
 function SelectAreaDialog:updateMenuButtons()
     local selectedItem = self:getSelectedItem()
-    local hasPermission = ModUtils.getPlayerHasPermission('landscaping')
 
     self.applyButton:setDisabled(selectedItem == nil)
-    self.createAreaButton:setVisible(hasPermission and g_landscapingManager:getCanCreateArea())
-    self.editAreaButton:setVisible(hasPermission and selectedItem ~= nil)
     self.buttonBox:invalidateLayout()
 end

@@ -88,6 +88,7 @@
         <Profile name="tfGlobalMaterials_list" extends="list" with="anchorMiddleCenter">
             <size value="350px 560px" />
 
+            <wrapAround value="true" />
             <isHorizontalList value="false" />
             <listItemSpacing value="2px" />
         </Profile>
@@ -106,6 +107,8 @@
             <position value="12px 0" />
 
             <imageSliceId value="noSlice" />
+            <imageColor value="1 1 1 0.5" />
+            <imageSelectedColor value="1 1 1 1" />
         </Profile>
 
 
@@ -114,8 +117,8 @@
             <position value="56px 0" />
 
             <textAutoWidth value="true" />
-            <textColor value="0.89627 0.92158 0.81485 0.8" />
-            <textSelectedColor value="$preset_fs25_colorGreen" />
+            <textColor value="1 1 1 0.5" />
+            <textSelectedColor value="1 1 1 1" />
         </Profile>
 
         <Profile name="tf_globalMaterialsBg" extends="tf_dialogBg">

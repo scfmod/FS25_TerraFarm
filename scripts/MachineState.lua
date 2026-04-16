@@ -39,8 +39,6 @@ DrivingDirectionMode = {
 --- EXPERIMENTAL
 ---@field allowGradingUp boolean
 ---@field forceNodes boolean
----@field ignoreAreaMaterial boolean
----@field ignoreAreaGroundTextures boolean
 ---@field updateCollisions boolean
 MachineState = {}
 
@@ -83,8 +81,6 @@ function MachineState.registerSavegameXMLPaths(schema, key)
 
     schema:register(XMLValueType.BOOL, key .. '#forceNodes')
     schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
-    schema:register(XMLValueType.BOOL, key .. '#ignoreAreaMaterial')
-    schema:register(XMLValueType.BOOL, key .. '#ignoreAreaGroundTextures')
     schema:register(XMLValueType.BOOL, key .. '#updateCollisions')
 end
 
@@ -126,8 +122,6 @@ function MachineState.new()
 
     self.allowGradingUp = false
     self.forceNodes = false
-    self.ignoreAreaMaterial = false
-    self.ignoreAreaGroundTextures = false
     self.updateCollisions = true
 
     return self
@@ -196,8 +190,6 @@ function MachineState:saveToXMLFile(xmlFile, key)
     xmlFile:setValue(key .. '#allowGradingUp', self.allowGradingUp)
     xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
 
-    xmlFile:setValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
-    xmlFile:setValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
     xmlFile:setValue(key .. '#updateCollisions', self.updateCollisions)
 end
 
@@ -237,8 +229,6 @@ function MachineState:loadFromXMLFile(xmlFile, key)
     self.allowGradingUp = xmlFile:getValue(key .. '#allowGradingUp', self.allowGradingUp)
     self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
 
-    self.ignoreAreaMaterial = xmlFile:getValue(key .. '#ignoreAreaMaterial', self.ignoreAreaMaterial)
-    self.ignoreAreaGroundTextures = xmlFile:getValue(key .. '#ignoreAreaGroundTextures', self.ignoreAreaGroundTextures)
     self.updateCollisions = xmlFile:getValue(key .. '#updateCollisions', self.updateCollisions)
 end
 
@@ -280,8 +270,6 @@ function MachineState:clone()
     clone.allowGradingUp = self.allowGradingUp
     clone.forceNodes = self.forceNodes
 
-    clone.ignoreAreaMaterial = self.ignoreAreaMaterial
-    clone.ignoreAreaGroundTextures = self.ignoreAreaGroundTextures
     clone.updateCollisions = self.updateCollisions
 
     return clone
@@ -323,9 +311,6 @@ function MachineState:writeStream(streamId, connection)
     streamWriteBool(streamId, self.allowGradingUp)
     streamWriteBool(streamId, self.forceNodes)
 
-    streamWriteBool(streamId, self.ignoreAreaMaterial)
-    streamWriteBool(streamId, self.ignoreAreaGroundTextures)
-
     streamWriteBool(streamId, self.updateCollisions)
 end
 
@@ -364,9 +349,6 @@ function MachineState:readStream(streamId, connection)
 
     self.allowGradingUp = streamReadBool(streamId)
     self.forceNodes = streamReadBool(streamId)
-
-    self.ignoreAreaMaterial = streamReadBool(streamId)
-    self.ignoreAreaGroundTextures = streamReadBool(streamId)
 
     self.updateCollisions = streamReadBool(streamId)
 end

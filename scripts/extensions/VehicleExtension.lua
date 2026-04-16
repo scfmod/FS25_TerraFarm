@@ -53,9 +53,20 @@ local function registerMachineFunctions(vehicle)
     vehicle['handleDeformationInput'] = Machine.handleDeformationInput
     vehicle['setResourcesEnabled'] = Machine.setResourcesEnabled
 
-    vehicle['getMachineLandscapingAreaId'] = Machine.getMachineLandscapingAreaId
-    vehicle['getMachineLandscapingArea'] = Machine.getMachineLandscapingArea
-    vehicle['setMachineLandscapingArea'] = Machine.setMachineLandscapingArea
+    vehicle['setMachineInputAreaId'] = Machine.setMachineInputAreaId
+    vehicle['getMachineInputAreaId'] = Machine.getMachineInputAreaId
+    vehicle['getMachineInputArea'] = Machine.getMachineInputArea
+    vehicle['setIsMachineInputAreaEnabled'] = Machine.setIsMachineInputAreaEnabled
+    vehicle['getIsMachineInputAreaEnabled'] = Machine.getIsMachineInputAreaEnabled
+
+    vehicle['setMachineOutputAreaId'] = Machine.setMachineOutputAreaId
+    vehicle['getMachineOutputAreaId'] = Machine.getMachineOutputAreaId
+    vehicle['getMachineOutputArea'] = Machine.getMachineOutputArea
+    vehicle['setIsMachineOutputAreaEnabled'] = Machine.setIsMachineOutputAreaEnabled
+    vehicle['getIsMachineOutputAreaEnabled'] = Machine.getIsMachineOutputAreaEnabled
+
+    vehicle['getMachineType'] = Machine.getMachineType
+    vehicle['getMachineWorkArea'] = Machine.getMachineWorkArea
 end
 
 ---@param vehicle Vehicle

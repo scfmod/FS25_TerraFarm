@@ -177,16 +177,16 @@ function InGameMenuTerraFarmFrame:onFrameOpen()
 
     self.detailBox:setVisible(#self.vehicles > 0)
 
-    g_messageCenter:subscribe(ModMessageType.MACHINE_ADDED, self.onMachineAdded, self)
-    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVED, self.onMachineRemoved, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_ADD, self.onMachineAdd, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVE, self.onMachineRemove, self)
 
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETED, self.updateAreas, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_REGISTERED, self.updateAreas, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATED, self.updateAreas, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETE, self.updateAreas, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_REGISTER, self.updateAreas, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATE, self.updateAreas, self)
 
-    g_messageCenter:subscribe(ModMessageType.WATERPLANE_DELETED, self.updateWaterplanes, self)
-    g_messageCenter:subscribe(ModMessageType.WATERPLANE_REGISTERED, self.updateWaterplanes, self)
-    g_messageCenter:subscribe(ModMessageType.WATERPLANE_UPDATED, self.updateWaterplanes, self)
+    g_messageCenter:subscribe(ModMessageType.WATERPLANE_DELETE, self.updateWaterplanes, self)
+    g_messageCenter:subscribe(ModMessageType.WATERPLANE_REGISTER, self.updateWaterplanes, self)
+    g_messageCenter:subscribe(ModMessageType.WATERPLANE_UPDATE, self.updateWaterplanes, self)
 
     g_messageCenter:subscribe(MessageType.MASTERUSER_ADDED, self.onMasterUserAdded, self)
     g_messageCenter:subscribe(MessageType.PLAYER_FARM_CHANGED, self.onPlayerFarmChanged, self)
@@ -315,9 +315,14 @@ function InGameMenuTerraFarmFrame:populateCellForItemInSection(list, section, in
         local area = self.areas[index]
 
         if area ~= nil then
-            cell:getAttribute('icon'):setImageSlice(nil, area:getIconSliceId())
+            local r, g, b = area:getDisplayColor()
+            ---@type BitmapElement
+            local imageElement = cell:getAttribute('icon')
+
+            imageElement:setImageColor(nil, r, g, b)
+            imageElement:setImageSlice(nil, area:getIconSliceId())
+
             cell:getAttribute('name'):setText(area:getName())
-            -- cell:getAttribute('id'):setText(area.uniqueId)
             cell:getAttribute('type'):setText(area:getTypeName())
             cell:getAttribute('status'):setText(area.visible and Editor.L10N_SYMBOL.VISIBLE or Editor.L10N_SYMBOL.HIDDEN)
         end
@@ -491,12 +496,12 @@ function InGameMenuTerraFarmFrame:getSelectedWaterplane()
 end
 
 ---@param vehicle Machine
-function InGameMenuTerraFarmFrame:onMachineAdded(vehicle)
+function InGameMenuTerraFarmFrame:onMachineAdd(vehicle)
     self:updateVehicles()
 end
 
 ---@param vehicle Machine
-function InGameMenuTerraFarmFrame:onMachineRemoved(vehicle)
+function InGameMenuTerraFarmFrame:onMachineRemove(vehicle)
     if table.hasElement(self.vehicles, vehicle) then
         self:updateVehicles()
     end

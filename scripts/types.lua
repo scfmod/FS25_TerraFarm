@@ -4,15 +4,6 @@
 
 ---@class FillUnitVehicle : Vehicle, FillUnit
 
----@class MachineType
----@field id string
----@field name string
----@field useDischargeable boolean
----@field useDrivingDirection boolean
----@field useFillUnit boolean
----@field useLeveler boolean
----@field useShovel boolean
-
 ---@class LandscapingAreaColor
 ---@field name string
 ---@field diffuseColor number[]
@@ -38,9 +29,14 @@
 ---@field xmlFilenameConfig string? -- Only used if isExternal is true
 ---@field state MachineState
 ---@field collisionNodes? number[]
----@field landscapingAreaId? string
+---
+---@field inputAreaId? string
+---@field inputAreaEnabled boolean
 ---@field inputTerrainLayerId number
+---@field outputAreaId? string
+---@field outputAreaEnabled boolean
 ---@field outputTerrainLayerId number
+---
 ---@field fillUnitIndex number?
 ---@field fillUnit FillUnitObject?
 ---@field fillTypeIndex number
@@ -58,6 +54,7 @@
 ---@field hasShovel boolean
 ---@field hasTurnOnVehicle boolean
 ---@field hasTrailer boolean
+---
 ---@field enabled boolean
 ---@field resourcesEnabled boolean
 ---@field active boolean
@@ -65,6 +62,7 @@
 ---@field modesInput MachineMode[]
 ---@field outputMode MachineMode
 ---@field modesOutput MachineMode[]
+---
 ---@field effectAnimationNodes table
 ---@field effects Effect[]
 ---@field sample SampleObject?

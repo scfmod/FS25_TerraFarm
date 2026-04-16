@@ -6,110 +6,302 @@
                 <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_landscapingArea" />
             </Bitmap>
 
-            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
-                <Bitmap profile="tfMenuFrame_infoBox" id="infoBox">
-                    <BoxLayout handleFocus="false" profile="tfMenuFrame_infoBoxLayout" id="statusLayout">
-                        <Text profile="tfMenuFrame_infoTitle" id="areaTitle" />
-                        <Text profile="tfMenuFrame_infoText" id="areaText" />
-                    </BoxLayout>
+            <ScrollingLayout profile="tfAreaFrame_contentLayout" id="boxLayout" autoValidateLayout="true">
+                <BoxLayout profile="tfAreaFrame_actionsLayout">
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <Button profile="tfAreaFrame_actionItemButton" id="inputSelectButtonElement" text="$l10n_button_select" onClick="onClickSelectArea">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
 
-                    <Bitmap profile="tfMenuFrame_infoBoxImage" id="areaImage" />
-                </Bitmap>
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <Button profile="tfAreaFrame_actionItemButton" id="inputResetButtonElement" text="$l10n_button_reset" onClick="onClickReset">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
-                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_selectArea" />
-                    <Button id="selectAreaButton" onClick="onClickSelectArea" profile="tfMenuFrame_button" text="$l10n_ui_selectArea">
-                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
-                    </Button>
-                </Bitmap>
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <Button profile="tfAreaFrame_actionItemButton" id="inputEditButtonElement" text="$l10n_ui_edit" onClick="onClickEditArea">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
-                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_machineCopy" />
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <BinaryOption profile="tfAreaFrame_actionItemOption" id="inputEnabledOptionElement" onClick="onClickStateOption" />
+                        <Text profile="tfAreaFrame_actionItemText" text="$l10n_setting_disasterDestructionState_enabled" textColor="1 1 1 0.1" />
+                    </GuiElement>
 
-                    <Button id="selectMachineButton" onClick="onClickSelectMachine" profile="tfMenuFrame_button" text="$l10n_ui_machines">
-                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
-                    </Button>
-                </Bitmap>
+                    <GuiElement profile="tfAreaFrame_actionItem" margin="0 136px 0 0">
+                        <Button profile="tfAreaFrame_actionItemButton" id="outputSelectButtonElement" text="$l10n_button_select" onClick="onClickSelectArea">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
-                    <Button id="resetButton" onClick="onClickReset" profile="tfMenuFrame_button" text="$l10n_button_reset">
-                        <ThreePartBitmap profile="fs25_settingsButtonBg" />
-                    </Button>
-                </Bitmap>
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <Button profile="tfAreaFrame_actionItemButton" id="outputResetButtonElement" text="$l10n_button_reset" onClick="onClickReset">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
 
-                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
-                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_inGameMenuModeSettings" />
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <Button profile="tfAreaFrame_actionItemButton" id="outputEditButtonElement" text="$l10n_ui_edit" onClick="onClickEditArea">
+                            <ThreePartBitmap profile="fs25_settingsButtonBg" />
+                        </Button>
+                    </GuiElement>
+
+                    <GuiElement profile="tfAreaFrame_actionItem">
+                        <BinaryOption profile="tfAreaFrame_actionItemOption" id="outputEnabledOptionElement" onClick="onClickStateOption" />
+                        <Text profile="tfAreaFrame_actionItemText" text="$l10n_setting_disasterDestructionState_enabled" textColor="1 1 1 0.1" />
+                    </GuiElement>
+                </BoxLayout>
+
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader" id="inputHeaderElement">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_terraform" />
                 </GuiElement>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
-                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_ignoreAreaMaterial" />
-                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" id="ignoreAreaMaterialOption" name="ignoreAreaMaterial" />
-                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_ignoreAreaMaterialTooltip" />
+                <Bitmap profile="tfAreaFrame_layoutItem">
+                    <GuiElement profile="tfAreaFrame_layoutItemContentPlaceholder" id="inputPlaceholderElement">
+                        <Text profile="tfAreaFrame_layoutItemContentPlaceholderText" text="$l10n_ui_notSet" />
+                    </GuiElement>
+                    <GuiElement profile="tfAreaFrame_layoutItemContent" id="inputElement">
+                        <GuiElement profile="tfAreaFrame_layoutItemArea">
+                            <Bitmap profile="tfAreaFrame_layoutItemAreaImage" id="inputAreaImageElement" />
+                            <Text profile="tfAreaFrame_layoutItemAreaTitle" id="inputAreaTitleElement" />
+                            <Text profile="tfAreaFrame_layoutItemAreaText" id="inputAreaTextElement" />
+                        </GuiElement>
+
+                        <BoxLayout profile="tfAreaFrame_layoutItemOptions">
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <Bitmap profile="tfAreaFrame_layoutItemOptionImage" id="inputMaterialImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitle" text="$l10n_ui_material" />
+                                <Text profile="tfAreaFrame_layoutItemOptionText" id="inputMaterialTextElement" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <TFTerrainLayer profile="tfAreaFrame_layoutItemOptionImage" id="inputTerraformImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitle" text="$l10n_ui_terraformTexture" />
+                                <Text profile="tfAreaFrame_layoutItemOptionText" id="inputTerraformTextElement" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <TFTerrainLayer profile="tfAreaFrame_layoutItemOptionImageDisabled" id="inputDischargeImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitleDisabled" text="$l10n_ui_dischargeTexture" />
+                                <Text profile="tfAreaFrame_layoutItemOptionTextDisabled" id="inputDischargeTextElement" text="test long text here in the discharge text element" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <Text profile="tfAreaFrame_layoutItemOptionTitle" text="$l10n_ui_restrictArea" position="0 8px" />
+                                <Text profile="tfAreaFrame_layoutItemOptionText" id="inputAreaStateTextElement" position="0 -8px" textUpperCase="true" />
+                            </GuiElement>
+                        </BoxLayout>
+                    </GuiElement>
                 </Bitmap>
 
-                <Bitmap profile="tfMenuFrame_optionWrapper">
-                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_ignoreAreaGroundTextures" />
-                    <BinaryOption profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" id="ignoreAreaGroundTexturesOption" name="ignoreAreaGroundTextures" />
-                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_ignoreAreaGroundTexturesTooltip" />
-                </Bitmap>
+                <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader" id="outputHeaderElement">
+                    <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_discharge" />
+                </GuiElement>
 
+                <Bitmap profile="tfAreaFrame_layoutItem">
+                    <GuiElement profile="tfAreaFrame_layoutItemContentPlaceholder" id="outputPlaceholderElement">
+                        <Text profile="tfAreaFrame_layoutItemContentPlaceholderText" text="$l10n_ui_notSet" />
+                    </GuiElement>
+                    <GuiElement profile="tfAreaFrame_layoutItemContent" id="outputElement">
+                        <GuiElement profile="tfAreaFrame_layoutItemArea">
+                            <Bitmap profile="tfAreaFrame_layoutItemAreaImage" id="outputAreaImageElement" />
+                            <Text profile="tfAreaFrame_layoutItemAreaTitle" id="outputAreaTitleElement" />
+                            <Text profile="tfAreaFrame_layoutItemAreaText" id="outputAreaTextElement" />
+                        </GuiElement>
+
+                        <BoxLayout profile="tfAreaFrame_layoutItemOptions">
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <Bitmap profile="tfAreaFrame_layoutItemOptionImageDisabled" id="outputMaterialImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitleDisabled" text="$l10n_ui_material" />
+                                <Text profile="tfAreaFrame_layoutItemOptionTextDisabled" id="outputMaterialTextElement" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <TFTerrainLayer profile="tfAreaFrame_layoutItemOptionImageDisabled" id="outputTerraformImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitleDisabled" text="$l10n_ui_terraformTexture" />
+                                <Text profile="tfAreaFrame_layoutItemOptionTextDisabled" id="outputTerraformTextElement" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <GuiElement profile="tfAreaFrame_layoutItemOptionImageWrapper">
+                                    <TFTerrainLayer profile="tfAreaFrame_layoutItemOptionImage" id="outputDischargeImageElement" />
+                                </GuiElement>
+                                <Text profile="tfAreaFrame_layoutItemOptionTitle" text="$l10n_ui_dischargeTexture" />
+                                <Text profile="tfAreaFrame_layoutItemOptionText" id="outputDischargeTextElement" />
+                            </GuiElement>
+
+                            <GuiElement profile="tfAreaFrame_layoutItemOption">
+                                <Text profile="tfAreaFrame_layoutItemOptionTitle" text="$l10n_ui_restrictArea" position="0 8px" />
+                                <Text profile="tfAreaFrame_layoutItemOptionText" id="outputAreaStateTextElement" position="0 -8px" textUpperCase="true" />
+                            </GuiElement>
+                        </BoxLayout>
+                    </GuiElement>
+                </Bitmap>
             </ScrollingLayout>
 
             <Bitmap profile="tfMenuFrame_contentShadowTop" />
             <Bitmap profile="tfMenuFrame_contentShadowBottom" />
-
-            <ThreePartBitmap profile="tf_listSliderBox">
-                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
-            </ThreePartBitmap>
         </Bitmap>
     </GuiElement>
 
     <GuiProfiles>
-        <Profile name="tfMenuFrame_contentDescriptionText" extends="textDefault">
-            <size value="100% 64px" />
-
-            <textOffset value="8px 0" />
+        <Profile name="tfAreaFrame_contentLayout" extends="tfMenuFrame_contentLayout">
+            <alignmentX value="right" />
         </Profile>
-
-        <Profile name="tfMenuFrame_infoBox" extends="baseReference">
-            <size value="1000px 96px" />
-            <margin value="0px 64px 0px 0px" />
-
-            <imageColor value="0.33716 0.55834 0.0003 1" />
-            <imageDisabledColor value="0 0 0 0.5" />
-        </Profile>
-
-        <Profile name="tfMenuFrame_infoBoxLayout" extends="baseReference" with="anchorMiddleCenter">
-            <size value="100% 94px" />
-
-            <imageColor value="0.01 0.01 0.01 1" />
-            <alignmentY value="middle" />
-        </Profile>
-
-        <Profile name="tfMenuFrame_infoBoxImage" extends="baseReference" with="anchorMiddleLeft">
-            <size value="64px 64px" />
-            <position value="16px 0" />
-
-            <imageColor value="1 1 1 1" />
-        </Profile>
-
-        <Profile name="tfMenuFrame_infoTitle" extends="textDefault" with="anchorTopLeft">
-            <size value="500px 20px" />
-            <margin value="112px 0 0 0" />
-
-            <textSize value="20px" />
-            <textBold value="false" />
+        <Profile name="tfAreaFrame_text" extends="textDefault">
+            <textSize value="14px" />
+            <textAutoWidth value="true" />
             <textDisabledColor value="1 1 1 0.1" />
         </Profile>
 
-        <Profile name="tfMenuFrame_infoText" extends="textDefault" with="anchorTopLeft">
-            <size value="240px 20px" />
-            <margin value="96px 0 0 0" />
+        <Profile name="tfAreaFrame_actionsLayout">
+            <size value="220px 800px" />
+            <margin value="0 112px 16px -916px" />
 
+            <flowDirection value="vertical" />
+            <alignmentX value="right" />
+            <elementSpacing value="9px" />
+        </Profile>
+        <Profile name="tfAreaFrame_actionItem" with="anchorTopRight">
+            <size value="100% 42px" />
+        </Profile>
+        <Profile name="tfAreaFrame_actionItemButton" extends="tfMenuFrame_button" with="anchorTopRight">
+            <size value="160px 42px" />
+            <position value="0 0" />
+        </Profile>
+        <Profile name="tfAreaFrame_actionItemOption" extends="tfMenuFrame_binaryOption" with="anchorMiddleRight">
+            <position value="0 0" />
+            <size value="160px 32px" />
+        </Profile>
+        <Profile name="tfAreaFrame_actionItemText" extends="tfAreaFrame_text" with="anchorMiddleLeft">
+            <position value="-32px 0" />
             <textAlignment value="right" />
-            <textColor value="1 1 1 1" />
+        </Profile>
+
+        <Profile name="tfAreaFrame_layoutItem" extends="baseReference">
+            <size value="1000px 272px" />
+            <imageColor value="0 0 0 0.1" />
+        </Profile>
+
+        <Profile name="tfAreaFrame_layoutItemContentPlaceholder" with="anchorMiddleCenter">
+            <size value="300px 240px" />
+            <position value="6px 0" />
+
+            <hasFrame value="true" />
+            <frameThickness value="1dp 0 1dp 0" />
+            <frameRightColor value="0.3 0.3 0.3 0.05" />
+            <frameLeftColor value="0.3 0.3 0.3 0.05" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemContentPlaceholderText" extends="textDefault" with="anchorMiddleLeft">
+            <size value="340px 32px" />
+            <position value="-348px 0" />
+
+            <textColor value="1 1 1 0.1" />
+            <textUpperCase value="true" />
+            <textAlignment value="center" />
+        </Profile>
+
+        <Profile name="tfAreaFrame_layoutItemContent" with="anchorMiddleCenter">
+            <size value="968px 240px" />
+        </Profile>
+
+        <Profile name="tfAreaFrame_layoutItemArea" with="anchorTopLeft">
+            <size value="340px 240px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="0 0 1dp 0" />
+            <frameRightColor value="0.3 0.3 0.3 0.05" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemAreaImage" extends="baseReference" with="anchorMiddleLeft">
+            <size value="96px 96px" />
+            <imageSliceId value="noSlice" />
+
+            <imageDisabledColor value="1 1 1 0.1" />
+
+            <hasFrame value="true" />
+            <frameThickness value="1dp 1dp 1dp 1dp" />
+            <frameTopColor value="0.3 0.3 0.3 0.1" />
+            <frameRightColor value="0.3 0.3 0.3 0.1" />
+            <frameBottomColor value="0.3 0.3 0.3 0.1" />
+            <frameLeftColor value="0.3 0.3 0.3 0.1" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemAreaText" extends="tfAreaFrame_text" with="anchorMiddleLeft">
+            <position value="112px 10px" />
+            <textSize value="16px" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemAreaTitle" extends="tfAreaFrame_layoutItemAreaText">
+            <position value="112px -10px" />
             <textSize value="14px" />
-            <textDisabledColor value="0.4 0.4 0.4 1" />
+            <textColor value="1 1 1 0.4" />
+        </Profile>
+
+
+        <Profile name="tfAreaFrame_layoutItemOptions" with="anchorTopLeft">
+            <position value="400px 0" />
+            <size value="240px 240px" />
+            <handleFocus value="false" />
+
+            <flowDirection value="vertical" />
+            <elementSpacing value="18px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="0 0 1dp 0" />
+            <frameRightColor value="0.3 0.3 0.3 0.05" />
+        </Profile>
+
+
+        <Profile name="tfAreaFrame_layoutItemOption">
+            <size value="100% 48px" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionImageWrapper" with="anchorMiddleLeft">
+            <size value="48px 48px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="1dp 1dp 1dp 1dp" />
+            <frameTopColor value="0.3 0.3 0.3 0.1" />
+            <frameRightColor value="0.3 0.3 0.3 0.1" />
+            <frameBottomColor value="0.3 0.3 0.3 0.1" />
+            <frameLeftColor value="0.3 0.3 0.3 0.1" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionImage" extends="baseReference">
+            <size value="100% 100%" />
+            <imageSliceId value="noSlice" />
+            <imageUVs value="0 0 1 1" />
+            <imageColor value="1 1 1 1" />
+            <imageDisabledColor value="1 1 1 0.05" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionImageDisabled" extends="tfAreaFrame_layoutItemOptionImage">
+            <imageColor value="1 1 1 0.05" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionText" extends="tfAreaFrame_text" with="anchorMiddleLeft">
+            <size value="70% 20px" />
+            <position value="64px -8px" />
+
+            <textAutoWidth value="false" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionTextDisabled" extends="tfAreaFrame_layoutItemOptionText">
+            <textColor value="1 1 1 0.1" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionTitle" extends="tfAreaFrame_layoutItemOptionText">
+            <position value="64px 8px" />
+            <textColor value="1 1 1 0.4" />
+            <textSize value="13px" />
+        </Profile>
+        <Profile name="tfAreaFrame_layoutItemOptionTitleDisabled" extends="tfAreaFrame_layoutItemOptionTitle">
+            <textColor value="1 1 1 0.1" />
         </Profile>
     </GuiProfiles>
 </GUI>

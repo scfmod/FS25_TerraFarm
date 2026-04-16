@@ -316,3 +316,13 @@ end
 function LandscapingArea:getBorderColor()
     return LandscapingUtils.getAreaColorByIndex(self.color)
 end
+
+---@return number r
+---@return number g
+---@return number b
+---@nodiscard
+function LandscapingArea:getDisplayColor()
+    local color = self:getBorderColor()
+
+    return color[1], color[2], color[3]
+end

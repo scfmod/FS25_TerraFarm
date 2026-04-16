@@ -1,74 +1,93 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <HUD animateDuration="200">
     <BoxLayout profile="tfHud_layout" id="boxLayout">
-        <Bitmap profile="tfHud_item" id="vehicleItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <Bitmap profile="tfHud_itemImage" id="vehicleImage" />
-            <Text profile="tfHud_itemText" id="vehicleText" />
+        <Bitmap profile="tfHud_displayItem" id="vehicleDisplayElement">
+            <Bitmap profile="tfHud_displayItemBar" />
+            <Bitmap profile="tfHud_displayItemImage" id="vehicleDisplayImageElement" />
+            <Text profile="tfHud_displayItemTitle" id="vehicleDisplayTitleElement" />
+            <Text profile="tfHud_displayItemText" id="vehicleDisplayTextElement" />
         </Bitmap>
 
-        <Bitmap profile="tfHud_item" id="inputItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <Bitmap profile="tfHud_itemModeImage" id="inputImage" />
-            <Text profile="tfHud_itemTitle" id="inputTitle" text="$l10n_ui_terraform" />
-            <Text profile="tfHud_itemDescription" id="inputText" />
+        <Bitmap profile="tfHud_displayItem" id="materialDisplayElement">
+            <Bitmap profile="tfHud_displayItemBar" />
+            <Bitmap profile="tfHud_displayItemImage" id="materialDisplayImageElement" />
+            <Text profile="tfHud_displayItemTitle" id="materialDisplayTitleElement" text="$l10n_ui_material" />
+            <Text profile="tfHud_displayItemText" id="materialDisplayTextElement" />
         </Bitmap>
 
-        <Bitmap profile="tfHud_item" id="outputItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <Bitmap profile="tfHud_itemModeImage" id="outputImage" />
-            <Text profile="tfHud_itemTitle" id="outputTitle" text="$l10n_ui_discharge" />
-            <Text profile="tfHud_itemDescription" id="outputText" />
-        </Bitmap>
+        <BoxLayout profile="tfHud_displayGroup" id="inputDisplayElement">
+            <Text profile="tfHud_displayGroupHeaderTitle" text="$l10n_ui_terraform" />
 
-        <Bitmap profile="tfHud_item" id="materialItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <Bitmap profile="tfHud_itemImage" id="materialImage" />
-            <Text profile="tfHud_itemText" id="materialText" />
-        </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="inputDisplayModeElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <Bitmap profile="tfHud_displayItemImage" id="inputDisplayModeImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="inputDisplayModeTitleElement" text="$l10n_ui_mode" />
+                <Text profile="tfHud_displayItemText" id="inputDisplayModeTextElement" />
+            </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="inputDisplayTextureElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <TFTerrainLayer profile="tfHud_displayItemImage" id="inputDisplayTextureImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="inputDisplayTextureTitleElement" text="$l10n_ui_texture" />
+                <Text profile="tfHud_displayItemText" id="inputDisplayTextureTextElement" />
+            </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="inputDisplayAreaElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <Bitmap profile="tfHud_displayItemImage" id="inputDisplayAreaImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="inputDisplayAreaTitleElement" />
+                <Text profile="tfHud_displayItemText" id="inputDisplayAreaTextElement" />
+                <Bitmap profile="tfHud_displayItemColor" id="inputDisplayAreaColorElement" />
+            </Bitmap>
+        </BoxLayout>
 
-        <Bitmap profile="tfHud_item" id="inputTextureItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <TerrainLayer profile="tfHud_itemImage" id="inputTextureImage" />
-            <Text profile="tfHud_itemTitle" text="$l10n_ui_terraform" />
-            <Text profile="tfHud_itemDescription" id="inputTextureText" />
-        </Bitmap>
+        <BoxLayout profile="tfHud_displayGroup" id="outputDisplayElement">
+            <Text profile="tfHud_displayGroupHeaderTitle" text="$l10n_ui_discharge" />
 
-        <Bitmap profile="tfHud_item" id="outputTextureItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <TerrainLayer profile="tfHud_itemImage" id="outputTextureImage" />
-            <Text profile="tfHud_itemTitle" text="$l10n_ui_discharge" />
-            <Text profile="tfHud_itemDescription" id="outputTextureText" />
-        </Bitmap>
-
-        <Bitmap profile="tfHud_item" id="areaItem">
-            <Bitmap profile="tfHud_itemBar" />
-            <Bitmap profile="tfHud_itemImage" id="areaImage" />
-            <Text profile="tfHud_itemTitle" id="areaTitle" />
-            <Text profile="tfHud_itemDescription" id="areaText" />
-        </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="outputDisplayModeElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <Bitmap profile="tfHud_displayItemImage" id="outputDisplayModeImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="outputDisplayModeTitleElement" text="$l10n_ui_mode" />
+                <Text profile="tfHud_displayItemText" id="outputDisplayModeTextElement" />
+            </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="outputDisplayTextureElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <TFTerrainLayer profile="tfHud_displayItemImage" id="outputDisplayTextureImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="outputDisplayTextureTitleElement" text="$l10n_ui_texture" />
+                <Text profile="tfHud_displayItemText" id="outputDisplayTextureTextElement" />
+            </Bitmap>
+            <Bitmap profile="tfHud_displayGroupItem" id="outputDisplayAreaElement">
+                <Bitmap profile="tfHud_displayItemBar" />
+                <Bitmap profile="tfHud_displayItemImage" id="outputDisplayAreaImageElement" />
+                <Text profile="tfHud_displayItemTitle" id="outputDisplayAreaTitleElement" />
+                <Text profile="tfHud_displayItemText" id="outputDisplayAreaTextElement" />
+                <Bitmap profile="tfHud_displayItemColor" id="outputDisplayAreaColorElement" />
+            </Bitmap>
+        </BoxLayout>
     </BoxLayout>
 
     <GuiProfiles>
         <Profile name="tfHud_layout" extends="baseReference" with="anchorTopRight">
-            <size value="200px 320px" />
+            <size value="240px 0px" />
             <position value="0 -0.2" />
 
             <imageColor value="0 0 0 0" />
-            <flowDirection value="vertical" />
+
             <elementSpacing value="4dp" />
+            <fitFlowToElements value="true" />
+            <flowDirection value="vertical" />
+            <alignmentX value="center" />
+            <alignmentY value="top" />
         </Profile>
 
-        <Profile name="tfHud_item" extends="baseReference" with="anchorTopLeft">
-            <size value="200px 48px" />
+        <Profile name="tfHud_displayItem" extends="baseReference">
+            <size value="100% 48px" />
 
             <imageColor value="0 0 0 0.8" />
-            <imageDisabledColor value="0 0 0 0.8" />
+            <imageDisabledColor value="0 0 0 0.4" />
         </Profile>
 
-        <Profile name="tfHud_itemBar" with="anchorMiddleLeft">
+        <Profile name="tfHud_displayItemBar" with="anchorMiddleLeft">
             <size value="6px 32px" />
-            <position value="8px 0" />
+            <position value="5px 0" />
 
             <imageSliceId value="terraFarm.bar_small" />
             <imageUVRotation value="90" />
@@ -77,9 +96,9 @@
             <imageDisabledColor value="0.7 0.7 0.7 0.4" />
         </Profile>
 
-        <Profile name="tfHud_itemImage" extends="baseReference" with="anchorMiddleLeft">
+        <Profile name="tfHud_displayItemImage" extends="baseReference" with="anchorMiddleLeft">
             <size value="32px 32px" />
-            <position value="24px 0" />
+            <position value="16px 0" />
 
             <imageSliceId value="noSlice" />
             <imageUVs value="0 0 1 1" />
@@ -88,34 +107,60 @@
             <imageDisabledColor value="1 1 1 0.7" />
         </Profile>
 
-        <Profile name="tfHud_itemModeImage" extends="baseReference" with="anchorMiddleLeft">
-            <size value="32px 32px" />
-            <position value="24px 0" />
+        <Profile name="tfHud_displayItemText" extends="textDefault" with="anchorMiddleLeft">
+            <size value="100% 20px" />
+            <position value="56px -7px" />
 
-            <imageColor value="0.33716 0.55834 0.0003 1" />
-            <imageDisabledColor value="0.33716 0.55834 0.0003 0.7" />
-        </Profile>
-
-        <Profile name="tfHud_itemText" extends="textDefault" with="anchorMiddleLeft">
-            <size value="1656px 20px" />
-            <position value="64px 0" />
-
-            <textSize value="12px" />
+            <textSize value="13px" />
             <textMaxWidth value="140px" />
             <textBold value="false" />
             <textColor value="1 1 1 1" />
-            <textDisabledColor value="0.7 0.7 0.7 0.8" />
             <text2Color value="0 0 0 1" />
+            <textDisabledColor value="0.7 0.7 0.7 0.8" />
         </Profile>
 
-        <Profile name="tfHud_itemTitle" extends="tfHud_itemText">
-            <position value="64px 7px" />
-
+        <Profile name="tfHud_displayItemTitle" extends="tfHud_displayItemText">
+            <position value="56px 7px" />
             <textSize value="10px" />
+            <textColor value="1 1 1 0.5" />
         </Profile>
 
-        <Profile name="tfHud_itemDescription" extends="tfHud_itemText">
-            <position value="64px -7px" />
+        <Profile name="tfHud_displayItemColor" extends="baseReference" with="anchorMiddleRight">
+            <position value="-16px 0" />
+            <size value="16px 16px" />
+            <imageColor value="1 1 1 0.7" />
+            <imageDisabledColor value="0 0 0 0.3" />
+            <imageSliceId value="gui.whiteCircleFilled" />
         </Profile>
+
+        <Profile name="tfHud_displayGroup" extends="baseReference">
+            <width value="100%" />
+
+            <imageColor value="0 0 0 0.4" />
+            <imageDisabledColor value="0 0 0 0.4" />
+
+            <elementSpacing value="4dp" />
+            <fitFlowToElements value="true" />
+            <flowDirection value="vertical" />
+            <alignmentX value="left" />
+            <alignmentY value="top" />
+        </Profile>
+
+        <Profile name="tfHud_displayGroupHeaderTitle" extends="textDefault" with="anchorMiddleLeft">
+            <size value="100% 24px" />
+            <margin value="0 3px 0 0" />
+
+            <textOffset value="8px 0" />
+            <textSize value="13px" />
+        </Profile>
+
+        <Profile name="tfHud_displayGroupItem" extends="tfHud_displayItem">
+            <imageColor value="0 0 0 0.7" />
+            <imageDisabledColor value="0 0 0 0" />
+
+            <margin value="8px 0 0 0" />
+        </Profile>
+
+
     </GuiProfiles>
 </HUD>

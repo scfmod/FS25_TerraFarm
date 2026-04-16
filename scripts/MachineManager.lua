@@ -51,11 +51,43 @@ function MachineManager:checkDisplayWarning()
     end
 end
 
----@param vehicle any
----@param uniqueId? string
-function MachineManager:onSetMachineLandscapingArea(vehicle, uniqueId)
-    if vehicle ~= nil and self.activeVehicle == vehicle then
-        g_messageCenter:publish(ModMessageType.ACTIVE_AREA_CHANGED, uniqueId, vehicle)
+---@param vehicle Machine
+---@param id? string
+function MachineManager:onSetMachineInputAreaId(vehicle, id)
+    if vehicle ~= nil and vehicle == self.activeVehicle then
+        g_messageCenter:publish(ModMessageType.SET_ACTIVE_INPUT_AREA, id, vehicle)
+    end
+end
+
+---@param vehicle Machine
+---@param enabled boolean
+function MachineManager:onSetMachineInputAreaEnabled(vehicle, enabled)
+    if vehicle ~= nil and vehicle == self.activeVehicle then
+        local area = vehicle:getMachineInputArea()
+
+        if area ~= nil then
+            g_messageCenter:publish(ModMessageType.SET_ACTIVE_INPUT_AREA_STATE, area.uniqueId, enabled, vehicle)
+        end
+    end
+end
+
+---@param vehicle Machine
+---@param id? string
+function MachineManager:onSetMachineOutputAreaId(vehicle, id)
+    if vehicle ~= nil and vehicle == self.activeVehicle then
+        g_messageCenter:publish(ModMessageType.SET_ACTIVE_OUTPUT_AREA, id, vehicle)
+    end
+end
+
+---@param vehicle Machine
+---@param enabled boolean
+function MachineManager:onSetMachineOutputAreaEnabled(vehicle, enabled)
+    if vehicle ~= nil and vehicle == self.activeVehicle then
+        local area = vehicle:getMachineOutputArea()
+
+        if area ~= nil then
+            g_messageCenter:publish(ModMessageType.SET_ACTIVE_OUTPUT_AREA_STATE, area.uniqueId, enabled, vehicle)
+        end
     end
 end
 
@@ -64,7 +96,7 @@ function MachineManager:setActiveVehicle(vehicle)
     if self.activeVehicle ~= vehicle then
         self.activeVehicle = vehicle
 
-        g_messageCenter:publish(ModMessageType.ACTIVE_MACHINE_CHANGED, vehicle)
+        g_messageCenter:publish(ModMessageType.SET_ACTIVE_MACHINE, vehicle)
     end
 end
 
@@ -101,15 +133,15 @@ function MachineManager:registerVehicle(vehicle)
         table.insert(self.vehicles, vehicle)
 
         -- g_modController:debug('Registered vehicle: %s', vehicle:getFullName())
-        g_messageCenter:publishDelayed(ModMessageType.MACHINE_ADDED, vehicle)
+        g_messageCenter:publishDelayed(ModMessageType.MACHINE_ADD, vehicle)
     end
 end
 
 ---@param vehicle Machine
-function MachineManager:unregisterVehicle(vehicle)
+function MachineManager:unregisterMachine(vehicle)
     if table.removeElement(self.vehicles, vehicle) then
         -- g_modController:debug('Unregistered vehicle: %s', vehicle:getFullName())
-        g_messageCenter:publish(ModMessageType.MACHINE_REMOVED, vehicle)
+        g_messageCenter:publish(ModMessageType.MACHINE_REMOVE, vehicle)
     end
 end
 
@@ -191,7 +223,10 @@ function MachineManager:loadModsConfigurations()
 end
 
 function MachineManager:onModsLoaded()
-    g_messageCenter:subscribe(SetMachineLandscapingAreaEvent, self.onSetMachineLandscapingArea, self)
+    g_messageCenter:subscribe(SetMachineInputAreaIdEvent, self.onSetMachineInputAreaId, self)
+    g_messageCenter:subscribe(SetMachineInputAreaEnabledEvent, self.onSetMachineInputAreaEnabled, self)
+    g_messageCenter:subscribe(SetMachineOutputAreaIdEvent, self.onSetMachineOutputAreaId, self)
+    g_messageCenter:subscribe(SetMachineOutputAreaEnabledEvent, self.onSetMachineOutputAreaEnabled, self)
 
     self:loadInternalConfigurations()
     self:loadModsConfigurations()

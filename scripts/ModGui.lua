@@ -11,6 +11,8 @@ source(g_modDirectory .. 'scripts/gui/dialogs/GlobalMaterialsDialog.lua')
 source(g_modDirectory .. 'scripts/gui/dialogs/GlobalSettingsDialog.lua')
 
 source(g_modDirectory .. 'scripts/gui/elements/TFIconOptionElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFScrollingLayoutElement.lua')
+source(g_modDirectory .. 'scripts/gui/elements/TFTerrainLayerElement.lua')
 
 source(g_modDirectory .. 'scripts/gui/InGameMenuTerraFarmFrame.lua')
 

@@ -11,6 +11,10 @@
         <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Genel ayarlar iletişim kutusunu aç" />
         <text name="input_MACHINE_TOGGLE_HUD" text="HUD görünürlüğünü değiştir" />
+        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Select terraform area" />
+        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Select discharge area" />
+        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Toggle terraform area enabled" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Toggle discharge area enabled" />
 
         <!-- Generic texts-->
         <text name="ui_mode" text="Mod" />
@@ -23,6 +27,7 @@
         <text name="ui_materialSettings" text="Malzeme ayarları" />
         <text name="ui_material" text="Malzeme" />
         <text name="ui_texture" text="Texture" />
+        <text name="ui_terraformTexture" text="Terraform texture" />
         <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Malzemeyi değiştir" />
         <text name="ui_changeTexture" text="Texture değiştir" />
@@ -128,7 +133,6 @@
         <text name="machineType_trencher" text="Kanal kazıcı" />
 
         <!-- 1.3.0.0 UPDATE: New entries -->
-        <text name="input_MACHINE_SELECT_AREA" text="Open select area dialog" />
 
         <text name="ui_landscapingAreas" text="Landscaping areas" />
         <text name="ui_landscapingArea" text="Landscaping area" />

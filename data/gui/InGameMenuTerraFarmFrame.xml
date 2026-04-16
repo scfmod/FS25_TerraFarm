@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GUI name="ingameMenuTerraFarm">
-    <GuiElement profile="fs25_menuContainer">
-        <GuiElement profile="fs25_menuHeaderPanel">
+    <GuiElement profile="fs25_menuContainer" position="-77px 80px">
+        <GuiElement profile="fs25_menuHeaderPanel" position="1px 92px">
             <Bitmap profile="fs25_menuHeaderIconBg">
                 <Bitmap profile="tfFrame_menuHeaderIcon" />
             </Bitmap>
@@ -45,15 +45,15 @@
                 <ThreePartBitmap position="0px -2dp" profile="fs25_lineSeparatorBottom" />
             </GuiElement>
             <SmoothList profile="tfFrame_list" id="machinesList" onDoubleClick="onItemDoubleClick" wrapAround="true">
-                <ListItem profile="fs25_vehiclesListItem" name="rowTemplate">
-                    <ThreePartBitmap profile="fs25_vehiclesListItemBg" name="alternating" />
-                    <Text profile="fs25_vehiclesListItemName" position="16px 0px" name="name" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="440px 0px" name="operator" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="620px 0px" name="age" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="800px 0px" name="operatingHours" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="980px 0px" name="damage" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="1160px 0px" name="type" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="1330px 0px" name="status" />
+                <ListItem profile="tfFrame_vehiclesListItem" name="rowTemplate">
+                    <Bitmap profile="tfFrame_vehiclesListBg" name="alternating" />
+                    <Text profile="tfFrame_vehiclesListItemName" position="16px 0px" name="name" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="440px 0px" name="operator" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="620px 0px" name="age" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="800px 0px" name="operatingHours" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="980px 0px" name="damage" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="1160px 0px" name="type" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="1330px 0px" name="status" />
                 </ListItem>
             </SmoothList>
             <GuiElement id="detailBox" profile="tfFrame_detailsContainer">
@@ -66,7 +66,7 @@
         </GuiElement>
         <GuiElement profile="fs25_subCategorySelectorTabbedContainer" id="subCategoryPages[2]">
             <GuiElement profile="fs25_statisticsHeaderBox">
-                <Text position="16px 0" profile="fs25_vehiclesHeaderName" text="$l10n_ui_name" />
+                <Text position="16px 0" profile="fs25_vehiclesHeaderName" text="$l10n_ui_area" />
                 <GuiElement position="440px 0px" profile="fs25_vehiclesHeaderTextContainer">
                     <Text profile="fs25_vehiclesHeaderText" text="" />
                 </GuiElement>
@@ -85,32 +85,32 @@
                 <ThreePartBitmap position="0px -2dp" profile="fs25_lineSeparatorBottom" />
             </GuiElement>
             <SmoothList profile="tfFrame_list" id="areasList" onDoubleClick="onItemDoubleClick" wrapAround="true" height="716px">
-                <ListItem profile="fs25_vehiclesListItem" name="rowTemplate">
-                    <ThreePartBitmap profile="fs25_vehiclesListItemBg" name="alternating" />
-                    <Bitmap profile="tfFrame_areasListItemImage" position="56px 0px" name="icon" />
-                    <Text profile="fs25_vehiclesListItemName" position="64px 0" name="name" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="440px 0px" name="licensePlate" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="620px 0px" name="age" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="800px 0px" name="operatingHours" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="980px 0px" name="damage" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="1100px 0px" name="type" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="1330px 0px" name="status" />
+                <ListItem profile="tfFrame_vehiclesListItem" name="rowTemplate">
+                    <Bitmap profile="tfFrame_vehiclesListBg" name="alternating" />
+                    <Bitmap profile="tfFrame_areasListItemImage" position="10px 0px" name="icon" />
+                    <Text profile="tfFrame_vehiclesListItemName" position="16px 0" name="name" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="440px 0px" name="licensePlate" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="620px 0px" name="age" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="800px 0px" name="operatingHours" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="980px 0px" name="damage" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="1100px 0px" name="type" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="1330px 0px" name="status" />
                 </ListItem>
             </SmoothList>
         </GuiElement>
         <GuiElement profile="fs25_subCategorySelectorTabbedContainer" id="subCategoryPages[3]">
             <GuiElement profile="fs25_statisticsHeaderBox">
-                <Text position="16px 0" profile="fs25_vehiclesHeaderName" text="$l10n_ui_name" />
+                <Text position="16px 0" profile="fs25_vehiclesHeaderName" text="$l10n_ui_waterPlane" />
                 <GuiElement position="1340px 0px" profile="fs25_vehiclesHeaderTextContainer">
                     <Text profile="fs25_vehiclesHeaderText" text="$l10n_ui_missionStatusTitle" />
                 </GuiElement>
                 <ThreePartBitmap position="0px -2dp" profile="fs25_lineSeparatorBottom" />
             </GuiElement>
             <SmoothList profile="tfFrame_list" id="waterplanesList" onDoubleClick="onItemDoubleClick" wrapAround="true" height="716px">
-                <ListItem profile="fs25_vehiclesListItem" name="rowTemplate">
-                    <ThreePartBitmap profile="fs25_vehiclesListItemBg" name="alternating" />
-                    <Text profile="fs25_vehiclesListItemName" position="16px 0" name="name" />
-                    <Text profile="fs25_vehiclesListItemInfo" position="1330px 0px" name="status" />
+                <ListItem profile="tfFrame_vehiclesListItem" name="rowTemplate">
+                    <Bitmap profile="tfFrame_vehiclesListBg" name="alternating" />
+                    <Text profile="tfFrame_vehiclesListItemName" position="16px 0" name="name" />
+                    <Text profile="tfFrame_vehiclesListItemInfo" position="1330px 0px" name="status" />
                 </ListItem>
             </SmoothList>
         </GuiElement>
@@ -130,7 +130,7 @@
         <Profile name="tfFrame_areasListItemImage" extends="baseReference" with="anchorMiddleLeft">
             <size value="32px 32px" />
             <imageSliceId value="terraFarm.icon_excavator" />
-            <imageSelectedColor value="$preset_fs25_colorMainDark" />
+            <imageColor value="1 1 1 1" />
         </Profile>
         <Profile name="tfFrame_menuHeaderIcon" extends="fs25_menuHeaderIcon">
             <imageSliceId value="terraFarm.icon_excavator" />
@@ -161,6 +161,36 @@
         <Profile name="tfFrame_list" extends="fs25_vehiclesList">
             <position value="0px -34px" />
             <absoluteSizeOffset value="0px 175px" />
+        </Profile>
+
+        <Profile name="tfFrame_vehiclesListItem" extends="fs25_vehiclesListItem">
+            <height value="49px" />
+            <imageColor value="0 0 0 0" />
+            <!-- <alternateBackgroundColor value="1 1 1 0.005" /> -->
+            <alternateBackgroundColor value="0 0 0 0" />
+
+            <hasFrame value="true" />
+            <frameThickness value="0dp 0dp 0dp 1dp" />
+            <frameBottomColor value="0.1 0.1 0.1 0.1" />
+        </Profile>
+
+        <Profile name="tfFrame_vehiclesListBg" extends="baseReference" with="anchorStretchingYStretchingX">
+            <!-- <imageColor value="1 1 1 0.6" /> -->
+            <imageSelectedColor value="1 1 1 0.025" />
+        </Profile>
+
+        <Profile name="tfFrame_vehiclesListItemName" extends="fs25_vehiclesListItemName">
+            <textBold value="false" />
+            <textColor value="1 1 1 0.4" />
+            <textSelectedColor value="1 1 1 1" />
+            <!-- <textSelectedBold value="true" /> -->
+        </Profile>
+        <Profile name="tfFrame_vehiclesListItemInfo" extends="fs25_vehiclesListItemInfo">
+            <textBold value="false" />
+            <textColor value="1 1 1 0.4" />
+            <textSelectedColor value="1 1 1 1" />
+            <!-- <textSelectedBold value="true" /> -->
+
         </Profile>
     </GuiProfiles>
 </GUI>

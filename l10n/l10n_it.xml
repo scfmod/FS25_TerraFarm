@@ -12,6 +12,10 @@
         <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Aprire finestra di dialogo texture terreno di scarico" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Aprire la finestra di dialogo delle impostazioni globali" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Attiva la visibilità dell'HUD" />
+        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Select terraform area" />
+        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Select discharge area" />
+        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Toggle terraform area enabled" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Toggle discharge area enabled" />
 
         <!-- Generic texts-->
         <text name="ui_mode" text="Modalità" />
@@ -24,6 +28,7 @@
         <text name="ui_materialSettings" text="Impostazioni del materiale" />
         <text name="ui_material" text="Materiale" />
         <text name="ui_texture" text="Struttura" />
+        <text name="ui_terraformTexture" text="Terraform texture" />
         <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Cambia il materiale" />
         <text name="ui_changeTexture" text="Cambia texture" />
@@ -140,7 +145,6 @@
         <text name="machineType_trencher" text="Escavatore" />
 
         <!-- 1.3.0.0 UPDATE: New entries -->
-        <text name="input_MACHINE_SELECT_AREA" text="Aprire la finestra di dialogo selezione area" />
 
         <text name="ui_landscapingAreas" text="Aree di progettazione" />
         <text name="ui_landscapingArea" text="Are di progettazione" />

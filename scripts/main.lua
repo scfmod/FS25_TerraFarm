@@ -13,16 +13,22 @@ g_overlayManager:addTextureConfigFile(g_modDirectory .. 'data/textures/ui_elemen
 
 ---@class ModMessageType
 ModMessageType = {}
-ModMessageType.MACHINE_ADDED = nextMessageTypeId()
-ModMessageType.MACHINE_REMOVED = nextMessageTypeId()
-ModMessageType.ACTIVE_MACHINE_CHANGED = nextMessageTypeId()
-ModMessageType.ACTIVE_AREA_CHANGED = nextMessageTypeId()
-ModMessageType.LANDSCAPING_AREA_REGISTERED = nextMessageTypeId()
-ModMessageType.LANDSCAPING_AREA_UPDATED = nextMessageTypeId()
-ModMessageType.LANDSCAPING_AREA_DELETED = nextMessageTypeId()
-ModMessageType.WATERPLANE_REGISTERED = nextMessageTypeId()
-ModMessageType.WATERPLANE_UPDATED = nextMessageTypeId()
-ModMessageType.WATERPLANE_DELETED = nextMessageTypeId()
+ModMessageType.MACHINE_ADD = nextMessageTypeId()
+ModMessageType.MACHINE_REMOVE = nextMessageTypeId()
+
+ModMessageType.SET_ACTIVE_MACHINE = nextMessageTypeId()
+ModMessageType.SET_ACTIVE_INPUT_AREA = nextMessageTypeId()
+ModMessageType.SET_ACTIVE_INPUT_AREA_STATE = nextMessageTypeId()
+ModMessageType.SET_ACTIVE_OUTPUT_AREA = nextMessageTypeId()
+ModMessageType.SET_ACTIVE_OUTPUT_AREA_STATE = nextMessageTypeId()
+
+ModMessageType.LANDSCAPING_AREA_REGISTER = nextMessageTypeId()
+ModMessageType.LANDSCAPING_AREA_UPDATE = nextMessageTypeId()
+ModMessageType.LANDSCAPING_AREA_DELETE = nextMessageTypeId()
+
+ModMessageType.WATERPLANE_REGISTER = nextMessageTypeId()
+ModMessageType.WATERPLANE_UPDATE = nextMessageTypeId()
+ModMessageType.WATERPLANE_DELETE = nextMessageTypeId()
 
 source(g_modDirectory .. 'scripts/ModController.lua')
 

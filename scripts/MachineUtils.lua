@@ -119,11 +119,9 @@ function MachineUtils.loadMachineModesFromXML(xmlFile, key)
             if Machine.MODE[strMode] ~= nil then
                 table.insert(modes, Machine.MODE[strMode])
             else
-                Logging.xmlWarning('Invalid mode "%s" (%s)', strMode, key)
+                Logging.xmlWarning(xmlFile, 'Invalid mode "%s" (%s)', strMode, key)
             end
         end
-    else
-        -- Logging.xmlError(xmlFile, 'No modes defined (%s)', key)
     end
 
     return modes
@@ -167,7 +165,7 @@ end
 function MachineUtils.getHasInputMode(vehicle, mode)
     local spec = vehicle.spec_machine
 
-    return table.hasElement(spec.modesInput, mode)
+    return table.find(spec.modesInput, mode) ~= nil
 end
 
 ---@param vehicle Machine
@@ -177,7 +175,7 @@ end
 function MachineUtils.getHasOutputMode(vehicle, mode)
     local spec = vehicle.spec_machine
 
-    return table.hasElement(spec.modesOutput, mode)
+    return table.find(spec.modesOutput, mode) ~= nil
 end
 
 ---@param vehicle Machine

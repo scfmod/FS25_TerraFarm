@@ -46,7 +46,7 @@ function MachineWorkArea.new(vehicle)
     local self = setmetatable({}, MachineWorkArea_mt)
 
     self.vehicle = vehicle
-    self.machineType = vehicle.spec_machine.machineType
+    self.machineType = vehicle:getMachineType()
     self.isAreaNodeActive = false
     self.density = 0.5
 
@@ -232,97 +232,54 @@ end
 
 ---@param mode MachineMode
 function MachineWorkArea:input(mode)
-    local area = self.vehicle:getMachineLandscapingArea()
-
-    if mode == Machine.MODE.FLATTEN then
-        return self:flatten(area)
-    end
-
-    local terrainLayerId, fillTypeIndex
-
-    if area ~= nil then
-        local state = self.vehicle:getMachineState()
-        local x, y, z = self:getPosition()
-        local isInsideArea = area:getIsInsideArea(x, y, z)
-
-        if not state.ignoreAreaGroundTextures and isInsideArea or not area.restrictArea then
-            terrainLayerId = area.forceInputLayer
-        end
-
-        if not state.ignoreAreaMaterial and isInsideArea or not area.restrictArea then
-            fillTypeIndex = area.forceFillTypeIndex
-        end
-    end
-
-    if mode == Machine.MODE.PAINT then
-        local op = LandscapingInputPaint.new(self, terrainLayerId)
-        op:apply()
-    elseif mode == Machine.MODE.LOWER then
-        local op = LandscapingInputLower.new(self, terrainLayerId, fillTypeIndex)
-        op:apply()
+    if mode == Machine.MODE.LOWER then
+        self:inputLower()
+    elseif mode == Machine.MODE.FLATTEN then
+        self:inputGrade()
     elseif mode == Machine.MODE.SMOOTH then
-        local op = LandscapingInputSmooth.new(self, terrainLayerId, fillTypeIndex)
-        op:apply()
+        self:inputSmooth()
+    elseif mode == Machine.MODE.PAINT then
+        self:inputPaint()
     end
 end
 
----@param mode MachineMode
----@param liters number
----@param fillTypeIndex number
----@return number litersDropped
----@nodiscard
-function MachineWorkArea:output(mode, liters, fillTypeIndex)
-    local area = self.vehicle:getMachineLandscapingArea()
-    local terrainLayerId
+function MachineWorkArea:inputLower()
+    local area, enabled = self.vehicle:getMachineInputArea()
 
-    if mode == Machine.MODE.FLATTEN then
-        return self:flattenDischarge(area, fillTypeIndex, liters)
-    end
-
-    if area ~= nil then
-        local state = self.vehicle:getMachineState()
-        local x, y, z = self:getPosition()
-        local isInsideArea = area:getIsInsideArea(x, y, z)
-
-        if not state.ignoreAreaGroundTextures and isInsideArea or not area.restrictArea then
-            terrainLayerId = area.forceOutputLayer
-        end
-    end
-
-    if mode == Machine.MODE.PAINT then
-        local op = LandscapingOutputPaint.new(self, terrainLayerId)
-        op:apply()
-        return op.outputLiters
-    elseif mode == Machine.MODE.RAISE then
-        local op = LandscapingOutputRaise.new(self, terrainLayerId, fillTypeIndex, liters)
-        op:apply()
-        return op.outputLiters
-    elseif mode == Machine.MODE.SMOOTH then
-        local op = LandscapingOutputSmooth.new(self, terrainLayerId, fillTypeIndex, liters)
-        op:apply()
-        return op.outputLiters
-    end
-
-    return 0
-end
-
----@param area? LandscapingArea
-function MachineWorkArea:flatten(area)
-    if area ~= nil then
+    if area ~= nil and enabled then
         local x, y, z = self:getPosition()
         local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
 
         if valid then
-            local terrainLayerId, fillTypeIndex
-            local state = self.vehicle:getMachineState()
+            local terrainLayerId = area.forceInputLayer
+            local fillTypeIndex = area.forceFillTypeIndex
 
-            if not state.ignoreAreaGroundTextures then
-                terrainLayerId = area.forceInputLayer
+            if minY == maxY then
+                local op = LandscapingInputFlatten.new(self, terrainLayerId, fillTypeIndex, targetY)
+                op:apply()
+            else
+                local op = LandscapingInputSlope.new(self, terrainLayerId, fillTypeIndex, minY, maxY, nx, ny, nz, direction, targetY)
+                op:apply()
             end
+        end
+    else
+        local targetY = 0
+        local op = LandscapingInputFlatten.new(self, nil, nil, targetY)
 
-            if not state.ignoreAreaMaterial then
-                fillTypeIndex = area.forceFillTypeIndex
-            end
+        op:apply()
+    end
+end
+
+function MachineWorkArea:inputGrade()
+    local area, enabled = self.vehicle:getMachineInputArea()
+
+    if area ~= nil and enabled then
+        local x, y, z = self:getPosition()
+        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
+
+        if valid then
+            local terrainLayerId = area.forceInputLayer
+            local fillTypeIndex = area.forceFillTypeIndex
 
             if minY == maxY then
                 local op = LandscapingInputFlatten.new(self, terrainLayerId, fillTypeIndex, targetY)
@@ -340,55 +297,127 @@ function MachineWorkArea:flatten(area)
     end
 end
 
----@return number
----@nodiscard
-function MachineWorkArea:getOutputTargetHeight()
-    local area = self.vehicle:getMachineLandscapingArea()
+function MachineWorkArea:inputSmooth()
+    local area, enabled = self.vehicle:getMachineInputArea()
 
-    if area ~= nil then
-        local x, y, z = self:getOutputPosition()
-        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
+    if area ~= nil and enabled then
+        local x, y, z = self:getPosition()
+        local isValidPosition = not area.restrictArea or area:getIsInsideArea(x, y, z)
 
-        if valid then
-            return targetY
+        if isValidPosition then
+            local terrainLayerId = area.forceInputLayer
+            local fillTypeIndex = area.forceFillTypeIndex
+
+
+            local op = LandscapingInputSmooth.new(self, terrainLayerId, fillTypeIndex)
+            op:apply()
         end
+    else
+        local op = LandscapingInputSmooth.new(self)
+        op:apply()
     end
-
-    return MachineUtils.getVehicleTargetHeight(self.vehicle)
 end
 
----@param area? LandscapingArea
----@param litersToDrop number
+function MachineWorkArea:inputPaint()
+    local area, enabled = self.vehicle:getMachineInputArea()
+
+    if area ~= nil and enabled then
+        local x, y, z = self:getPosition()
+        local isValidPosition = not area.restrictArea or area:getIsInsideArea(x, y, z)
+
+        if isValidPosition then
+            local terrainLayerId = area.forceInputLayer
+
+            local op = LandscapingInputPaint.new(self, terrainLayerId)
+            op:apply()
+        end
+    else
+        local op = LandscapingInputPaint.new(self)
+        op:apply()
+    end
+end
+
+---@param mode MachineMode
+---@param liters number
+---@param fillTypeIndex number
+---@return number litersDropped
+---@nodiscard
+function MachineWorkArea:output(mode, liters, fillTypeIndex)
+    if mode == Machine.MODE.RAISE then
+        return self:outputRaise(liters, fillTypeIndex)
+    elseif mode == Machine.MODE.FLATTEN then
+        return self:outputGrade(liters, fillTypeIndex)
+    elseif mode == Machine.MODE.SMOOTH then
+        return self:outputSmooth(liters, fillTypeIndex)
+    elseif mode == Machine.MODE.PAINT then
+        return self:outputPaint()
+    end
+
+    return 0
+end
+
+---@param liters number
 ---@param fillTypeIndex number
 ---@return number
 ---@nodiscard
-function MachineWorkArea:flattenDischarge(area, fillTypeIndex, litersToDrop)
-    if area ~= nil then
+function MachineWorkArea:outputRaise(liters, fillTypeIndex)
+    local area, enabled = self.vehicle:getMachineOutputArea()
+
+    if area ~= nil and enabled then
         local x, y, z = self:getOutputPosition()
         local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
 
         if valid then
-            local terrainLayerId
-
-            local state = self.vehicle:getMachineState()
-
-            if not state.ignoreAreaGroundTextures then
-                terrainLayerId = area.forceOutputLayer
-            end
+            local terrainLayerId = area.forceOutputLayer
 
             if minY == maxY then
-                local op = LandscapingOutputFlatten.new(self, terrainLayerId, fillTypeIndex, litersToDrop, targetY)
+                local op = LandscapingOutputFlatten.new(self, terrainLayerId, fillTypeIndex, liters, targetY)
                 op:apply()
                 return op.outputLiters
             else
-                local op = LandscapingOutputSlope.new(self, terrainLayerId, fillTypeIndex, litersToDrop, minY, maxY, nx, ny, nz, direction, targetY)
+                local op = LandscapingOutputSlope.new(self, terrainLayerId, fillTypeIndex, liters, minY, maxY, nx, ny, nz, direction, targetY)
+                op:apply()
+                return op.outputLiters
+            end
+        end
+    else
+        local targetY = 1024
+        local op = LandscapingOutputFlatten.new(self, nil, fillTypeIndex, liters, targetY)
+
+        op:apply()
+        return op.outputLiters
+    end
+
+    return 0
+end
+
+---@param liters number
+---@param fillTypeIndex number
+---@return number
+---@nodiscard
+function MachineWorkArea:outputGrade(liters, fillTypeIndex)
+    local area, enabled = self.vehicle:getMachineOutputArea()
+
+    if area ~= nil and enabled then
+        local x, y, z = self:getOutputPosition()
+        local valid, targetY, minY, maxY, nx, ny, nz, direction = area:getDeformationParams(x, y, z)
+
+        if valid then
+            local terrainLayerId = area.forceOutputLayer
+
+            if minY == maxY then
+                local op = LandscapingOutputFlatten.new(self, terrainLayerId, fillTypeIndex, liters, targetY)
+                op:apply()
+                return op.outputLiters
+            else
+                local op = LandscapingOutputSlope.new(self, terrainLayerId, fillTypeIndex, liters, minY, maxY, nx, ny, nz, direction, targetY)
                 op:apply()
                 return op.outputLiters
             end
         end
     else
         local targetWorldPosY = MachineUtils.getVehicleTargetHeight(self.vehicle)
-        local op = LandscapingOutputFlatten.new(self, nil, fillTypeIndex, litersToDrop, targetWorldPosY)
+        local op = LandscapingOutputFlatten.new(self, nil, fillTypeIndex, liters, targetWorldPosY)
 
         op:apply()
 
@@ -396,6 +425,102 @@ function MachineWorkArea:flattenDischarge(area, fillTypeIndex, litersToDrop)
     end
 
     return 0
+end
+
+---@param liters number
+---@param fillTypeIndex number
+---@return number
+---@nodiscard
+function MachineWorkArea:outputSmooth(liters, fillTypeIndex)
+    local area, enabled = self.vehicle:getMachineOutputArea()
+
+    if area ~= nil and enabled then
+        local x, y, z = self:getPosition()
+        local isValidPosition = not area.restrictArea or area:getIsInsideArea(x, y, z)
+
+        if isValidPosition then
+            local terrainLayerId = area.forceOutputLayer
+
+            local op = LandscapingOutputSmooth.new(self, terrainLayerId, fillTypeIndex, liters)
+            op:apply()
+            return op.outputLiters
+        end
+    else
+        local op = LandscapingOutputSmooth.new(self, nil, fillTypeIndex, liters)
+        op:apply()
+        return op.outputLiters
+    end
+
+    return 0
+end
+
+---@return number
+---@nodiscard
+function MachineWorkArea:outputPaint()
+    local area, enabled = self.vehicle:getMachineOutputArea()
+
+    if area ~= nil and enabled then
+        local x, y, z = self:getPosition()
+        local isValidPosition = not area.restrictArea or area:getIsInsideArea(x, y, z)
+
+        if isValidPosition then
+            local terrainLayerId = area.forceOutputLayer
+            local op = LandscapingOutputPaint.new(self, terrainLayerId)
+            op:apply()
+            return op.outputLiters
+        end
+    else
+        local op = LandscapingOutputPaint.new(self)
+        op:apply()
+        return op.outputLiters
+    end
+
+    return 0
+end
+
+---@return number?
+---@nodiscard
+function MachineWorkArea:getInputTargetHeight()
+    local vehicle = self.vehicle
+
+    local mode = vehicle:getInputMode()
+
+    if mode == Machine.MODE.LOWER or mode == Machine.MODE.FLATTEN then
+        local area, enabled = vehicle:getMachineInputArea()
+
+        if area ~= nil and enabled then
+            local x, y, z = self:getPosition()
+            local valid, targetY = area:getDeformationParams(x, y, z)
+
+            if valid then
+                return targetY
+            end
+        elseif mode == Machine.MODE.FLATTEN then
+            return MachineUtils.getVehicleTargetHeight(vehicle)
+        end
+    end
+end
+
+---@return number?
+---@nodiscard
+function MachineWorkArea:getOutputTargetHeight()
+    local vehicle = self.vehicle
+    local mode = vehicle:getOutputMode()
+
+    if mode == Machine.MODE.RAISE or mode == Machine.MODE.FLATTEN then
+        local area, enabled = vehicle:getMachineOutputArea()
+
+        if enabled and area ~= nil then
+            local x, y, z = self:getOutputPosition()
+            local valid, targetY = area:getDeformationParams(x, y, z)
+
+            if valid then
+                return targetY
+            end
+        elseif mode == Machine.MODE.FLATTEN then
+            return MachineUtils.getVehicleTargetHeight(vehicle)
+        end
+    end
 end
 
 ---@return number worldPosX

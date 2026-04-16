@@ -1,9 +1,12 @@
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineActiveEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineEnabledEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineFillTypeEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputAreaEnabledEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputAreaIdEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineInputModeEvent.lua')
-source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineLandscapingAreaEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputAreaEnabledEvent.lua')
+source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputAreaIdEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputLayerEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineOutputModeEvent.lua')
 source(g_currentModDirectory .. 'scripts/specializations/events/SetMachineResourcesEvent.lua')
@@ -25,12 +28,12 @@ Machine.DEFAULT_FILLTYPE = 'STONE'
 
 ---@enum MachineMode
 Machine.MODE = {
-    MATERIAL = 0,
     RAISE = 1,
     LOWER = 2,
     SMOOTH = 3,
     FLATTEN = 4,
-    PAINT = 5
+    PAINT = 5,
+    MATERIAL = 6,
 }
 
 Machine.NUM_BITS_MODE = 3
@@ -56,7 +59,10 @@ Machine.L10N_ACTION_SELECT_GROUND_TEXTURE = g_i18n:getText('ui_changeTexture')
 Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE = g_i18n:getText('ui_changeDischargeTexture')
 Machine.L10N_ACTION_GLOBAL_SETTINGS = g_i18n:getText('ui_globalSettings')
 Machine.L10N_ACTION_TOGGLE_HUD = g_i18n:getText('ui_toggleHud')
-Machine.L10N_ACTION_SELECT_AREA = g_i18n:getText('input_MACHINE_SELECT_AREA')
+Machine.L10N_ACTION_SELECT_INPUT_AREA = g_i18n:getText('input_MACHINE_SELECT_INPUT_AREA')
+Machine.L10N_ACTION_SELECT_OUTPUT_AREA = g_i18n:getText('input_MACHINE_SELECT_OUTPUT_AREA')
+Machine.L10N_ACTION_TOGGLE_INPUT_AREA_STATE = g_i18n:getText('input_MACHINE_TOGGLE_INPUT_AREA_STATE')
+Machine.L10N_ACTION_TOGGLE_OUTPUT_AREA_STATE = g_i18n:getText('input_MACHINE_TOGGLE_OUTPUT_AREA_STATE')
 Machine.L10N_ACTION_TOGGLE_GLOBAL_BORDER = g_i18n:getText('input_MACHINE_GLOBAL_TOGGLE_BORDER')
 
 Machine.ACTION_TOGGLE_ACTIVE = 'MACHINE_TOGGLE_ACTIVE'
@@ -68,7 +74,10 @@ Machine.ACTION_SELECT_TEXTURE = 'MACHINE_SELECT_TEXTURE'
 Machine.ACTION_SELECT_DISCHARGE_TEXTURE = 'MACHINE_SELECT_DISCHARGE_TEXTURE'
 Machine.ACTION_GLOBAL_SETTINGS = 'MACHINE_GLOBAL_SETTINGS'
 Machine.ACTION_TOGGLE_HUD = 'MACHINE_TOGGLE_HUD'
-Machine.ACTION_SELECT_AREA = 'MACHINE_SELECT_AREA'
+Machine.ACTION_SELECT_INPUT_AREA = 'MACHINE_SELECT_INPUT_AREA'
+Machine.ACTION_SELECT_OUTPUT_AREA = 'MACHINE_SELECT_OUTPUT_AREA'
+Machine.ACTION_TOGGLE_INPUT_AREA_STATE = 'MACHINE_TOGGLE_INPUT_AREA_STATE'
+Machine.ACTION_TOGGLE_OUTPUT_AREA_STATE = 'MACHINE_TOGGLE_OUTPUT_AREA_STATE'
 Machine.ACTION_GLOBAL_TOGGLE_BORDER = 'MACHINE_GLOBAL_TOGGLE_BORDER'
 
 ---@type table<MachineMode, string>
@@ -148,7 +157,11 @@ function Machine.registerSavegameXMLPaths(schema, key)
     schema:register(XMLValueType.STRING, key .. '#dischargeTerrainLayer')
     schema:register(XMLValueType.STRING, key .. '#inputMode')
     schema:register(XMLValueType.STRING, key .. '#outputMode')
-    schema:register(XMLValueType.STRING, key .. '#landscapingAreaId')
+
+    schema:register(XMLValueType.STRING, key .. '#inputAreaId')
+    schema:register(XMLValueType.BOOL, key .. '#inputAreaEnabled')
+    schema:register(XMLValueType.STRING, key .. '#outputAreaId')
+    schema:register(XMLValueType.BOOL, key .. '#outputAreaEnabled')
 
     MachineState.registerSavegameXMLPaths(schema, key .. '.state')
 
@@ -210,9 +223,22 @@ function Machine.registerFunctions(vehicleType)
     SpecializationUtil.registerFunction(vehicleType, 'handleDeformationInput', Machine.handleDeformationInput)
     SpecializationUtil.registerFunction(vehicleType, 'setResourcesEnabled', Machine.setResourcesEnabled)
 
-    SpecializationUtil.registerFunction(vehicleType, 'getMachineLandscapingAreaId', Machine.getMachineLandscapingAreaId)
-    SpecializationUtil.registerFunction(vehicleType, 'getMachineLandscapingArea', Machine.getMachineLandscapingArea)
-    SpecializationUtil.registerFunction(vehicleType, 'setMachineLandscapingArea', Machine.setMachineLandscapingArea)
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineInputAreaId', Machine.setMachineInputAreaId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineInputAreaId', Machine.getMachineInputAreaId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineInputArea', Machine.getMachineInputArea)
+
+    SpecializationUtil.registerFunction(vehicleType, 'setIsMachineInputAreaEnabled', Machine.setIsMachineInputAreaEnabled)
+    SpecializationUtil.registerFunction(vehicleType, 'getIsMachineInputAreaEnabled', Machine.getIsMachineInputAreaEnabled)
+
+    SpecializationUtil.registerFunction(vehicleType, 'setMachineOutputAreaId', Machine.setMachineOutputAreaId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineOutputAreaId', Machine.getMachineOutputAreaId)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineOutputArea', Machine.getMachineOutputArea)
+
+    SpecializationUtil.registerFunction(vehicleType, 'setIsMachineOutputAreaEnabled', Machine.setIsMachineOutputAreaEnabled)
+    SpecializationUtil.registerFunction(vehicleType, 'getIsMachineOutputAreaEnabled', Machine.getIsMachineOutputAreaEnabled)
+
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineType', Machine.getMachineType)
+    SpecializationUtil.registerFunction(vehicleType, 'getMachineWorkArea', Machine.getMachineWorkArea)
 end
 
 function Machine.initSpecialization()
@@ -304,8 +330,11 @@ function Machine:onLoad()
     spec.lastIntervalUpdate = 0
     spec.state = MachineState.new()
 
-    spec.inputMode = Machine.MODE.MATERIAL
-    spec.outputMode = Machine.MODE.MATERIAL
+    spec.inputMode = Machine.MODE.LOWER
+    spec.outputMode = Machine.MODE.RAISE
+
+    spec.inputAreaEnabled = true
+    spec.outputAreaEnabled = true
 
     spec.inputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
     spec.outputTerrainLayerId = g_landscapingManager:getDefaultTerrainLayerId()
@@ -546,7 +575,7 @@ function Machine:onDelete()
     spec.fillUnit = nil
     spec.fillType = nil
 
-    g_machineManager:unregisterVehicle(self)
+    g_machineManager:unregisterMachine(self)
 end
 
 ---@param xmlFile XMLFile
@@ -559,8 +588,15 @@ function Machine:saveToXMLFile(xmlFile, key)
     xmlFile:setValue(key .. '#inputMode', Machine.MODE_NAME[spec.inputMode])
     xmlFile:setValue(key .. '#outputMode', Machine.MODE_NAME[spec.outputMode])
 
-    if spec.landscapingAreaId ~= nil then
-        xmlFile:setValue(key .. '#landscapingAreaId', spec.landscapingAreaId)
+    xmlFile:setValue(key .. '#inputAreaEnabled', spec.inputAreaEnabled)
+    xmlFile:setValue(key .. '#outputAreaEnabled', spec.outputAreaEnabled)
+
+    if spec.inputAreaId ~= nil then
+        xmlFile:setValue(key .. '#inputAreaId', spec.inputAreaId)
+    end
+
+    if spec.outputAreaId ~= nil then
+        xmlFile:setValue(key .. '#outputAreaId', spec.outputAreaId)
     end
 
     ---@type FillTypeObject?
@@ -609,7 +645,11 @@ function Machine:loadFromXMLFile(xmlFile, key)
         self:setOutputMode(Machine.MODE[outputModeStr], true)
     end
 
-    spec.landscapingAreaId = xmlFile:getValue(key .. '#landscapingAreaId', nil)
+    spec.inputAreaEnabled = xmlFile:getValue(key .. '#inputAreaEnabled', spec.inputAreaEnabled)
+    spec.outputAreaEnabled = xmlFile:getValue(key .. '#outputAreaEnabled', spec.outputAreaEnabled)
+
+    spec.inputAreaId = xmlFile:getValue(key .. '#inputAreaId', nil)
+    spec.outputAreaId = xmlFile:getValue(key .. '#outputAreaId', nil)
 
     local fillTypeName = xmlFile:getValue(key .. '#fillType')
 
@@ -737,32 +777,120 @@ function Machine:getMachineState()
     return self.spec_machine.state
 end
 
----@return string?
+---@return MachineType
 ---@nodiscard
-function Machine:getMachineLandscapingAreaId()
-    return self.spec_machine.landscapingAreaId
+function Machine:getMachineType()
+    return self.spec_machine.machineType
+end
+
+---@return MachineWorkArea
+---@nodiscard
+function Machine:getMachineWorkArea()
+    return self.spec_machine.workArea
+end
+
+---@param id string?
+---@param noEventSend? boolean
+function Machine:setMachineInputAreaId(id, noEventSend)
+    local spec = self.spec_machine
+
+    if spec.inputAreaId ~= id then
+        SetMachineInputAreaIdEvent.sendEvent(self, id, noEventSend)
+
+        spec.inputAreaId = id
+
+        g_messageCenter:publish(SetMachineInputAreaIdEvent, self, id)
+    end
+end
+
+---@return string?
+---@return boolean isEnabled
+---@nodiscard
+function Machine:getMachineInputAreaId()
+    local spec = self.spec_machine
+
+    return spec.inputAreaId, spec.inputAreaEnabled
 end
 
 ---@return LandscapingArea?
+---@return boolean isEnabled
 ---@nodiscard
-function Machine:getMachineLandscapingArea()
+function Machine:getMachineInputArea()
     local spec = self.spec_machine
 
-    return g_landscapingManager:getAreaByUniqueId(spec.landscapingAreaId)
+    return g_landscapingManager:getAreaByUniqueId(spec.inputAreaId), spec.inputAreaEnabled
 end
 
----@param uniqueId? string
+---@param enabled boolean
 ---@param noEventSend? boolean
-function Machine:setMachineLandscapingArea(uniqueId, noEventSend)
+function Machine:setIsMachineInputAreaEnabled(enabled, noEventSend)
     local spec = self.spec_machine
 
-    if spec.landscapingAreaId ~= uniqueId then
-        SetMachineLandscapingAreaEvent.sendEvent(self, uniqueId)
+    if spec.inputAreaEnabled ~= enabled then
+        SetMachineInputAreaEnabledEvent.sendEvent(self, enabled, noEventSend)
 
-        spec.landscapingAreaId = uniqueId
+        spec.inputAreaEnabled = enabled
 
-        g_messageCenter:publish(SetMachineLandscapingAreaEvent, self, uniqueId)
+        g_messageCenter:publish(SetMachineInputAreaEnabledEvent, self, enabled)
     end
+end
+
+---@return boolean
+---@nodiscard
+function Machine:getIsMachineInputAreaEnabled()
+    return self.spec_machine.inputAreaEnabled
+end
+
+---@param id string?
+---@param noEventSend? boolean
+function Machine:setMachineOutputAreaId(id, noEventSend)
+    local spec = self.spec_machine
+
+    if spec.outputAreaId ~= id then
+        SetMachineOutputAreaIdEvent.sendEvent(self, id, noEventSend)
+
+        spec.outputAreaId = id
+
+        g_messageCenter:publish(SetMachineOutputAreaIdEvent, self, id)
+    end
+end
+
+---@return string?
+---@return boolean isEnabled
+---@nodiscard
+function Machine:getMachineOutputAreaId()
+    local spec = self.spec_machine
+
+    return spec.outputAreaId, spec.outputAreaEnabled
+end
+
+---@return LandscapingArea?
+---@return boolean isEnabled
+---@nodiscard
+function Machine:getMachineOutputArea()
+    local spec = self.spec_machine
+
+    return g_landscapingManager:getAreaByUniqueId(spec.outputAreaId), spec.outputAreaEnabled
+end
+
+---@param enabled boolean
+---@param noEventSend? boolean
+function Machine:setIsMachineOutputAreaEnabled(enabled, noEventSend)
+    local spec = self.spec_machine
+
+    if spec.outputAreaEnabled ~= enabled then
+        SetMachineOutputAreaEnabledEvent.sendEvent(self, enabled, noEventSend)
+
+        spec.outputAreaEnabled = enabled
+
+        g_messageCenter:publish(SetMachineOutputAreaEnabledEvent, self, enabled)
+    end
+end
+
+---@return boolean
+---@nodiscard
+function Machine:getIsMachineOutputAreaEnabled()
+    return self.spec_machine.outputAreaEnabled
 end
 
 ---@param enabled boolean
@@ -1229,9 +1357,15 @@ function Machine:onWriteStream(streamId, connection)
         streamWriteUIntN(streamId, spec.fillTypeIndex or 0, FillTypeManager.SEND_NUM_BITS)
         streamWriteUIntN(streamId, spec.inputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
         streamWriteUIntN(streamId, spec.outputTerrainLayerId or 0, TerrainDeformation.LAYER_SEND_NUM_BITS)
+        streamWriteBool(streamId, spec.inputAreaEnabled)
+        streamWriteBool(streamId, spec.outputAreaEnabled)
 
-        if streamWriteBool(streamId, spec.landscapingAreaId ~= nil) then
-            streamWriteString(streamId, spec.landscapingAreaId)
+        if streamWriteBool(streamId, spec.inputAreaId ~= nil) then
+            streamWriteString(streamId, spec.inputAreaId)
+        end
+
+        if streamWriteBool(streamId, spec.outputAreaId ~= nil) then
+            streamWriteString(streamId, spec.outputAreaId)
         end
 
         spec.state:writeStream(streamId, connection)
@@ -1255,10 +1389,19 @@ function Machine:onReadStream(streamId, connection)
         self:setMachineInputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
         self:setMachineOutputLayerId(streamReadUIntN(streamId, TerrainDeformation.LAYER_SEND_NUM_BITS), true)
 
+        spec.inputAreaEnabled = streamReadBool(streamId)
+        spec.outputAreaEnabled = streamReadBool(streamId)
+
         if streamReadBool(streamId) then
-            spec.landscapingAreaId = streamReadString(streamId)
+            spec.inputAreaId = streamReadString(streamId)
         else
-            spec.landscapingAreaId = nil
+            spec.inputAreaId = nil
+        end
+
+        if streamReadBool(streamId) then
+            spec.outputAreaId = streamReadString(streamId)
+        else
+            spec.outputAreaId = nil
         end
 
         spec.state:readStream(streamId, connection)
@@ -1377,13 +1520,44 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
         end
 
-        action = InputAction[Machine.ACTION_SELECT_AREA]
+        if MachineUtils.getHasInputs(self) then
+            action = InputAction[Machine.ACTION_SELECT_INPUT_AREA]
 
-        if action ~= nil then
-            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectArea, false, true, false, true)
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectInputArea, false, true, false, true)
 
-            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_AREA)
-            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_INPUT_AREA)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
+
+            action = InputAction[Machine.ACTION_TOGGLE_INPUT_AREA_STATE]
+
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventToggleInputAreaState, false, true, false, true)
+
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_TOGGLE_INPUT_AREA_STATE)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
+        end
+
+        if MachineUtils.getHasOutputs(self) then
+            action = InputAction[Machine.ACTION_SELECT_OUTPUT_AREA]
+
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectOutputArea, false, true, false, true)
+
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_OUTPUT_AREA)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
+
+            action = InputAction[Machine.ACTION_TOGGLE_OUTPUT_AREA_STATE]
+
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventToggleOutputAreaState, false, true, false, true)
+
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_TOGGLE_OUTPUT_AREA_STATE)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
         end
 
         action = InputAction[Machine.ACTION_GLOBAL_SETTINGS]
@@ -1618,16 +1792,44 @@ function Machine:selectDischargeTerrainLayerCallback(terrainLayerId)
     end
 end
 
-function Machine:actionEventSelectArea()
-    g_selectAreaDialog:setSelectCallback(Machine.selectAreaCallback, self)
-    g_selectAreaDialog:show(self)
+function Machine:actionEventSelectInputArea()
+    local spec = self.spec_machine
+
+    g_selectAreaDialog:setSelectCallback(Machine.selectInputAreaCallback, self)
+    g_selectAreaDialog:show(spec.inputAreaId, Machine.L10N_ACTION_SELECT_INPUT_AREA)
 end
 
----@param area? LandscapingArea
-function Machine:selectAreaCallback(area)
-    if area ~= nil and area.uniqueId ~= nil then
-        self:setMachineLandscapingArea(area.uniqueId)
+---@param id? string
+function Machine:selectInputAreaCallback(id)
+    if id ~= nil then
+        self:setMachineInputAreaId(id)
     end
+end
+
+function Machine:actionEventToggleInputAreaState()
+    local spec = self.spec_machine
+
+    self:setIsMachineInputAreaEnabled(not spec.inputAreaEnabled)
+end
+
+function Machine:actionEventSelectOutputArea()
+    local spec = self.spec_machine
+
+    g_selectAreaDialog:setSelectCallback(Machine.selectOutputAreaCallback, self)
+    g_selectAreaDialog:show(spec.outputAreaId, Machine.L10N_ACTION_SELECT_OUTPUT_AREA)
+end
+
+---@param id? string
+function Machine:selectOutputAreaCallback(id)
+    if id ~= nil then
+        self:setMachineOutputAreaId(id)
+    end
+end
+
+function Machine:actionEventToggleOutputAreaState()
+    local spec = self.spec_machine
+
+    self:setIsMachineOutputAreaEnabled(not spec.outputAreaEnabled)
 end
 
 function Machine:actionEventGlobalSettings()

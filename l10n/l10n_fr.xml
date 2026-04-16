@@ -12,7 +12,10 @@
         <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Ouvrir les réglages globaux" />
         <text name="input_MACHINE_TOGGLE_HUD" text="Afficher/masquer le HUD" />
-
+        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Select terraform area" />
+        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Select discharge area" />
+        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Toggle terraform area enabled" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Toggle discharge area enabled" />
         <!-- Generic texts-->
         <text name="ui_mode" text="Mode" />
         <text name="ui_enable" text="Activer" />
@@ -24,6 +27,7 @@
         <text name="ui_materialSettings" text="Paramètres du matériau" />
         <text name="ui_material" text="Matériau" />
         <text name="ui_texture" text="Texture" />
+        <text name="ui_terraformTexture" text="Terraform texture" />
         <text name="ui_dischargeTexture" text="Discharge texture" />
         <text name="ui_changeMaterial" text="Changer le matériau" />
         <text name="ui_changeTexture" text="Changer la texture" />
@@ -129,7 +133,6 @@
         <text name="machineType_trencher" text="Trancheuse" />
 
         <!-- 1.3.0.0 UPDATE: New entries -->
-        <text name="input_MACHINE_SELECT_AREA" text="Open select area dialog" />
 
         <text name="ui_landscapingAreas" text="Landscaping areas" />
         <text name="ui_landscapingArea" text="Landscaping area" />

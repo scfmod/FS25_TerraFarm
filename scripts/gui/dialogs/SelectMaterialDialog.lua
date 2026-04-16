@@ -84,7 +84,7 @@ function SelectMaterialDialog:updateItems()
     end
 
     table.sort(self.items, function (a, b)
-        return a.title < b.title
+        return a.title:upper() < b.title:upper()
     end)
 
     self.list:reloadData()

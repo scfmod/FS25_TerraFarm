@@ -44,7 +44,10 @@
         <action name="MACHINE_SELECT_DISCHARGE_TEXTURE" />
         <action name="MACHINE_GLOBAL_SETTINGS" />
         <action name="MACHINE_TOGGLE_HUD" />
-        <action name="MACHINE_SELECT_AREA" />
+        <action name="MACHINE_SELECT_INPUT_AREA" />
+        <action name="MACHINE_SELECT_OUTPUT_AREA" />
+        <action name="MACHINE_TOGGLE_INPUT_AREA_STATE" />
+        <action name="MACHINE_TOGGLE_OUTPUT_AREA_STATE" />
         <action name="MACHINE_GLOBAL_TOGGLE_BORDER" />
 
         <action name="AREA_EDITOR_ENTER" locked="true" />
@@ -159,9 +162,13 @@
         <actionBinding action="MACHINE_SELECT_DISCHARGE_TEXTURE">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_8" index="1" />
         </actionBinding>
-        <actionBinding action="MACHINE_SELECT_AREA">
-            <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_7" index="1" />
-        </actionBinding>
+
+        <actionBinding action="MACHINE_SELECT_INPUT_AREA" />
+        <actionBinding action="MACHINE_SELECT_OUTPUT_AREA" />
+
+        <actionBinding action="MACHINE_TOGGLE_INPUT_AREA_STATE" />
+        <actionBinding action="MACHINE_TOGGLE_OUTPUT_AREA_STATE" />
+
         <actionBinding action="MACHINE_GLOBAL_SETTINGS">
             <binding device="KB_MOUSE_DEFAULT" input="KEY_KP_9" index="1" />
         </actionBinding>

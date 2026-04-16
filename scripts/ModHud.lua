@@ -3,7 +3,8 @@ source(g_modDirectory .. 'scripts/gui/elements/HUDMachineDisplayElement.lua')
 ---@class ModHud
 ---@field isDirty boolean
 ---@field display HUDMachineDisplayElement
----@field targetShape number
+---@field targetInputShape number
+---@field targetOutputShape number
 ModHud = {}
 
 ModHud.XML_FILENAME = g_modDirectory .. 'data/gui/MachineHUD.xml'
@@ -44,7 +45,8 @@ function ModHud:delete()
     self.display:delete()
     self.display = nil
 
-    delete(self.targetShape)
+    delete(self.targetInputShape)
+    delete(self.targetOutputShape)
 end
 
 function ModHud:reload()
@@ -77,19 +79,21 @@ function ModHud:loadShapes()
     local i3dNode = g_i3DManager:loadI3DFile(ModHud.TARGET_SHAPES_FILENAME, false, false)
 
     if i3dNode ~= 0 then
-        self.targetShape = getChildAt(i3dNode, 0)
+        self.targetInputShape = getChildAt(i3dNode, 0)
 
-        link(getRootNode(), self.targetShape)
-        setVisibility(self.targetShape, false)
+        link(getRootNode(), self.targetInputShape)
+        setVisibility(self.targetInputShape, false)
+
+        self.targetOutputShape = clone(self.targetInputShape, true, false, false)
 
         delete(i3dNode)
     end
 end
 
 function ModHud:activate()
-    g_messageCenter:subscribe(ModMessageType.ACTIVE_MACHINE_CHANGED, self.onActiveMachineChanged, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATED, self.onAreaUpdated, self)
-    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETED, self.onAreaUpdated, self)
+    g_messageCenter:subscribe(ModMessageType.SET_ACTIVE_MACHINE, self.onSetActiveMachine, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_UPDATE, self.onAreaUpdated, self)
+    g_messageCenter:subscribe(ModMessageType.LANDSCAPING_AREA_DELETE, self.onAreaUpdated, self)
 
     g_messageCenter:subscribe(SetMachineActiveEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineEnabledEvent, self.onMachineUpdated, self)
@@ -98,14 +102,18 @@ function ModHud:activate()
     g_messageCenter:subscribe(SetMachineOutputModeEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineInputLayerEvent, self.onMachineUpdated, self)
     g_messageCenter:subscribe(SetMachineOutputLayerEvent, self.onMachineUpdated, self)
-    g_messageCenter:subscribe(SetMachineLandscapingAreaEvent, self.onMachineUpdated, self)
+    g_messageCenter:subscribe(SetMachineInputAreaIdEvent, self.onMachineUpdated, self)
+    g_messageCenter:subscribe(SetMachineOutputAreaIdEvent, self.onMachineUpdated, self)
+
+    g_messageCenter:subscribe(SetMachineInputAreaEnabledEvent, self.onMachineUpdated, self)
+    g_messageCenter:subscribe(SetMachineOutputAreaEnabledEvent, self.onMachineUpdated, self)
 
     g_currentMission:addDrawable(self)
     g_currentMission:addUpdateable(self)
 end
 
 ---@param vehicle Machine?
-function ModHud:onActiveMachineChanged(vehicle)
+function ModHud:onSetActiveMachine(vehicle)
     self.display:updateDisplay()
 end
 
@@ -219,10 +227,7 @@ function ModHud:update(dt)
     local activeVehicle = g_machineManager.activeVehicle
 
     if activeVehicle ~= nil and g_modSettings:getIsEnabled() and activeVehicle:getMachineEnabled() then
-        local inputMode = activeVehicle:getInputMode()
-        local outputMode = activeVehicle:getOutputMode()
-
-        if g_modSettings:getDebugCalibration() and (inputMode == Machine.MODE.FLATTEN or outputMode == Machine.MODE.FLATTEN) then
+        if g_modSettings:getDebugCalibration() and activeVehicle:getMachineActive() then
             self:updateTarget(true)
             return
         end
@@ -231,22 +236,78 @@ function ModHud:update(dt)
     self:updateTarget(false)
 end
 
----@param enabled boolean
-function ModHud:updateTarget(enabled)
-    if self.targetShape ~= nil then
-        local vehicle = g_machineManager.activeVehicle
+---@param vehicle Machine
+function ModHud:updateInputTarget(vehicle)
+    local mode = vehicle:getInputMode()
 
-        if vehicle ~= nil and enabled and g_gui.currentGui == nil then
-            local workArea = vehicle.spec_machine.workArea
-            local x, _, z = workArea:getOutputPosition()
-            local targetY = workArea:getOutputTargetHeight()
+    if MachineUtils.getHasInputs(vehicle) and (mode == Machine.MODE.LOWER or mode == Machine.MODE.FLATTEN) then
+        local workArea = vehicle:getMachineWorkArea()
 
-            setWorldTranslation(self.targetShape, x, targetY, z)
-            setVisibility(self.targetShape, true)
-        else
-            setVisibility(self.targetShape, false)
+        local x, _, z = workArea:getPosition()
+        local targetY = workArea:getInputTargetHeight()
+
+        if targetY ~= nil then
+            setWorldTranslation(self.targetInputShape, x, targetY, z)
+            setVisibility(self.targetInputShape, true)
+            return
         end
     end
+
+    setVisibility(self.targetInputShape, false)
+end
+
+---@param vehicle Machine
+function ModHud:updateOutputTarget(vehicle)
+    local mode = vehicle:getOutputMode()
+
+    if MachineUtils.getHasOutputs(vehicle) and (mode == Machine.MODE.RAISE or mode == Machine.MODE.FLATTEN) then
+        local workArea = vehicle:getMachineWorkArea()
+
+        local x, _, z = workArea:getOutputPosition()
+        local targetY = workArea:getOutputTargetHeight()
+
+        if targetY ~= nil then
+            setWorldTranslation(self.targetOutputShape, x, targetY, z)
+            setVisibility(self.targetOutputShape, true)
+            return
+        end
+    end
+
+    setVisibility(self.targetOutputShape, false)
+end
+
+---@param enabled boolean
+function ModHud:updateTarget(enabled)
+    local vehicle = g_machineManager.activeVehicle
+
+    if enabled and vehicle ~= nil and g_gui.currentGui == nil then
+        self:updateInputTarget(vehicle)
+        self:updateOutputTarget(vehicle)
+    else
+        setVisibility(self.targetInputShape, false)
+        setVisibility(self.targetOutputShape, false)
+    end
+end
+
+function ModHud:updateTargetColor()
+    -- TODO
+
+    local r1, g1, b1 = 0.75, 0.75, 0.75
+    local r2, g2, b2 = 0.75, 0.75, 0.75
+
+    local inputArea, inputEnabled = g_landscapingManager:getActiveInputArea()
+    local outputArea, outputEnabled = g_landscapingManager:getActiveOutputArea()
+
+    if inputArea ~= nil then
+        r1, g1, b1 = inputArea:getDisplayColor()
+    end
+
+    if outputArea ~= nil then
+        r2, g2, b2 = outputArea:getDisplayColor()
+    end
+
+    setShaderParameter(self.targetInputShape, 'lineColor', r1, g1, b1, 0.5)
+    setShaderParameter(self.targetOutputShape, 'lineColor', r2, g2, b2, 0.5)
 end
 
 ---@diagnostic disable-next-line: lowercase-global

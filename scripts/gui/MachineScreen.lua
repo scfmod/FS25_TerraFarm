@@ -53,8 +53,11 @@ end
 function MachineScreen:setupPages()
     ---@return boolean
     local function calibrationPredicateFn()
-        if self.vehicle ~= nil and self.vehicle.spec_machine ~= nil then
-            return MachineUtils.getHasInputMode(self.vehicle, Machine.MODE.FLATTEN) or MachineUtils.getHasOutputMode(self.vehicle, Machine.MODE.FLATTEN)
+        if self.vehicle ~= nil then
+            return MachineUtils.getHasInputMode(self.vehicle, Machine.MODE.LOWER)
+                or MachineUtils.getHasInputMode(self.vehicle, Machine.MODE.FLATTEN)
+                or MachineUtils.getHasOutputMode(self.vehicle, Machine.MODE.RAISE)
+                or MachineUtils.getHasOutputMode(self.vehicle, Machine.MODE.FLATTEN)
         end
 
         return false
@@ -155,7 +158,7 @@ function MachineScreen:onOpen()
     self:onMenuOpened()
     self:updateVehicle()
 
-    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVED, self.onMachineRemoved, self)
+    g_messageCenter:subscribe(ModMessageType.MACHINE_REMOVE, self.onMachineRemove, self)
 
     FocusManager:lockFocusInput(InputAction.MENU_PAGE_NEXT, 150)
     FocusManager:lockFocusInput(InputAction.MENU_PAGE_PREV, 150)
@@ -193,7 +196,7 @@ function MachineScreen:onClickBack()
 end
 
 ---@param vehicle Machine
-function MachineScreen:onMachineRemoved(vehicle)
+function MachineScreen:onMachineRemove(vehicle)
     if vehicle ~= nil and vehicle == self.vehicle then
         self:exitMenu()
     end

@@ -6,7 +6,7 @@
                 <Text profile="tfMenuFrame_contentHeaderText" text="$l10n_ui_machineSettings" />
             </Bitmap>
 
-            <ScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
+            <TFScrollingLayout profile="tfMenuFrame_contentLayout" id="boxLayout">
                 <GuiElement profile="tfMenuFrame_contentLayoutSectionHeader">
                     <Text profile="tfMenuFrame_contentLayoutSectionHeaderText" text="$l10n_ui_settingsGeneral" />
                 </GuiElement>
@@ -102,7 +102,7 @@
 
                     <BinaryOption id="forceNodesOption" name="forceNodes" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
                 </Bitmap>
-            </ScrollingLayout>
+            </TFScrollingLayout>
 
             <Bitmap profile="tfMenuFrame_contentShadowTop" />
             <Bitmap profile="tfMenuFrame_contentShadowBottom" />

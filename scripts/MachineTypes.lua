@@ -1,3 +1,13 @@
+---@class MachineType
+---@field id string
+---@field name string
+---@field useDischargeable boolean
+---@field useDrivingDirection boolean
+---@field useFillUnit boolean
+---@field useLeveler boolean
+---@field useShovel boolean
+---@field useInput boolean
+
 ---@type MachineType
 local machineTypeCompactor = {
     id = 'compactor',
@@ -6,7 +16,8 @@ local machineTypeCompactor = {
     useDrivingDirection = true,
     useFillUnit = false,
     useLeveler = false,
-    useShovel = false
+    useShovel = false,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -18,7 +29,8 @@ local machineTypeDischarger = {
     useFillUnit = true,
     useLeveler = false,
     useShovel = false,
-    useTrailer = true
+    useTrailer = true,
+    useInput = false,
 }
 
 ---@type MachineType
@@ -29,7 +41,8 @@ local machineTypeExcavatorRipper = {
     useDrivingDirection = false,
     useFillUnit = false,
     useLeveler = false,
-    useShovel = false
+    useShovel = false,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -40,7 +53,8 @@ local machineTypeExcavatorShovel = {
     useDrivingDirection = false,
     useFillUnit = true,
     useLeveler = true,
-    useShovel = true
+    useShovel = true,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -51,7 +65,8 @@ local machineTypeLeveler = {
     useDrivingDirection = true,
     useFillUnit = true,
     useLeveler = true,
-    useShovel = false
+    useShovel = false,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -62,7 +77,8 @@ local machineTypeRipper = {
     useDrivingDirection = true,
     useFillUnit = false,
     useLeveler = false,
-    useShovel = false
+    useShovel = false,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -73,7 +89,8 @@ local machineTypeShovel = {
     useDrivingDirection = true,
     useFillUnit = true,
     useLeveler = true,
-    useShovel = true
+    useShovel = true,
+    useInput = true,
 }
 
 ---@type MachineType
@@ -84,7 +101,8 @@ local machineTypeTrencher = {
     useDrivingDirection = false,
     useFillUnit = true,
     useLeveler = false,
-    useShovel = false
+    useShovel = false,
+    useInput = true,
 }
 
 g_machineManager:registerMachineType(machineTypeCompactor)

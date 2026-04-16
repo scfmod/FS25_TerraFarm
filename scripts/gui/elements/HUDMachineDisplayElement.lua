@@ -5,29 +5,52 @@
 ---@field animateDuration number
 ---@field boxLayout BoxLayoutElement
 ---
----@field inputItem BitmapElement
----@field inputTitle TextElement
----@field inputImage BitmapElement
----@field inputText TextElement
----@field outputItem BitmapElement
----@field outputImage BitmapElement
----@field outputText TextElement
----@field materialItem BitmapElement
----@field materialImage BitmapElement
----@field materialText TextElement
----@field inputTextureItem BitmapElement
----@field inputTextureImage TerrainLayerElement
----@field inputTextureText TextElement
----@field outputTextureItem BitmapElement
----@field outputTextureImage TerrainLayerElement
----@field outputTextureText TextElement
----@field areaItem BitmapElement
----@field areaImage BitmapElement
----@field areaTitle TextElement
----@field areaText TextElement
----@field vehicleItem BitmapElement
----@field vehicleImage BitmapElement
----@field vehicleText TextElement
+---@field vehicleDisplayElement BitmapElement
+---@field vehicleDisplayImageElement BitmapElement
+---@field vehicleDisplayTitleElement TextElement
+---@field vehicleDisplayTextElement TextElement
+---
+---@field materialDisplayElement BitmapElement
+---@field materialDisplayImageElement BitmapElement
+---@field materialDisplayTitleElement TextElement
+---@field materialDisplayTextElement TextElement
+---
+---@field inputDisplayElement BoxLayoutElement
+---
+---@field inputDisplayModeElement BitmapElement
+---@field inputDisplayModeImageElement BitmapElement
+---@field inputDisplayModeTitleElement TextElement
+---@field inputDisplayModeTextElement TextElement
+---
+---@field inputDisplayTextureElement BitmapElement
+---@field inputDisplayTextureImageElement TerrainLayerElement
+---@field inputDisplayTextureTitleElement TextElement
+---@field inputDisplayTextureTextElement TextElement
+---
+---@field inputDisplayAreaElement BitmapElement
+---@field inputDisplayAreaImageElement BitmapElement
+---@field inputDisplayAreaTitleElement TextElement
+---@field inputDisplayAreaTextElement TextElement
+---@field inputDisplayAreaColorElement BitmapElement
+---
+---@field outputDisplayElement BoxLayoutElement
+---
+---@field outputDisplayModeElement BitmapElement
+---@field outputDisplayModeImageElement BitmapElement
+---@field outputDisplayModeTitleElement TextElement
+---@field outputDisplayModeTextElement TextElement
+---
+---@field outputDisplayTextureElement BitmapElement
+---@field outputDisplayTextureImageElement TerrainLayerElement
+---@field outputDisplayTextureTitleElement TextElement
+---@field outputDisplayTextureTextElement TextElement
+---
+---@field outputDisplayAreaElement BitmapElement
+---@field outputDisplayAreaImageElement BitmapElement
+---@field outputDisplayAreaTitleElement TextElement
+---@field outputDisplayAreaTextElement TextElement
+---@field outputDisplayAreaColorElement BitmapElement
+---
 ---@field elements table<string, GuiElement>
 ---@field posX number
 ---@field posY number
@@ -250,113 +273,156 @@ function HUDMachineDisplayElement:updateDisplay()
         self:setIsEnabled(active)
 
         self:updateVehicleDisplay(vehicle)
-        self:updateModeDisplay(vehicle)
         self:updateMaterialDisplay(vehicle)
-        self:updateTextureDisplay(vehicle)
-        self:updateOutputTextureDisplay(vehicle)
-        self:updateAreaDisplay(vehicle)
+
+        self:updateInputDisplay(vehicle)
+        self:updateOutputDisplay(vehicle)
 
         self.boxLayout:invalidateLayout()
     end
 end
 
 ---@param vehicle Machine
-function HUDMachineDisplayElement:updateModeDisplay(vehicle)
-    local spec = vehicle.spec_machine
+function HUDMachineDisplayElement:updateInputDisplay(vehicle)
+    if MachineUtils.getHasInputs(vehicle) then
+        local area, areaEnabled = vehicle:getMachineInputArea()
+        local layerId = vehicle:getMachineInputLayerId()
 
-    if #spec.modesInput > 0 then
-        self.inputItem:setVisible(true)
-        self.inputImage:setImageSlice(nil, Machine.MODE_ICON_SLICE_ID[spec.inputMode])
-        self.inputText:setText(Machine.L10N_MODE[spec.inputMode])
-    else
-        self.inputItem:setVisible(false)
-    end
+        if area and areaEnabled then
+            layerId = area.forceInputLayer or layerId
 
-    if #spec.modesOutput > 0 then
-        self.outputItem:setVisible(true)
-        self.outputImage:setImageSlice(nil, Machine.MODE_ICON_SLICE_ID[spec.outputMode])
-        self.outputText:setText(Machine.L10N_MODE[spec.outputMode])
-    else
-        self.outputItem:setVisible(false)
-    end
-end
+            local iconSliceId = area:getIconSliceId()
 
----@param vehicle Machine
-function HUDMachineDisplayElement:updateMaterialDisplay(vehicle)
-    local spec = vehicle.spec_machine
+            self.inputDisplayAreaImageElement:setImageSlice(nil, iconSliceId)
+            self.inputDisplayAreaTitleElement:setText(area:getTypeName())
+            self.inputDisplayAreaTextElement:setText(area:getName())
 
-    ---@type FillTypeObject?
-    local fillType = g_fillTypeManager:getFillTypeByIndex(spec.fillTypeIndex)
+            local r, g, b = area:getDisplayColor()
+            self.inputDisplayAreaColorElement:setImageColor(nil, r, g, b)
+            self.inputDisplayAreaColorElement:setImageColor(GuiOverlay.STATE_DISABLED, r, g, b)
 
-    if fillType ~= nil and spec.machineType.useFillUnit then
-        self.materialItem:setVisible(true)
-        self.materialImage:setImageFilename(fillType.hudOverlayFilename)
-        self.materialText:setText(fillType.title)
-    else
-        self.materialItem:setVisible(false)
-    end
-end
-
----@param vehicle Machine
-function HUDMachineDisplayElement:updateTextureDisplay(vehicle)
-    local spec = vehicle.spec_machine
-
-    if #spec.modesInput > 0 then
-        local terrainLayer = g_landscapingManager:getTerrainLayerById(spec.inputTerrainLayerId)
-
-        self.inputTextureItem:setVisible(true)
-
-        if terrainLayer ~= nil then
-            self.inputTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.inputTextureText:setText(terrainLayer.title)
+            self.inputDisplayAreaElement:setVisible(true)
         else
-            self.inputTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.inputTerrainLayerId)))
+            self.inputDisplayAreaElement:setVisible(false)
         end
+
+        self:updateInputMode(vehicle)
+        self:updateInputTexture(layerId)
+
+        self.inputDisplayElement:setSize(nil, self.inputDisplayElement:invalidateLayout())
+        self.inputDisplayElement:setVisible(true)
     else
-        self.inputTextureItem:setVisible(false)
+        self.inputDisplayElement:setVisible(false)
     end
 end
 
 ---@param vehicle Machine
-function HUDMachineDisplayElement:updateOutputTextureDisplay(vehicle)
-    local spec = vehicle.spec_machine
+function HUDMachineDisplayElement:updateInputMode(vehicle)
+    local mode = vehicle:getInputMode()
 
-    if #spec.modesOutput > 0 then
-        local terrainLayer = g_landscapingManager:getTerrainLayerById(spec.outputTerrainLayerId)
+    self.inputDisplayModeImageElement:setImageSlice(nil, Machine.MODE_ICON_SLICE_ID[mode])
+    self.inputDisplayModeTextElement:setText(Machine.L10N_MODE[mode])
+end
 
-        self.outputTextureItem:setVisible(true)
+---@param layerId number
+function HUDMachineDisplayElement:updateInputTexture(layerId)
+    local terrainLayer = g_landscapingManager:getTerrainLayerById(layerId)
 
-        if terrainLayer ~= nil then
-            self.outputTextureImage:setTerrainLayer(g_terrainNode, terrainLayer.id)
-            self.outputTextureText:setText(terrainLayer.title)
+    if terrainLayer ~= nil then
+        self.inputDisplayTextureImageElement:setTerrainLayer(g_terrainNode, layerId)
+        self.inputDisplayTextureTextElement:setText(terrainLayer.title)
+    else
+        self.inputDisplayTextureTextElement:setText(string.format('LAYER %s NOT FOUND', tostring(layerId)))
+    end
+end
+
+---@param vehicle Machine
+function HUDMachineDisplayElement:updateOutputDisplay(vehicle)
+    if MachineUtils.getHasOutputs(vehicle) then
+        local area, areaEnabled = vehicle:getMachineOutputArea()
+        local layerId = vehicle:getMachineOutputLayerId()
+
+        if area and areaEnabled then
+            layerId = area.forceOutputLayer or layerId
+
+            local iconSliceId = area:getIconSliceId()
+
+            self.outputDisplayAreaImageElement:setImageSlice(nil, iconSliceId)
+            self.outputDisplayAreaTitleElement:setText(area:getTypeName())
+            self.outputDisplayAreaTextElement:setText(area:getName())
+
+            local r, g, b = area:getDisplayColor()
+            self.outputDisplayAreaColorElement:setImageColor(nil, r, g, b)
+            self.outputDisplayAreaColorElement:setImageColor(GuiOverlay.STATE_DISABLED, r, g, b)
+
+            self.outputDisplayAreaElement:setVisible(true)
         else
-            self.outputTextureText:setText(string.format('LAYER %s NOT FOUND', tostring(spec.outputTerrainLayerId)))
+            self.outputDisplayAreaElement:setVisible(false)
         end
+
+        self:updateOutputMode(vehicle)
+        self:updateOutputTexture(layerId)
+
+        self.outputDisplayElement:setSize(nil, self.outputDisplayElement:invalidateLayout())
+        self.outputDisplayElement:setVisible(true)
     else
-        self.outputTextureItem:setVisible(false)
+        self.outputDisplayElement:setVisible(false)
     end
 end
 
 ---@param vehicle Machine
-function HUDMachineDisplayElement:updateAreaDisplay(vehicle)
-    local area = vehicle:getMachineLandscapingArea()
+function HUDMachineDisplayElement:updateOutputMode(vehicle)
+    local mode = vehicle:getOutputMode()
 
-    if area ~= nil then
-        local iconSliceId = LandscapingUtils.getAreaIconSliceId(area.icon)
+    self.outputDisplayModeImageElement:setImageSlice(nil, Machine.MODE_ICON_SLICE_ID[mode])
+    self.outputDisplayModeTextElement:setText(Machine.L10N_MODE[mode])
+end
 
-        self.areaImage:setImageSlice(nil, iconSliceId)
-        self.areaTitle:setText(area:getTypeName())
-        self.areaText:setText(area:getName())
-        self.areaItem:setVisible(true)
+---@param layerId number
+function HUDMachineDisplayElement:updateOutputTexture(layerId)
+    local terrainLayer = g_landscapingManager:getTerrainLayerById(layerId)
+
+    if terrainLayer ~= nil then
+        self.outputDisplayTextureImageElement:setTerrainLayer(g_terrainNode, layerId)
+        self.outputDisplayTextureTextElement:setText(terrainLayer.title)
     else
-        self.areaItem:setVisible(false)
+        self.outputDisplayTextureTextElement:setText(string.format('LAYER %s NOT FOUND', tostring(layerId)))
     end
 end
 
 ---@param vehicle Machine
 function HUDMachineDisplayElement:updateVehicleDisplay(vehicle)
-    ---@diagnostic disable-next-line: need-check-nil
-    self.vehicleImage:setImageFilename(vehicle:getImageFilename())
-    ---@diagnostic disable-next-line: need-check-nil
-    self.vehicleText:setText(vehicle.spec_machine.machineType.name)
+    local machineType = vehicle:getMachineType()
+
+    self.vehicleDisplayImageElement:setImageFilename(vehicle:getImageFilename())
+    self.vehicleDisplayTitleElement:setText(machineType.name)
+    self.vehicleDisplayTextElement:setText(vehicle:getName())
+end
+
+---@param vehicle Machine
+function HUDMachineDisplayElement:updateMaterialDisplay(vehicle)
+    local machineType = vehicle:getMachineType()
+
+    if machineType.useInput then
+        local fillTypeIndex = vehicle:getMachineFillTypeIndex()
+        local area, areaEnabled = vehicle:getMachineInputArea()
+
+        if area ~= nil and areaEnabled and area.forceFillTypeIndex ~= nil then
+            fillTypeIndex = area.forceFillTypeIndex
+        end
+
+        ---@type FillTypeObject?
+        local fillType = g_fillTypeManager:getFillTypeByIndex(fillTypeIndex)
+
+        if fillType ~= nil then
+            self.materialDisplayImageElement:setImageFilename(fillType.hudOverlayFilename)
+            self.materialDisplayTextElement:setText(fillType.title)
+        else
+            self.materialDisplayTextElement:setText(string.format('UNKNOWN FILLTYPEINDEX %s', tostring(fillTypeIndex)))
+        end
+
+        self.materialDisplayElement:setVisible(true)
+    else
+        self.materialDisplayElement:setVisible(false)
+    end
 end

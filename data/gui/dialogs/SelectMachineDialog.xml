@@ -73,6 +73,8 @@
             <position value="12px 0px" />
 
             <imageSliceId value="noSlice" />
+            <imageColor value="1 1 1 0.65" />
+            <imageSelectedColor value="1 1 1 1" />
         </Profile>
 
         <Profile name="tfSelectMachine_listItemLine" extends="baseReference" with="anchorMiddleLeft">
@@ -91,8 +93,8 @@
             <textMaxWidth value="190px" />
             <textLayoutMode value="scrolling" />
 
-            <textColor value="0.89627 0.92158 0.81485 0.8" />
-            <textSelectedColor value="$preset_fs25_colorGreen" />
+            <textColor value="1 1 1 0.5" />
+            <textSelectedColor value="1 1 1 1" />
         </Profile>
 
         <Profile name="tfSelectMachine_listItemDetailsText" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
@@ -102,8 +104,8 @@
             <textSize value="12px" />
             <textAutoWidth value="true" />
 
-            <textColor value="0.89627 0.92158 0.81485 0.4" />
-            <textSelectedColor value="$preset_fs25_colorGreen" />
+            <textColor value="1 1 1 0.2" />
+            <textSelectedColor value="1 1 1 0.7" />
         </Profile>
 
         <Profile name="tfSelectMachine_listItemText" extends="fs25_textDarkHighlight" with="anchorMiddleLeft">
@@ -112,8 +114,8 @@
 
             <textAutoWidth value="true" />
 
-            <textColor value="0.89627 0.92158 0.81485 0.4" />
-            <textSelectedColor value="$preset_fs25_colorGreen" />
+            <textColor value="1 1 1 0.2" />
+            <textSelectedColor value="1 1 1 0.7" />
         </Profile>
 
         <Profile name="tfSelectMachine_listShadowTop" extends="tf_listShadow">
