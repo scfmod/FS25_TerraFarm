@@ -11,8 +11,8 @@
 ---@field visible boolean
 ---@field points number[][]
 LandscapingWaterplane = {}
-LandscapingWaterplane.SEND_NUM_BITS_PLANES = 2 ^ 5
-LandscapingWaterplane.MAX_NUM_PLANES = LandscapingWaterplane.SEND_NUM_BITS_PLANES - 1
+LandscapingWaterplane.SEND_NUM_BITS_PLANES = 5
+LandscapingWaterplane.MAX_NUM_PLANES = 2 ^ LandscapingWaterplane.SEND_NUM_BITS_PLANES - 1
 
 ---@enum WaterplaneColor
 LandscapingWaterplane.COLOR = {
