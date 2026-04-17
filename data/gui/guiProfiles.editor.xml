@@ -353,5 +353,11 @@
 
     <Profile name="ingameEditor_multiTextOption" extends="tfMenuFrame_multiTextOption" with="anchorMiddleRight">
         <position value="-12px 0" />
+
+        <defaultProfileText value="ingameEditor_multiTextOptionText" />
+    </Profile>
+
+    <Profile name="ingameEditor_multiTextOptionText" extends="fs25_multiTextOptionText">
+        <textSize value="14px" />
     </Profile>
 </GuiProfiles>

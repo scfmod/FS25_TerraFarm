@@ -11,6 +11,9 @@
 ---@field borderModeOption MultiTextOptionElement
 ---@field borderVisibilityOption MultiTextOptionElement
 ---@field extensionStatus TextElement
+---@field callbackFn? function
+---@field callbackTarget? table
+---@field dialogBgElement BitmapElement
 ---@field superClass fun(): MessageDialog
 GlobalSettingsDialog = {}
 
@@ -65,7 +68,15 @@ function GlobalSettingsDialog:onGuiSetupFinished()
     })
 end
 
+---@param callbackFn function
+---@param callbackTarget? table
+function GlobalSettingsDialog:setCloseCallback(callbackFn, callbackTarget)
+    self.callbackFn = callbackFn
+    self.callbackTarget = callbackTarget
+end
+
 function GlobalSettingsDialog:show()
+    self.dialogBgElement:setVisible(not g_machineScreen.isOpen)
     g_gui:showDialog(GlobalSettingsDialog.CLASS_NAME)
 end
 
@@ -189,4 +200,27 @@ function GlobalSettingsDialog:onMasterUserAdded(user)
         self:updateSettings()
         self:updateMenuButtons()
     end
+end
+
+function GlobalSettingsDialog:onClickBack(forceBack, usedMenuButton)
+    if (self.isCloseAllowed or forceBack) and not usedMenuButton then
+        self:sendCallback()
+        return false
+    end
+    return true
+end
+
+function GlobalSettingsDialog:sendCallback()
+    self:close()
+
+    if self.callbackFn ~= nil then
+        if self.callbackTarget ~= nil then
+            self.callbackFn(self.callbackTarget)
+        else
+            self.callbackFn()
+        end
+    end
+
+    self.callbackFn = nil
+    self.callbackTarget = nil
 end

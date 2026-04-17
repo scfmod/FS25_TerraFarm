@@ -121,11 +121,16 @@ end
 function MachineSettingsAreaFrame:onClickSelectArea(element)
     if element == self.inputSelectButtonElement then
         ---@param id? string
-        local function callback(id)
-            if id ~= nil then
+        ---@param clickOk boolean
+        local function callback(id, clickOk)
+            self.target:setShowOverlay(false)
+
+            if clickOk and id ~= nil then
                 self.target.vehicle:setMachineInputAreaId(id)
             end
         end
+
+        self.target:setShowOverlay(true)
 
         local inputId = self.target.vehicle:getMachineInputAreaId()
 
@@ -133,11 +138,16 @@ function MachineSettingsAreaFrame:onClickSelectArea(element)
         g_selectAreaDialog:show(inputId, Machine.L10N_ACTION_SELECT_INPUT_AREA)
     elseif element == self.outputSelectButtonElement then
         ---@param id? string
-        local function callback(id)
-            if id ~= nil then
+        ---@param clickOk boolean
+        local function callback(id, clickOk)
+            self.target:setShowOverlay(false)
+
+            if clickOk and id ~= nil then
                 self.target.vehicle:setMachineOutputAreaId(id)
             end
         end
+
+        self.target:setShowOverlay(true)
 
         local outputId = self.target.vehicle:getMachineOutputAreaId()
 

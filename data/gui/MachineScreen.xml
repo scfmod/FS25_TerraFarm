@@ -2,54 +2,114 @@
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
 
-    <Bitmap profile="screen_container">
-        <ThreePartBitmap profile="screen_bgMiddleSmall" />
-        <ThreePartBitmap profile="screen_bgTopSmall" />
-        <ThreePartBitmap profile="screen_bgBottom" />
+    <Bitmap id="screenBgElement" profile="tf_dialogFullscreenBg" />
+
+    <Bitmap profile="tfMachineFrame_screenBg">
+        <Paging id="pagingElement" onPageChange="onPageChange" onPageUpdate="onPageUpdate" profile="tfMachineScreen_menuPaging">
+            <frameReference ref="machineSettings" name="machineSettings" id="settingsFrame" />
+            <frameReference ref="machineSettingsInput" name="machineSettingsInput" id="inputSettingsFrame" />
+            <frameReference ref="machineSettingsOutput" name="machineSettingsOutput" id="outputSettingsFrame" />
+            <frameReference ref="machineSettingsLandscaping" name="machineSettingsLandscaping" id="landscapingSettingsFrame" />
+            <frameReference ref="machineSettingsArea" name="machineSettingsArea" id="areaSettingsFrame" />
+        </Paging>
+
+        <Bitmap id="header" profile="tfMachineScreen_menuTabs">
+            <MultiTextOption id="pageSelector" onClick="onClickPageSelection" profile="uiInGameMenuHeaderSelector" soundDisabled="true" />
+            <SmoothList id="pagingTabList" onScroll="onTabMenuScroll" onSelectionChanged="onTabMenuSelectionChanged" profile="tfMachineScreen_menuTabList">
+                <ListItem profile="tfMachineScreen_menuTabListItem">
+                    <Button name="tabButton" profile="tfMachineScreen_menuTabListItemButton" soundDisabled="true">
+                        <Bitmap profile="tfMachineScreen_menuTabListItemButtonBg" />
+                    </Button>
+                </ListItem>
+            </SmoothList>
+        </Bitmap>
+
+        <BoxLayout id="buttonsPanel" profile="tfMachineScreen_menuButtonBox">
+            <Button id="menuButton[1]" onClick="onClickBack" profile="buttonBack" />
+            <Button id="menuButton[2]" onClick="onClickBack" profile="buttonBack" />
+            <Button id="menuButton[3]" onClick="onClickBack" profile="buttonBack" />
+            <Button id="menuButton[4]" onClick="onClickBack" profile="buttonBack" />
+            <Button id="menuButton[5]" onClick="onClickBack" profile="buttonBack" />
+            <Button id="menuButton[6]" onClick="onClickBack" profile="buttonBack" />
+        </BoxLayout>
     </Bitmap>
 
-    <Paging id="pagingElement" onPageChange="onPageChange" onPageUpdate="onPageUpdate" profile="tfMachineScreen_paging">
-        <frameReference ref="machineSettings" name="machineSettings" id="settingsFrame" />
-        <frameReference ref="machineSettingsInput" name="machineSettingsInput" id="inputSettingsFrame" />
-        <frameReference ref="machineSettingsOutput" name="machineSettingsOutput" id="outputSettingsFrame" />
-        <frameReference ref="machineSettingsLandscaping" name="machineSettingsLandscaping" id="landscapingSettingsFrame" />
-        <frameReference ref="machineSettingsArea" name="machineSettingsArea" id="areaSettingsFrame" />
-    </Paging>
+    <GuiElement profile="newLayer" />
 
-    <Bitmap id="header" profile="tfMachineScreen_tabList">
-        <MultiTextOption id="pageSelector" onClick="onClickPageSelection" profile="uiInGameMenuHeaderSelector" soundDisabled="true" />
-        <SmoothList id="pagingTabList" onScroll="onTabMenuScroll" onSelectionChanged="onTabMenuSelectionChanged" profile="fs25_tabList">
-            <ListItem profile="fs25_tabListItem">
-                <Button name="tabButton" profile="tfScreen_tabListItemButton" soundDisabled="true" />
-            </ListItem>
-        </SmoothList>
-    </Bitmap>
-
-    <BoxLayout id="buttonsPanel" profile="tfMenuScreen_buttonBox">
-        <Button id="menuButton[1]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-        <Button id="menuButton[2]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-        <Button id="menuButton[3]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-        <Button id="menuButton[4]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-        <Button id="menuButton[5]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-        <Button id="menuButton[6]" onClick="onClickBack" profile="buttonBack">
-            <Bitmap name="separator" profile="fs25_buttonBoxSeparator" />
-        </Button>
-    </BoxLayout>
+    <Bitmap profile="tfMachineScreen_dialogOverlay" id="overlayElement" visible="false" />
 
     <GuiProfiles>
+        <Profile name="tfMachineFrame_screenBg" extends="baseReference" with="anchorMiddleCenter">
+            <size value="1300px 900px" />
+            <imageColor value="0.022 0.022 0.022 1" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_dialogOverlay" extends="baseReference" with="anchorMiddleCenter">
+            <size value="1300px 900px" />
+            <imageColor value="0.013 0.013 0.013 0.98" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuPaging" extends="emptyPanel" with="anchorMiddleCenter">
+            <size value="1152px 640px" />
+            <position value="2px 0" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuTabs" extends="emptyPanel" with="anchorMiddleLeft">
+            <size value="144px 100%" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuTabList" extends="emptyPanel" with="anchorStretchingYStretchingX anchorMiddleLeft">
+            <handleFocus value="false" />
+            <soundDisabled value="true" />
+            <listItemAlignment value="middle" />
+            <listItemSpacing value="3px" />
+
+            <imageSliceId value="gui.colorPreset" />
+            <imageColor value="0.922 0.022 0.022 1" />
+        </Profile>
+        <Profile name="tfMachineScreen_menuTabListItem" extends="baseReference" with="anchorTopLeft">
+            <size value="100% 132px" />
+            <handleFocus value="false" />
+
+            <imageColor value="0.03 0.03 0.03 0" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuTabListItemButton" extends="baseReference" with="anchorMiddleLeft">
+            <size value="140px 132px" />
+            <handleFocus value="false" />
+            <ignorePressedOverlayState value="true" />
+            <textAlignment value="center" />
+
+            <iconSize value="64px 64px" />
+            <iconColor value="1 1 1 1" />
+            <iconSelectedColor value="$preset_fs25_colorMainDark" />
+
+            <imageColor value="0.028 0.028 0.028 1" />
+            <imageSelectedColor value="0.33716 0.55834 0.0003 0.75" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuTabListItemButtonBg" extends="baseReference" with="anchorStretchingYRight">
+            <width value="4px" />
+            <position value="4px 0" />
+
+            <imageColor value="0.017 0.017 0.017 1" />
+            <imageSelectedColor value="0.33716 0.55834 0.0003 0.1" />
+        </Profile>
+
+        <Profile name="tfMachineScreen_menuButtonBox" extends="emptyPanel" with="anchorBottomStretchingX">
+            <height value="80px" />
+            <position value="-64px 0" />
+
+            <alignmentX value="right" />
+            <alignmentY value="middle" />
+            <autoValidateLayout value="true" />
+        </Profile>
+
+
+        <!-- TODO cleanup -->
         <Profile name="tfMenuScreen_buttonBox" extends="baseReference" with="anchorBottomCenter">
             <size value="1326px 56px" />
-            <position value="0 113px" />
+            <position value="0 102px" />
 
             <imageColor value="0 0 0 0" />
             <alignmentX value="right" />
@@ -59,6 +119,7 @@
         </Profile>
 
         <Profile name="tfMachineScreen_paging" extends="uiInGameMenuPaging">
+
         </Profile>
 
         <Profile name="tfMachineScreen_tabList" extends="baseReference" with="anchorMiddleCenter">
@@ -68,26 +129,6 @@
             <imageColor value="0 0 0 0" />
         </Profile>
 
-        <Profile name="screen_container" with="anchorMiddleCenter">
-            <size value="1400px 900px" />
-            <imageColor value="0 0 0 0" />
-        </Profile>
-
-        <Profile name="screen_bgTopSmall" extends="fs25_dialogBgTopSmall">
-            <imageColor value="1 1 1 1" />
-            <startImageColor value="1 1 1 1" />
-            <endImageColor value="1 1 1 1" />
-        </Profile>
-        <Profile name="screen_bgMiddleSmall" extends="fs25_dialogBgMiddleSmall">
-            <imageColor value="1 1 1 1" />
-            <startImageColor value="1 1 1 1" />
-            <endImageColor value="1 1 1 1" />
-        </Profile>
-        <Profile name="screen_bgBottom" extends="fs25_dialogBgBottom">
-            <imageColor value="1 1 1 1" />
-            <startImageColor value="1 1 1 1" />
-            <endImageColor value="1 1 1 1" />
-        </Profile>
 
         <Profile name="tfScreen_tabListItemButton" extends="fs25_tabListItemButton">
         </Profile>

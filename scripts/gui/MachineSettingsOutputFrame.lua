@@ -154,14 +154,19 @@ function MachineSettingsOutputFrame:onClickSelectTerrainLayer()
     if self.target.vehicle ~= nil then
         local spec = self.target.vehicle.spec_machine
 
+        self.target:setShowOverlay(true)
+
         g_selectTerrainLayerDialog:setSelectCallback(self.selectTerrainLayerCallback, self)
         g_selectTerrainLayerDialog:show(spec.outputTerrainLayerId)
     end
 end
 
 ---@param terrainLayerId number?
-function MachineSettingsOutputFrame:selectTerrainLayerCallback(terrainLayerId)
-    if self.target.vehicle ~= nil and terrainLayerId ~= nil then
+---@param clickOk boolean
+function MachineSettingsOutputFrame:selectTerrainLayerCallback(terrainLayerId, clickOk)
+    self.target:setShowOverlay(false)
+
+    if clickOk and self.target.vehicle ~= nil and terrainLayerId ~= nil then
         self.target.vehicle:setMachineOutputLayerId(terrainLayerId)
     end
 end

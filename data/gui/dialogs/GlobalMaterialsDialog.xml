@@ -4,9 +4,6 @@
     <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
 
     <Bitmap id="dialogElement" profile="tf_globalMaterialsBg">
-        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
-        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
-        <ThreePartBitmap profile="tf_dialogBgBottom" />
 
         <Text position="0px -32px" profile="tf_dialogTitle" text="$l10n_ui_materialSettings" />
 
@@ -36,7 +33,7 @@
                 </SmoothList>
 
                 <ThreePartBitmap profile="tf_listSliderBoxLeft">
-                    <Slider dataElementId="enabledList" profile="tf_listSlider" />
+                    <Slider dataElementId="enabledList" profile="tf_listSlider" hideParentWhenEmpty="true" />
                 </ThreePartBitmap>
 
                 <Bitmap profile="tfGlobalMaterials_listShadowTop" />
@@ -67,7 +64,7 @@
                 </SmoothList>
 
                 <ThreePartBitmap profile="tf_listSliderBox">
-                    <Slider dataElementId="disabledList" profile="tf_listSlider" />
+                    <Slider dataElementId="disabledList" profile="tf_listSlider" hideParentWhenEmpty="true" />
                 </ThreePartBitmap>
 
                 <Bitmap profile="tfGlobalMaterials_listShadowTop" />
@@ -75,22 +72,30 @@
             </GuiElement>
         </GuiElement>
 
-        <BoxLayout profile="fs25_dialogButtonBox" id="buttonBox">
+        <BoxLayout profile="tfGlobalMaterials_dialogButtonBox" id="buttonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
-            <Bitmap profile="fs25_dialogButtonBoxSeparator" />
             <Button id="actionButton" profile="buttonActivate" text="$l10n_ui_disable" onClick="onClickAction" />
-            <Bitmap profile="fs25_dialogButtonBoxSeparator" />
             <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
         </BoxLayout>
     </Bitmap>
 
     <GuiProfiles>
+        <Profile name="tfGlobalMaterials_dialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomStretchingX">
+            <height value="80px" />
+            <position value="-16px 0" />
+        </Profile>
+
         <Profile name="tfGlobalMaterials_list" extends="list" with="anchorMiddleCenter">
             <size value="350px 560px" />
 
             <wrapAround value="true" />
             <isHorizontalList value="false" />
             <listItemSpacing value="2px" />
+
+            <hasFrame value="true" />
+            <frameThickness value="4dp 0dp 4dp 0dp" />
+            <frameLeftColor value="0 0 0 0.1" />
+            <frameRightColor value="0 0 0 0.1" />
         </Profile>
 
         <Profile name="tfGlobalMaterials_listItem" with="anchorTopStretchingX">
@@ -123,6 +128,7 @@
 
         <Profile name="tf_globalMaterialsBg" extends="tf_dialogBg">
             <size value="820px 760px" />
+            <imageColor value="0.018 0.018 0.018 1" />
         </Profile>
 
         <Profile name="tf_globalMaterialsContent">

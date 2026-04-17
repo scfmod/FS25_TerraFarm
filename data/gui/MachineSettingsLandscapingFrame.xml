@@ -51,7 +51,7 @@
             <Bitmap profile="tfMenuFrame_contentShadowBottom" />
 
             <ThreePartBitmap profile="tf_listSliderBox">
-                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" />
+                <Slider profile="tf_listSlider" dataElementId="boxLayout" handleFocus="false" hideParentWhenEmpty="true" />
             </ThreePartBitmap>
         </Bitmap>
     </GuiElement>

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
-    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
 
     <Bitmap id="dialogElement" profile="tfSelectMaterial_dialogBg">
-        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
-        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
-        <ThreePartBitmap profile="tf_dialogBgBottom" />
-
         <Text position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_changeMaterial" />
 
         <GuiElement profile="tfSelectMaterial_dialogContent">
@@ -19,30 +14,37 @@
             </SmoothList>
 
             <ThreePartBitmap profile="tf_listSliderBox">
-                <Slider dataElementId="list" profile="tf_listSlider" />
+                <Slider dataElementId="list" profile="tf_listSlider" hideParentWhenEmpty="true" />
             </ThreePartBitmap>
 
             <Bitmap profile="tfSelectMaterial_listShadowTop" />
             <Bitmap profile="tfSelectMaterial_listShadowBottom" />
         </GuiElement>
 
-        <BoxLayout profile="tf_dialogButtonBox">
+        <BoxLayout profile="tfSelectMaterial_dialogButtonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
-            <Bitmap profile="tf_dialogButtonBoxSeparator" />
-            <Button id="settingsButton" profile="buttonActivate" text="$l10n_ui_materialSettings" onClick="onClickMaterialSettings" />
-            <Bitmap profile="tf_dialogButtonBoxSeparator" />
             <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
+            <Button id="settingsButton" profile="buttonActivate" text="$l10n_ui_materialSettings" onClick="onClickMaterialSettings" />
         </BoxLayout>
     </Bitmap>
 
     <GuiProfiles>
+        <Profile name="tfSelectMaterial_dialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomCenter">
+            <width value="420px" />
+            <height value="80px" />
+            <position value="-16px 4px" />
+            <absoluteSizeOffset value="0 0" />
+            <numFlows value="2" />
+            <lateralFlowSize value="38px" />
+        </Profile>
         <Profile name="tfSelectMaterial_dialogBg" extends="tf_dialogBg">
             <size value="420px 760px" />
+            <imageColor value="0.018 0.018 0.018 1" />
         </Profile>
 
         <Profile name="tfSelectMaterial_dialogContent" with="anchorBottomCenter">
-            <size value="376px 600px" />
-            <position value="-10px 80px" />
+            <size value="372px 600px" />
+            <position value="0 80px" />
         </Profile>
 
         <Profile name="tfSelectMaterial_list" extends="list" with="anchorTopLeft">
@@ -81,12 +83,12 @@
         </Profile>
 
         <Profile name="tfSelectMaterial_listShadowTop" extends="tf_listShadow">
-            <position value="6px 0" />
-            <size value="370px 32px" />
+            <position value="0 0" />
+            <size value="420px 20px" />
+            <imageColor value="0 0 0 0.4" />
         </Profile>
 
         <Profile name="tfSelectMaterial_listShadowBottom" extends="tfSelectMaterial_listShadowTop" with="anchorBottomCenter">
-            <position value="0 0" />
 
             <imageUVRotation value="180" />
         </Profile>

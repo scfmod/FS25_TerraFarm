@@ -191,14 +191,19 @@ function MachineSettingsInputFrame:onClickSelectMaterial()
     if self.target.vehicle ~= nil then
         local spec = self.target.vehicle.spec_machine
 
+        self.target:setShowOverlay(true)
+
         g_selectMaterialDialog:setSelectCallback(self.selectMaterialCallback, self)
         g_selectMaterialDialog:show(spec.fillTypeIndex)
     end
 end
 
 ---@param fillTypeIndex number?
-function MachineSettingsInputFrame:selectMaterialCallback(fillTypeIndex)
-    if self.target.vehicle ~= nil and fillTypeIndex ~= nil then
+---@param clickOk boolean
+function MachineSettingsInputFrame:selectMaterialCallback(fillTypeIndex, clickOk)
+    self.target:setShowOverlay(false)
+
+    if clickOk and self.target.vehicle ~= nil and fillTypeIndex ~= nil then
         self.target.vehicle:setMachineFillTypeIndex(fillTypeIndex)
     end
 end
@@ -207,14 +212,19 @@ function MachineSettingsInputFrame:onClickSelectTerrainLayer()
     if self.target.vehicle ~= nil then
         local spec = self.target.vehicle.spec_machine
 
+        self.target:setShowOverlay(true)
+
         g_selectTerrainLayerDialog:setSelectCallback(self.selectTerrainLayerCallback, self)
         g_selectTerrainLayerDialog:show(spec.inputTerrainLayerId)
     end
 end
 
 ---@param terrainLayerId number?
-function MachineSettingsInputFrame:selectTerrainLayerCallback(terrainLayerId)
-    if self.target.vehicle ~= nil and terrainLayerId ~= nil then
+---@param clickOk boolean
+function MachineSettingsInputFrame:selectTerrainLayerCallback(terrainLayerId, clickOk)
+    self.target:setShowOverlay(false)
+
+    if clickOk and self.target.vehicle ~= nil and terrainLayerId ~= nil then
         self.target.vehicle:setMachineInputLayerId(terrainLayerId)
     end
 end

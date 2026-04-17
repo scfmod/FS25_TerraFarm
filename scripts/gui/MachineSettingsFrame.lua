@@ -190,13 +190,18 @@ function MachineSettingsFrame:onEnterPressedInput(element)
 end
 
 function MachineSettingsFrame:onClickSelectMachine()
+    self.target:setShowOverlay(true)
+
     g_selectMachineDialog:setSelectCallback(self.selectMachineCallback, self)
     g_selectMachineDialog:show(self.target.vehicle)
 end
 
 ---@param vehicle Machine?
-function MachineSettingsFrame:selectMachineCallback(vehicle)
-    if vehicle ~= nil and self.target.vehicle ~= nil then
+---@param clickOk boolean
+function MachineSettingsFrame:selectMachineCallback(vehicle, clickOk)
+    self.target:setShowOverlay(false)
+
+    if clickOk and vehicle ~= nil and self.target.vehicle ~= nil then
         local spec = vehicle.spec_machine
         local state = spec.state:clone()
 

@@ -6,6 +6,9 @@
 ---@field outputSettingsFrame MachineSettingsOutputFrame
 ---@field areaSettingsFrame MachineSettingsAreaFrame
 ---@field vehicle? Machine
+---@field overlayElement BitmapElement
+---@field showOverlay boolean
+---@field screenBgElement BitmapElement
 MachineScreen = {}
 
 MachineScreen.CLASS_NAME = 'MachineScreen'
@@ -18,6 +21,7 @@ function MachineScreen.new(target, customMt)
     ---@cast self MachineScreen
 
     self.currentPageName = ''
+    self.showOverlay = false
 
     return self
 end
@@ -124,11 +128,18 @@ function MachineScreen:setupMenuButtonInfo()
     }
 end
 
+---@param vehicle Machine?
 function MachineScreen:show(vehicle)
     if vehicle ~= nil then
         self.vehicle = vehicle
+        self.screenBgElement:setVisible(g_gui.currentGui ~= nil)
         g_gui:showDialog(MachineScreen.CLASS_NAME)
     end
+end
+
+---@param visible boolean
+function MachineScreen:setShowOverlay(visible)
+    self.showOverlay = visible
 end
 
 function MachineScreen:exitMenu()
@@ -240,6 +251,13 @@ function MachineScreen:update(dt)
 end
 
 function MachineScreen:onClickGlobalSettings()
+    local function callback()
+        self:setShowOverlay(false)
+    end
+
+    self:setShowOverlay(true)
+
+    g_globalSettingsDialog:setCloseCallback(callback)
     g_globalSettingsDialog:show()
 end
 
@@ -313,4 +331,12 @@ function MachineScreen:onPageChange(pageIndex, pageMappingIndex, element, skipTa
     self:updateTabDisplay()
 
     page:onFrameOpen()
+end
+
+function MachineScreen:draw(...)
+    MachineScreen:superClass().draw(self, ...)
+
+    if self.showOverlay then
+        self.overlayElement:draw(...)
+    end
 end

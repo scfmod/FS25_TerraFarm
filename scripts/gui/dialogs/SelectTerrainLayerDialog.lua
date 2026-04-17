@@ -120,31 +120,35 @@ end
 ---@param index number
 ---@param cell ListItemElement
 function SelectTerrainLayerDialog:onItemDoubleClick(list, section, index, cell)
-    self:sendCallback(index)
+    self:sendCallback(index, true)
 end
 
 function SelectTerrainLayerDialog:onClickApply()
-    self:sendCallback(self.list:getSelectedIndexInSection())
+    self:sendCallback(self.list:getSelectedIndexInSection(), true)
 end
 
 ---@param index number?
-function SelectTerrainLayerDialog:sendCallback(index)
+---@param clickOk boolean
+function SelectTerrainLayerDialog:sendCallback(index, clickOk)
     local item = g_landscapingManager:getTerrainLayers()[index]
 
     self:close()
 
     if self.selectCallbackFunction ~= nil then
         if self.selectCallbackTarget ~= nil then
-            self.selectCallbackFunction(self.selectCallbackTarget, item and item.id)
+            self.selectCallbackFunction(self.selectCallbackTarget, item and item.id, clickOk)
         else
-            self.selectCallbackFunction(item and item.id)
+            self.selectCallbackFunction(item and item.id, clickOk)
         end
     end
+
+    self.selectCallbackFunction = nil
+    self.selectCallbackTarget = nil
 end
 
 function SelectTerrainLayerDialog:onClickBack(forceBack, usedMenuButton)
     if (self.isCloseAllowed or forceBack) and not usedMenuButton then
-        self:sendCallback()
+        self:sendCallback(nil, false)
 
         return false
     else

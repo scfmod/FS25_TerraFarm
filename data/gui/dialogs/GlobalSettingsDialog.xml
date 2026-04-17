@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
-    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
+    <Bitmap id="dialogBgElement" profile="tf_dialogFullscreenBg" />
 
     <Bitmap id="dialogElement" profile="tfGlobalSettings_dialogBg">
-        <ThreePartBitmap profile="fs25_dialogBgMiddleSmall" />
-        <ThreePartBitmap profile="fs25_dialogBgTopSmall" />
-        <ThreePartBitmap profile="fs25_dialogBgBottom" />
-
         <Text position="0 -40px" profile="tf_dialogTitle" text="$l10n_ui_globalSettings" />
-
         <GuiElement profile="tf_globalSettingsContent">
             <ScrollingLayout profile="tf_globalSettingsLayout" id="boxLayout">
                 <Bitmap profile="tf_globalSettingsOptionContainer">
@@ -63,16 +58,21 @@
             </ScrollingLayout>
         </GuiElement>
 
-        <BoxLayout profile="tf_dialogButtonBox">
+        <BoxLayout profile="tfGlobalSettings_dialogButtonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_back" />
-            <Bitmap profile="tf_dialogButtonBoxSeparator" />
             <Button id="settingsButton" profile="buttonActivate" text="$l10n_ui_materialSettings" onClick="onClickMaterialSettings" />
         </BoxLayout>
     </Bitmap>
 
     <GuiProfiles>
+        <Profile name="tfGlobalSettings_dialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomStretchingX">
+            <height value="80px" />
+            <position value="-16px 0" />
+        </Profile>
+
         <Profile name="tfGlobalSettings_dialogBg" extends="tf_dialogBg">
             <size value="720px 840px" />
+            <imageColor value="0.018 0.018 0.018 0.998" />
         </Profile>
 
         <Profile name="tf_globalSettingsContent">

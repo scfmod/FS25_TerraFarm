@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
-    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
 
     <Bitmap id="dialogElement" profile="tfSelectTerrainLayer_dialogBg">
-        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
-        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
-        <ThreePartBitmap profile="tf_dialogBgBottom" />
-
         <Text id="title" position="0 -32px" profile="tf_dialogTitle" text="$l10n_ui_changeTexture" />
 
         <GuiElement profile="tfSelectTerrainLayer_dialogContent">
-
             <GuiElement profile="tfSelectTerrainLayer_dialogContentLeft">
-                <TerrainLayer profile="tfSelectTerrainLayer_previewImage" id="previewImage" />
-                <Bitmap profile="tfSelectTerrainLayer_maskImage" />
+                <GuiElement profile="tfSelectTerrainLayer_previewImageWrapper">
+                    <TerrainLayer profile="tfSelectTerrainLayer_previewImage" id="previewImage" />
+                </GuiElement>
                 <Text profile="tfSelectTerrainLayer_previewTitle" text="$l10n_ui_colorPicker_preview" />
             </GuiElement>
 
@@ -27,7 +22,7 @@
                 </SmoothList>
 
                 <ThreePartBitmap profile="tf_listSliderBox">
-                    <Slider dataElementId="list" profile="tf_listSlider" />
+                    <Slider dataElementId="list" profile="tf_listSlider" hideParentWhenEmpty="true" />
                 </ThreePartBitmap>
 
                 <Bitmap profile="tfSelectTerrainLayer_listShadowTop" />
@@ -37,16 +32,27 @@
 
         </GuiElement>
 
-        <BoxLayout profile="tf_dialogButtonBox">
+        <BoxLayout profile="tfSelectTerrainLayer_dialogButtonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
-            <Bitmap profile="tf_dialogButtonBoxSeparator" />
             <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_apply" />
         </BoxLayout>
     </Bitmap>
 
     <GuiProfiles>
+        <Profile name="tfSelectTerrainLayer_dialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomCenter">
+            <width value="758px" />
+            <height value="80px" />
+            <position value="0 0" />
+        </Profile>
+
+        <Profile name="tfSelectTerrainLayer_dialogScreenBgTest" extends="baseReference" with="anchorMiddleCenter">
+            <size value="1300px 900px" />
+            <imageColor value="0.013 0.013 0.013 0.9" />
+        </Profile>
+
         <Profile name="tfSelectTerrainLayer_dialogBg" extends="tf_dialogBg">
             <size value="790px 760px" />
+            <imageColor value="0.018 0.018 0.018 0.998" />
         </Profile>
 
         <Profile name="tfSelectTerrainLayer_dialogContent" with="anchorBottomCenter">
@@ -99,8 +105,8 @@
         </Profile>
 
         <Profile name="tfSelectTerrainLayer_listShadowTop" extends="tf_listShadow">
-            <position value="6px 0" />
-            <size value="370px 32px" />
+            <position value="0 0" />
+            <size value="392px 32px" />
         </Profile>
         <Profile name="tfSelectTerrainLayer_listShadowBottom" extends="tfSelectTerrainLayer_listShadowTop" with="anchorBottomCenter">
             <position value="0 0" />
@@ -108,8 +114,18 @@
             <imageUVRotation value="180" />
         </Profile>
 
+        <Profile name="tfSelectTerrainLayer_previewImageWrapper" with="anchorMiddleCenter">
+            <size value="264px 264px" />
+            <hasFrame value="true" />
+            <frameThickness value="4px 4px 4px 4px" />
+            <frameTopColor value="0 0 0 0.25" />
+            <frameRightColor value="0 0 0 0.25" />
+            <frameBottomColor value="0 0 0 0.25" />
+            <frameLeftColor value="0 0 0 0.25" />
+        </Profile>
         <Profile name="tfSelectTerrainLayer_previewImage" extends="baseReference" with="anchorMiddleCenter">
             <size value="256px 256px" />
+
         </Profile>
 
         <Profile name="tfSelectTerrainLayer_previewTitle" extends="textDefault" with="anchorMiddleCenter">

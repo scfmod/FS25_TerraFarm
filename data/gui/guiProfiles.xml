@@ -134,15 +134,14 @@
 
 
     <!-- Frame profiles -->
-    <Profile name="tfMenuFrame_contentContainer" extends="emptyPanel" with="anchorMiddleCenter">
-        <size value="1234px 740px" />
-        <position value="-13px -2px" />
+    <Profile name="tfMenuFrame_contentContainer" extends="emptyPanel" with="anchorMiddleRight">
+        <size value="1088px 740px" />
     </Profile>
 
     <Profile name="tfMenuFrame_content" extends="baseReference" with="anchorTopLeft">
         <size value="100% 100%" />
 
-        <imageColor value="0.2 0.2 0.2 0.025" />
+        <imageColor value="0.02 0.02 0.02 1" />
     </Profile>
 
     <Profile name="tfMenuFrame_contentHeader" extends="baseReference" with="anchorTopLeft">
@@ -160,11 +159,11 @@
     </Profile>
 
     <Profile name="tfMenuFrame_contentShadowTop" with="anchorTopCenter">
-        <size value="1200px 24px" />
+        <size value="1088px 24px" />
         <position value="0 0" />
 
         <imageSliceId value="terraFarm.list_shadow" />
-        <imageColor value="0 0 0 0.5" />
+        <imageColor value="0 0 0 0.25" />
     </Profile>
 
     <Profile name="tfMenuFrame_contentShadowBottom" extends="tfMenuFrame_contentShadowTop" with="anchorBottomCenter">

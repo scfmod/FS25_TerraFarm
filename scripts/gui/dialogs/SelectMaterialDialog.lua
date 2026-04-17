@@ -130,11 +130,11 @@ end
 ---@param index number
 ---@param cell ListItemElement
 function SelectMaterialDialog:onItemDoubleClick(list, section, index, cell)
-    self:sendCallback(index)
+    self:sendCallback(index, true)
 end
 
 function SelectMaterialDialog:onClickApply()
-    self:sendCallback(self.list:getSelectedIndexInSection())
+    self:sendCallback(self.list:getSelectedIndexInSection(), true)
 end
 
 function SelectMaterialDialog:onClickMaterialSettings()
@@ -142,23 +142,27 @@ function SelectMaterialDialog:onClickMaterialSettings()
 end
 
 ---@param index number?
-function SelectMaterialDialog:sendCallback(index)
+---@param clickOk boolean
+function SelectMaterialDialog:sendCallback(index, clickOk)
     local item = self.items[index]
 
     self:close()
 
     if self.selectCallbackFunction ~= nil then
         if self.selectCallbackTarget ~= nil then
-            self.selectCallbackFunction(self.selectCallbackTarget, item and item.index)
+            self.selectCallbackFunction(self.selectCallbackTarget, item and item.index, clickOk)
         else
-            self.selectCallbackFunction(item and item.index)
+            self.selectCallbackFunction(item and item.index, clickOk)
         end
     end
+
+    self.selectCallbackFunction = nil
+    self.selectCallbackTarget = nil
 end
 
 function SelectMaterialDialog:onClickBack(forceBack, usedMenuButton)
     if (self.isCloseAllowed or forceBack) and not usedMenuButton then
-        self:sendCallback(nil)
+        self:sendCallback(nil, false)
 
         return false
     else

@@ -131,6 +131,12 @@ function SelectAreaDialog:populateCellForItemInSection(list, section, index, cel
 
         cell:getAttribute('name'):setText(area:getName())
         cell:getAttribute('text'):setText(area:getTypeName())
+
+        if area.visible then
+            cell:getAttribute('status'):setText('')
+        else
+            cell:getAttribute('status'):setText(Editor.L10N_SYMBOL.HIDDEN)
+        end
     end
 end
 
@@ -143,15 +149,16 @@ end
 ---@param index number
 ---@param cell ListItemElement
 function SelectAreaDialog:onItemDoubleClick(list, section, index, cell)
-    self:sendCallback(index)
+    self:sendCallback(index, true)
 end
 
 function SelectAreaDialog:onClickApply()
-    self:sendCallback(self.list:getSelectedIndexInSection())
+    self:sendCallback(self.list:getSelectedIndexInSection(), true)
 end
 
 ---@param index number?
-function SelectAreaDialog:sendCallback(index)
+---@param clickOk boolean
+function SelectAreaDialog:sendCallback(index, clickOk)
     local item = self.items[index]
     local id = item and item.uniqueId or nil
 
@@ -159,16 +166,19 @@ function SelectAreaDialog:sendCallback(index)
 
     if self.selectCallbackFunction ~= nil then
         if self.selectCallbackTarget ~= nil then
-            self.selectCallbackFunction(self.selectCallbackTarget, id)
+            self.selectCallbackFunction(self.selectCallbackTarget, id, clickOk)
         else
-            self.selectCallbackFunction(id)
+            self.selectCallbackFunction(id, clickOk)
         end
     end
+
+    self.selectCallbackFunction = nil
+    self.selectCallbackTarget = nil
 end
 
 function SelectAreaDialog:onClickBack(forceBack, usedMenuButton)
     if (self.isCloseAllowed or forceBack) and not usedMenuButton then
-        self:close()
+        self:sendCallback(nil, false)
 
         return false
     else

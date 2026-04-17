@@ -122,6 +122,9 @@ function SelectAreaTypeDialog:sendCallback(index)
             self.selectCallbackFunction(item)
         end
     end
+
+    self.selectCallbackFunction = nil
+    self.selectCallbackTarget = nil
 end
 
 function SelectAreaTypeDialog:onClickBack(forceBack, usedMenuButton)

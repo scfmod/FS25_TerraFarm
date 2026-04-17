@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
     <GuiElement profile="newLayer" />
-    <Bitmap id="dialogBg" profile="tf_dialogFullscreenBg" />
 
     <Bitmap id="dialogElement" profile="tfSelectMachine_dialogBg">
-        <ThreePartBitmap profile="tf_dialogBgMiddleSmall" />
-        <ThreePartBitmap profile="tf_dialogBgTopSmall" />
-        <ThreePartBitmap profile="tf_dialogBgBottom" />
-
-        <Text position="0 -32px" profile="tfSelectMachine_dialogTitle" id="dialogTextElement" text="$l10n_ui_areas" />
+        <Text profile="tfSelectMachine_dialogTitle" id="dialogTextElement" text="$l10n_ui_areas" />
 
         <Text id="listEmptyText" profile="tfDialog_listEmptyText" text="$l10n_ui_areasEmpty" />
 
@@ -18,24 +13,33 @@
                     <Bitmap name="image" profile="tfSelectArea_listItemImage" />
                     <Text name="name" profile="tfSelectArea_listItemTitle" />
                     <Text name="text" profile="tfSelectArea_listItemText" />
+                    <Text name="status" profile="tfSelectArea_listItemStatusText" />
                 </ListItem>
             </SmoothList>
 
             <ThreePartBitmap profile="tf_listSliderBox">
-                <Slider dataElementId="list" profile="tf_listSlider" />
+                <Slider dataElementId="list" profile="tf_listSlider" hideParentWhenEmpty="true" />
             </ThreePartBitmap>
 
             <Bitmap profile="tfSelectMachine_listShadowTop" />
             <Bitmap profile="tfSelectMachine_listShadowBottom" />
         </GuiElement>
 
-        <BoxLayout profile="tf_dialogButtonBox" id="buttonBox">
+        <BoxLayout profile="tfSelectArea_dialogButtonBox" id="buttonBox">
             <Button id="backButton" onClick="onClickBack" profile="buttonBack" text="$l10n_button_cancel" />
             <Button id="applyButton" onClick="onClickApply" profile="buttonOK" text="$l10n_button_select" />
         </BoxLayout>
     </Bitmap>
 
     <GuiProfiles>
+        <Profile name="tfSelectArea_dialogButtonBox" extends="fs25_dialogButtonBox" with="anchorBottomStretchingX">
+            <height value="80px" />
+            <position value="-16px 4px" />
+            <absoluteSizeOffset value="0 0" />
+            <numFlows value="2" />
+            <lateralFlowSize value="38px" />
+        </Profile>
+
         <Profile name="tfSelectArea_list" extends="tfSelectMachine_list">
             <listItemSpacing value="2px" />
         </Profile>
@@ -46,18 +50,26 @@
             <imageSelectedColor value="1 1 1 0.025" />
         </Profile>
         <Profile name="tfSelectArea_listItemTitle" extends="tfSelectMachine_listItemTitle">
-            <position value="72px 8px" />
+            <position value="72px -8px" />
             <textBold value="false" />
 
             <textColor value="1 1 1 0.4" />
             <textSelectedColor value="1 1 1 1" />
         </Profile>
-        <Profile name="tfSelectArea_listItemText" extends="tfSelectMachine_listItemText">
-            <position value="72px -10px" />
-            <textSize value="12px" />
+        <Profile name="tfSelectArea_listItemText" extends="tfSelectMachine_listItemText" with="anchorMiddleLeft">
+            <position value="72px 10px" />
 
+            <textSize value="12px" />
+            <textAlignment value="left" />
             <textColor value="1 1 1 0.1" />
             <textSelectedColor value="1 1 1 0.25" />
+        </Profile>
+
+        <Profile name="tfSelectArea_listItemStatusText" extends="tfSelectArea_listItemText" with="anchorMiddleRight">
+            <position value="-24px 0" />
+
+            <textAlignment value="right" />
+            <textUpperCase value="true" />
         </Profile>
 
         <Profile name="tfSelectArea_listItemImage" extends="tfSelectMachine_listItemImage" with="anchorMiddleLeft">

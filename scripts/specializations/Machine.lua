@@ -1758,8 +1758,9 @@ function Machine:actionEventSelectMaterial()
 end
 
 ---@param fillTypeIndex number?
-function Machine:selectMaterialCallback(fillTypeIndex)
-    if fillTypeIndex ~= nil then
+---@param clickOk boolean
+function Machine:selectMaterialCallback(fillTypeIndex, clickOk)
+    if clickOk and fillTypeIndex ~= nil then
         self:setMachineFillTypeIndex(fillTypeIndex)
     end
 end
@@ -1772,8 +1773,9 @@ function Machine:actionEventSelectTerrainLayer()
 end
 
 ---@param terrainLayerId number?
-function Machine:selectTerrainLayerCallback(terrainLayerId)
-    if terrainLayerId ~= nil then
+---@param clickOk boolean
+function Machine:selectTerrainLayerCallback(terrainLayerId, clickOk)
+    if clickOk and terrainLayerId ~= nil then
         self:setMachineInputLayerId(terrainLayerId)
     end
 end
@@ -1786,8 +1788,9 @@ function Machine:actionEventSelectDischargeTerrainLayer()
 end
 
 ---@param terrainLayerId number?
-function Machine:selectDischargeTerrainLayerCallback(terrainLayerId)
-    if terrainLayerId ~= nil then
+---@param clickOk boolean
+function Machine:selectDischargeTerrainLayerCallback(terrainLayerId, clickOk)
+    if clickOk and terrainLayerId ~= nil then
         self:setMachineOutputLayerId(terrainLayerId)
     end
 end
@@ -1800,8 +1803,9 @@ function Machine:actionEventSelectInputArea()
 end
 
 ---@param id? string
-function Machine:selectInputAreaCallback(id)
-    if id ~= nil then
+---@param clickOk boolean
+function Machine:selectInputAreaCallback(id, clickOk)
+    if clickOk and id ~= nil then
         self:setMachineInputAreaId(id)
     end
 end
@@ -1820,8 +1824,9 @@ function Machine:actionEventSelectOutputArea()
 end
 
 ---@param id? string
-function Machine:selectOutputAreaCallback(id)
-    if id ~= nil then
+---@param clickOk boolean
+function Machine:selectOutputAreaCallback(id, clickOk)
+    if clickOk and id ~= nil then
         self:setMachineOutputAreaId(id)
     end
 end

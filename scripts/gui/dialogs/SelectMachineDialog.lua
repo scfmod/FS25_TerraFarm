@@ -148,31 +148,35 @@ end
 ---@param index number
 ---@param cell ListItemElement
 function SelectMachineDialog:onItemDoubleClick(list, section, index, cell)
-    self:sendCallback(index)
+    self:sendCallback(index, true)
 end
 
 function SelectMachineDialog:onClickApply()
-    self:sendCallback(self.list:getSelectedIndexInSection())
+    self:sendCallback(self.list:getSelectedIndexInSection(), true)
 end
 
 ---@param index number?
-function SelectMachineDialog:sendCallback(index)
+---@param clickOk boolean
+function SelectMachineDialog:sendCallback(index, clickOk)
     local item = self.items[index]
 
     self:close()
 
     if self.selectCallbackFunction ~= nil then
         if self.selectCallbackTarget ~= nil then
-            self.selectCallbackFunction(self.selectCallbackTarget, item and item.vehicle)
+            self.selectCallbackFunction(self.selectCallbackTarget, item and item.vehicle, clickOk)
         else
-            self.selectCallbackFunction(item and item.vehicle)
+            self.selectCallbackFunction(item and item.vehicle, clickOk)
         end
     end
+
+    self.selectCallbackFunction = nil
+    self.selectCallbackTarget = nil
 end
 
 function SelectMachineDialog:onClickBack(forceBack, usedMenuButton)
     if (self.isCloseAllowed or forceBack) and not usedMenuButton then
-        self:sendCallback(nil)
+        self:sendCallback(nil, false)
 
         return false
     else

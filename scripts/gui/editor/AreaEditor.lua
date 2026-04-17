@@ -227,8 +227,8 @@ end
 ---@param element ButtonElement
 function AreaEditor:onPressedDataButton(element)
     if element == self.materialButtonElement then
-        local function callback(fillTypeIndex)
-            if fillTypeIndex ~= nil then
+        local function callback(fillTypeIndex, clickOk)
+            if clickOk and fillTypeIndex ~= nil then
                 self.area.forceFillTypeIndex = fillTypeIndex
                 self:updateFillTypeInput(fillTypeIndex, self.materialImageElement, self.materialTextElement, self.materialResetButtonElement)
                 self:setHasChanged(true)
@@ -238,8 +238,8 @@ function AreaEditor:onPressedDataButton(element)
         g_selectMaterialDialog:setSelectCallback(callback)
         g_selectMaterialDialog:show(self.area.forceFillTypeIndex)
     elseif element == self.inputLayerButtonElement then
-        local function callback(layerId)
-            if layerId ~= nil then
+        local function callback(layerId, clickOk)
+            if clickOk and layerId ~= nil then
                 self.area.forceInputLayer = layerId
                 self:updateTerrainLayerInput(layerId, self.inputLayerImageElement, self.inputLayerTextElement, self.inputLayerResetButtonElement)
                 self:setHasChanged(true)
@@ -249,8 +249,8 @@ function AreaEditor:onPressedDataButton(element)
         g_selectTerrainLayerDialog:setSelectCallback(callback)
         g_selectTerrainLayerDialog:show(self.area.forceInputLayer)
     elseif element == self.outputLayerButtonElement then
-        local function callback(layerId)
-            if layerId ~= nil then
+        local function callback(layerId, clickOk)
+            if clickOk and layerId ~= nil then
                 self.area.forceOutputLayer = layerId
                 self:updateTerrainLayerInput(layerId, self.outputLayerImageElement, self.outputLayerTextElement, self.outputLayerResetButtonElement)
                 self:setHasChanged(true)
