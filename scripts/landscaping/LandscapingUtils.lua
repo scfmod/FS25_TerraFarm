@@ -19,52 +19,52 @@ LandscapingUtils.AREA_ICON_SLICE_IDS = {
 ---@type LandscapingAreaColor[]
 LandscapingUtils.AREA_COLORS = {
     {
-        name = 'Orange',
+        name = g_i18n:getText('ui_colorOrange'),
         diffuseColor = { 1, 0.1, 0, 1 },
         decalColor = { 1, 0.2, 0, 1 }
     },
     {
-        name = 'Red',
+        name = g_i18n:getText('ui_colorRed'),
         diffuseColor = { 0.7, 0, 0, 1 },
         decalColor = { 1, 0, 0, 1 }
     },
     {
-        name = 'Yellow',
+        name = g_i18n:getText('ui_colorYellow'),
         diffuseColor = { 0.5, 0.5, 0, 1 },
         decalColor = { 0.5, 0.5, 0, 1 }
     },
     {
-        name = 'Bright green',
+        name = g_i18n:getText('ui_colorGreenLight'),
         diffuseColor = { 0, 0.8, 0, 1 },
         decalColor = { 0, 1, 0, 1 }
     },
     {
-        name = 'Green',
+        name = g_i18n:getText('ui_colorGreen'),
         diffuseColor = { 0, 0.2, 0, 1 },
         decalColor = { 0, 0.2, 0, 1 }
     },
     {
-        name = 'Teal',
+        name = g_i18n:getText('ui_colorTurquoise'),
         diffuseColor = { 0, 0.2, 0.2, 1 },
         decalColor = { 0, 0.25, 0.25, 1 }
     },
     {
-        name = 'Blue',
+        name = g_i18n:getText('ui_colorBlue'),
         diffuseColor = { 0, 0.25, 0.8, 1 },
         decalColor = { 0, 0.25, 0.8, 1 }
     },
     {
-        name = 'Pink',
+        name = g_i18n:getText('ui_colorPink'),
         diffuseColor = { 1, 0, 1, 1 },
         decalColor = { 1, 0, 1, 1 }
     },
     {
-        name = 'Purple',
+        name = g_i18n:getText('ui_colorPurple'),
         diffuseColor = { 0.1, 0.05, 1, 1 },
         decalColor = { 0.2, 0.05, 1, 1 }
     },
     {
-        name = 'White',
+        name = g_i18n:getText('ui_colorWhite'),
         diffuseColor = { 1, 1, 1, 1 },
         decalColor = { 1, 1, 1, 1 }
     }
