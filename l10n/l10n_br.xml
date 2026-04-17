@@ -2,49 +2,55 @@
 <l10n>
     <texts>
         <!-- Input bindings -->
-        <text name="input_MACHINE_SETTINGS" text="Abrir o diálogo de configurações da máquina" />
-        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Alternar para ativar máquina" />
+        <text name="input_MACHINE_SETTINGS" text="Abrir diálogo de configurações da máquina" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Alternar ativação da máquina" />
         <text name="input_MACHINE_TOGGLE_INPUT" text="Alternar modo de entrada" />
         <text name="input_MACHINE_TOGGLE_OUTPUT" text="Alternar modo de saída" />
-        <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir o diálogo de material" />
-        <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir o diálogo de textura do solo" />
-        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Abrir a caixa de diálogo de textura de solo de descarga" />
-        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir o diálogo de configurações globais" />
-        <text name="input_MACHINE_TOGGLE_HUD" text="Alternar a visibilidade do HUD" />
-        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Select terraform area" />
-        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Select discharge area" />
-        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Toggle terraform area enabled" />
-        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Toggle discharge area enabled" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Abrir diálogo de material" />
+        <text name="input_MACHINE_SELECT_TEXTURE" text="Abrir diálogo de textura do solo" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Abrir diálogo de textura de descarga no solo" />
+        <text name="input_MACHINE_GLOBAL_SETTINGS" text="Abrir diálogo de configurações globais" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="Alternar visibilidade do HUD" />
+        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Selecionar área de terraformação" />
+        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Selecionar área de descarga" />
+        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Alternar ativação da área de terraformação" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Alternar ativação da área de descarga" />
 
         <!-- Generic texts-->
         <text name="ui_mode" text="Modo" />
-        <text name="ui_enable" text="Habilitar" />
-        <text name="ui_enabled" text="Habilitado" />
-        <text name="ui_disable" text="Desabilitar" />
-        <text name="ui_disabled" text="Desabilitado" />
+        <text name="ui_enable" text="Ativar" />
+        <text name="ui_enabled" text="Ativado" />
+        <text name="ui_disable" text="Desativar" />
+        <text name="ui_disabled" text="Desativado" />
         <text name="ui_toggleHud" text="Alternar HUD" />
         <text name="ui_globalSettings" text="Configurações globais" />
         <text name="ui_materialSettings" text="Configurações de material" />
         <text name="ui_material" text="Material" />
         <text name="ui_texture" text="Textura" />
-        <text name="ui_terraformTexture" text="Terraform texture" />
+        <text name="ui_terraformTexture" text="Textura de terraformação" />
         <text name="ui_dischargeTexture" text="Textura de descarga" />
-        <text name="ui_changeMaterial" text="Mudar material" />
-        <text name="ui_changeTexture" text="Mudar textura" />
-        <text name="ui_changeDischargeTexture" text="Mudança na textura de descarga" />
+        <text name="ui_changeMaterial" text="Alterar material" />
+        <text name="ui_changeTexture" text="Alterar textura" />
+        <text name="ui_changeDischargeTexture" text="Alterar textura de descarga" />
         <text name="ui_circle" text="Círculo" />
         <text name="ui_square" text="Quadrado" />
-        <text name="ui_terrainDeformation" text="Deformação de terreno" />
-        <text name="ui_enableHud" text="Habilitar HUD" />
+        <text name="ui_terrainDeformation" text="Deformação do terreno" />
+        <text name="ui_enableHud" text="Ativar HUD" />
         <text name="ui_machines" text="Máquinas" />
         <text name="ui_machinesEmpty" text="Nenhuma máquina disponível encontrada" />
-        <text name="ui_distanceFormat" text="Distância: %.0f m" tag="format" />
+        <text name="ui_notAvailable" text="Não disponível" />
+
+        <text name="ui_distanceFormat" text="%.0f m" tag="format" />
         <text name="ui_copySettings" text="Copiar configurações" />
         <text name="ui_copySettingsTooltip" text="Copiar configurações da máquina de outro veículo" />
         <text name="ui_areaModifiers" text="Modificadores de área" />
         <text name="ui_postDeformation" text="Pós-deformação" />
         <text name="ui_operator" text="Operador" />
-        <text name="ui_notAvailable" text="Não disponível" />
+
+        <text name="ui_forwards" text="Para frente" />
+        <text name="ui_backwards" text="Para trás" />
+        <text name="ui_both" text="Ambos" />
+        <text name="ui_ignore" text="Ignorar" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Configurações da máquina" />
@@ -52,155 +58,159 @@
         <text name="ui_machineDeactivate" text="Desativar máquina" />
         <text name="ui_machineToggleInput" text="Alternar modo de entrada" />
         <text name="ui_machineToggleOutput" text="Alternar modo de saída" />
-        <text name="ui_enableMachine" text="Habilitar máquina" />
-        <text name="ui_enableMapResources" text="Usar recursos de mapa" />
+        <text name="ui_enableMachine" text="Ativar máquina" />
+        <text name="ui_enableMapResources" text="Usar recursos do mapa" />
         <text name="ui_enableMapResourcesTooltip" text="" />
 
         <text name="ui_modeMaterial" text="Material" />
         <text name="ui_modeFlatten" text="Nivelar" />
-        <text name="ui_modeSmooth" text="Suavisar" />
+        <text name="ui_modeSmooth" text="Suavizar" />
         <text name="ui_modeLower" text="Abaixar" />
         <text name="ui_modePaint" text="Pintar" />
-        <text name="ui_raise" text="Levantar" />
+        <text name="ui_raise" text="Elevar" />
 
         <text name="ui_terraform" text="Terraformar" />
         <text name="ui_discharge" text="Descarga" />
 
         <!-- Map resources texts -->
-        <text name="ui_mapResourcesAvailable" text="O recurso está disponível para este mapa." />
-        <text name="ui_mapResourcesNotAvailable" text="O recurso não está disponível para este mapa." />
-        <text name="ui_mapResourcesDescription" text="Disponível apenas para mapas com recurso implementado. Se habilitado, ele usará materiais e camadas de tinta em diferentes áreas definidas pelo autor do mapa. Cada máquina pode ligar/desligar o recurso se habilitado." />
+        <text name="ui_mapResourcesAvailable" text="Recurso disponível para este mapa." />
+        <text name="ui_mapResourcesNotAvailable" text="Recurso não disponível para este mapa." />
+        <text name="ui_mapResourcesDescription" text="Disponível apenas em mapas com o recurso implementado. Quando ativado, utiliza materiais e camadas de pintura em áreas diferentes definidas pelo autor do mapa. Cada máquina pode ativar ou desativar o recurso individualmente." />
 
         <!-- Global settings texts -->
-        <text name="ui_globalEnabled" text="Habilitar TerraFarm" />
-        <text name="ui_globalDefaultEnabled" text="Habilitar máquinas por padrão" />
-        <text name="ui_mapResources" text="Recursos do mapas" />
-        <text name="ui_globalResourcesEnabled" text="Habilitar recursos do mapa" />
+        <text name="ui_globalEnabled" text="Ativar TerraFarm" />
+        <text name="ui_globalDefaultEnabled" text="Ativar máquinas por padrão" />
+        <text name="ui_mapResources" text="Recursos do mapa" />
+        <text name="ui_globalResourcesEnabled" text="Ativar recursos do mapa" />
         <text name="ui_displayMode" text="Modo de exibição do HUD" />
-        <text name="ui_debug" text="Depurar" />
-        <text name="ui_debugNodes" text="Depuração dos nós da máquina" />
-        <text name="ui_debugCalibration" text="Depuração da calibração da máquina" />
+        <text name="ui_debug" text="Depuração" />
+        <text name="ui_debugNodes" text="Depurar nós da máquina" />
+        <text name="ui_debugCalibration" text="Depurar calibração da máquina" />
 
         <!-- Store items -->
         <text name="displayItem_machine" text="Máquina" />
 
         <!-- MachineState -->
-        <text name="ui_stateEnableEffects" text="Habilitar efeitos visuais" />
-        <text name="ui_stateEnableEffectsTooltip" text="Disponível apenas em equipamentos suportados" />
-        <text name="ui_stateClearDecoArea" text="Limpar folhagem" />
-        <text name="ui_stateClearDecoAreaTooltip" text="Remove a folhagem e os arbustos ao fazer a terraformação" />
+        <text name="ui_stateEnableEffects" text="Ativar efeitos visuais" />
+        <text name="ui_stateEnableEffectsTooltip" text="Efeitos visuais de terraformação" />
+        <text name="ui_stateClearDecoArea" text="Limpar vegetação" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Remover vegetação e arbustos ao terraformar" />
         <text name="ui_stateClearDensityMapHeightArea" text="Limpar material" />
-        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Remove o material ao redor da deformação do terreno" />
-        <text name="ui_stateEnableInputMaterial" text="Habilitar material" />
-        <text name="ui_stateEnableInputMaterialTooltip" text="Habilita a criação de material ao terraformar" />
-        <text name="ui_stateEnableOutputMaterial" text="Habilitar descarga" />
-        <text name="ui_stateEnableOutputMaterialTooltip" text="Permite a descarga de material no solo" />
-        <text name="ui_stateEnablePaintGroundTexture" text="Habilitar pintura" />
-        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Pinta novas texturas de solo ao terraformar" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Remover material ao redor da deformação do terreno" />
+        <text name="ui_stateEnableInputMaterial" text="Ativar material" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Permitir criação de material durante a terraformação" />
+        <text name="ui_stateEnableOutputMaterial" text="Ativar descarga" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Permitir descarregar material no solo" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Ativar pintura" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Pintar novas texturas de solo durante a terraformação" />
         <text name="ui_stateRadius" text="Raio" />
         <text name="ui_stateRadiusTooltip" text="" />
-        <text name="ui_stateStrength" text="Força" />
+        <text name="ui_stateStrength" text="Intensidade" />
         <text name="ui_stateStrengthTooltip" text="" />
         <text name="ui_stateHardness" text="Dureza" />
         <text name="ui_stateHardnessTooltip" text="" />
-        <text name="ui_stateBrushShape" text="Forma do pincel de deformação" />
-        <text name="ui_stateBrushShapeTooltip" text="Alterna a forma do pincel de deformação" />
-        <text name="ui_stateRemoveFieldArea" text="Remover áreas do campo" />
-        <text name="ui_stateRemoveFieldAreaTooltip" text="Remove as áreas dos campos durante a terraformação" />
+        <text name="ui_stateBrushShape" text="Formato do pincel de deformação" />
+        <text name="ui_stateBrushShapeTooltip" text="" />
+        <text name="ui_stateRemoveFieldArea" text="Remover áreas de plantio" />
+        <text name="ui_stateRemoveFieldAreaTooltip" text="" />
         <text name="ui_stateRemoveStoneArea" text="Remover pedras" />
-        <text name="ui_stateRemoveStoneAreaTooltip" text="Remove as pedras do solo durante a terraformação" />
+        <text name="ui_stateRemoveStoneAreaTooltip" text="" />
         <text name="ui_stateRemoveWeedArea" text="Remover ervas daninhas" />
-        <text name="ui_stateRemoveWeedAreaTooltip" text="Remove ervas daninhas durante a terraformação" />
-        <text name="ui_stateAllowGradingUp" text="Permitir subir a classificação" />
-        <text name="ui_stateAllowGradingUpTooltip" text="Recomendado desligar a entrada de material quando ativo" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Remove ervas daninhas ao terraformar" />
+        <text name="ui_stateAllowGradingUp" text="Permitir elevação" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Recomendado desativar entrada de material quando ativado" />
         <text name="ui_stateForceNodes" text="Forçar nós" />
         <text name="ui_stateForceNodesTooltip" text="Forçar todos os nós se um ou mais estiverem ativos" />
+        <text name="ui_stateAutoDeactivate" text="Desativar automaticamente" />
+        <text name="ui_stateAutoDeactivateTooltip" text="Desativa a máquina quando o jogador sai do veículo" />
+        <text name="ui_stateDrivingDirectionMode" text="Direção de condução ativa" />
+        <text name="ui_stateDrivingDirectionModeTooltip" text="Aplica ações de terraformação conforme a direção de condução selecionada" />
         <text name="ui_statePaintRadiusModifier" text="Modificador de raio de pintura" />
-        <text name="ui_statePaintRadiusModifierTooltip" text="Altera o raio da pintura no solo durante a terraformação" />
+        <text name="ui_statePaintRadiusModifierTooltip" text="" />
         <text name="ui_stateDensityRadiusModifier" text="Modificador de raio de densidade" />
-        <text name="ui_stateDensityRadiusModifierTooltip" text="Altera o raio da densidade durante a terraformação" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="Modificador de raio pós-deformação" />
         <text name="ui_stateInputRatio" text="Taxa de entrada" />
-        <text name="ui_stateInputRatioTooltip" text="" />
-        <text name="ui_stateOutputRatio" text="Output ratio" />
-        <text name="ui_stateOutputRatioTooltip" text="Material output ratio" />
+        <text name="ui_stateInputRatioTooltip" text="Taxa de entrada de material" />
+        <text name="ui_stateOutputRatio" text="Taxa de saída" />
+        <text name="ui_stateOutputRatioTooltip" text="Taxa de saída de material" />
 
         <!-- Machine types -->
         <text name="machineType_compactor" text="Compactador" />
         <text name="machineType_excavator" text="Escavadora" />
-        <text name="machineType_leveler" text="Niveladora" />
-        <text name="machineType_ripper" text="Subsoladora" />
+        <text name="machineType_leveler" text="Nivelador" />
+        <text name="machineType_ripper" text="Ripper de solo" />
         <text name="machineType_shovel" text="Pá" />
-        <text name="machineType_trencher" text="Trincheradora" />
+        <text name="machineType_trencher" text="Valetadeira" />
 
         <!-- 1.3.0.0 UPDATE: New entries -->
 
-        <text name="ui_landscapingAreas" text="Landscaping areas" />
-        <text name="ui_landscapingArea" text="Landscaping area" />
-        <text name="ui_waterPlanes" text="Water planes" />
-        <text name="ui_waterPlane" text="Water plane" />
-        <text name="ui_area" text="Area" />
-        <text name="ui_areas" text="Areas" />
-        <text name="ui_areasLimitWarning" text="Number of landscaping areas limit reached" />
-        <text name="ui_waterplanesLimitWarning" text="Number of water planes limit reached" />
-        <text name="ui_createArea" text="Create new area" />
-        <text name="ui_createWaterplane" text="Create new water plane" />
-        <text name="ui_areaPath" text="Path area" />
-        <text name="ui_areaPathText" text="Define an area using points to form a path with various positions." />
-        <text name="ui_areaPolygon" text="Polygon area" />
-        <text name="ui_areaPolygonText" text="Define an area using points and a target height." />
+        <text name="ui_landscapingAreas" text="Áreas de paisagismo" />
+        <text name="ui_landscapingArea" text="Área de paisagismo" />
+        <text name="ui_waterPlanes" text="Planos de água" />
+        <text name="ui_waterPlane" text="Plano de água" />
+        <text name="ui_area" text="Área" />
+        <text name="ui_areas" text="Áreas" />
+        <text name="ui_areasLimitWarning" text="Limite de áreas de paisagismo atingido" />
+        <text name="ui_waterplanesLimitWarning" text="Limite de planos de água atingido" />
+        <text name="ui_createArea" text="Criar nova área" />
+        <text name="ui_createWaterplane" text="Criar novo plano de água" />
+        <text name="ui_areaPath" text="Área em caminho" />
+        <text name="ui_areaPathText" text="Define uma área usando pontos para formar um caminho com várias posições." />
+        <text name="ui_areaPolygon" text="Área poligonal" />
+        <text name="ui_areaPolygonText" text="Define uma área usando pontos e uma altura alvo." />
 
-        <text name="ui_editorSaveChanges" text="Save changes" />
-        <text name="ui_moveArea" text="Move area" />
-        <text name="ui_restrictArea" text="Restrict within area" />
-        <text name="ui_targetHeight" text="Target height" />
-        <text name="ui_setTargetHeight" text="Set target height" />
-        <text name="ui_moveHorizontal" text="Move horizontal" />
-        <text name="ui_moveVertical" text="Move vertical" />
-        <text name="ui_editMode" text="Edit mode" />
-        <text name="ui_exitEditMode" text="Exit edit mode" />
-        <text name="ui_movePoint" text="Move point" />
-        <text name="ui_setNewPosition" text="Set new position" />
-        <text name="ui_placePoint" text="Place new point" />
-        <text name="ui_createPoint" text="Create new point" />
-        <text name="ui_selectPoint" text="Select point" />
-        <text name="ui_setAngle" text="Set angle" />
-        <text name="ui_setPosition" text="Set position" />
-        <text name="ui_keepDirection" text="Keep direction" />
-        <text name="ui_followAngle" text="Follow angle" />
-        <text name="ui_alignWorldAxes" text="Align to world axes" />
-        <text name="ui_forceAngle" text="Force angle" />
-        <text name="ui_point" text="Point" />
-        <text name="ui_segment" text="Segment" />
-        <text name="ui_icon" text="Icon" />
-        <text name="ui_exit" text="Exit" />
-        <text name="ui_width" text="Width" />
-        <text name="ui_visible" text="Visible" />
-        <text name="ui_hidden" text="Hidden" />
-        <text name="ui_setVisible" text="Set visible" />
-        <text name="ui_setHidden" text="Set hidden" />
-        <text name="ui_notSet" text="Not set" />
-        <text name="ui_edit" text="Edit" />
-        <text name="ui_activeOnly" text="Active only" />
-        <text name="ui_editorConfirmCloseText" text="Do you want to close editor? Unsaved changed will be discarded" />
-        <text name="ui_areaConfirmDeleteText" text="Do you want to delete the landscaping area?" />
-        <text name="ui_waterplaneConfirmDeleteText" text="Do you want to delete the water plane?" />
+        <text name="ui_editorSaveChanges" text="Salvar alterações" />
+        <text name="ui_moveArea" text="Mover área" />
+        <text name="ui_restrictArea" text="Restringir dentro da área" />
+        <text name="ui_targetHeight" text="Altura alvo" />
+        <text name="ui_setTargetHeight" text="Definir altura alvo" />
+        <text name="ui_moveHorizontal" text="Mover horizontalmente" />
+        <text name="ui_moveVertical" text="Mover verticalmente" />
+        <text name="ui_editMode" text="Modo de edição" />
+        <text name="ui_exitEditMode" text="Sair do modo de edição" />
+        <text name="ui_movePoint" text="Mover ponto" />
+        <text name="ui_setNewPosition" text="Definir nova posição" />
+        <text name="ui_placePoint" text="Colocar novo ponto" />
+        <text name="ui_createPoint" text="Criar novo ponto" />
+        <text name="ui_selectPoint" text="Selecionar ponto" />
+        <text name="ui_setAngle" text="Definir ângulo" />
+        <text name="ui_setPosition" text="Definir posição" />
+        <text name="ui_keepDirection" text="Manter direção" />
+        <text name="ui_followAngle" text="Seguir ângulo" />
+        <text name="ui_alignWorldAxes" text="Alinhar aos eixos do mundo" />
+        <text name="ui_forceAngle" text="Forçar ângulo" />
+        <text name="ui_point" text="Ponto" />
+        <text name="ui_segment" text="Segmento" />
+        <text name="ui_icon" text="Ícone" />
+        <text name="ui_exit" text="Sair" />
+        <text name="ui_width" text="Largura" />
+        <text name="ui_visible" text="Visível" />
+        <text name="ui_hidden" text="Oculto" />
+        <text name="ui_setVisible" text="Tornar visível" />
+        <text name="ui_setHidden" text="Ocultar" />
+        <text name="ui_notSet" text="Não definido" />
+        <text name="ui_edit" text="Editar" />
+        <text name="ui_activeOnly" text="Apenas ativo" />
+        <text name="ui_editorConfirmCloseText" text="Deseja fechar o editor? As alterações não salvas serão descartadas." />
+        <text name="ui_areaConfirmDeleteText" text="Deseja excluir a área de paisagismo?" />
+        <text name="ui_waterplaneConfirmDeleteText" text="Deseja excluir o plano de água?" />
 
-        <text name="ui_areaBorderVisibility" text="Area border visibility" />
-        <text name="ui_areaBorderMode" text="Area border mode" />
+        <text name="ui_areaBorderVisibility" text="Visibilidade das bordas da área" />
+        <text name="ui_areaBorderMode" text="Modo de borda da área" />
         <text name="ui_areaBorderModeNormal" text="Normal" />
-        <text name="ui_areaBorderModeDecal" text="Decal" />
-        <text name="ui_areaBorderModeMesh" text="Mesh" />
-        <text name="ui_areasEmpty" text="No available areas found" />
-        <text name="ui_selectArea" text="Select area" />
-        <text name="ui_machineCopy" text="Copy from machine" />
-        <text name="ui_ignoreAreaMaterial" text="Ignore material settings" />
+        <text name="ui_areaBorderModeDecal" text="Decalque" />
+        <text name="ui_areaBorderModeMesh" text="Malha" />
+        <text name="ui_areasEmpty" text="Nenhuma área disponível encontrada" />
+        <text name="ui_selectArea" text="Selecionar área" />
+        <text name="ui_machineCopy" text="Copiar da máquina" />
+        <text name="ui_ignoreAreaMaterial" text="Ignorar configurações de material" />
         <text name="ui_ignoreAreaMaterialTooltip" text="" />
-        <text name="ui_ignoreAreaGroundTextures" text="Ignore texture settings" />
+        <text name="ui_ignoreAreaGroundTextures" text="Ignorar configurações de textura" />
         <text name="ui_ignoreAreaGroundTexturesTooltip" text="" />
 
-        <text name="ui_stateUpdateCollisions" text="Update vehicle collisions" />
-        <text name="ui_stateUpdateCollisionsTooltip" text="Toggle vehicle collisions when active/inactive" />
+        <text name="ui_stateUpdateCollisions" text="Atualizar colisões de veículos" />
+        <text name="ui_stateUpdateCollisionsTooltip" text="Alternar colisões de veículos quando ativo/inativo" />
 
-        <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Toggle global area borders visibility" />
+        <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Alternar visibilidade das bordas das áreas globais" />
     </texts>
 </l10n>
