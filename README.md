@@ -12,6 +12,9 @@ Tired of using the landscaping tool to carve out your land? Not satisfied with u
 
 Surveyor was removed in version 1.3.0.0 and is now replaced with Landscaping area feature. [Argsy Gaming](https://www.youtube.com/@ArgsyGaming) has released a video covering the new features in TerraFarm. [Click here to watch the video](https://www.youtube.com/watch?v=RNowvimnJOs) or click on the image.
 
+
+[![Argsy Gaming - Mastering TERRAFARM](https://img.youtube.com/vi/i4uJtZ1NSBI/0.jpg)](https://www.youtube.com/watch?v=i4uJtZ1NSBI)
+
 ---
 
 ```
