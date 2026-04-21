@@ -67,6 +67,8 @@ local function registerMachineFunctions(vehicle)
 
     vehicle['getMachineType'] = Machine.getMachineType
     vehicle['getMachineWorkArea'] = Machine.getMachineWorkArea
+
+    vehicle['raycastCallbackShovelFillVolume'] = Machine.raycastCallbackShovelFillVolume
 end
 
 ---@param vehicle Vehicle

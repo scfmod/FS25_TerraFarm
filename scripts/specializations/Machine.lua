@@ -239,6 +239,8 @@ function Machine.registerFunctions(vehicleType)
 
     SpecializationUtil.registerFunction(vehicleType, 'getMachineType', Machine.getMachineType)
     SpecializationUtil.registerFunction(vehicleType, 'getMachineWorkArea', Machine.getMachineWorkArea)
+
+    SpecializationUtil.registerFunction(vehicleType, 'raycastCallbackShovelFillVolume', Machine.raycastCallbackShovelFillVolume)
 end
 
 function Machine.initSpecialization()
@@ -1251,7 +1253,119 @@ function Machine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSelect
             self:setMachineEffectActive(false, true)
             spec.stopEffectTime = nil
         end
+
+        local shovelNode = spec.shovelNode
+
+        if spec.machineTypeId == 'excavatorShovel' and shovelNode ~= nil then
+            if Machine.getShovelNodeIsActive(self, shovelNode) then
+                local freeCapacity = self:getFillUnitFreeCapacity(shovelNode.fillUnitIndex)
+
+                if freeCapacity > 0 then
+                    local x, y, z = localToWorld(shovelNode.node, 0, shovelNode.yOffset, shovelNode.zOffset)
+                    local raycastCollisionMask = CollisionFlag.FILLABLE + CollisionFlag.VEHICLE
+                    local raycastMaxDistance = 0.5
+                    local raycastOffsetYMargin = 0.625
+
+                    raycastAll(x, y + raycastOffsetYMargin, z, 0, -1, 0, raycastMaxDistance, 'raycastCallbackShovelFillVolume', self, raycastCollisionMask)
+                end
+            end
+        end
     end
+end
+
+-- NOTE: not a registered function
+---@param shovelNode ShovelNode
+---@return boolean
+---@nodiscard
+function Machine:getShovelNodeIsActive(shovelNode)
+    local isActive = true
+
+    if shovelNode.needsMovement then
+        if shovelNode.tf_lastPosition == nil then
+            ---@diagnostic disable-next-line: inject-field
+            shovelNode.tf_lastPosition = { 0, 0, 0 }
+        end
+
+        local x, y, z = getWorldTranslation(shovelNode.node)
+        local _, _, dz = worldToLocal(shovelNode.node, shovelNode.tf_lastPosition[1], shovelNode.tf_lastPosition[2], shovelNode.tf_lastPosition[3])
+        isActive = isActive and dz < 0
+
+        shovelNode.tf_lastPosition[1] = x
+        shovelNode.tf_lastPosition[2] = y
+        shovelNode.tf_lastPosition[3] = z
+    end
+
+    if shovelNode.maxPickupAngle ~= nil then
+        local _, dy, _ = localDirectionToWorld(shovelNode.node, 0, 0, 1)
+        local angle = math.acos(dy)
+        if angle > shovelNode.maxPickupAngle then
+            return false
+        end
+    end
+
+    if shovelNode.needsAttacherVehicle then
+        ---@diagnostic disable-next-line: undefined-field
+        if self.getAttacherVehicle ~= nil and self:getAttacherVehicle() == nil then
+            return false
+        end
+    end
+
+    return isActive
+end
+
+function Machine:raycastCallbackShovelFillVolume(hitActorId, x, y, z, distance, nx, ny, nz, subShapeIndex, hitShapeId, isLast)
+    local spec = self.spec_machine
+
+    if hitActorId ~= 0 then
+        ---@type FillUnitVehicle?
+        local object = g_currentMission:getNodeObject(hitActorId)
+
+        if object ~= nil and object ~= self and object.getFillUnitIndexFromNode ~= nil and object:isa(Vehicle) then
+            ---@type number?
+            local fillUnitIndex = object:getFillUnitIndexFromNode(hitShapeId)
+
+            if fillUnitIndex ~= nil then
+                local fillLevel = object:getFillUnitFillLevel(fillUnitIndex)
+                local fillTypeIndex = object:getFillUnitFillType(fillUnitIndex)
+                local shovelAccessible = self:getIsFillAllowedFromFarm(object:getActiveFarm())
+                local shovelAllowFillType = self:getFillUnitAllowsFillType(spec.shovelNode.fillUnitIndex, fillTypeIndex)
+                local hasMinFillLevel = fillLevel > 0
+
+                if shovelAccessible and shovelAllowFillType and hasMinFillLevel then
+                    ---@cast fillTypeIndex -?
+
+                    Machine.handleShovelFill(self, object, fillUnitIndex, fillTypeIndex)
+                    return false
+                end
+            end
+        end
+    end
+
+    if isLast then
+        return false
+    else
+        return true
+    end
+end
+
+-- NOTE: not a registered function
+---@param object FillUnitVehicle
+---@param fillUnitIndex number
+---@param fillTypeIndex number
+function Machine:handleShovelFill(object, fillUnitIndex, fillTypeIndex)
+    local spec = self.spec_machine
+    local shovelNode = spec.shovelNode
+    ---@cast shovelNode -?
+
+    local totalCapacity = self:getFillUnitCapacity(shovelNode.fillUnitIndex)
+    local emptyLiters = totalCapacity / 1000
+
+    emptyLiters = math.clamp(emptyLiters, 250, 2500)
+
+    local loadInfo = self:getFillVolumeLoadInfo(shovelNode.loadInfoIndex)
+    local delta = object:addFillUnitFillLevel(self:getOwnerFarmId(), fillUnitIndex, -emptyLiters, fillTypeIndex, ToolType.UNDEFINED, loadInfo)
+
+    self:addFillUnitFillLevel(self:getOwnerFarmId(), shovelNode.fillUnitIndex, -delta, fillTypeIndex, ToolType.UNDEFINED)
 end
 
 -- NOTE: not a registered function
