@@ -730,8 +730,7 @@ function Machine:setMachineActive(active, noEventSend)
         end
 
         Machine.updateCollisionNodes(self)
-
-        self:requestActionEventUpdate()
+        Machine.updateActionEvents(self)
 
         g_messageCenter:publish(SetMachineActiveEvent, self, active)
     end
@@ -1423,7 +1422,7 @@ function Machine:onStartMotor()
     local spec = self.spec_machine
 
     if self.isClient and spec.requirePoweredOn then
-        self:requestActionEventUpdate()
+        Machine.updateActionEvents(self)
     end
 end
 
@@ -1443,7 +1442,7 @@ function Machine:onTurnedOn()
     local spec = self.spec_machine
 
     if self.isClient and spec.requireTurnedOn then
-        self:requestActionEventUpdate()
+        Machine.updateActionEvents(self)
     end
 end
 
@@ -1555,6 +1554,8 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
         local spec = self.spec_machine
         local canActivate = self:getCanActivateMachine()
         local addActionEvents = isActiveForInput
+        local hasInputs = MachineUtils.getHasInputs(self)
+        local hasOutputs = MachineUtils.getHasOutputs(self)
 
         self:clearActionEventsTable(spec.actionEvents)
 
@@ -1566,13 +1567,7 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
 
         if action ~= nil then
             local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventToggleActive, false, true, false, true)
-
-            if canActivate then
-                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_DEACTIVATE)
-            else
-                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_ACTIVATE)
-            end
-
+            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_ACTIVATE)
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_NORMAL)
         end
 
@@ -1607,34 +1602,27 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_NORMAL)
         end
 
-        action = InputAction[Machine.ACTION_SELECT_MATERIAL]
+        if spec.machineType.useInput then
+            action = InputAction[Machine.ACTION_SELECT_MATERIAL]
 
-        if action ~= nil then
-            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectMaterial, false, true, false, true)
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectMaterial, false, true, false, true)
 
-            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_MATERIAL)
-            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_MATERIAL)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
         end
 
-        action = InputAction[Machine.ACTION_SELECT_TEXTURE]
+        if hasInputs then
+            action = InputAction[Machine.ACTION_SELECT_TEXTURE]
 
-        if action ~= nil then
-            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectTerrainLayer, false, true, false, true)
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectTerrainLayer, false, true, false, true)
 
-            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_GROUND_TEXTURE)
-            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
-        end
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_GROUND_TEXTURE)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
 
-        action = InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]
-
-        if action ~= nil then
-            local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectDischargeTerrainLayer, false, true, false, true)
-
-            g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE)
-            g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
-        end
-
-        if MachineUtils.getHasInputs(self) then
             action = InputAction[Machine.ACTION_SELECT_INPUT_AREA]
 
             if action ~= nil then
@@ -1654,7 +1642,16 @@ function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnore
             end
         end
 
-        if MachineUtils.getHasOutputs(self) then
+        if hasOutputs then
+            action = InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]
+
+            if action ~= nil then
+                local _, eventId = self:addActionEvent(spec.actionEvents, action, self, Machine.actionEventSelectDischargeTerrainLayer, false, true, false, true)
+
+                g_inputBinding:setActionEventText(eventId, Machine.L10N_ACTION_SELECT_DISCHARGE_GROUND_TEXTURE)
+                g_inputBinding:setActionEventTextPriority(eventId, GS_PRIO_LOW)
+            end
+
             action = InputAction[Machine.ACTION_SELECT_OUTPUT_AREA]
 
             if action ~= nil then
