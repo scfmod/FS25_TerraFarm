@@ -3,65 +3,71 @@
     <texts>
         <!-- Input bindings -->
         <text name="input_MACHINE_SETTINGS" text="Makine ayarları iletişim kutusunu aç" />
-        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Makineyi etkinleştirmeyi aç / kapat" />
-        <text name="input_MACHINE_TOGGLE_INPUT" text="Giriş modunu değiştir" />
-        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Çıkış modunu değiştir" />
-        <text name="input_MACHINE_SELECT_MATERIAL" text="Materyal diyaloğunu aç" />
+        <text name="input_MACHINE_TOGGLE_ACTIVE" text="Makineyi etkinleştirmeyi aç/kapat" />
+        <text name="input_MACHINE_TOGGLE_INPUT" text="Giriş modunu aç/kapat" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT" text="Çıkış modunu aç/kapat" />
+        <text name="input_MACHINE_SELECT_MATERIAL" text="Malzeme iletişim kutusunu aç" />
         <text name="input_MACHINE_SELECT_TEXTURE" text="Zemin dokusu iletişim kutusunu aç" />
-        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Open discharge ground texture dialog" />
+        <text name="input_MACHINE_SELECT_DISCHARGE_TEXTURE" text="Boşaltma zemin dokusu iletişim kutusunu aç" />
         <text name="input_MACHINE_GLOBAL_SETTINGS" text="Genel ayarlar iletişim kutusunu aç" />
-        <text name="input_MACHINE_TOGGLE_HUD" text="HUD görünürlüğünü değiştir" />
-        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Select terraform area" />
-        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Select discharge area" />
-        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Toggle terraform area enabled" />
-        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Toggle discharge area enabled" />
+        <text name="input_MACHINE_TOGGLE_HUD" text="HUD görünürlüğünü aç/kapat" />
+        <text name="input_MACHINE_SELECT_INPUT_AREA" text="Terraform alanını seç" />
+        <text name="input_MACHINE_SELECT_OUTPUT_AREA" text="Boşaltma alanını seç" />
+        <text name="input_MACHINE_TOGGLE_INPUT_AREA_STATE" text="Terraform alanını etkinleştirme geçişi" />
+        <text name="input_MACHINE_TOGGLE_OUTPUT_AREA_STATE" text="Boşaltma alanını etkinleştirme geçişi" />
 
         <!-- Generic texts-->
         <text name="ui_mode" text="Mod" />
         <text name="ui_enable" text="Etkinleştir" />
-        <text name="ui_enabled" text="Etkinleştirilmiş" />
-        <text name="ui_disable" text="Devre dışı bırakmak" />
-        <text name="ui_disabled" text="Devre dışı bırakılmış" />
-        <text name="ui_toggleHud" text="HUD değiştir" />
+        <text name="ui_enabled" text="Etkin" />
+        <text name="ui_disable" text="Devre dışı bırak" />
+        <text name="ui_disabled" text="Devre dışı" />
+        <text name="ui_toggleHud" text="HUD Aç/Kapat" />
         <text name="ui_globalSettings" text="Genel ayarlar" />
         <text name="ui_materialSettings" text="Malzeme ayarları" />
         <text name="ui_material" text="Malzeme" />
-        <text name="ui_texture" text="Texture" />
-        <text name="ui_terraformTexture" text="Terraform texture" />
-        <text name="ui_dischargeTexture" text="Discharge texture" />
+        <text name="ui_texture" text="Doku" />
+        <text name="ui_terraformTexture" text="Terraform dokusu" />
+        <text name="ui_dischargeTexture" text="Boşaltma dokusu" />
         <text name="ui_changeMaterial" text="Malzemeyi değiştir" />
-        <text name="ui_changeTexture" text="Texture değiştir" />
-        <text name="ui_changeDischargeTexture" text="Change discharge texture" />
+        <text name="ui_changeTexture" text="Dokuyu değiştir" />
+        <text name="ui_changeDischargeTexture" text="Boşaltma dokusunu değiştir" />
         <text name="ui_circle" text="Daire" />
         <text name="ui_square" text="Kare" />
         <text name="ui_terrainDeformation" text="Arazi deformasyonu" />
-        <text name="ui_enableHud" text="HUD etkinleştir" />
+        <text name="ui_enableHud" text="HUD'u etkinleştir" />
         <text name="ui_machines" text="Makineler" />
         <text name="ui_machinesEmpty" text="Kullanılabilir makine bulunamadı" />
-        <text name="ui_distanceFormat" text="Mesafe: %.0f m" tag="format" />
+        <text name="ui_notAvailable" text="Kullanılamaz" />
+
+        <text name="ui_distanceFormat" text="%.0f m" tag="format" />
         <text name="ui_copySettings" text="Ayarları kopyala" />
-        <text name="ui_copySettingsTooltip" text="Makine ayarlarını başka bir araçtan kopyalayın" />
-        <text name="ui_areaModifiers" text="Alan değiştiriciler" />
-        <text name="ui_postDeformation" text="Sonrası deformasyon" />
-        <text name="ui_operator" text="Operator" />
-        <text name="ui_notAvailable" text="Müsait değil" />
+        <text name="ui_copySettingsTooltip" text="Makine ayarlarını başka bir araçtan kopyala" />
+        <text name="ui_areaModifiers" text="Alan değiştiricileri" />
+        <text name="ui_postDeformation" text="Arazi deformasyonu" />
+        <text name="ui_operator" text="Operatör" />
+
+        <text name="ui_forwards" text="İleri" />
+        <text name="ui_backwards" text="Geri" />
+        <text name="ui_both" text="Her ikisi" />
+        <text name="ui_ignore" text="Yoksay" />
 
         <!-- Machine texts -->
         <text name="ui_machineSettings" text="Makine ayarları" />
         <text name="ui_machineActivate" text="Makineyi etkinleştir" />
         <text name="ui_machineDeactivate" text="Makineyi devre dışı bırak" />
-        <text name="ui_machineToggleInput" text="Giriş modunu değiştir" />
-        <text name="ui_machineToggleOutput" text="Çıkış modunu değiştir" />
+        <text name="ui_machineToggleInput" text="Giriş modunu aç/kapat" />
+        <text name="ui_machineToggleOutput" text="Çıkış modunu aç/kapat" />
         <text name="ui_enableMachine" text="Makineyi etkinleştir" />
-        <text name="ui_enableMapResources" text="Harita kaynaklarını kullanın" />
+        <text name="ui_enableMapResources" text="Harita kaynaklarını kullan" />
         <text name="ui_enableMapResourcesTooltip" text="" />
 
         <text name="ui_modeMaterial" text="Malzeme" />
-        <text name="ui_modeFlatten" text="Düzleşmek" />
-        <text name="ui_modeSmooth" text="Düz" />
-        <text name="ui_modeLower" text="Aşağı" />
+        <text name="ui_modeFlatten" text="Düzle" />
+        <text name="ui_modeSmooth" text="Yumuşat" />
+        <text name="ui_modeLower" text="Alçalt" />
         <text name="ui_modePaint" text="Boya" />
-        <text name="ui_raise" text="Yukarı" />
+        <text name="ui_raise" text="Yükselt" />
 
         <text name="ui_terraform" text="Terraform" />
         <text name="ui_discharge" text="Boşaltma" />
@@ -74,29 +80,29 @@
         <!-- Global settings texts -->
         <text name="ui_globalEnabled" text="TerraFarm'ı etkinleştir" />
         <text name="ui_globalDefaultEnabled" text="Makineleri varsayılan olarak etkinleştir" />
-        <text name="ui_mapResources" text="Map resources" />
+        <text name="ui_mapResources" text="Harita kaynakları" />
         <text name="ui_globalResourcesEnabled" text="Harita kaynaklarını etkinleştir" />
-        <text name="ui_displayMode" text="HUD ekran modu" />
-        <text name="ui_debug" text="Debug" />
-        <text name="ui_debugNodes" text="Makine düğümlerinde hata ayıklama" />
-        <text name="ui_debugCalibration" text="Makine kalibrasyonunda hata ayıklama" />
+        <text name="ui_displayMode" text="HUD görünüm modu" />
+        <text name="ui_debug" text="Hata ayıklama" />
+        <text name="ui_debugNodes" text="Makine düğümlerinde hata ayıkla" />
+        <text name="ui_debugCalibration" text="Makine kalibrasyonunda hata ayıkla" />
 
         <!-- Store items -->
         <text name="displayItem_machine" text="Makine" />
 
         <!-- MachineState -->
         <text name="ui_stateEnableEffects" text="Görsel efektleri etkinleştir" />
-        <text name="ui_stateEnableEffectsTooltip" text="Yalnızca desteklenen ekipmanlarda mevcuttur" />
-        <text name="ui_stateClearDecoArea" text="Yaprakları temizle" />
-        <text name="ui_stateClearDecoAreaTooltip" text="Dünyalaştırma sırasında bitki örtüsünü ve çalıları kaldırın" />
-        <text name="ui_stateClearDensityMapHeightArea" text="Malzemeyi Temizle" />
-        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Arazi deformasyonunun etrafındaki malzemeyi kaldırın" />
+        <text name="ui_stateEnableEffectsTooltip" text="Terraforming görsel efektleri" />
+        <text name="ui_stateClearDecoArea" text="Bitki örtüsünü temizle" />
+        <text name="ui_stateClearDecoAreaTooltip" text="Terraform yaparken bitki örtüsünü ve çalıları kaldırır" />
+        <text name="ui_stateClearDensityMapHeightArea" text="Malzemeyi temizle" />
+        <text name="ui_stateClearDensityMapHeightAreaTooltip" text="Arazi deformasyonu etrafındaki yığınları kaldırır" />
         <text name="ui_stateEnableInputMaterial" text="Malzemeyi etkinleştir" />
-        <text name="ui_stateEnableInputMaterialTooltip" text="Dünyalaştırma sırasında malzeme oluşturmayı etkinleştir" />
-        <text name="ui_stateEnableOutputMaterial" text="Deşarjı etkinleştir" />
-        <text name="ui_stateEnableOutputMaterialTooltip" text="Malzemenin yere boşaltılmasına izin verin" />
-        <text name="ui_stateEnablePaintGroundTexture" text="Boyayı etkinleştir" />
-        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Dünyalaştırma sırasında yeni zemin dokularının boyanması" />
+        <text name="ui_stateEnableInputMaterialTooltip" text="Terraform yaparken malzeme oluşturmayı etkinleştir" />
+        <text name="ui_stateEnableOutputMaterial" text="Boşaltmayı etkinleştir" />
+        <text name="ui_stateEnableOutputMaterialTooltip" text="Malzemenin yere boşaltılmasına izin ver" />
+        <text name="ui_stateEnablePaintGroundTexture" text="Boyamayı etkinleştir" />
+        <text name="ui_stateEnablePaintGroundTextureTooltip" text="Terraform yaparken yeni zemin dokularını boyar" />
         <text name="ui_stateRadius" text="Yarıçap" />
         <text name="ui_stateRadiusTooltip" text="" />
         <text name="ui_stateStrength" text="Güç" />
@@ -105,102 +111,107 @@
         <text name="ui_stateHardnessTooltip" text="" />
         <text name="ui_stateBrushShape" text="Deformasyon fırçası şekli" />
         <text name="ui_stateBrushShapeTooltip" text="" />
-        <text name="ui_stateRemoveFieldArea" text="Tarla alanlarını kaldır" />
+        <text name="ui_stateRemoveFieldArea" text="Tarlaları sil" />
         <text name="ui_stateRemoveFieldAreaTooltip" text="" />
-        <text name="ui_stateRemoveStoneArea" text="Taşları kaldır" />
+        <text name="ui_stateRemoveStoneArea" text="Taşları sil" />
         <text name="ui_stateRemoveStoneAreaTooltip" text="" />
-        <text name="ui_stateRemoveWeedArea" text="Yabani otları kaldır" />
-        <text name="ui_stateRemoveWeedAreaTooltip" text="Dünyalaştırma sırasında yabani otları temizler" />
-        <text name="ui_stateAllowGradingUp" text="Yükseltmeye izin ver" />
-        <text name="ui_stateAllowGradingUpTooltip" text="Aktif olduğunda malzeme girişinin kapatılması önerilir" />
+        <text name="ui_stateRemoveWeedArea" text="Yabani otları sil" />
+        <text name="ui_stateRemoveWeedAreaTooltip" text="Terraform yaparken yabani otları kaldırır" />
+        <text name="ui_stateAllowGradingUp" text="Düzleyerek yükseltmeye izin ver" />
+        <text name="ui_stateAllowGradingUpTooltip" text="Aktifken malzeme girişinin kapatılması önerilir" />
         <text name="ui_stateForceNodes" text="Düğümleri zorla" />
-        <text name="ui_stateForceNodesTooltip" text="Bir veya daha fazlası etkinse tüm düğümleri zorla" />
-        <text name="ui_statePaintRadiusModifier" text="Boya yarıçapı değiştiricisi" />
+        <text name="ui_stateForceNodesTooltip" text="Biri veya daha fazlası aktifse tüm düğümleri çalışmaya zorla" />
+        <text name="ui_stateAutoDeactivate" text="Otomatik devre dışı bırak" />
+        <text name="ui_stateAutoDeactivateTooltip" text="Oyuncu araçtan ayrıldığında makineyi kapat" />
+        <text name="ui_stateDrivingDirectionMode" text="Aktif sürüş yönü" />
+        <text name="ui_stateDrivingDirectionModeTooltip" text="Seçilen sürüş yönüne bağlı olarak terraform işlemlerini uygula" />
+        <text name="ui_statePaintRadiusModifier" text="Boya yarıçapı çarpanı" />
         <text name="ui_statePaintRadiusModifierTooltip" text="" />
-        <text name="ui_stateDensityRadiusModifier" text="Yoğunluk yarıçapı değiştiricisi" />
-        <text name="ui_stateDensityRadiusModifierTooltip" text="" />
+        <text name="ui_stateDensityRadiusModifier" text="Yoğunluk yarıçapı çarpanı" />
+        <text name="ui_stateDensityRadiusModifierTooltip" text="Deformasyon sonrası yarıçap çarpanı" />
         <text name="ui_stateInputRatio" text="Giriş oranı" />
-        <text name="ui_stateInputRatioTooltip" text="" />
-        <text name="ui_stateOutputRatio" text="Output ratio" />
-        <text name="ui_stateOutputRatioTooltip" text="Material output ratio" />
+        <text name="ui_stateInputRatioTooltip" text="Malzeme dolum oranı" />
+        <text name="ui_stateOutputRatio" text="Çıkış oranı" />
+        <text name="ui_stateOutputRatioTooltip" text="Malzeme boşaltma oranı" />
 
         <!-- Machine types -->
-        <text name="machineType_compactor" text="Silinidr" />
-        <text name="machineType_excavator" text="Excavator" />
-        <text name="machineType_leveler" text="Tesviye" />
-        <text name="machineType_ripper" text="Zemin sökücü" />
+        <text name="machineType_compactor" text="Kompaktör" />
+        <text name="machineType_excavator" text="Ekskavatör" />
+        <text name="machineType_leveler" text="Zemin Düzleştirici" />
+        <text name="machineType_ripper" text="Toprak Gevşetici" />
         <text name="machineType_shovel" text="Kepçe" />
-        <text name="machineType_trencher" text="Kanal kazıcı" />
+        <text name="machineType_trencher" text="Kanal Açıcı" />
 
         <!-- 1.3.0.0 UPDATE: New entries -->
 
-        <text name="ui_landscapingAreas" text="Landscaping areas" />
-        <text name="ui_landscapingArea" text="Landscaping area" />
-        <text name="ui_waterPlanes" text="Water planes" />
-        <text name="ui_waterPlane" text="Water plane" />
-        <text name="ui_area" text="Area" />
-        <text name="ui_areas" text="Areas" />
-        <text name="ui_areasLimitWarning" text="Number of landscaping areas limit reached" />
-        <text name="ui_waterplanesLimitWarning" text="Number of water planes limit reached" />
-        <text name="ui_createArea" text="Create new area" />
-        <text name="ui_createWaterplane" text="Create new water plane" />
-        <text name="ui_areaPath" text="Path area" />
-        <text name="ui_areaPathText" text="Define an area using points to form a path with various positions." />
-        <text name="ui_areaPolygon" text="Polygon area" />
-        <text name="ui_areaPolygonText" text="Define an area using points and a target height." />
+        <text name="ui_landscapingAreas" text="Peyzaj alanları" />
+        <text name="ui_landscapingArea" text="Peyzaj alanı" />
+        <text name="ui_waterPlanes" text="Su yüzeyleri" />
+        <text name="ui_waterPlane" text="Su yüzeyi" />
+        <text name="ui_area" text="Alan" />
+        <text name="ui_areas" text="Alanlar" />
+        <text name="ui_areasLimitWarning" text="Maksimum peyzaj alanı sınırına ulaşıldı" />
+        <text name="ui_waterplanesLimitWarning" text="Maksimum su yüzeyi sınırına ulaşıldı" />
+        <text name="ui_createArea" text="Yeni alan oluştur" />
+        <text name="ui_createWaterplane" text="Yeni su yüzeyi oluştur" />
+        <text name="ui_areaPath" text="Yol alanı" />
+        <text name="ui_areaPathText" text="Çeşitli konumlardan geçen bir yol dizisi oluşturmak için noktaları kullanarak bir alan tanımlayın." />
+        <text name="ui_areaPolygon" text="Çokgen alanı" />
+        <text name="ui_areaPolygonText" text="Noktaları ve hedef bir yüksekliği kullanarak bir alan tanımlayın." />
 
-        <text name="ui_editorSaveChanges" text="Save changes" />
-        <text name="ui_moveArea" text="Move area" />
-        <text name="ui_restrictArea" text="Restrict within area" />
-        <text name="ui_targetHeight" text="Target height" />
-        <text name="ui_setTargetHeight" text="Set target height" />
-        <text name="ui_moveHorizontal" text="Move horizontal" />
-        <text name="ui_moveVertical" text="Move vertical" />
-        <text name="ui_editMode" text="Edit mode" />
-        <text name="ui_exitEditMode" text="Exit edit mode" />
-        <text name="ui_movePoint" text="Move point" />
-        <text name="ui_setNewPosition" text="Set new position" />
-        <text name="ui_placePoint" text="Place new point" />
-        <text name="ui_createPoint" text="Create new point" />
-        <text name="ui_selectPoint" text="Select point" />
-        <text name="ui_setAngle" text="Set angle" />
-        <text name="ui_setPosition" text="Set position" />
-        <text name="ui_keepDirection" text="Keep direction" />
-        <text name="ui_followAngle" text="Follow angle" />
-        <text name="ui_alignWorldAxes" text="Align to world axes" />
-        <text name="ui_forceAngle" text="Force angle" />
-        <text name="ui_point" text="Point" />
+        <text name="ui_editorSaveChanges" text="Değişiklikleri kaydet" />
+        <text name="ui_moveArea" text="Alanı taşı" />
+        <text name="ui_restrictArea" text="Alan içinde sınırla" />
+        <text name="ui_targetHeight" text="Hedef yükseklik" />
+        <text name="ui_setTargetHeight" text="Hedef yüksekliği ayarla" />
+        <text name="ui_moveHorizontal" text="Yatay taşı" />
+        <text name="ui_moveVertical" text="Dikey taşı" />
+        <text name="ui_editMode" text="Düzenleme modu" />
+        <text name="ui_exitEditMode" text="Düzenleme modundan çık" />
+        <text name="ui_movePoint" text="Noktayı taşı" />
+        <text name="ui_setNewPosition" text="Yeni konum belirle" />
+        <text name="ui_placePoint" text="Yeni nokta yerleştir" />
+        <text name="ui_createPoint" text="Yeni nokta oluştur" />
+        <text name="ui_selectPoint" text="Nokta seç" />
+        <text name="ui_setAngle" text="Açıyı ayarla" />
+        <text name="ui_setPosition" text="Konumu ayarla" />
+        <text name="ui_setAngle" text="Açıyı ayarla" />
+        <text name="ui_keepDirection" text="Yönü koru" />
+        <text name="ui_followAngle" text="Açıyı takip et" />
+        <text name="ui_alignWorldAxes" text="Dünya eksenlerine hizala" />
+        <text name="ui_forceAngle" text="Açıyı zorla" />
+        <text name="ui_point" text="Nokta" />
         <text name="ui_segment" text="Segment" />
-        <text name="ui_icon" text="Icon" />
-        <text name="ui_exit" text="Exit" />
-        <text name="ui_width" text="Width" />
-        <text name="ui_visible" text="Visible" />
-        <text name="ui_hidden" text="Hidden" />
-        <text name="ui_setVisible" text="Set visible" />
-        <text name="ui_setHidden" text="Set hidden" />
-        <text name="ui_notSet" text="Not set" />
-        <text name="ui_edit" text="Edit" />
-        <text name="ui_activeOnly" text="Active only" />
-        <text name="ui_editorConfirmCloseText" text="Do you want to close editor? Unsaved changed will be discarded" />
-        <text name="ui_areaConfirmDeleteText" text="Do you want to delete the landscaping area?" />
-        <text name="ui_waterplaneConfirmDeleteText" text="Do you want to delete the water plane?" />
+        <text name="ui_icon" text="İkon" />
+        <text name="ui_exit" text="Çıkış" />
+        <text name="ui_width" text="Genişlik" />
+        <text name="ui_visible" text="Görünür" />
+        <text name="ui_hidden" text="Gizli" />
+        <text name="ui_setVisible" text="Görünür yap" />
+        <text name="ui_setHidden" text="Gizli yap" />
+        <text name="ui_notSet" text="Ayarlanmadı" />
+        <text name="ui_edit" text="Düzenle" />
+        <text name="ui_activeOnly" text="Sadece aktif olanlar" />
+        <text name="ui_editorConfirmCloseText" text="Düzenleyiciyi kapatmak istiyor musunuz? Kaydedilmemiş değişiklikler silinecektir" />
+        <text name="ui_areaConfirmDeleteText" text="Peyzaj alanını silmek istiyor musunuz?" />
+        <text name="ui_waterplaneConfirmDeleteText" text="Su yüzeyini silmek istiyor musunuz?" />
 
-        <text name="ui_areaBorderVisibility" text="Area border visibility" />
-        <text name="ui_areaBorderMode" text="Area border mode" />
+        <text name="ui_areaBorderVisibility" text="Alan sınırı görünürlüğü" />
+        <text name="ui_areaBorderMode" text="Alan sınırı modu" />
         <text name="ui_areaBorderModeNormal" text="Normal" />
-        <text name="ui_areaBorderModeDecal" text="Decal" />
-        <text name="ui_areaBorderModeMesh" text="Mesh" />
-        <text name="ui_areasEmpty" text="No available areas found" />
-        <text name="ui_selectArea" text="Select area" />
-        <text name="ui_machineCopy" text="Copy from machine" />
-        <text name="ui_ignoreAreaMaterial" text="Ignore material settings" />
+        <text name="ui_areaBorderModeDecal" text="Çıkartma" />
+        <text name="ui_areaBorderModeMesh" text="Ağ" />
+        <text name="ui_areasEmpty" text="Kullanılabilir alan bulunamadı" />
+        <text name="ui_selectArea" text="Alan seç" />
+        <text name="ui_machineCopy" text="Makineden kopyala" />
+        <text name="ui_ignoreAreaMaterial" text="Malzeme ayarlarını yoksay" />
         <text name="ui_ignoreAreaMaterialTooltip" text="" />
-        <text name="ui_ignoreAreaGroundTextures" text="Ignore texture settings" />
+        <text name="ui_ignoreAreaGroundTextures" text="Doku ayarlarını yoksay" />
         <text name="ui_ignoreAreaGroundTexturesTooltip" text="" />
 
-        <text name="ui_stateUpdateCollisions" text="Update vehicle collisions" />
-        <text name="ui_stateUpdateCollisionsTooltip" text="Toggle vehicle collisions when active/inactive" />
+        <text name="ui_stateUpdateCollisions" text="Araç çarpışmalarını güncelle" />
+        <text name="ui_stateUpdateCollisionsTooltip" text="Aktif/Pasif durumunda araç çarpışmalarını aç/kapat" />
 
-        <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Toggle global area borders visibility" />
+        <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Genel alan sınırları görünürlüğünü aç/kapat" />
     </texts>
 </l10n>
