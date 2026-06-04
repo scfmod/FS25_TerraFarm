@@ -1257,7 +1257,7 @@ function Machine:onUpdateTick(dt, isActiveForInput, isActiveForInputIgnoreSelect
 
         local shovelNode = spec.shovelNode
 
-        if spec.machineTypeId == 'excavatorShovel' and shovelNode ~= nil then
+        if shovelNode ~= nil and (spec.machineTypeId == 'shovel' or spec.machineTypeId == 'excavatorShovel') then
             if Machine.getShovelNodeIsActive(self, shovelNode) then
                 local freeCapacity = self:getFillUnitFreeCapacity(shovelNode.fillUnitIndex)
 
