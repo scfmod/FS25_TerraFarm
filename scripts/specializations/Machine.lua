@@ -557,6 +557,7 @@ function Machine:onPostLoad(savegame)
         g_machineManager:registerVehicle(self)
         g_messageCenter:subscribe(MessageType.MASTERUSER_ADDED, Machine.onMasterUserAdded, self)
         g_messageCenter:subscribe(PlayerPermissionsEvent, Machine.onPlayerPermissionsChanged, self)
+        g_messageCenter:subscribe(SetEnabledEvent, Machine.onGlobalEnabledChanged, self)
     end
 end
 
@@ -702,6 +703,7 @@ function Machine:setMachineEnabled(enabled, noEventSend)
         end
 
         g_messageCenter:publish(SetMachineEnabledEvent, self, enabled)
+        Machine.updateActionEvents(self)
     end
 end
 
@@ -1552,7 +1554,6 @@ end
 function Machine:onRegisterActionEvents(isActiveForInput, isActiveForInputIgnoreSelection)
     if self.isClient then
         local spec = self.spec_machine
-        local canActivate = self:getCanActivateMachine()
         local addActionEvents = isActiveForInput
         local hasInputs = MachineUtils.getHasInputs(self)
         local hasOutputs = MachineUtils.getHasOutputs(self)
@@ -1705,108 +1706,64 @@ end
 function Machine:updateActionEvents()
     if self.isClient then
         local spec = self.spec_machine
-        local canActivate = self:getCanActivateMachine()
-        local hasAccess = self:getCanAccessMachine()
-        local isActive = self:getIsActiveForInput()
+        local canActivateMachine = self:getCanActivateMachine()
+        local canAccessMachine = self:getCanAccessMachine()
+        local isActiveForInput = self:getIsActiveForInput()
+        local isEnabled = g_modSettings:getIsEnabled() and spec.enabled
 
-        local action = InputAction[Machine.ACTION_TOGGLE_ACTIVE]
+        local event = spec.actionEvents[InputAction[Machine.ACTION_TOGGLE_ACTIVE]]
+        if event ~= nil then
+            if isActiveForInput and canActivateMachine then
+                g_inputBinding:setActionEventActive(event.actionEventId, true)
 
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                if isActive and canActivate then
-                    g_inputBinding:setActionEventActive(event.actionEventId, true)
-
-                    if spec.active then
-                        g_inputBinding:setActionEventText(event.actionEventId, Machine.L10N_ACTION_DEACTIVATE)
-                    else
-                        g_inputBinding:setActionEventText(event.actionEventId, Machine.L10N_ACTION_ACTIVATE)
-                    end
+                if spec.active then
+                    g_inputBinding:setActionEventText(event.actionEventId, Machine.L10N_ACTION_DEACTIVATE)
                 else
-                    g_inputBinding:setActionEventActive(event.actionEventId, false)
+                    g_inputBinding:setActionEventText(event.actionEventId, Machine.L10N_ACTION_ACTIVATE)
                 end
+            else
+                g_inputBinding:setActionEventActive(event.actionEventId, false)
             end
         end
 
-        action = InputAction[Machine.ACTION_TOGGLE_INPUT]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_TOGGLE_INPUT]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, isActiveForInput and isEnabled and (canActivateMachine or canAccessMachine))
         end
 
-        action = InputAction[Machine.ACTION_TOGGLE_OUTPUT]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_TOGGLE_OUTPUT]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, isActiveForInput and isEnabled and (canActivateMachine or canAccessMachine))
         end
 
-        action = InputAction[Machine.ACTION_SETTINGS]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and hasAccess)
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_SETTINGS]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, isActiveForInput and canAccessMachine)
         end
 
-        action = InputAction[Machine.ACTION_SELECT_MATERIAL]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, isActive and (canActivate or hasAccess))
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_SELECT_MATERIAL]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, isActiveForInput and (canActivateMachine or canAccessMachine))
         end
 
-        action = InputAction[Machine.ACTION_SELECT_TEXTURE]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesInput > 0 and isActive and (canActivate or hasAccess))
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_SELECT_TEXTURE]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesInput > 0 and isActiveForInput and (canActivateMachine or canAccessMachine))
         end
 
-        action = InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesOutput > 0 and isActive and (canActivate or hasAccess))
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_SELECT_DISCHARGE_TEXTURE]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, #spec.modesOutput > 0 and isActiveForInput and (canActivateMachine or canAccessMachine))
         end
 
-        action = InputAction[Machine.ACTION_GLOBAL_SETTINGS]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, true)
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_GLOBAL_SETTINGS]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, true)
         end
 
-        action = InputAction[Machine.ACTION_TOGGLE_HUD]
-
-        if action ~= nil then
-            local event = spec.actionEvents[action]
-
-            if event ~= nil then
-                g_inputBinding:setActionEventActive(event.actionEventId, true)
-            end
+        event = spec.actionEvents[InputAction[Machine.ACTION_TOGGLE_HUD]]
+        if event ~= nil then
+            g_inputBinding:setActionEventActive(event.actionEventId, isEnabled)
         end
     end
 end
@@ -2014,4 +1971,8 @@ function Machine:onPlayerPermissionsChanged(userId)
             self:setMachineActive(false)
         end
     end
+end
+
+function Machine:onGlobalEnabledChanged(enabled)
+    Machine.updateActionEvents(self)
 end
