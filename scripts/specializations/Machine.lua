@@ -1957,13 +1957,15 @@ end
 function Machine:getCanDischargeToGround(superFunc, dischargeNode)
     local spec = self.spec_machine
 
-    if dischargeNode == spec.dischargeNode then
+    if dischargeNode == spec.dischargeNode and g_modSettings:getIsEnabled() and self:getMachineEnabled() then
         if spec.outputMode == Machine.MODE.MATERIAL then
             if not spec.state.enableOutputMaterial then
                 return false
             end
-        elseif spec.machineType.useDischargeable and g_modSettings:getIsEnabled() and self:getMachineEnabled() then
-            if self:getMachineActive() then
+        elseif spec.machineType.useDischargeable then
+            if not dischargeNode.dischargeHitTerrain then
+                return false
+            elseif self:getMachineActive() then
                 if spec.outputMode == Machine.MODE.PAINT then
                     return true
                 end
@@ -1978,14 +1980,17 @@ function Machine:getCanDischargeToGround(superFunc, dischargeNode)
     return superFunc(self, dischargeNode)
 end
 
+---@param superFunc function
+---@param dischargeNode DischargeNode
+---@param emptyLiters number
 ---@return number dischargedLiters
 ---@return boolean minDropReached
 ---@return boolean hasMinDropFillLevel
 function Machine:discharge(superFunc, dischargeNode, emptyLiters)
     local spec = self.spec_machine
 
-    if dischargeNode == spec.dischargeNode and self.spec_dischargeable.currentDischargeState == Dischargeable.DISCHARGE_STATE_GROUND then
-        if g_modSettings:getIsEnabled() and self:getMachineActive() and spec.outputMode ~= Machine.MODE.MATERIAL then
+    if dischargeNode == spec.dischargeNode and g_modSettings:getIsEnabled() and self:getMachineActive() then
+        if spec.outputMode ~= Machine.MODE.MATERIAL and dischargeNode.dischargeHitTerrain and self.spec_dischargeable.currentDischargeState == Dischargeable.DISCHARGE_STATE_GROUND then
             return Machine.dischargeToGround(self, emptyLiters)
         end
     end
