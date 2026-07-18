@@ -136,10 +136,12 @@ No.
 
 ## Known issues
 
-On client side in multiplayer tire tracks doesn't disappear when terraforming the landscape.
+- On client side in multiplayer tire tracks doesn't disappear when terraforming the landscape.
 This is because the game does not sync tire tracks in multiplayer. I may be able to fix this in a later version, but for now this is a very low prioritized visual bug.
 
-Please note that terrain deformations are still a work in progress, so more adjustments will be worked on in the future.
+- Please note that terrain deformations are still a work in progress, so more adjustments will be worked on in the future.
+
+- There seems to be an issue with Xbox Game Pass version of FS25 not saving landscaping areas XML file.
 
 ## Translations
 
