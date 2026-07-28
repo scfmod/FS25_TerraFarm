@@ -229,6 +229,7 @@ function LandscapingArea:setIsVisible(visible)
         self.visible = visible
 
         g_landscapingManager:updateAreaBorderVisibility(self)
+        g_modSettings:setAreaVisibility(self.uniqueId, visible)
     end
 end
 

@@ -39,6 +39,7 @@ local defaultExcludeFillTypes = {
 
 ---@class ModSettings
 ---@field materials string[]
+---@field areaVisibility table<string, boolean>
 ---@field defaultEnabled boolean
 ---@field enabled boolean
 ---@field hudEnabled boolean
@@ -57,6 +58,7 @@ function ModSettings.new()
     local self = setmetatable({}, ModSettings_mt)
 
     self.materials = {}
+    self.areaVisibility = {}
     self.defaultEnabled = true
     self.enabled = true
     self.hudEnabled = true
@@ -150,6 +152,34 @@ end
 ---@nodiscard
 function ModSettings:getMaterials()
     return self.materials
+end
+
+---@param uniqueId string
+---@return boolean
+---@nodiscard
+function ModSettings:getAreaVisibility(uniqueId)
+    local visible = self.areaVisibility[uniqueId]
+
+    return visible == nil or visible
+end
+
+---@param uniqueId string
+---@param visible boolean
+function ModSettings:setAreaVisibility(uniqueId, visible)
+    if g_client ~= nil and uniqueId ~= nil and self.areaVisibility[uniqueId] ~= visible then
+        self.areaVisibility[uniqueId] = visible
+
+        self:saveUserSettings()
+    end
+end
+
+---@param uniqueId string
+function ModSettings:deleteAreaVisibility(uniqueId)
+    if g_client ~= nil and uniqueId ~= nil and self.areaVisibility[uniqueId] ~= nil then
+        self.areaVisibility[uniqueId] = nil
+
+        self:saveUserSettings()
+    end
 end
 
 ---@return string?
@@ -248,6 +278,8 @@ end
 
 function ModSettings:loadUserSettings()
     if g_client ~= nil then
+        self.areaVisibility = {}
+
         ---@type XMLFile?
         local xmlFile = XMLFile.loadIfExists('userSettings', ModSettings.XML_FILENAME_USER_SETTINGS)
 
@@ -275,6 +307,15 @@ function ModSettings:loadUserSettings()
 
             g_landscapingManager:setBorderMode(borderMode, true)
 
+            for _, key in xmlFile:iterator('userSettings.areaVisibility.area') do
+                local uniqueId = xmlFile:getString(key .. '#uniqueId')
+                local visible = xmlFile:getBool(key .. '#visible')
+
+                if uniqueId ~= nil and visible ~= nil then
+                    self.areaVisibility[uniqueId] = visible
+                end
+            end
+
             xmlFile:delete()
         end
     end
@@ -297,6 +338,21 @@ function ModSettings:saveUserSettings()
 
             local borderModeStr = LandscapingManager.BORDER_MODE_STR[g_landscapingManager.borderMode] or LandscapingManager.BORDER_MODE_STR[BorderMode.GROUND_MESH_XRAY]
             xmlFile:setString('userSettings.borderMode', borderModeStr)
+
+            local uniqueIds = {}
+
+            for uniqueId, _ in pairs(self.areaVisibility) do
+                table.insert(uniqueIds, uniqueId)
+            end
+
+            table.sort(uniqueIds)
+
+            for i, uniqueId in ipairs(uniqueIds) do
+                local key = string.format('userSettings.areaVisibility.area(%i)', i - 1)
+
+                xmlFile:setString(key .. '#uniqueId', uniqueId)
+                xmlFile:setBool(key .. '#visible', self.areaVisibility[uniqueId])
+            end
 
             xmlFile:save()
             xmlFile:delete()

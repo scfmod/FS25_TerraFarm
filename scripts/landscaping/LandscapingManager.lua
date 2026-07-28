@@ -523,6 +523,8 @@ function LandscapingManager:registerArea(area, noEventSend)
         self.areas[uniqueId] = area
 
         if g_client ~= nil then
+            area.visible = g_modSettings:getAreaVisibility(uniqueId)
+
             local rootNode = createTransformGroup('areaBorderRootNode')
             link(self.borderRootNode, rootNode)
             self.areaBorderRootNode[uniqueId] = rootNode
@@ -545,10 +547,14 @@ function LandscapingManager:deleteAreaByUniqueId(uniqueId, noEventSend)
 
         self.areas[uniqueId] = nil
 
-        if g_client ~= nil and self.areaBorderRootNode[uniqueId] ~= nil then
-            delete(self.areaBorderRootNode[uniqueId])
-            self.areaBorderRootNode[uniqueId] = nil
-            self.areaBorderNodes[uniqueId] = nil
+        if g_client ~= nil then
+            g_modSettings:deleteAreaVisibility(uniqueId)
+
+            if self.areaBorderRootNode[uniqueId] ~= nil then
+                delete(self.areaBorderRootNode[uniqueId])
+                self.areaBorderRootNode[uniqueId] = nil
+                self.areaBorderNodes[uniqueId] = nil
+            end
         end
 
         g_messageCenter:publish(ModMessageType.LANDSCAPING_AREA_DELETE, uniqueId)
