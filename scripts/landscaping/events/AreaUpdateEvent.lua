@@ -38,9 +38,10 @@ end
 function AreaUpdateEvent:readStream(streamId, connection)
     local uniqueId = streamReadString(streamId)
     ---@diagnostic disable-next-line: assign-type-mismatch
-    self.area = g_landscapingManager:getAreaByUniqueId(uniqueId)
+    local area = g_landscapingManager:getAreaByUniqueId(uniqueId)
 
-    if self.area ~= nil then
+    if area ~= nil then
+        self.area = area:clone()
         self.area:readStream(streamId, connection)
         self:run(connection)
     else
@@ -50,6 +51,10 @@ end
 
 ---@param connection Connection
 function AreaUpdateEvent:run(connection)
+    if not ModUtils.getEventConnectionHasPermission(connection, 'landscaping') then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

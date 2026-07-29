@@ -107,6 +107,10 @@ LandscapingManager.DEFAULT_TERRAIN_LAYERS = {
     'DIRT',
     'GRAVEL'
 }
+LandscapingManager.AREA_CLASSES = {
+    [LandscapingAreaPath.CLASS_NAME] = LandscapingAreaPath,
+    [LandscapingAreaPolygon.CLASS_NAME] = LandscapingAreaPolygon,
+}
 
 LandscapingManager.BORDER_COLOR = { 0.3, 0.3, 0.3, 0.5 }
 LandscapingManager.BORDER_DECAL_COLOR = { 0.3, 0.3, 0.3, 0.85 }
@@ -491,7 +495,7 @@ end
 ---@nodiscard
 function LandscapingManager:createArea(className, uniqueId)
     if self:getCanCreateArea() then
-        local class = _G[className]
+        local class = LandscapingManager.AREA_CLASSES[className]
 
         if class ~= nil then
             ---@type LandscapingArea

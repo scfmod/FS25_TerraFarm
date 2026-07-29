@@ -42,13 +42,21 @@ function AreaRegisterEvent:readStream(streamId, connection)
 
     ---@diagnostic disable-next-line: assign-type-mismatch
     self.area = g_landscapingManager:createArea(className, uniqueId)
-    self.area:readStream(streamId, connection)
 
-    self:run(connection)
+    if self.area ~= nil then
+        self.area:readStream(streamId, connection)
+        self:run(connection)
+    else
+        Logging.error('AreaRegisterEvent:readStream() Could not create area class "%s"', tostring(className))
+    end
 end
 
 ---@param connection Connection
 function AreaRegisterEvent:run(connection)
+    if not ModUtils.getEventConnectionHasPermission(connection, 'landscaping') then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

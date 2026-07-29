@@ -44,6 +44,10 @@ end
 
 ---@param connection Connection
 function WaterplaneSetVisibleEvent:run(connection)
+    if not ModUtils.getEventConnectionHasPermission(connection, 'landscaping') then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

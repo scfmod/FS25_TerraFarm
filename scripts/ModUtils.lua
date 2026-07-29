@@ -97,6 +97,56 @@ function ModUtils.getPlayerHasPermission(permission, connection, farmId)
     return false
 end
 
+---@param connection Connection?
+---@param permission string
+---@param farmId? number
+---@return boolean
+---@nodiscard
+function ModUtils.getEventConnectionHasPermission(connection, permission, farmId)
+    if connection == nil then
+        return false
+    end
+
+    if connection:getIsServer() then
+        return true
+    end
+
+    return ModUtils.getPlayerHasPermission(permission, connection, farmId)
+end
+
+---@param connection Connection?
+---@return boolean
+---@nodiscard
+function ModUtils.getEventConnectionIsAdministrator(connection)
+    if connection == nil then
+        return false
+    end
+
+    if connection:getIsServer() then
+        return true
+    end
+
+    if g_currentMission ~= nil and g_currentMission.userManager ~= nil then
+        local user = g_currentMission.userManager:getUserByConnection(connection)
+        return user ~= nil and user:getIsMasterUser()
+    end
+
+    return false
+end
+
+---@param connection Connection?
+---@param permission string
+---@param vehicle Machine?
+---@return boolean
+---@nodiscard
+function ModUtils.getEventConnectionHasVehiclePermission(connection, permission, vehicle)
+    if vehicle == nil or vehicle.getOwnerFarmId == nil then
+        return false
+    end
+
+    return ModUtils.getEventConnectionHasPermission(connection, permission, vehicle:getOwnerFarmId())
+end
+
 ---@param x number
 ---@param y number
 ---@param z number

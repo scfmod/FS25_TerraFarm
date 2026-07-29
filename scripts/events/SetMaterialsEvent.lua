@@ -1,6 +1,8 @@
 ---@class SetMaterialsEvent : Event
 ---@field materials string[]
 SetMaterialsEvent = {}
+SetMaterialsEvent.SEND_NUM_BITS_MATERIALS = 10
+SetMaterialsEvent.MAX_NUM_MATERIALS = 2 ^ SetMaterialsEvent.SEND_NUM_BITS_MATERIALS - 1
 
 local SetMaterialsEvent_mt = Class(SetMaterialsEvent, Event)
 
@@ -25,23 +27,22 @@ function SetMaterialsEvent.new(materials)
 end
 
 function SetMaterialsEvent:writeStream(streamId, connection)
-    streamWriteInt32(streamId, #self.materials)
+    local numMaterials = math.min(#self.materials, SetMaterialsEvent.MAX_NUM_MATERIALS)
+    streamWriteUIntN(streamId, numMaterials, SetMaterialsEvent.SEND_NUM_BITS_MATERIALS)
 
-    for _, name in ipairs(self.materials) do
-        streamWriteString(streamId, name)
+    for i = 1, numMaterials do
+        streamWriteString(streamId, self.materials[i])
     end
 end
 
 function SetMaterialsEvent:readStream(streamId, connection)
-    local numMaterials = streamReadInt32(streamId)
+    local numMaterials = streamReadUIntN(streamId, SetMaterialsEvent.SEND_NUM_BITS_MATERIALS)
 
     self.materials = {}
 
-    if numMaterials > 0 then
-        for i = 1, numMaterials do
-            local name = streamReadString(streamId)
-            table.insert(self.materials, name)
-        end
+    for _ = 1, numMaterials do
+        local name = streamReadString(streamId)
+        table.insert(self.materials, name)
     end
 
     self:run(connection)
@@ -49,6 +50,10 @@ end
 
 ---@param connection Connection
 function SetMaterialsEvent:run(connection)
+    if not ModUtils.getEventConnectionIsAdministrator(connection) then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

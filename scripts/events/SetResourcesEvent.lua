@@ -45,6 +45,10 @@ end
 
 ---@param connection Connection
 function SetResourcesEvent:run(connection)
+    if not ModUtils.getEventConnectionIsAdministrator(connection) then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

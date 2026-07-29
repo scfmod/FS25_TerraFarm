@@ -401,11 +401,11 @@ function InGameMenuTerraFarmFrame:updateMenuButtons()
                 self.toggleEnabledButtonInfo.text = InGameMenuTerraFarmFrame.L10N_SYMBOL.ACTION_ENABLE
             end
 
-            if ModUtils.getPlayerHasPermission('manageRights') then
+            if ModUtils.getPlayerHasPermission('manageRights', nil, vehicle:getOwnerFarmId()) then
                 table.insert(self.menuButtonInfo, self.toggleEnabledButtonInfo)
             end
 
-            if ModUtils.getPlayerHasPermission('landscaping') then
+            if ModUtils.getPlayerHasPermission('landscaping', nil, vehicle:getOwnerFarmId()) then
                 table.insert(self.menuButtonInfo, self.machineSettingsButtonInfo)
             end
         end
@@ -424,9 +424,8 @@ function InGameMenuTerraFarmFrame:updateMenuButtons()
                 self.toggleActiveButtonInfo.text = Editor.L10N_SYMBOL.SET_VISIBLE
             end
 
-            table.insert(self.menuButtonInfo, self.toggleActiveButtonInfo)
-
             if ModUtils.getPlayerHasPermission('landscaping') then
+                table.insert(self.menuButtonInfo, self.toggleActiveButtonInfo)
                 table.insert(self.menuButtonInfo, self.deleteAreaButtonInfo)
                 self.deleteAreaButtonInfo.text = Editor.L10N_SYMBOL.DELETE
                 table.insert(self.menuButtonInfo, self.editAreaButtonInfo)
@@ -514,7 +513,7 @@ end
 function InGameMenuTerraFarmFrame:onClickMachineSettings()
     local vehicle = self:getSelectedVehicle()
 
-    if vehicle ~= nil then
+    if vehicle ~= nil and ModUtils.getPlayerHasPermission('landscaping', nil, vehicle:getOwnerFarmId()) then
         g_machineScreen:show(vehicle)
     end
 end
@@ -522,13 +521,17 @@ end
 function InGameMenuTerraFarmFrame:onClickToggleEnabled()
     local vehicle = self:getSelectedVehicle()
 
-    if vehicle ~= nil then
+    if vehicle ~= nil and ModUtils.getPlayerHasPermission('manageRights', nil, vehicle:getOwnerFarmId()) then
         vehicle:setMachineEnabled(not vehicle:getMachineEnabled())
         self:updateVehicles()
     end
 end
 
 function InGameMenuTerraFarmFrame:onClickEditArea()
+    if not ModUtils.getPlayerHasPermission('landscaping') then
+        return
+    end
+
     local subCategoryIndex = self.subCategoryPaging:getState()
 
     if subCategoryIndex == 2 then
@@ -547,6 +550,10 @@ function InGameMenuTerraFarmFrame:onClickEditArea()
 end
 
 function InGameMenuTerraFarmFrame:onClickCreateArea()
+    if not ModUtils.getPlayerHasPermission('landscaping') then
+        return
+    end
+
     local subCategoryIndex = self.subCategoryPaging:getState()
 
     if subCategoryIndex == 2 then
@@ -566,6 +573,10 @@ function InGameMenuTerraFarmFrame:onClickCreateArea()
 end
 
 function InGameMenuTerraFarmFrame:onClickDeleteArea()
+    if not ModUtils.getPlayerHasPermission('landscaping') then
+        return
+    end
+
     local subCategoryIndex = self.subCategoryPaging:getState()
 
     if subCategoryIndex == 2 then
@@ -606,6 +617,10 @@ function InGameMenuTerraFarmFrame:onClickDeleteArea()
 end
 
 function InGameMenuTerraFarmFrame:onClickToggleActive()
+    if not ModUtils.getPlayerHasPermission('landscaping') then
+        return
+    end
+
     local subCategoryIndex = self.subCategoryPaging:getState()
 
     if subCategoryIndex == 2 then

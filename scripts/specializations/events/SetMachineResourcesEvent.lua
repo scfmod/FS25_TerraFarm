@@ -46,6 +46,10 @@ end
 
 ---@param connection Connection
 function SetMachineResourcesEvent:run(connection)
+    if not ModUtils.getEventConnectionHasVehiclePermission(connection, 'manageRights', self.vehicle) then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection, self.vehicle)
     end

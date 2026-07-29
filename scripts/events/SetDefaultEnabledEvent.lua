@@ -41,6 +41,10 @@ end
 
 ---@param connection Connection
 function SetDefaultEnabledEvent:run(connection)
+    if not ModUtils.getEventConnectionIsAdministrator(connection) then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection)
     end

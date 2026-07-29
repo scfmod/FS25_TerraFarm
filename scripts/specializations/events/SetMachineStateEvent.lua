@@ -47,6 +47,10 @@ end
 
 ---@param connection Connection
 function SetMachineStateEvent:run(connection)
+    if not ModUtils.getEventConnectionHasVehiclePermission(connection, 'landscaping', self.vehicle) then
+        return
+    end
+
     if not connection:getIsServer() then
         g_server:broadcastEvent(self, nil, connection, self.vehicle)
     end
