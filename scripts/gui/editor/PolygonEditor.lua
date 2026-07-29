@@ -99,7 +99,7 @@ function PolygonEditor:splitSelectedSegment()
     local points = self.points
     local numPoints = #points
 
-    if selectedIndex ~= nil then
+    if selectedIndex ~= nil and numPoints < self.numPointsLimit then
         local selectedPos = points[selectedIndex]
         local prevPos = points[selectedIndex - 1]
 
@@ -189,7 +189,7 @@ function PolygonEditor:createPoint()
     local numPoints = #points
     local targetPos = self:getTargetPos()
 
-    if targetPos ~= nil and numPoints <= self.numPointsLimit then
+    if targetPos ~= nil and numPoints < self.numPointsLimit then
         local selectedIndex = self.selectedIndex
         local targetIndex = selectedIndex or 1
 

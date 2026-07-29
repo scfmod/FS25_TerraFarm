@@ -52,7 +52,7 @@ end
 ---@return boolean
 ---@nodiscard
 function LandscapingAreaPath:getCanAddPoint()
-    return #self.points <= LandscapingAreaPath.MAX_NUM_POINTS
+    return #self.points < LandscapingAreaPath.MAX_NUM_POINTS
 end
 
 ---@param x number
@@ -410,6 +410,16 @@ function LandscapingAreaPath:loadFromXMLFile(xmlFile, key)
         self.points = {}
 
         for _, itemKey in xmlFile:iterator(key .. '.points.point') do
+            if #self.points >= LandscapingAreaPath.MAX_NUM_POINTS then
+                Logging.xmlError(
+                    xmlFile,
+                    'LandscapingAreaPath:loadFromXMLFile() Too many points in "%s" (maximum is %d)',
+                    key,
+                    LandscapingAreaPath.MAX_NUM_POINTS
+                )
+                return false
+            end
+
             local x, y, z = xmlFile:getValue(itemKey .. '#position')
 
             table.insert(self.points, { x, y, z })
@@ -443,10 +453,19 @@ end
 ---@param streamId number
 ---@param connection Connection
 function LandscapingAreaPath:writeStream(streamId, connection)
+    assert(
+        #self.points <= LandscapingAreaPath.MAX_NUM_POINTS,
+        string.format(
+            'Cannot write %d path points; maximum is %d',
+            #self.points,
+            LandscapingAreaPath.MAX_NUM_POINTS
+        )
+    )
+
     self:superClass().writeStream(self, streamId, connection)
 
     streamWriteFloat32(streamId, self.width)
-    streamWriteUIntN(streamId, #self.points, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
+    streamWriteUIntN(streamId, #self.points, LandscapingAreaPath.SEND_NUM_BITS_POINTS)
 
     for _, point in ipairs(self.points) do
         ModUtils.writeCompressedXYZPos(streamId, point[1], point[2], point[3])
@@ -460,7 +479,7 @@ function LandscapingAreaPath:readStream(streamId, connection)
 
     self.width = streamReadFloat32(streamId)
 
-    local numPoints = streamReadUIntN(streamId, LandscapingAreaPolygon.SEND_NUM_BITS_POINTS)
+    local numPoints = streamReadUIntN(streamId, LandscapingAreaPath.SEND_NUM_BITS_POINTS)
 
     self.points = {}
 

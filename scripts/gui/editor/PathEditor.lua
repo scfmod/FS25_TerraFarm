@@ -124,7 +124,7 @@ function PathEditor:createPoint()
     local points = self.points
     local targetPos = self:getTargetPos()
 
-    if targetPos ~= nil and #points <= self.numPointsLimit then
+    if targetPos ~= nil and #points < self.numPointsLimit then
         local selectedIndex = self.selectedIndex
         local targetIndex = selectedIndex or 1
 

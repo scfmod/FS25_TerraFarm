@@ -24,6 +24,15 @@ end
 function SetLandscapingAreasEvent:writeStream(streamId, connection)
     local areas = g_landscapingManager:getAreas()
 
+    assert(
+        #areas <= LandscapingArea.MAX_NUM_AREAS,
+        string.format(
+            'Cannot write %d landscaping areas; maximum is %d',
+            #areas,
+            LandscapingArea.MAX_NUM_AREAS
+        )
+    )
+
     streamWriteUIntN(streamId, #areas, LandscapingArea.SEND_NUM_BITS_AREAS)
 
     for _, area in ipairs(areas) do

@@ -24,6 +24,15 @@ end
 function SetWaterplanesEvent:writeStream(streamId, connection)
     local waterplanes = g_landscapingManager:getWaterplanes()
 
+    assert(
+        #waterplanes <= LandscapingWaterplane.MAX_NUM_PLANES,
+        string.format(
+            'Cannot write %d waterplanes; maximum is %d',
+            #waterplanes,
+            LandscapingWaterplane.MAX_NUM_PLANES
+        )
+    )
+
     streamWriteUIntN(streamId, #waterplanes, LandscapingWaterplane.SEND_NUM_BITS_PLANES)
 
     for _, waterplane in ipairs(waterplanes) do

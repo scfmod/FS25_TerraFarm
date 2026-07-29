@@ -106,7 +106,7 @@ end
 ---@return boolean
 ---@nodiscard
 function LandscapingWaterplane:getCanAddPoint()
-    return #self.points <= LandscapingAreaPolygon.MAX_NUM_POINTS
+    return #self.points < LandscapingAreaPolygon.MAX_NUM_POINTS
 end
 
 ---@return string
@@ -161,6 +161,16 @@ function LandscapingWaterplane:loadFromXMLFile(xmlFile, key)
     local y = self.targetY
 
     for _, itemKey in xmlFile:iterator(key .. '.points.point') do
+        if #self.points >= LandscapingAreaPolygon.MAX_NUM_POINTS then
+            Logging.xmlError(
+                xmlFile,
+                'LandscapingWaterplane:loadFromXMLFile() Too many points in "%s" (maximum is %d)',
+                key,
+                LandscapingAreaPolygon.MAX_NUM_POINTS
+            )
+            return false
+        end
+
         local x, _, z = xmlFile:getValue(itemKey .. '#position')
 
         table.insert(self.points, { x, y, z })
@@ -202,6 +212,15 @@ end
 ---@param streamId number
 ---@param connection Connection
 function LandscapingWaterplane:writeStream(streamId, connection)
+    assert(
+        #self.points <= LandscapingAreaPolygon.MAX_NUM_POINTS,
+        string.format(
+            'Cannot write %d waterplane points; maximum is %d',
+            #self.points,
+            LandscapingAreaPolygon.MAX_NUM_POINTS
+        )
+    )
+
     streamWriteString(streamId, self.name)
     streamWriteBool(streamId, self.visible)
     streamWriteUInt8(streamId, self.color)

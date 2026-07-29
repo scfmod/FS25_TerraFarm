@@ -60,7 +60,7 @@ end
 ---@return boolean
 ---@nodiscard
 function LandscapingAreaPolygon:getCanAddPoint()
-    return #self.points <= LandscapingAreaPolygon.MAX_NUM_POINTS
+    return #self.points < LandscapingAreaPolygon.MAX_NUM_POINTS
 end
 
 ---@param x number worldPosX
@@ -138,6 +138,16 @@ function LandscapingAreaPolygon:loadFromXMLFile(xmlFile, key)
         local y = self.targetY
 
         for _, itemKey in xmlFile:iterator(key .. '.points.point') do
+            if #self.points >= LandscapingAreaPolygon.MAX_NUM_POINTS then
+                Logging.xmlError(
+                    xmlFile,
+                    'LandscapingAreaPolygon:loadFromXMLFile() Too many points in "%s" (maximum is %d)',
+                    key,
+                    LandscapingAreaPolygon.MAX_NUM_POINTS
+                )
+                return false
+            end
+
             local x, _, z = xmlFile:getValue(itemKey .. '#position')
 
             table.insert(self.points, { x, y, z })
@@ -176,6 +186,15 @@ end
 ---@param streamId number
 ---@param connection Connection
 function LandscapingAreaPolygon:writeStream(streamId, connection)
+    assert(
+        #self.points <= LandscapingAreaPolygon.MAX_NUM_POINTS,
+        string.format(
+            'Cannot write %d polygon points; maximum is %d',
+            #self.points,
+            LandscapingAreaPolygon.MAX_NUM_POINTS
+        )
+    )
+
     self:superClass().writeStream(self, streamId, connection)
 
     streamWriteFloat32(streamId, self.targetY)

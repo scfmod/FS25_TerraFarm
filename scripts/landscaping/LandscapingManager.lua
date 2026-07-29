@@ -476,13 +476,13 @@ end
 function LandscapingManager:getCanCreateArea()
     local i = 0
     for _, _ in pairs(self.areas) do i = i + 1 end
-    return i <= LandscapingArea.MAX_NUM_AREAS
+    return i < LandscapingArea.MAX_NUM_AREAS
 end
 
 function LandscapingManager:getCanCreateWaterplane()
     local i = 0
     for _, _ in pairs(self.waterplanes) do i = i + 1 end
-    return i <= LandscapingWaterplane.MAX_NUM_PLANES
+    return i < LandscapingWaterplane.MAX_NUM_PLANES
 end
 
 ---@param className string
@@ -501,6 +501,8 @@ function LandscapingManager:createArea(className, uniqueId)
         else
             Logging.error('LandscapingManager:createArea() Unknown class "%s"', tostring(className))
         end
+    else
+        Logging.error('LandscapingManager:createArea() can not create any more areas, MAX_NUM_AREAS = %d', LandscapingArea.MAX_NUM_AREAS)
     end
 end
 

@@ -395,7 +395,7 @@ function Editor:splitSelectedSegment()
     local selectedIndex = self.selectedIndex
     local points = self.points
 
-    if selectedIndex ~= nil then
+    if selectedIndex ~= nil and #points < self.numPointsLimit then
         local selectedPos = points[selectedIndex]
         local prevPos = points[selectedIndex - 1]
 
