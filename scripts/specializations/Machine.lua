@@ -295,12 +295,14 @@ function Machine:onLoad()
 
     ---@type XMLFile
     local xmlFile = self.xmlFile
+    local baseDirectory = self.baseDirectory
 
     if spec.isExternal then
         local xmlFileExternal = XMLFile.loadIfExists('machineConfiguration', spec.xmlFilenameConfig, Vehicle.xmlSchema)
 
         if xmlFileExternal ~= nil then
             xmlFile = xmlFileExternal
+            baseDirectory = Utils.getDirectory(spec.xmlFilenameConfig)
         else
             Logging.error('Machine:onLoad() Failed to load machine configuration file: %s', tostring(spec.xmlFilenameConfig))
             return false
@@ -472,11 +474,11 @@ function Machine:onLoad()
         end
 
         if self.isClient then
-            spec.effectAnimationNodes = g_animationManager:loadAnimations(self.xmlFile, 'vehicle.machine.effectAnimations', self.components, self, self.i3dMappings)
+            spec.effectAnimationNodes = g_animationManager:loadAnimations(xmlFile, 'vehicle.machine.effectAnimations', self.components, self, self.i3dMappings)
             spec.playSound = xmlFile:getValue('vehicle.machine#playSound', true)
 
             if #spec.effects > 0 and spec.playSound then
-                spec.sample = g_soundManager:loadSampleFromXML(self.xmlFile, 'vehicle.machine', 'workSound', self.baseDirectory, self.components, 0, AudioGroup.VEHICLE, self.i3dMappings, self)
+                spec.sample = g_soundManager:loadSampleFromXML(xmlFile, 'vehicle.machine', 'workSound', baseDirectory, self.components, 0, AudioGroup.VEHICLE, self.i3dMappings, self)
             end
 
             if spec.sample == nil then
