@@ -685,33 +685,44 @@ function LandscapingManager:loadAreasFromXML()
     end
 end
 
+---@return boolean
 function LandscapingManager:saveAreasToXML()
+    local filename = ModUtils.getSavegameDirectoryFilename('terraFarmAreas.xml') or 'terraFarmAreas.xml'
     local xmlFile = ModUtils.createSavegameDirectoryXMLFile('terraFarmAreas', 'terraFarmAreas.xml', 'areas', LandscapingArea.XML_SCHEMA)
 
-    if xmlFile ~= nil then
-        local i = 0
-
-        for _, area in pairs(self.areas) do
-            local key = string.format('areas.landscaping.area(%i)', i)
-
-            if area:saveToXMLFile(xmlFile, key) then
-                i = i + 1
-            end
-        end
-
-        i = 0
-
-        for _, waterplane in pairs(self.waterplanes) do
-            local key = string.format('areas.waterplanes.area(%i)', i)
-
-            if waterplane:saveToXMLFile(xmlFile, key) then
-                i = i + 1
-            end
-        end
-
-        xmlFile:save()
-        xmlFile:delete()
+    if xmlFile == nil then
+        Logging.error('Could not create TerraFarm landscaping file "%s"', filename)
+        return false
     end
+
+    local i = 0
+
+    for _, area in pairs(self.areas) do
+        local key = string.format('areas.landscaping.area(%i)', i)
+
+        if area:saveToXMLFile(xmlFile, key) then
+            i = i + 1
+        end
+    end
+
+    i = 0
+
+    for _, waterplane in pairs(self.waterplanes) do
+        local key = string.format('areas.waterplanes.area(%i)', i)
+
+        if waterplane:saveToXMLFile(xmlFile, key) then
+            i = i + 1
+        end
+    end
+
+    local success = xmlFile:save() == true
+    xmlFile:delete()
+
+    if not success then
+        Logging.error('Could not write TerraFarm landscaping file "%s"', filename)
+    end
+
+    return success
 end
 
 function LandscapingManager:onPostTerrainInit()

@@ -229,21 +229,34 @@ function ModSettings:setDefaultMaterials()
     end
 end
 
+---@return boolean
 function ModSettings:saveSettings()
-    if g_server ~= nil then
-        local xmlFile = ModUtils.createSavegameDirectoryXMLFile('modSettings', 'terraFarmSettings.xml', 'settings')
-
-        if xmlFile ~= nil then
-            xmlFile:setBool('settings.enabled', self.enabled)
-            xmlFile:setBool('settings.defaultEnabled', self.defaultEnabled)
-            xmlFile:setBool('settings.resourcesActive', g_resourceManager.active)
-
-            self:saveMaterialSettings(xmlFile)
-
-            xmlFile:save()
-            xmlFile:delete()
-        end
+    if g_server == nil then
+        return true
     end
+
+    local filename = ModUtils.getSavegameDirectoryFilename('terraFarmSettings.xml') or 'terraFarmSettings.xml'
+    local xmlFile = ModUtils.createSavegameDirectoryXMLFile('modSettings', 'terraFarmSettings.xml', 'settings')
+
+    if xmlFile == nil then
+        Logging.error('Could not create TerraFarm settings file "%s"', filename)
+        return false
+    end
+
+    xmlFile:setBool('settings.enabled', self.enabled)
+    xmlFile:setBool('settings.defaultEnabled', self.defaultEnabled)
+    xmlFile:setBool('settings.resourcesActive', g_resourceManager.active)
+
+    self:saveMaterialSettings(xmlFile)
+
+    local success = xmlFile:save() == true
+    xmlFile:delete()
+
+    if not success then
+        Logging.error('Could not write TerraFarm settings file "%s"', filename)
+    end
+
+    return success
 end
 
 function ModSettings:loadUserSettings()
