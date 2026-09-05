@@ -1081,14 +1081,14 @@ end
 function Machine:handleDeformationInput(liters, fillTypeIndex)
     local spec = self.spec_machine
 
+    liters = liters * spec.state.inputRatio
+
     if spec.hasFillUnit and spec.fillUnit ~= nil then
         local isFull = spec.fillUnit.capacity - spec.fillUnit.fillLevel < 0.01
 
         if spec.state.overflow and isFull and g_machineManager:getIsShovelType(spec.machineType) then
             MachineUtils.tipToGroundOverflow(liters, fillTypeIndex, spec.workArea)
         else
-            liters = liters * spec.state.inputRatio
-
             self:addFillUnitFillLevel(self:getOwnerFarmId(), spec.fillUnit.fillUnitIndex, liters, fillTypeIndex, ToolType.UNDEFINED)
         end
     elseif g_machineManager:getIsRipperType(spec.machineType) and spec.state.enableOutputMaterial then
