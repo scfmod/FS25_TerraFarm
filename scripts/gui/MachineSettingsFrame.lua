@@ -13,6 +13,8 @@
 ---@field drivingDirectionModeOption MultiTextOptionElement
 ---@field updateCollisionsOption BinaryOptionElement
 ---@field updateCollisionsOptionWrapper BitmapElement
+---@field overflowOption BinaryOptionElement
+---@field overflowOptionWrapper BitmapElement
 ---
 ---@field superClass fun(): TabbedMenuFrameElement
 MachineSettingsFrame = {}
@@ -127,6 +129,14 @@ function MachineSettingsFrame:updateState(vehicle)
         else
             self.updateCollisionsOptionWrapper:setDisabled(true)
             self.updateCollisionsOption:setIsChecked(false)
+        end
+
+        if g_machineManager:getIsShovelType(spec.machineType) then
+            self.overflowOptionWrapper:setDisabled(false)
+            self.overflowOption:setIsChecked(spec.state.overflow)
+        else
+            self.overflowOptionWrapper:setDisabled(true)
+            self.overflowOption:setIsChecked(false)
         end
     end
 end

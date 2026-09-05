@@ -89,6 +89,13 @@
                     <BinaryOption id="updateCollisionsOption" name="updateCollisions" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
                 </Bitmap>
 
+                <Bitmap profile="tfMenuFrame_optionWrapper" id="overflowOptionWrapper">
+                    <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateOverflow" />
+                    <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateOverflowTooltip" />
+
+                    <BinaryOption id="overflowOption" name="overflow" profile="tfMenuFrame_binaryOption" onClick="onClickStateCheckedOption" />
+                </Bitmap>
+
                 <Bitmap profile="tfMenuFrame_optionWrapper">
                     <Text profile="tfMenuFrame_optionTitle" text="$l10n_ui_stateAllowGradingUp" />
                     <Text profile="tfMenuFrame_optionTooltip" text="$l10n_ui_stateAllowGradingUpTooltip" />

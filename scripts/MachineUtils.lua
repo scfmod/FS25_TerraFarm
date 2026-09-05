@@ -213,3 +213,47 @@ function MachineUtils.getNumOutputs(vehicle)
 
     return #spec.modesOutput
 end
+
+---@param liters number
+---@param fillTypeIndex number
+---@param workArea MachineWorkArea
+function MachineUtils.tipToGroundOverflow(liters, fillTypeIndex, workArea)
+    local offsetZ = 1
+    local halfWidth = workArea.width / 2
+    local outputNode = workArea.outputNode or workArea.referenceNode
+    local vehicle = workArea.vehicle
+
+    local levelerNode = vehicle.spec_machine.levelerNode
+
+    if levelerNode ~= nil then
+        offsetZ = levelerNode.zOffset
+    end
+
+    local sx, sy, sz = localToWorld(outputNode, -halfWidth, 0, offsetZ)
+    local ex, ey, ez = localToWorld(outputNode, halfWidth, 0, offsetZ)
+
+    DensityMapHeightUtil.tipToGroundAroundLine(
+        nil, liters, fillTypeIndex,
+        sx, sy, sz, ex, ey, ez,
+        0.5, 1, 0, false
+    )
+end
+
+---@param liters number
+---@param fillTypeIndex number
+---@param workArea MachineWorkArea
+function MachineUtils.tipToGroundRipper(liters, fillTypeIndex, workArea)
+    local offsetZ = -1
+    local halfLength = 1
+    local halfWidth = 1
+    local outputNode = workArea.outputNode or workArea.referenceNode
+
+    local sx, sy, sz = localToWorld(outputNode, -halfWidth, 0, -halfLength + offsetZ)
+    local ex, ey, ez = localToWorld(outputNode, halfWidth, 0, halfLength + offsetZ)
+
+    DensityMapHeightUtil.tipToGroundAroundLine(
+        workArea.vehicle, liters, fillTypeIndex,
+        sx, sy, sz, ex, ey, ez,
+        0.5, 2, 0, false
+    )
+end

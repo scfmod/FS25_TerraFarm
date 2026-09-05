@@ -210,6 +210,8 @@
 
         <text name="ui_stateUpdateCollisions" text="Atualizar colisões de veículos" />
         <text name="ui_stateUpdateCollisionsTooltip" text="Alternar colisões de veículos quando ativo/inativo" />
+        <text name="ui_stateOverflow" text="Enable material overflow" />
+        <text name="ui_stateOverflowTooltip" text="Input material overflows to ground when full" />
 
         <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Alternar visibilidade das bordas das áreas globais" />
     </texts>

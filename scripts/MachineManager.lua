@@ -339,6 +339,22 @@ function MachineManager:verifyModConfigurations(modName)
     return found, notFound
 end
 
+---@param type MachineType
+---@return boolean
+---@nodiscard
+function MachineManager:getIsShovelType(type)
+    local id = type.id
+    return id == 'shovel' or id == 'excavatorShovel'
+end
+
+---@param type MachineType
+---@return boolean
+---@nodiscard
+function MachineManager:getIsRipperType(type)
+    local id = type.id
+    return id == 'ripper' or id == 'excavatorRipper'
+end
+
 --
 -- Note: can be nil!
 -- Omitted from return type because we only use it in MachineSpecialization:onLoad()

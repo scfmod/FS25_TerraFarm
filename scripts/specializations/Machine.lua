@@ -439,7 +439,7 @@ function Machine:onLoad()
         table.insert(spec.modesOutput, Machine.MODE.SMOOTH)
         table.insert(spec.modesOutput, Machine.MODE.PAINT)
 
-        if (spec.machineTypeId == 'shovel' or spec.machineTypeId == 'excavatorShovel') and not MachineUtils.getHasInputMode(self, Machine.MODE.MATERIAL) then
+        if g_machineManager:getIsShovelType(spec.machineType) and not MachineUtils.getHasInputMode(self, Machine.MODE.MATERIAL) then
             table.insert(spec.modesInput, Machine.MODE.MATERIAL)
         end
     end
@@ -1082,23 +1082,17 @@ function Machine:handleDeformationInput(liters, fillTypeIndex)
     local spec = self.spec_machine
 
     if spec.hasFillUnit and spec.fillUnit ~= nil then
-        liters = liters * spec.state.inputRatio
+        local isFull = spec.fillUnit.capacity - spec.fillUnit.fillLevel < 0.01
 
-        self:addFillUnitFillLevel(self:getOwnerFarmId(), spec.fillUnit.fillUnitIndex, liters, fillTypeIndex, ToolType.UNDEFINED)
-    elseif (spec.machineType.id == 'ripper' or spec.machineType.id == 'excavatorRipper') and spec.state.enableOutputMaterial then
-        local offsetZ = -1
-        local halfLength = 1
-        local halfWidth = 1
-        local outputNode = spec.workArea.outputNode or spec.workArea.referenceNode
+        if spec.state.overflow and isFull and g_machineManager:getIsShovelType(spec.machineType) then
+            MachineUtils.tipToGroundOverflow(liters, fillTypeIndex, spec.workArea)
+        else
+            liters = liters * spec.state.inputRatio
 
-        local sx, sy, sz = localToWorld(outputNode, -halfWidth, 0, -halfLength + offsetZ)
-        local ex, ey, ez = localToWorld(outputNode, halfWidth, 0, halfLength + offsetZ)
-
-        DensityMapHeightUtil.tipToGroundAroundLine(
-            self, liters, fillTypeIndex or spec.fillTypeIndex,
-            sx, sy, sz, ex, ey, ez,
-            0.5, 2, 0, false
-        )
+            self:addFillUnitFillLevel(self:getOwnerFarmId(), spec.fillUnit.fillUnitIndex, liters, fillTypeIndex, ToolType.UNDEFINED)
+        end
+    elseif g_machineManager:getIsRipperType(spec.machineType) and spec.state.enableOutputMaterial then
+        MachineUtils.tipToGroundRipper(liters, fillTypeIndex, spec.workArea)
     end
 end
 
@@ -1177,8 +1171,11 @@ function Machine:getIsFull()
     local spec = self.spec_machine
 
     if spec.hasFillUnit and spec.fillUnit ~= nil then
+        if spec.state.overflow and g_machineManager:getIsShovelType(spec.machineType) then
+            return false
+        end
         return spec.fillUnit.capacity - spec.fillUnit.fillLevel < 0.01
-    elseif spec.machineType.id == 'ripper' or spec.machineType.id == 'excavatorRipper' or spec.machineType.id == 'compactor' then
+    elseif g_machineManager:getIsRipperType(spec.machineType) or spec.machineType.id == 'compactor' then
         return false
     end
 

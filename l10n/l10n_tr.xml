@@ -211,6 +211,8 @@
 
         <text name="ui_stateUpdateCollisions" text="Araç çarpışmalarını güncelle" />
         <text name="ui_stateUpdateCollisionsTooltip" text="Aktif/Pasif durumunda araç çarpışmalarını aç/kapat" />
+        <text name="ui_stateOverflow" text="Enable material overflow" />
+        <text name="ui_stateOverflowTooltip" text="Input material overflows to ground when full" />
 
         <text name="input_MACHINE_GLOBAL_TOGGLE_BORDER" text="Genel alan sınırları görünürlüğünü aç/kapat" />
     </texts>

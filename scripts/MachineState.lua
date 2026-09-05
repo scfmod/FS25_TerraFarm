@@ -40,6 +40,7 @@ DrivingDirectionMode = {
 ---@field allowGradingUp boolean
 ---@field forceNodes boolean
 ---@field updateCollisions boolean
+---@field overflow boolean
 MachineState = {}
 
 MachineState.SEND_NUM_BITS_DIRECTION_MODE = 3
@@ -82,6 +83,7 @@ function MachineState.registerSavegameXMLPaths(schema, key)
     schema:register(XMLValueType.BOOL, key .. '#forceNodes')
     schema:register(XMLValueType.BOOL, key .. '#allowGradingUp')
     schema:register(XMLValueType.BOOL, key .. '#updateCollisions')
+    schema:register(XMLValueType.BOOL, key .. '#overflow')
 end
 
 ---@return MachineState
@@ -123,6 +125,7 @@ function MachineState.new()
     self.allowGradingUp = false
     self.forceNodes = false
     self.updateCollisions = true
+    self.overflow = false
 
     return self
 end
@@ -191,6 +194,7 @@ function MachineState:saveToXMLFile(xmlFile, key)
     xmlFile:setValue(key .. '#forceNodes', self.forceNodes)
 
     xmlFile:setValue(key .. '#updateCollisions', self.updateCollisions)
+    xmlFile:setValue(key .. '#overflow', self.overflow)
 end
 
 ---@param xmlFile XMLFile
@@ -230,6 +234,7 @@ function MachineState:loadFromXMLFile(xmlFile, key)
     self.forceNodes = xmlFile:getValue(key .. '#forceNodes', self.forceNodes)
 
     self.updateCollisions = xmlFile:getValue(key .. '#updateCollisions', self.updateCollisions)
+    self.overflow = xmlFile:getValue(key .. '#overflow', self.overflow)
 end
 
 ---@return MachineState
@@ -271,6 +276,7 @@ function MachineState:clone()
     clone.forceNodes = self.forceNodes
 
     clone.updateCollisions = self.updateCollisions
+    clone.overflow = self.overflow
 
     return clone
 end
@@ -312,6 +318,7 @@ function MachineState:writeStream(streamId, connection)
     streamWriteBool(streamId, self.forceNodes)
 
     streamWriteBool(streamId, self.updateCollisions)
+    streamWriteBool(streamId, self.overflow)
 end
 
 ---@param streamId number
@@ -351,4 +358,5 @@ function MachineState:readStream(streamId, connection)
     self.forceNodes = streamReadBool(streamId)
 
     self.updateCollisions = streamReadBool(streamId)
+    self.overflow = streamReadBool(streamId)
 end
