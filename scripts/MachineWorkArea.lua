@@ -559,6 +559,10 @@ function MachineWorkArea:getCanOutputToTerrain()
     local maxDistance = self.raycastDistance
     local collisionMask = CollisionFlag.TERRAIN + CollisionFlag.TERRAIN_DISPLACEMENT
 
+    if self.machineType.id == 'excavatorShovel' then
+        collisionMask = collisionMask + CollisionFlag.TERRAIN_DELTA
+    end
+
     self.raycastHitTerrain = false
 
     if self.outputNode ~= nil then
