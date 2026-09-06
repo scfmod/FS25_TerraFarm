@@ -1915,9 +1915,11 @@ function Machine:getCanDischargeToGround(superFunc, dischargeNode)
         if spec.outputMode == Machine.MODE.MATERIAL then
             if not spec.state.enableOutputMaterial then
                 return false
+            elseif self:getMachineActive() then
+                return spec.workArea:getCanOutputToTerrain()
             end
         elseif spec.machineType.useDischargeable then
-            if not dischargeNode.dischargeHitTerrain then
+            if not spec.state.enableOutputMaterial then
                 return false
             elseif self:getMachineActive() then
                 if spec.outputMode == Machine.MODE.PAINT then
@@ -1925,7 +1927,7 @@ function Machine:getCanDischargeToGround(superFunc, dischargeNode)
                 end
 
                 return spec.workArea:getCanOutputToTerrain()
-            elseif not spec.state.enableOutputMaterial then
+            elseif not dischargeNode.dischargeHitTerrain then
                 return false
             end
         end
